@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkjad6iqtfo2y"]
+
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_u3vb6"]
+[ext_resource type="Script" path="res://characters scenes/sami.gd" id="2_5wxjf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbj5o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u3vb6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrgeu"]
+size = Vector2(120, 120)
+
+[node name="Sami" type="CharacterBody2D"]
+position = Vector2(149, 94)
+scale = Vector2(0.2, 0.2)
+motion_mode = 1
+script = ExtResource("2_5wxjf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_tbj5o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9.15527e-05)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_lrgeu")
+
+[node name="Camera2D" type="Camera2D" parent="."]
