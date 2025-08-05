@@ -1,12 +1,20 @@
-[gd_scene format=3 uid="uid://cegmd331vxi6x"]
+[gd_scene load_steps=3 format=3 uid="uid://cegmd331vxi6x"]
 
-[node name="CameraControl" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uyr4l"]
+a = Vector2(-118, -102)
+b = Vector2(-118, 100)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rlffo"]
+a = Vector2(126, -101)
+b = Vector2(126, 96)
+
+[node name="CameraControl" type="Camera2D"]
 position = Vector2(160, 90)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_uyr4l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_rlffo")

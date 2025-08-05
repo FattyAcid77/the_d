@@ -34,7 +34,7 @@ offset_bottom = 43.0
 offset_left = 156.0
 offset_top = 156.0
 offset_right = 196.0
-offset_bottom = 182.0
+offset_bottom = 178.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(221, 87)
