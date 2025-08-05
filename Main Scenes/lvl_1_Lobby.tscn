@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxofprk7jlwg1"]
+
+[ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
+
+[node name="Lvl1Lobby" type="Node2D"]
+
+[node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
+
+[node name="Sami" parent="." instance=ExtResource("2_xriv7")]
