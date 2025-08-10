@@ -8,3 +8,4 @@
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 
 [node name="Sami" parent="." instance=ExtResource("2_xriv7")]
+position = Vector2(160, 90)
