@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal transition_in_complete
+
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var timer: Timer = $Timer
 
@@ -10,10 +12,15 @@ func start_transition():
 	timer.start()
 	
 func finish_transition():
+	if timer:
+		timer.stop()
 	animation_player.play("fade_from_black")
 	
 	await animation_player.animation_finished
 	queue_free()
+	
+func report_midpoint() -> void:
+	transition_in_complete.emit()
 	
 
 

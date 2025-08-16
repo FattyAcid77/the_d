@@ -18,7 +18,7 @@ animations = [{
 size = Vector2(120, 120)
 
 [node name="Sami" type="CharacterBody2D"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.8, 0.8)
 motion_mode = 1
 script = ExtResource("2_5wxjf")
 
@@ -29,7 +29,3 @@ sprite_frames = SubResource("SpriteFrames_tbj5o")
 shape = SubResource("RectangleShape2D_lrgeu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 320
-limit_bottom = 180
