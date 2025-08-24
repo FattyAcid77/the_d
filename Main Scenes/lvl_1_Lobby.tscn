@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene load_steps=5 format=3 uid="uid://dxofprk7jlwg1"]
 
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_171b8"]
 [ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_2fqaq"]
 
 [node name="Lvl1Lobby" type="Node2D"]
+script = ExtResource("1_171b8")
 
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 
 [node name="Sami" parent="." instance=ExtResource("2_xriv7")]
+position = Vector2(690, 432)
+speed = 300
+
+[node name="Door_reg" parent="." instance=ExtResource("3_2fqaq")]
+position = Vector2(501, 290)
+
+[node name="Door_reg2" parent="." instance=ExtResource("3_2fqaq")]
+position = Vector2(504, 609)
