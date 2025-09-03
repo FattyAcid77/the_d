@@ -1,0 +1,85 @@
+{
+	"npc1":{
+		"trees": [
+			{
+				"branch_id": "npc_1_1",
+				"dialogs": [
+					{
+						"state": "start",
+						"text": "اهلين و سهلين بالحلو",
+						"options": {
+							"طيبين عمو": "Being_Happy",
+							"خرا عليك عمو": "Being_Sad",
+							"ولك حل عني عمو": "Being_dumb"
+						}
+					},
+					{
+						"state": "Being_Happy",
+						"text": "ولك يا رب دوم ",
+						"options": {
+							"خرا عليك عمو": "Being_Sad",
+							"ولك حل عني": "end"
+						}
+					},
+					{
+						"state": "Being_Sad",
+						"text": "شو الخرا هذا؟
+						 يا عم غور",
+						"options": {
+							"ولك حل عني": "end"
+						}
+					},
+					{
+						"state": "Being_dumb",
+						"text": " شو عم تحكي انتا؟ 
+						ولك لا عاد تجي هونا",
+						"options":{
+							"تمام": "end"
+						}
+					},
+				]
+			},
+			{
+				"branch_id": "npc_1_2",
+				"dialogs":[
+					{
+						"state": "start",
+						"text": "والله مدري وش اكتب",
+						"options":{
+							"ولا انا الصدق": "exit"
+						}
+					},
+					{
+						"state": "exit",
+						"text": "طيب اتخارج لا اشوفك"
+					}
+				]
+			},
+			{
+				"branch_id": "npc_1_default",
+				"dialogs": [
+					{
+						"state": "default",
+						"text": "Well, fuck off wont you?"
+					}
+				]
+			},
+		],
+	},
+	"npc2": {
+		"trees":[
+			{
+				"branch_id": "npc_2_1",
+				"dialogs": []
+			},
+			{
+				"branch_id": "npc_2_2",
+				"dialogs": []
+			},
+			{
+				"branch_id": "npc_2_default",
+				"dialogs": []
+			},
+		],
+	},
+}
