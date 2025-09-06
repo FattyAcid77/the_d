@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0e54eied8lev"]
+
+[ext_resource type="Script" uid="uid://b5cjy6uccofdv" path="res://FD_Testing/New_Diloage_System/Quest/quest_item.gd" id="1_mvt86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15kgy"]
+size = Vector2(68, 62)
+
+[node name="QuestItem" type="Area2D" groups=["Quest_Item"]]
+script = ExtResource("1_mvt86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_15kgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Quest_Item"]]
+position = Vector2(0, -9)
+scale = Vector2(0.0855263, 0.0855263)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5oy50rjras3p"]
+
+[ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="1_d8drj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_31uut"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_306ti"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ajt15"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4qo1"]
+
+[node name="DialogueButton" type="Button"]
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(1, 0.984314, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.984314, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.984314, 0, 1)
+theme_override_fonts/font = ExtResource("1_d8drj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_31uut")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_306ti")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ajt15")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u4qo1")
