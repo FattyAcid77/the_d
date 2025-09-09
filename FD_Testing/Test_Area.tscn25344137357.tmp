@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6svmmsd10lex"]
+
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_opm6v"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_1ut1q"]
+[ext_resource type="PackedScene" uid="uid://c0e54eied8lev" path="res://FD_Testing/New_Diloage_System/Quest/Quest_Item.tscn" id="3_b7yro"]
+[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="4_vma3e"]
+[ext_resource type="PackedScene" uid="uid://byhpuwetjn3tr" path="res://FD_Testing/New_Diloage_System/NPC/NPC.tscn" id="5_vma3e"]
+
+[node name="TestArea" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(566, 362)
+scale = Vector2(9.32031, 1)
+texture = ExtResource("1_opm6v")
+
+[node name="Sami" parent="." instance=ExtResource("2_1ut1q")]
+position = Vector2(93, 234)
+
+[node name="QuestItem" parent="." instance=ExtResource("3_b7yro")]
+position = Vector2(312, 144)
+item_icon = ExtResource("4_vma3e")
+
+[node name="Npc" parent="." instance=ExtResource("5_vma3e")]
+position = Vector2(109, -26)
+npc_id = "npc1"
+npc_name = "الجاوة"

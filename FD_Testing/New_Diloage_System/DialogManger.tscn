@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://36io0g4k5piy"]
+
+[ext_resource type="Script" uid="uid://dw5blvo22lkmc" path="res://FD_Testing/New_Diloage_System/dailog_manger.gd" id="1_1wu5h"]
+[ext_resource type="PackedScene" uid="uid://c04xm3yl64w4c" path="res://FD_Testing/New_Diloage_System/DialogUI.tscn" id="2_20p0o"]
+
+[node name="DialogManger" type="Node2D"]
+script = ExtResource("1_1wu5h")
+
+[node name="DialogUi" parent="." instance=ExtResource("2_20p0o")]
+metadata/_edit_use_anchors_ = true
