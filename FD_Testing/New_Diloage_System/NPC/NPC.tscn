@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://byhpuwetjn3tr"]
+
+[ext_resource type="Script" uid="uid://difgl3si5trgj" path="res://FD_Testing/New_Diloage_System/NPC/npc.gd" id="1_7qqv1"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_f1jm2"]
+[ext_resource type="Script" uid="uid://ydu3iar1fnnb" path="res://FD_Testing/New_Diloage_System/Recources/Dialoge/dialog.gd" id="2_eicg5"]
+[ext_resource type="PackedScene" uid="uid://36io0g4k5piy" path="res://FD_Testing/New_Diloage_System/DialogManger.tscn" id="4_rl8ku"]
+
+[sub_resource type="Resource" id="Resource_rl8ku"]
+script = ExtResource("2_eicg5")
+dialogs = {}
+metadata/_custom_type_script = "uid://ydu3iar1fnnb"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qqv1"]
+atlas = ExtResource("1_f1jm2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcqjf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qqv1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1jm2"]
+size = Vector2(136, 136)
+
+[node name="Npc" type="CharacterBody2D" groups=["NPC"]]
+script = ExtResource("1_7qqv1")
+dialog_resource = SubResource("Resource_rl8ku")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kcqjf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["NPC"]]
+shape = SubResource("RectangleShape2D_f1jm2")
+
+[node name="DialogManger" parent="." instance=ExtResource("4_rl8ku")]

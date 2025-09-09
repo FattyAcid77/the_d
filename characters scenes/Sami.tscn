@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=7 format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_u3vb6"]
-[ext_resource type="Script" path="res://characters scenes/sami.gd" id="2_5wxjf"]
+[ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
+[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="3_hq7kk"]
+[ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tbj5o"]
 animations = [{
@@ -29,3 +31,73 @@ sprite_frames = SubResource("SpriteFrames_tbj5o")
 shape = SubResource("RectangleShape2D_lrgeu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 150)
+collide_with_areas = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Coins" type="ColorRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -209.0
+offset_top = 29.0
+offset_right = -9.0
+offset_bottom = 129.0
+grow_horizontal = 0
+color = Color(0.141176, 0.141176, 0.141176, 0.788235)
+
+[node name="Icon" type="TextureRect" parent="HUD/Coins"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+texture = ExtResource("3_hq7kk")
+expand_mode = 2
+
+[node name="Amount" type="Label" parent="HUD/Coins"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -24.5
+offset_bottom = 24.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="QuestTracker" type="ColorRect" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 316.0
+offset_bottom = 216.0
+color = Color(0.141176, 0.141176, 0.141176, 0.788235)
+
+[node name="Details" type="VBoxContainer" parent="HUD/QuestTracker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="HUD/QuestTracker/Details"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.686275, 0.807843, 0.956863, 1)
+theme_override_font_sizes/font_size = 25
+text = "العنوان"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Objectives" type="VBoxContainer" parent="HUD/QuestTracker/Details"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuestManger" parent="." instance=ExtResource("4_6hsvr")]
