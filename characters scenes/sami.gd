@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Sami extends CharacterBody2D
 
 #up to change
 @export var speed = 5000

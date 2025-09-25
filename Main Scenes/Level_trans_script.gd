@@ -24,13 +24,14 @@ func init_player_location() -> void:
 				player.position = door.get_player_entery_vector()
 		player.orient(data.move_dir)
 
-func _on_player_entered_door(door:Door) -> void:
+func _on_player_entered_door(door:Door_reg) -> void:
 	_disconnect_from_doors()
 	player.disable()
 	player.queue_free()
 	data = LevelDataHandoff.new()
 	data.entery_door_name = door.entry_door_name
-	data.move_dir = door
+	
+	data.move_dir = door.position
 
 func _connect_to_doors() -> void:
 	for door in doors:
@@ -38,6 +39,6 @@ func _connect_to_doors() -> void:
 			door.player_entered_door.connect(_on_player_entered_door)
 
 func _disconnect_from_doors() -> void:
-	if door in doors:
+	for door in doors:
 		if door.player_entered_door.is_connected(_on_player_entered_door):
 			door.player_entered_door.disconnect(_on_player_entered_door)

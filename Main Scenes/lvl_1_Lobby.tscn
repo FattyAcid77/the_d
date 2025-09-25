@@ -9,13 +9,18 @@
 script = ExtResource("1_171b8")
 
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
+position = Vector2(0, 3)
 
 [node name="Sami" parent="." instance=ExtResource("2_xriv7")]
-position = Vector2(690, 432)
+position = Vector2(639, 366)
 speed = 300
 
 [node name="Door_reg" parent="." instance=ExtResource("3_2fqaq")]
 position = Vector2(501, 290)
+new_scene_path = ""
+door_name = ""
 
 [node name="Door_reg2" parent="." instance=ExtResource("3_2fqaq")]
 position = Vector2(504, 609)
+new_scene_path = ""
+door_name = ""

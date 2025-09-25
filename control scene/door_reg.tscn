@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlw7l4o25npqk"]
 
-[ext_resource type="Script" path="res://control scene/door_reg.gd" id="1_c2bhb"]
+[ext_resource type="Script" uid="uid://cb1jljpnabeb6" path="res://control scene/door_reg.gd" id="1_c2bhb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vtjhd"]
 radius = 85.0529

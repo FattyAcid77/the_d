@@ -17,14 +17,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
+SceneManager="*res://control scene/SceneManager.gd"
 
 [display]
 
-window/size/viewport_width=1080
+window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=1280
-window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/size/window_width_override=854
+window/size/window_height_override=480
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [dotnet]
