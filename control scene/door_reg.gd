@@ -1,6 +1,6 @@
 class_name Door_reg extends Area2D
 
-signal  player_entered(door: Door_reg, transition_type:String)
+signal  player_entered_door(door: Door_reg, transition_type:String)
 
 @export_enum("north", "east", "south", "west") var entery_direction
 @export var push_distance:int = 16
@@ -9,9 +9,9 @@ signal  player_entered(door: Door_reg, transition_type:String)
 
 
 func _on_body_entered(body: Node2D) -> void:
-	#if not body is Player:
-		#return
-	player_entered.emit(self)
+	if not body is Sami:
+		return
+	player_entered_door.emit(self)
 	SceneManager.load_new_scene(new_scene_path)
 	queue_free()
 

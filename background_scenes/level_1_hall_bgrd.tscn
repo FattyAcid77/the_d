@@ -1,31 +1,31 @@
 [gd_scene load_steps=6 format=3 uid="uid://ckgv15hoq1ph4"]
 
-[ext_resource type="Texture2D" uid="uid://hmx5lixbhma5" path="res://background_scenes/assets/groundfloor.png" id="1_efbi2"]
+[ext_resource type="Texture2D" uid="uid://5p3ax7qst0xc" path="res://background_scenes/assets/f1entrynobg.png" id="1_8kdpn"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ipiny"]
-a = Vector2(-636, -86)
-b = Vector2(222, -86)
+a = Vector2(-767, -112)
+b = Vector2(377, -117)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_36ve7"]
-a = Vector2(-335, 74)
-b = Vector2(504, 76)
+a = Vector2(-491, 138)
+b = Vector2(662, 140)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lv038"]
-a = Vector2(-222, -101)
-b = Vector2(-224, 301)
+a = Vector2(-352, -311)
+b = Vector2(-344, 359)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rqar6"]
-a = Vector2(222, -120)
-b = Vector2(220, 402)
+a = Vector2(372, -242)
+b = Vector2(379, 491)
 
 [node name="Level1HallBgrd" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(541, 816)
-texture = ExtResource("1_efbi2")
+position = Vector2(638, 360)
+texture = ExtResource("1_8kdpn")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(221, 87)
+position = Vector2(362, 61)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(473, 292)
