@@ -1,9 +1,11 @@
 class_name Sami extends CharacterBody2D
 
+
+
 #up to change
 @export var speed = 5000
+@export var input_enabled:bool = true
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
-
 
 @onready var amount: Label = $HUD/Coins/Amount
 @onready var quest_tracker: ColorRect = $HUD/QuestTracker
@@ -52,3 +54,11 @@ func _input(event) -> void:
 			elif target.is_in_group("Quest_Item"):
 				print("This is in item")
 				target.start_interact()
+
+
+func disable():
+	input_enabled = false
+	
+func enable():
+	input_enabled = true
+	visible = true

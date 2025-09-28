@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_2fqaq"]
 
-[node name="Lvl1Lobby" type="Node2D"]
+[node name="Lvl1Lobby" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_171b8")
+player = NodePath("Sami")
 
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 position = Vector2(0, 3)
 
 [node name="Sami" parent="." instance=ExtResource("2_xriv7")]
 position = Vector2(639, 366)
-speed = 300
 
 [node name="Door_reg" parent="." instance=ExtResource("3_2fqaq")]
 position = Vector2(501, 290)

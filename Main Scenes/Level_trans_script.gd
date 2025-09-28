@@ -9,6 +9,7 @@ func _ready() -> void:
 	player.visible = false
 	if data == null:
 		enter_level()
+		
 
 func enter_level() -> void:
 	if data != null:
@@ -30,8 +31,8 @@ func _on_player_entered_door(door:Door_reg) -> void:
 	player.queue_free()
 	data = LevelDataHandoff.new()
 	data.entery_door_name = door.entry_door_name
-	
 	data.move_dir = door.position
+	set_process(false)
 
 func _connect_to_doors() -> void:
 	for door in doors:
