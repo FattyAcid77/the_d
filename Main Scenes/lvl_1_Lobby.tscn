@@ -5,22 +5,22 @@
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_2fqaq"]
 
-[node name="Lvl1Lobby" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="Lvl1Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_171b8")
 player = NodePath("Sami")
+doors = [NodePath("Door_reg"), NodePath("Door_reg2")]
 
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 position = Vector2(0, 3)
 
 [node name="Sami" parent="." instance=ExtResource("2_xriv7")]
-position = Vector2(639, 366)
+position = Vector2(645, 442)
 
 [node name="Door_reg" parent="." instance=ExtResource("3_2fqaq")]
-position = Vector2(501, 290)
-new_scene_path = ""
-door_name = ""
+position = Vector2(646, 233)
+entery_direction = 2
+new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
+entry_door_name = "main-hall-north"
 
 [node name="Door_reg2" parent="." instance=ExtResource("3_2fqaq")]
-position = Vector2(504, 609)
-new_scene_path = ""
-door_name = ""
+position = Vector2(644, 708)

@@ -57,7 +57,8 @@ func _monitor_load_status() -> void:
 			return # this last return isn't necessary but I like how the 3 dead ends stand out as similar
 
 
-func load_new_scene(contenet_path:String, transition_type:String="fade_to_black") -> void:
+func load_new_scene(contenet_path:String) -> void:
+	var transition_type = "fade_to_black"
 	_transition = transition_type
 	_transition_screen = transition_screen_scene.instantiate() as TransitionScreen
 	get_tree().root.add_child(_transition_screen)

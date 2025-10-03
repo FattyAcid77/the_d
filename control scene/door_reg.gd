@@ -5,7 +5,7 @@ signal  player_entered_door(door: Door_reg, transition_type:String)
 @export_enum("north", "east", "south", "west") var entery_direction
 @export var push_distance:int = 16
 @export var new_scene_path:String
-@export var door_name:String
+@export var entry_door_name:String
 
 
 func _on_body_entered(body: Node2D) -> void:
