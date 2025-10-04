@@ -17,7 +17,7 @@ func start_transition():
 	
 	timer.start()
 
-#this one plays the second part ( fade from black) 
+#this one plays the second part (fade from black) 
 func finish_transition():
 	if timer:
 		timer.stop()
