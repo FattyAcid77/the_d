@@ -1,0 +1,159 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsw85bebck70i"]
+
+[ext_resource type="Script" uid="uid://brsh0yxfbhkwd" path="res://3MK-File/script/radio_7g_3_mk.gd" id="1_lj23g"]
+[ext_resource type="FontFile" uid="uid://bud1f0ks3i856" path="res://FD_Testing/Fonts/PixelAE-Bold.ttf" id="2_aaiwo"]
+[ext_resource type="Script" uid="uid://nq34jno0u2te" path="res://3MK-File/script/label.gd" id="3_ybm8t"]
+[ext_resource type="Script" uid="uid://nj0mncjw4k3k" path="res://3MK-File/Scene/sine_wave.gd" id="4_ybm8t"]
+[ext_resource type="Script" uid="uid://ubuq8mydfiss" path="res://3MK-File/Scene/wave_canvas.gd" id="5_jrjx4"]
+[ext_resource type="Texture2D" uid="uid://dnnkceabdcase" path="res://3MK-File/WaveLength.png" id="6_hqww6"]
+[ext_resource type="Texture2D" uid="uid://da483dvo8smlv" path="res://3MK-File/Ampil.png" id="7_n0blx"]
+
+[node name="Radio-7g-3mk" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lj23g")
+metadata/_edit_vertical_guides_ = [168.0, 896.0]
+metadata/_edit_horizontal_guides_ = [624.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1087.0
+offset_bottom = 716.0
+color = Color(0.046592973, 0.18034956, 0.3889195, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 960.0
+offset_bottom = 448.0
+color = Color(0, 0, 0, 1)
+
+[node name="SineWave" type="Control" parent="ColorRect/ColorRect"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.9663334)
+size_flags_horizontal = 4
+script = ExtResource("4_ybm8t")
+
+[node name="Center" type="CenterContainer" parent="ColorRect/ColorRect/SineWave"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaveCanvas" type="Control" parent="ColorRect/ColorRect/SineWave/Center"]
+custom_minimum_size = Vector2(800, 300)
+layout_mode = 2
+script = ExtResource("5_jrjx4")
+
+[node name="R1" type="Button" parent="ColorRect/ColorRect/SineWave"]
+z_index = 1
+layout_mode = 0
+offset_left = 768.0
+offset_top = 364.26352
+offset_right = 811.0
+offset_bottom = 412.26352
+theme_override_font_sizes/font_size = 29
+text = "R1"
+
+[node name="L1" type="Button" parent="ColorRect/ColorRect/SineWave"]
+z_index = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 355.9848
+offset_right = 80.0
+offset_bottom = 403.9848
+theme_override_font_sizes/font_size = 29
+text = "L1
+"
+
+[node name="R2" type="Button" parent="ColorRect/ColorRect/SineWave"]
+z_index = 1
+layout_mode = 0
+offset_left = 768.0
+offset_top = 463.6081
+offset_right = 812.0
+offset_bottom = 513.60815
+theme_override_font_sizes/font_size = 30
+text = "R2"
+
+[node name="L2" type="Button" parent="ColorRect/ColorRect/SineWave"]
+z_index = 1
+layout_mode = 0
+offset_left = 40.0
+offset_top = 463.6081
+offset_right = 81.0
+offset_bottom = 513.6081
+theme_override_font_sizes/font_size = 30
+text = "L2"
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 56.0
+offset_right = 648.0
+offset_bottom = 128.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ColorRect/ColorRect2"]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("2_aaiwo")
+theme_override_font_sizes/font_size = 30
+text = "530 hz"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_ybm8t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(536, 328)
+
+[node name="WaveLength" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(544, 496)
+scale = Vector2(0.06640625, 0.06640625)
+texture = ExtResource("6_hqww6")
+
+[node name="Ampil" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(544.00006, 608)
+scale = Vector2(0.07031244, 0.06249997)
+texture = ExtResource("7_n0blx")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 448.0
+offset_right = 1080.0
+offset_bottom = 560.0
+color = Color(0, 0.105882354, 0.23921569, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_top = 560.0
+offset_right = 1080.0
+offset_bottom = 672.0
+color = Color(0, 0.105882354, 0.23921569, 1)
+
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="ColorRect/ColorRect/SineWave" method="_on_r_1_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="ColorRect/ColorRect/SineWave" method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="ColorRect/ColorRect/SineWave" method="_on_l_1_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="ColorRect/ColorRect/SineWave" method="_on_button_2_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R2" to="ColorRect/ColorRect/SineWave" method="_on_r_2_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L2" to="ColorRect/ColorRect/SineWave" method="_on_l_2_pressed"]
