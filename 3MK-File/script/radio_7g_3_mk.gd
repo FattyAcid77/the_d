@@ -17,13 +17,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	label.text =str(Radio_Global.radio) +  "  Hz"  
+	label.text =str(RadioGlobal.radio) +  "  Hz"  
 	if b.is_pressed():
-		Radio_Global.radio += int(hold * 1 )
+		RadioGlobal.radio += int(hold * 1 )
 
 func _on_button_pressed() -> void:
-	Radio_Global.radio += 1
+	RadioGlobal.radio += 1
 
 
 func _on_button_2_pressed() -> void:
-	Radio_Global.radio -= 1
+	RadioGlobal.radio -= 1
