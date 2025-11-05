@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckgv15hoq1ph4"]
+[gd_scene load_steps=10 format=3 uid="uid://ckgv15hoq1ph4"]
 
 [ext_resource type="Texture2D" uid="uid://5p3ax7qst0xc" path="res://background_scenes/assets/f1entrynobg.png" id="1_8kdpn"]
 
@@ -8,7 +8,7 @@ b = Vector2(377, -117)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_36ve7"]
 a = Vector2(-491, 138)
-b = Vector2(662, 140)
+b = Vector2(0, 142)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lv038"]
 a = Vector2(-352, -311)
@@ -17,6 +17,22 @@ b = Vector2(-344, 359)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rqar6"]
 a = Vector2(372, -242)
 b = Vector2(379, 491)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8kdpn"]
+a = Vector2(176, 671)
+b = Vector2(176, 525)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ivfnr"]
+a = Vector2(252, 89)
+b = Vector2(-436, 96)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1uvr6"]
+a = Vector2(739, 661)
+b = Vector2(737, 577)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qromp"]
+a = Vector2(-23, 6)
+b = Vector2(54, 4)
 
 [node name="Level1HallBgrd" type="Node2D"]
 
@@ -32,7 +48,7 @@ position = Vector2(473, 292)
 shape = SubResource("SegmentShape2D_ipiny")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(184, 444)
+position = Vector2(181, 407)
 shape = SubResource("SegmentShape2D_36ve7")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -42,3 +58,17 @@ shape = SubResource("SegmentShape2D_lv038")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(422, 138)
 shape = SubResource("SegmentShape2D_rqar6")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_8kdpn")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(528, 545)
+shape = SubResource("SegmentShape2D_ivfnr")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_1uvr6")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(761, 577)
+shape = SubResource("SegmentShape2D_qromp")

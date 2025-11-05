@@ -71,12 +71,13 @@ _data = {
 }
 
 [node name="TransitionScreen" type="CanvasLayer"]
+layer = 3
 script = ExtResource("1_6oson")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(159.75, 89.75)
-scale = Vector2(320.5, 180.5)
+position = Vector2(920.75, 465.75)
+scale = Vector2(1842.5, 932.5)
 texture = SubResource("CanvasTexture_8ap13")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -86,6 +87,6 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

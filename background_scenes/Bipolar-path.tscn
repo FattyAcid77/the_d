@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dy86jaqf7j1xo"]
+
+[node name="Bipolar-path" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

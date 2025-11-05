@@ -24,3 +24,8 @@ texture = SubResource("CanvasTexture_r1wrr")
 position = Vector2(290, -98)
 scale = Vector2(34.5, 37.5)
 texture = SubResource("CanvasTexture_8c2uu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-4, -1, 27, -2, 27, 178, 275, 178, 273, -179, 29, -179, 29, -10, -34, -9, -33, -213, 298, -221, 372, 41, 320, 209, 43, 210, -36, 51)

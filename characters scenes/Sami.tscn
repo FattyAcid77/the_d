@@ -23,6 +23,7 @@ size = Vector2(120, 120)
 scale = Vector2(0.8, 0.8)
 motion_mode = 1
 script = ExtResource("2_5wxjf")
+speed = 10000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tbj5o")

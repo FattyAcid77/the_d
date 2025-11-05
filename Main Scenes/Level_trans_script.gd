@@ -1,4 +1,4 @@
-extends Node2D
+class_name Level extends Node2D
 
 @export var player: Sami
 @export var doors: Array[Door_reg]
@@ -26,6 +26,7 @@ func init_player_location() -> void:
 		player.orient(data.move_dir)
 
 func _on_player_entered_door(door:Door_reg) -> void:
+	#if Input.is_action_just_pressed("action"):
 	_disconnect_from_doors()
 	player.disable()
 	player.queue_free()

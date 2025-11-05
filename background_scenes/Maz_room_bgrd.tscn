@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bq0wmvhuq0hbt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dupmi"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5s0m3"]
+a = Vector2(-9, 423)
+b = Vector2(-9, -26)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jmtjh"]
+a = Vector2(360, 34)
+b = Vector2(-425, 34)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_31mtl"]
+a = Vector2(-76, 290)
+b = Vector2(-76, -175)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_sx4kc"]
+a = Vector2(419, -42)
+b = Vector2(-428, -40)
+
+[node name="MazRoomBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.286275, 0.329412, 0.411765, 1)
+position = Vector2(624, 367)
+scale = Vector2(745.5, 417)
+texture = SubResource("CanvasTexture_dupmi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(262, 163)
+shape = SubResource("SegmentShape2D_5s0m3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(653, 125)
+shape = SubResource("SegmentShape2D_jmtjh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1070, 307)
+shape = SubResource("SegmentShape2D_31mtl")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(604, 613)
+shape = SubResource("SegmentShape2D_sx4kc")

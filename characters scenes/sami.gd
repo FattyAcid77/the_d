@@ -13,6 +13,7 @@ class_name Sami extends CharacterBody2D
 @onready var objectives: VBoxContainer = $HUD/QuestTracker/Details/Objectives
 @onready var quest_manger: Node2D = $QuestManger
 
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var can_move = true
 
@@ -55,6 +56,10 @@ func _input(event) -> void:
 				print("This is in item")
 				target.start_interact()
 
+func orient(dir:Vector2) -> void:
+	#if dir.x:
+		#anim_sprite.flip_h
+	pass
 
 func disable():
 	input_enabled = false

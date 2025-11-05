@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctoev8a8cue1f"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_83pxp"]
+[ext_resource type="PackedScene" uid="uid://bq0wmvhuq0hbt" path="res://background_scenes/Maz_room_bgrd.tscn" id="2_upgb1"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_jrcq8"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_wsgam"]
+
+[node name="MazRoom" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_83pxp")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="MazRoomBgrd" parent="." instance=ExtResource("2_upgb1")]
+
+[node name="Sami" parent="." instance=ExtResource("3_jrcq8")]
+position = Vector2(607, 369)
+
+[node name="Door_reg" parent="." instance=ExtResource("4_wsgam")]
+position = Vector2(992, 349)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
+entry_door_name = "Maz_room_east"
