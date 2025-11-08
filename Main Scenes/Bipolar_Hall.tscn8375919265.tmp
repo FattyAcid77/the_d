@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://de2x5uch2cuas"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_k8ewv"]
+[ext_resource type="PackedScene" uid="uid://d1nhhvl0ugdg0" path="res://background_scenes/BipolarHallBgrd.tscn" id="1_qravw"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_myw4k"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_e7oh6"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="5_vtls1"]
+[ext_resource type="Script" uid="uid://durn0cm44g242" path="res://Main Scenes/filter.gd" id="6_rp3xq"]
+[ext_resource type="Script" uid="uid://fxamm14xxj5x" path="res://Save-Load-Feature/S-L_Script.gd" id="7_rp3xq"]
+[ext_resource type="Script" uid="uid://xen6dr6x6sfd" path="res://Main Scenes/character_body_2d.gd" id="8_s467i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcigo"]
+size = Vector2(160, 80)
+
+[node name="BipolarHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_k8ewv")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="BipolarHallBgrd" parent="." instance=ExtResource("1_qravw")]
+
+[node name="Door_reg" parent="." instance=ExtResource("2_myw4k")]
+position = Vector2(615, 19)
+entery_direction = 2
+new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
+entry_door_name = "Bipolar_North"
+
+[node name="Sami" parent="." instance=ExtResource("3_e7oh6")]
+position = Vector2(615, 158)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(632, 480)
+texture = ExtResource("5_vtls1")
+script = ExtResource("6_rp3xq")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_rp3xq")
+
+[node name="Save" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 448.0
+offset_right = 1232.0
+offset_bottom = 576.0
+text = "Save"
+
+[node name="Load" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 440.0
+offset_right = 344.0
+offset_bottom = 592.0
+text = "Load
+"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(632, 640)
+script = ExtResource("8_s467i")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("5_vtls1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_bcigo")
+
+[connection signal="pressed" from="Control/Save" to="Control" method="_on_save_pressed"]
+[connection signal="pressed" from="Control/Load" to="Control" method="_on_load_pressed"]

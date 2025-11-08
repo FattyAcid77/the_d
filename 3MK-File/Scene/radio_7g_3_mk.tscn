@@ -113,7 +113,7 @@ offset_right = 224.0
 offset_bottom = 72.0
 theme_override_fonts/font = ExtResource("2_aaiwo")
 theme_override_font_sizes/font_size = 30
-text = "530 hz"
+text = "1 hz"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_ybm8t")
@@ -150,10 +150,10 @@ offset_bottom = 672.0
 color = Color(0, 0.105882354, 0.23921569, 1)
 
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="ColorRect/ColorRect/SineWave" method="_on_button_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="ColorRect/ColorRect/SineWave" method="_on_r_1_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/R1" to="ColorRect/ColorRect/SineWave" method="_on_button_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="ColorRect/ColorRect/SineWave" method="_on_button_2_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="ColorRect/ColorRect/SineWave" method="_on_l_1_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/SineWave/L1" to="ColorRect/ColorRect/SineWave" method="_on_button_2_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/R2" to="ColorRect/ColorRect/SineWave" method="_on_r_2_pressed"]
 [connection signal="pressed" from="ColorRect/ColorRect/SineWave/L2" to="ColorRect/ColorRect/SineWave" method="_on_l_2_pressed"]

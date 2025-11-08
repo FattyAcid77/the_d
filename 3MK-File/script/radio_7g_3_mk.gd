@@ -2,11 +2,13 @@ extends Control
 @onready var b: Button = $ColorRect/ColorRect/SineWave/R1
 @onready var b_2: Button = $ColorRect/ColorRect/SineWave/L1
 @onready var label: Label = $ColorRect/ColorRect2/Label
+var radio_scene: PackedScene = preload("res://3MK-File/Scene/test_scene.tscn")
+
+func _close_radio():
+	var radio_instance = radio_scene.instantiate()
 
 
-
-
-var hold = 1
+@export var hold = 1
 
 
 

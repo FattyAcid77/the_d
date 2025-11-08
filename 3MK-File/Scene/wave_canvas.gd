@@ -1,4 +1,3 @@
-# res://scripts/WaveCanvas.gd
 extends Control
 
 @export var amplitude: float = 120.0
