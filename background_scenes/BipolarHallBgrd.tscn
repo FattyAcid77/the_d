@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1nhhvl0ugdg0"]
 
-[ext_resource type="Texture2D" uid="uid://fkvndxqt85w8" path="res://background_scenes/assets/Gf hall.png" id="1_118v7"]
+[ext_resource type="Texture2D" uid="uid://xh8ge2kckvgv" path="res://background_scenes/assets/R3path.png" id="1_6mu8k"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_d4o1x"]
 a = Vector2(-2, -213)
@@ -23,7 +23,7 @@ b = Vector2(973, 106)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(611.5, 357)
 scale = Vector2(1.82422, 2.89844)
-texture = ExtResource("1_118v7")
+texture = ExtResource("1_6mu8k")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(109, 143)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://vqb3opmxrsp4"]
+
+[ext_resource type="Texture2D" uid="uid://di8drkb8wxd26" path="res://background_scenes/assets/R3.png" id="1_e7cbw"]
+
+[node name="BipolarRoomBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(625, 486.00003)
+scale = Vector2(1.4797047, 1.4797047)
+texture = ExtResource("1_e7cbw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(301, 284)
+polygon = PackedVector2Array(0, 0, -27, 0, -27, 234, 297, 234, 297, 304, 288, 304, 288, 363, 297, 363, 297, 387, 516, 387, 516, 350, 660, 350, 660, 387, 688, 387, 688, 312, 650, 312, 650, 78, 667, 78, 667, 66, 676, 66, 676, 78, 688, 78, 688, 2, 589, 3, 589, -15, 293, -15, 293, 5, 227, 5, 216, 5, 216, 172, 16, 172, 16, 0, 4, 0, 94, -97, 728, -84, 726, 419, 200, 419, 203, 292, -86, 308, -69, -69)
