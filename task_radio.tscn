@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm5444y77ghw8"]
+
+[ext_resource type="Script" uid="uid://tid52sake3ye" path="res://task_radio.gd" id="1_37jev"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yg0r4"]
+radius = 224.5707
+
+[node name="task_radio" type="Area2D"]
+collision_layer = 255
+collision_mask = 255
+script = ExtResource("1_37jev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yg0r4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

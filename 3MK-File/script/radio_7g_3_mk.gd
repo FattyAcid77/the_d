@@ -2,11 +2,13 @@ extends Control
 @onready var b: Button = $ColorRect/ColorRect/SineWave/R1
 @onready var b_2: Button = $ColorRect/ColorRect/SineWave/L1
 @onready var label: Label = $ColorRect/ColorRect2/Label
+var radio_scene: PackedScene = preload("res://3MK-File/Scene/test_scene.tscn")
+
+func _close_radio():
+	var radio_instance = radio_scene.instantiate()
 
 
-
-
-var hold = 1
+@export var hold = 1
 
 
 
@@ -17,13 +19,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	label.text =str(Radio_Global.radio) +  "  Hz"  
+	label.text =str(RadioGlobal.radio) +  "  Hz"  
 	if b.is_pressed():
-		Radio_Global.radio += int(hold * 1 )
+		RadioGlobal.radio += int(hold * 1 )
 
 func _on_button_pressed() -> void:
-	Radio_Global.radio += 1
+	RadioGlobal.radio += 1
 
 
 func _on_button_2_pressed() -> void:
-	Radio_Global.radio -= 1
+	RadioGlobal.radio -= 1
