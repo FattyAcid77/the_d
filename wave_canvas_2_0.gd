@@ -3,36 +3,36 @@ extends Control
 @export var amplitude: float = 80.0
 @export var wavelength: float = 150.0
 @export var wave_speed: float = 300.0
-@export var phase: float = 0.0
 @export var samples: int = 512
 
-var axis_color = Color(0.9, 0.9, 0.95, 0.25)
-var player_color = Color(0.1, 0.6, 1.0, 1.0)
+var phase: float = 0.0
+
+var current_task: Area2D = null
+
 
 func _process(delta):
 	phase += delta * 1.5
 	queue_redraw()
 
 func _draw():
-	var r = get_rect()
-	var mid_y = r.size.y / 2.0
-	draw_line(Vector2(0, mid_y), Vector2(r.size.x, mid_y), axis_color, 2)
+	var rect = get_rect()
+	var mid_y = rect.size.y / 2.0
 
 	var pts := PackedVector2Array()
 	pts.resize(samples)
 
 	for i in range(samples):
 		var t = float(i) / (samples - 1)
-		var x = t * r.size.x
+		var x = t * rect.size.x
 
 		var freq = wave_speed / wavelength
 		var ang = TAU * freq * t + phase
 		var wrapped = fmod(ang, TAU)
 		if wrapped < 0: wrapped += TAU
 
-		var saw = wrapped / TAU * 2.0 - 1.0
+		var saw = (wrapped / TAU) * 2.0 - 1.0
 		var y = mid_y - saw * amplitude
 
 		pts[i] = Vector2(x, y)
 
-	draw_polyline(pts, player_color, 3, true)
+	draw_polyline(pts, Color(0.1, 0.6, 1.0), 3.0, true)

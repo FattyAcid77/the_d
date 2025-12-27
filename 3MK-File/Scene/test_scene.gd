@@ -7,10 +7,11 @@ extends Node2D
 @onready var ic5: Sprite2D = $Icon5
 @onready var ic6: Sprite2D = $Icon6
 @onready var ic7: Sprite2D = $Icon7
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 # === RADIO SCENE HOLDER ===
 @onready var radio_holder: Node = $"CanvasLayer/RadioHolder"
-var scene_to_instantiate: PackedScene = preload("res://3MK-File/Scene/radio_7g_3_mk.tscn")
+var scene_to_instantiate: PackedScene = preload("res://radio_2_0.tscn")
 var radio_instance: Node = null
 
 
@@ -75,3 +76,10 @@ func vis() -> void:
 		ic6.visible = true
 	elif RadioGlobal.state6:
 		ic7.visible = true
+
+
+
+
+
+func _on_task_radio_task_completed() -> void:
+	anim.play("default")
