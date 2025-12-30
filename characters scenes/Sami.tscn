@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkjad6iqtfo2y"]
 
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_u3vb6"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="1_u3vb6"]
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="3_hq7kk"]
 [ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]

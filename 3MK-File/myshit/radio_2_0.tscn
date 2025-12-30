@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdb8u7sdvpkpf"]
 
 [ext_resource type="FontFile" uid="uid://bud1f0ks3i856" path="res://FD_Testing/Fonts/PixelAE-Bold.ttf" id="1_2s7x8"]
-[ext_resource type="Script" uid="uid://xge56wrortoc" path="res://radio_2_0.gd" id="1_7eyv6"]
-[ext_resource type="Script" uid="uid://c0w22c7isxg3y" path="res://wave_canvas_2_0.gd" id="1_fug20"]
-[ext_resource type="Script" uid="uid://b2doajo0thihn" path="res://sine_wave_2_0.gd" id="1_tfhuu"]
+[ext_resource type="Script" uid="uid://xge56wrortoc" path="res://3MK-File/myshit/radio_2_0.gd" id="1_7eyv6"]
+[ext_resource type="Script" uid="uid://c0w22c7isxg3y" path="res://3MK-File/myshit/wave_canvas_2_0.gd" id="1_fug20"]
+[ext_resource type="Script" uid="uid://b2doajo0thihn" path="res://3MK-File/myshit/sine_wave_2_0.gd" id="1_tfhuu"]
 [ext_resource type="Texture2D" uid="uid://dnnkceabdcase" path="res://3MK-File/WaveLength.png" id="2_fug20"]
 [ext_resource type="Texture2D" uid="uid://da483dvo8smlv" path="res://3MK-File/Ampil.png" id="3_tfhuu"]
 [ext_resource type="AudioStream" uid="uid://baarxvvuwwyt4" path="res://3MK-File/soundwave.ogg" id="4_7eyv6"]
@@ -127,66 +127,6 @@ offset_top = 355.9848
 offset_right = 104.0
 offset_bottom = 411.82098
 text = "L2"
-
-[node name="Required_Waves" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 760.0
-offset_top = -16.0
-offset_right = 800.0
-offset_bottom = 24.0
-
-[node name="ColorRect7" type="ColorRect" parent="Required_Waves"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 72.0
-color = Color(0.28235295, 0.28235295, 0.28235295, 1)
-
-[node name="Label" type="Label" parent="Required_Waves/ColorRect7"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
-theme_override_fonts/font = ExtResource("1_2s7x8")
-theme_override_font_sizes/font_size = 30
-text = "1 v"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect8" type="ColorRect" parent="Required_Waves"]
-layout_mode = 0
-offset_left = -632.0
-offset_right = -432.0
-offset_bottom = 72.0
-color = Color(0.28235295, 0.28235295, 0.28235295, 1)
-
-[node name="Label" type="Label" parent="Required_Waves/ColorRect8"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
-theme_override_fonts/font = ExtResource("1_2s7x8")
-theme_override_font_sizes/font_size = 30
-text = "1 m"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ColorRect9" type="ColorRect" parent="Required_Waves"]
-layout_mode = 0
-offset_left = -328.0
-offset_right = -104.0
-offset_bottom = 72.0
-color = Color(0.28118682, 0.28118688, 0.28118682, 1)
-
-[node name="Label" type="Label" parent="Required_Waves/ColorRect9"]
-layout_mode = 0
-offset_right = 224.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
-theme_override_fonts/font = ExtResource("1_2s7x8")
-theme_override_font_sizes/font_size = 30
-text = "1 hz"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Player_wave" type="Control" parent="."]
 anchors_preset = 0

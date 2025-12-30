@@ -1,8 +1,9 @@
 extends Node2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $"../AnimatedSprite2D"
 
 @export_category("Task Settings")
 @export var task_scene: PackedScene 
-@export var required_amplitude: float = 100.0
+@export var required_amplitude: float = 120.0
 @export var required_wavelength: float = 150.0
 
 func _ready():
@@ -10,9 +11,13 @@ func _ready():
 		print("❌ Error: Task Scene not assigned!")
 		return
 
+# Example: player changed controls
+
+
+
 	# Create the task
 	var new_task = task_scene.instantiate()
-	
+
 	# Set position to (0,0) so it appears exactly where THIS node is
 	new_task.position = Vector2.ZERO 
 	
@@ -25,8 +30,14 @@ func _ready():
 	
 	add_child(new_task)
 
+
+func _process(delta: float) -> void:
+	if required_amplitude == WaveCanvas20.amplitude:
+		if required_wavelength == WaveCanvas20.wavelength:
+			_on_task_completed()
+	else:
+		animated_sprite_2d.stop()
+
+
 func _on_task_completed():
-	print("--------------------------------")
-	print("🏆 Task at ", global_position, " COMPLETE!")
-	print("🎁 REWARD GIVEN")
-	print("--------------------------------")
+	animated_sprite_2d.play("default")

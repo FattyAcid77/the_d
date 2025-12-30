@@ -1,5 +1,11 @@
 extends Node2D
 
+@onready var options: Control = $"../Options"
+
+
+
+
+
 # === ICON REFERENCES ===
 @onready var ic2: Sprite2D = $Icon2
 @onready var ic3: Sprite2D = $Icon3
@@ -11,7 +17,7 @@ extends Node2D
 
 # === RADIO SCENE HOLDER ===
 @onready var radio_holder: Node = $"CanvasLayer/RadioHolder"
-var scene_to_instantiate: PackedScene = preload("res://radio_2_0.tscn")
+var scene_to_instantiate: PackedScene = preload("res://3MK-File/myshit/radio_2_0.tscn")
 var radio_instance: Node = null
 
 
@@ -19,7 +25,7 @@ var radio_instance: Node = null
 func _ready() -> void:
 	print("radio_holder =", radio_holder)  # should NOT be Null
 	hide_all_icons()  # start hidden
-
+	remove_child(options)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("E"):
@@ -27,7 +33,10 @@ func _process(delta: float) -> void:
 			_open_radio()
 		else:
 			_close_radio()
-
+	if Input.is_action_just_pressed("Option"):
+		add_child(options)
+		if Input.is_action_just_pressed("Option"):
+			remove_child(options)
 	# Keep icons updated to reflect RadioGlobal state
 	vis()
 

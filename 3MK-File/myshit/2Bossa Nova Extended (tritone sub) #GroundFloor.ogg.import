@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://djw2rj43bje38"
+path="res://.godot/imported/2Bossa Nova Extended (tritone sub) #GroundFloor.ogg-823c98cdd5ce6a7686548e94b10d5bc3.oggvorbisstr"
+
+[deps]
+
+source_file="res://3MK-File/myshit/2Bossa Nova Extended (tritone sub) #GroundFloor.ogg"
+dest_files=["res://.godot/imported/2Bossa Nova Extended (tritone sub) #GroundFloor.ogg-823c98cdd5ce6a7686548e94b10d5bc3.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

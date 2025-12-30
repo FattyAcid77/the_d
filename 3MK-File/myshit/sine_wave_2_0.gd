@@ -8,7 +8,7 @@ extends Control
 @onready var frequancy: Label = $"../../Player_wave/ColorRect2/Frequancy"
 
 const AMP_STEP = 10.0
-const WL_STEP  = 15.0
+const WL_STEP  = 10.0
 
 func _process(delta):
 	# 1. SYNC LOCAL VISUALIZER TO GLOBAL DATA
@@ -20,7 +20,7 @@ func _process(delta):
 	# Note: Use WaveCanvas20 here too
 	if WaveCanvas20.wavelength != 0:
 		var freq = WaveCanvas20.amplitude / WaveCanvas20.wavelength
-		frequancy.text = "Hz: " + str(int(freq))
+		frequancy.text = "Hz: " + str(int(WaveCanvas20.amplitude * 10 /WaveCanvas20.wavelength * 10))
 	
 	amp.text = "Amp: " + str(int(WaveCanvas20.amplitude))
 	length.text = "WL: " + str(int(WaveCanvas20.wavelength))

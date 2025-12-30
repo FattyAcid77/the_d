@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cm5444y77ghw8"]
 
-[ext_resource type="Script" uid="uid://tid52sake3ye" path="res://task_radio.gd" id="1_37jev"]
+[ext_resource type="Script" uid="uid://tid52sake3ye" path="res://3MK-File/myshit/task_radio.gd" id="1_37jev"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yg0r4"]
 radius = 224.5707
