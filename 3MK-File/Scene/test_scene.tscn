@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dsc6w8fpqobwd"]
+[gd_scene load_steps=70 format=3 uid="uid://dsc6w8fpqobwd"]
 
 [ext_resource type="Script" uid="uid://cb6n5ypexp7gt" path="res://3MK-File/Scene/test_scene.gd" id="1_4y116"]
 [ext_resource type="Texture2D" uid="uid://fkvndxqt85w8" path="res://background_scenes/assets/Gf hall.png" id="2_cp8eu"]
@@ -293,6 +293,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q5a3d"]
 size = Vector2(160, 80)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mha57"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_b7lii"]
 atlas = ExtResource("10_hcdep")
 region = Rect2(0, 0, 80, 29)
@@ -429,7 +431,6 @@ shape = SubResource("RectangleShape2D_q5a3d")
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
 [node name="Icon" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(632, 480)
 texture = ExtResource("3_4y116")
 script = ExtResource("5_e0eku")
@@ -441,48 +442,7 @@ offset_left = -8.0
 offset_top = 8.0
 offset_right = 1032.0
 offset_bottom = 416.0
-
-[node name="Icon2" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0, 0, 1, 1)
-position = Vector2(848, 576.0002)
-scale = Vector2(0.390625, 0.47265625)
-texture = ExtResource("3_4y116")
-
-[node name="Icon3" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.23658246, 0.7329032, 0.68126386, 1)
-position = Vector2(400.00003, 648)
-scale = Vector2(0.625, 0.6875)
-texture = ExtResource("3_4y116")
-
-[node name="Icon4" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.6483495, 0.053013436, 0.2951378, 1)
-position = Vector2(416.00012, 536)
-scale = Vector2(0.390625, 0.47265625)
-texture = ExtResource("3_4y116")
-
-[node name="Icon5" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 0, 1)
-position = Vector2(816, 488)
-scale = Vector2(0.24414063, 0.32495117)
-texture = ExtResource("3_4y116")
-
-[node name="Icon6" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0, 1, 1)
-position = Vector2(888, 487.99997)
-scale = Vector2(0.15258789, 0.22340393)
-texture = ExtResource("3_4y116")
-
-[node name="Icon7" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.028990643, 0.18770868, 0.1702823, 1)
-position = Vector2(848, 668)
-scale = Vector2(0.625, 0.6875)
-texture = ExtResource("3_4y116")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mha57")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(328, -1600)
@@ -505,6 +465,14 @@ sprite_frames = SubResource("SpriteFrames_0qh8x")
 task_scene = ExtResource("8_q5a3d")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+linear_damp = 20.0
+
+[node name="Icon" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(115, 664.00006)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("3_4y116")
+script = ExtResource("5_e0eku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(112, 664)

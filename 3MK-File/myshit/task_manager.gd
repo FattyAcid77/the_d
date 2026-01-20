@@ -1,5 +1,8 @@
 extends Node2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $"../AnimatedSprite2D"
+@onready var rig: RigidBody2D = $"../RigidBody2D"
+
+
 
 @export_category("Task Settings")
 @export var task_scene: PackedScene 
@@ -7,6 +10,7 @@ extends Node2D
 @export var required_wavelength: float = 150.0
 
 func _ready():
+	remove_child(rig)
 	if task_scene == null:
 		print("❌ Error: Task Scene not assigned!")
 		return
@@ -35,9 +39,11 @@ func _process(delta: float) -> void:
 	if required_amplitude == WaveCanvas20.amplitude:
 		if required_wavelength == WaveCanvas20.wavelength:
 			_on_task_completed()
+			add_child(rig)
 	else:
 		animated_sprite_2d.stop()
-
+		remove_child(rig)
 
 func _on_task_completed():
 	animated_sprite_2d.play("default")
+	
