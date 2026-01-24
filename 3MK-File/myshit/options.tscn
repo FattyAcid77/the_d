@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://s5tbohsvvwni"]
+
+[ext_resource type="Script" uid="uid://fxamm14xxj5x" path="res://Save-Load-Feature/S-L_Script.gd" id="1_5v8ap"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5v8ap")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0.5370113, 0.5370113, 0.5370113, 1)
+layout_mode = 0
+offset_right = 1304.0
+offset_bottom = 736.0
+
+[node name="Save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 448.0
+offset_right = 1232.0
+offset_bottom = 576.0
+text = "Save"
+
+[node name="Load" type="Button" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 440.0
+offset_right = 344.0
+offset_bottom = 592.0
+text = "Load
+"
+
+[connection signal="pressed" from="Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Load" to="." method="_on_load_pressed"]

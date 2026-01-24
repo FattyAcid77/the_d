@@ -12,14 +12,18 @@ config_version=5
 
 config/name="(D.) 2.0"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://3MK-File/myshit/icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://3MK-File/myshit/default_bus_layout.tres"
 
 [autoload]
 
 Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
 SceneManager="*res://control scene/SceneManager.gd"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
-WaveCanvas20="*res://wave_canvas_2_0.gd"
+WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 
 [display]
 
@@ -96,6 +100,11 @@ Freq_D={
 E={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":75,"key_label":0,"unicode":107,"location":0,"echo":false,"script":null)
+]
+}
+Option={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 
