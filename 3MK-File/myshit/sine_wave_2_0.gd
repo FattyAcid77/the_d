@@ -3,8 +3,7 @@ extends Control
 # Reference to the local visualizer (just for drawing)
 @onready var wave_canvas: Control = $"Center/WaveCanvas-2_0"
 
-@onready var amp: Label = $"../../Player_wave/ColorRect4/AMP"
-@onready var length: Label = $"../../Player_wave/ColorRect5/LENGTH"
+
 @onready var frequancy: Label = $"../../Player_wave/ColorRect2/Frequancy"
 
 const AMP_STEP = 10.0
@@ -22,8 +21,7 @@ func _process(delta):
 		var freq = WaveCanvas20.amplitude / WaveCanvas20.wavelength
 		frequancy.text = "Hz: " + str(int(WaveCanvas20.amplitude * 10 /WaveCanvas20.wavelength * 10))
 	
-	amp.text = "Amp: " + str(int(WaveCanvas20.amplitude))
-	length.text = "WL: " + str(int(WaveCanvas20.wavelength))
+
 
 # === BUTTONS UPDATE THE GLOBAL (WaveCanvas20) ===
 

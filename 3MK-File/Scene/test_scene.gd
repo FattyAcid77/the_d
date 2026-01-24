@@ -13,7 +13,9 @@ extends Node2D
 @onready var icon: Sprite2D = $RigidBody2D/Icon
 
 # === RADIO SCENE HOLDER ===
-@onready var radio_holder: Node = $"CanvasLayer/RadioHolder"
+@onready var radio_holder: Panel = $CharacterBody2D/RadioHolder
+
+
 var scene_to_instantiate: PackedScene = preload("res://3MK-File/myshit/radio_2_0.tscn")
 var radio_instance: Node = null
 

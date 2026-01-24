@@ -35,4 +35,4 @@ func _draw():
 
 		pts[i] = Vector2(x, y)
 
-	draw_polyline(pts, Color(0.1, 0.6, 1.0), 3.0, true)
+	draw_polyline(pts, Color(1, 1, 1), 3.0, true)
