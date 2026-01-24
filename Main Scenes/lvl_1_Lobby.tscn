@@ -18,12 +18,12 @@ position = Vector2(645, 442)
 
 [node name="Door_reg" parent="." instance=ExtResource("3_2fqaq")]
 position = Vector2(646, 233)
-entery_direction = 2
+entery_direction = 0
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 entry_door_name = "main-hall-north"
 
 [node name="Door_reg2" parent="." instance=ExtResource("3_2fqaq")]
 position = Vector2(644, 708)
-entery_direction = 0
+entery_direction = 2
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
-entry_door_name = "main_hall_south"
+entry_door_name = "main-hall-south"

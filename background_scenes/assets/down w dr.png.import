@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fkvndxqt85w8"
-path="res://.godot/imported/Gf hall.png-7a94852f038e8421520021dbcdec77ed.ctex"
+uid="uid://qqepaf2n82eo"
+path="res://.godot/imported/down w dr.png-ebe611b7df861620e9b651ca362dfaec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background_scenes/assets/Gf hall.png"
-dest_files=["res://.godot/imported/Gf hall.png-7a94852f038e8421520021dbcdec77ed.ctex"]
+source_file="res://background_scenes/assets/down w dr.png"
+dest_files=["res://.godot/imported/down w dr.png-ebe611b7df861620e9b651ca362dfaec.ctex"]
 
 [params]
 

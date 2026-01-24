@@ -62,7 +62,7 @@ func load_new_scene(contenet_path:String) -> void:
 	transition_screen.start_transition()
 	_load_content(contenet_path)
 	
-func on_content_finished_loading(contenet) -> void:
+func on_content_finished_loading(contenet: Node2D) -> void:
 	var outgoing_scene = get_tree().current_scene
 	
 	var incoming_data:LevelDataHandoff

@@ -5,8 +5,8 @@ class_name Level extends Node2D
 var data: LevelDataHandoff
 
 func _ready() -> void:
-	player.disable()
-	player.visible = false
+	#player.disable()
+	#player.visible = false
 	if data == null:
 		enter_level()
 		
@@ -22,14 +22,14 @@ func init_player_location() -> void:
 	if data != null:
 		for door in doors:
 			if door.name == data.entry_door_name:
-				player.position = door.get_player_entery_vector()
+				#player.position = door.position
+				player.position = door.get_player_entry_vector()
 		player.orient(data.move_dir)
 
 func _on_player_entered_door(door:Door_reg) -> void:
-	#if Input.is_action_just_pressed("action"):
 	_disconnect_from_doors()
 	player.disable()
-	player.queue_free()
+	#player.queue_free()
 	data = LevelDataHandoff.new()
 	data.entry_door_name = door.entry_door_name
 	data.move_dir = door.position

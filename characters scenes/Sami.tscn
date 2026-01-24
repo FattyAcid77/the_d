@@ -1,47 +1,104 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=17 format=3 uid="uid://bkjad6iqtfo2y"]
 
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_u3vb6"]
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
+[ext_resource type="Texture2D" uid="uid://qqepaf2n82eo" path="res://background_scenes/assets/down w dr.png" id="2_6hsvr"]
 [ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="3_hq7kk"]
 [ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]
+[ext_resource type="PackedScene" uid="uid://egkrqh00dy5t" path="res://control scene/Sami_Camera.tscn" id="5_qpl50"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tbj5o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpl50"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(0, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3ftm"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(33, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e70c1"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(66, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25pd0"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(99, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ydvg"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(132, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uledl"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(165, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tjsc"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(198, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd56y"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(231, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehnog"]
+atlas = ExtResource("2_6hsvr")
+region = Rect2(0, 93, 33, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8q06m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_u3vb6")
+"texture": SubResource("AtlasTexture_qpl50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3ftm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e70c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25pd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ydvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uledl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tjsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd56y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehnog")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrgeu"]
-size = Vector2(120, 120)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6hsvr"]
+radius = 14.999998
+height = 32.5
 
 [node name="Sami" type="CharacterBody2D"]
-scale = Vector2(0.8, 0.8)
 motion_mode = 1
 script = ExtResource("2_5wxjf")
-speed = 10000
+speed = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_tbj5o")
+sprite_frames = SubResource("SpriteFrames_8q06m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lrgeu")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 1280
-limit_bottom = 720
+position = Vector2(0, 28.749998)
+shape = SubResource("CapsuleShape2D_6hsvr")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
 collide_with_areas = true
 
 [node name="HUD" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Coins" type="ColorRect" parent="HUD"]
 anchors_preset = 1
@@ -106,3 +163,5 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="QuestManger" parent="." instance=ExtResource("4_6hsvr")]
+
+[node name="Camera2D" parent="." instance=ExtResource("5_qpl50")]

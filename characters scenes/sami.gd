@@ -3,7 +3,8 @@ class_name Sami extends CharacterBody2D
 
 
 #up to change
-@export var speed = 5000
+@export var speed = 5000.0
+@export var accel: float = 1200.0
 @export var input_enabled:bool = true
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
@@ -16,31 +17,38 @@ class_name Sami extends CharacterBody2D
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var can_move = true
-
+var input_direction: Vector2 = Vector2.ZERO
+var desired_vel: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	#Need To Be Ref to the Global to use in other Scenes
 	Dialog_Global.player = self
 	quest_tracker.visible = false
+	scale = Vector2.ONE
 
 
 
 #Keep in mind that Delta Time should be used consistently so that gameplay remains the same across different PCs, regardless of their hardware specifications
 func _physics_process(delta: float) -> void:
-	if can_move:
-		get_input(delta)
-		move_and_slide()
-
-
-func get_input(delta: float):
-	var Raycast_length: int = 150
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	velocity = input_direction * speed * delta
 	
-	#this is the will move the RayCast to the input of the player
+	if can_move:
+		velocity = input_direction.normalized() * speed
+		raycast()
+		move_and_slide()
+		
+
+func _process(delta: float) -> void:
+	if input_enabled:
+		input_direction = Input.get_vector("left", "right", "up", "down")
+		desired_vel = input_direction.normalized() * speed
+
+
+	
+
+func raycast():
+	var Raycast_length: int = 150
 	if velocity != Vector2.ZERO:
 		ray_cast_2d.target_position = velocity.normalized() * Raycast_length
-	
 
 
 func _input(event) -> void:

@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://cb1jljpnabeb6" path="res://control scene/door_reg.gd" id="1_c2bhb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3ssd"]
-size = Vector2(220.5, 93)
+size = Vector2(78.25, 84)
 
 [node name="Door_reg" type="Area2D"]
 script = ExtResource("1_c2bhb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 1)
+position = Vector2(-0.125, 1)
 shape = SubResource("RectangleShape2D_k3ssd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_e7oh6"]
 
 [node name="BipolarHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+position = Vector2(132, -28)
 script = ExtResource("1_k8ewv")
 player = NodePath("Sami")
 doors = [NodePath("Door_reg")]
@@ -13,10 +14,10 @@ doors = [NodePath("Door_reg")]
 [node name="BipolarHallBgrd" parent="." instance=ExtResource("1_qravw")]
 
 [node name="Door_reg" parent="." instance=ExtResource("2_myw4k")]
-position = Vector2(615, 19)
+position = Vector2(165, 189)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
 entry_door_name = "Bipolar_North"
 
 [node name="Sami" parent="." instance=ExtResource("3_e7oh6")]
-position = Vector2(615, 158)
+position = Vector2(161, 271)

@@ -3,7 +3,7 @@ class_name Door_reg extends Area2D
 signal  player_entered_door(door: Door_reg)
 
 @export_enum("north", "east", "south", "west") var entery_direction
-@export var push_distance:int = 16
+@export var push_distance:int = 24
 @export var new_scene_path:String
 @export var entry_door_name:String
 var player_inside: bool = false
@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	if player_inside and Input.is_action_just_pressed("action"):
 		player_entered_door.emit(self)
 		SceneManager.load_new_scene(new_scene_path)
-		queue_free()
+		#queue_free()
 
 
 func get_player_entry_vector() -> Vector2:
