@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6svmmsd10lex"]
 
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://icon.svg" id="1_opm6v"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="1_opm6v"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_1ut1q"]
 [ext_resource type="PackedScene" uid="uid://c0e54eied8lev" path="res://FD_Testing/New_Diloage_System/Quest/Quest_Item.tscn" id="3_b7yro"]
 [ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="4_vma3e"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d21mh37tcl1gk"]
 
-[ext_resource type="Script" uid="uid://wp2vxay0leg5" path="res://task_manager.gd" id="1_wfdah"]
+[ext_resource type="Script" uid="uid://wp2vxay0leg5" path="res://3MK-File/myshit/task_manager.gd" id="1_wfdah"]
 
 [node name="Task_manager" type="Node2D"]
 script = ExtResource("1_wfdah")

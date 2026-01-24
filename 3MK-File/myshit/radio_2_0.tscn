@@ -1,0 +1,125 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdb8u7sdvpkpf"]
+
+[ext_resource type="FontFile" uid="uid://bud1f0ks3i856" path="res://FD_Testing/Fonts/PixelAE-Bold.ttf" id="1_2s7x8"]
+[ext_resource type="Script" uid="uid://xge56wrortoc" path="res://3MK-File/myshit/radio_2_0.gd" id="1_7eyv6"]
+[ext_resource type="Script" uid="uid://c0w22c7isxg3y" path="res://3MK-File/myshit/wave_canvas_2_0.gd" id="1_fug20"]
+[ext_resource type="Script" uid="uid://b2doajo0thihn" path="res://3MK-File/myshit/sine_wave_2_0.gd" id="1_tfhuu"]
+[ext_resource type="AudioStream" uid="uid://baarxvvuwwyt4" path="res://3MK-File/soundwave.ogg" id="4_7eyv6"]
+
+[node name="Radio-2_0" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7eyv6")
+metadata/_edit_vertical_guides_ = [168.0, 896.0]
+metadata/_edit_horizontal_guides_ = [624.0, 528.0]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(536, 328)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_7eyv6")
+volume_db = -24.275
+pitch_scale = 2.46
+autoplay = true
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 960.0
+offset_bottom = 448.0
+color = Color(0, 0, 0, 0)
+
+[node name="SineWave-2_0" type="Control" parent="ColorRect6"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.9663334)
+size_flags_horizontal = 4
+script = ExtResource("1_tfhuu")
+
+[node name="Center" type="CenterContainer" parent="ColorRect6/SineWave-2_0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WaveCanvas-2_0" type="Control" parent="ColorRect6/SineWave-2_0/Center"]
+custom_minimum_size = Vector2(800, 300)
+layout_mode = 2
+script = ExtResource("1_fug20")
+amplitude = null
+wavelength = null
+wave_speed = null
+samples = null
+
+[node name="R1" type="Button" parent="ColorRect6/SineWave-2_0"]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 455.32938
+offset_right = 768.0
+offset_bottom = 511.1655
+text = "R1"
+
+[node name="R2" type="Button" parent="ColorRect6/SineWave-2_0"]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 355.9848
+offset_right = 764.0
+offset_bottom = 411.82095
+text = "R2"
+
+[node name="L1" type="Button" parent="ColorRect6/SineWave-2_0"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 455.32935
+offset_right = 96.0
+offset_bottom = 511.16553
+text = "L1"
+
+[node name="L2" type="Button" parent="ColorRect6/SineWave-2_0"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 355.9848
+offset_right = 104.0
+offset_bottom = 411.82098
+text = "L2"
+
+[node name="Player_wave" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="Player_wave"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 56.0
+offset_right = 656.0
+offset_bottom = 128.0
+color = Color(0, 0, 0, 0)
+
+[node name="Frequancy" type="Label" parent="Player_wave/ColorRect2"]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_2s7x8")
+theme_override_font_sizes/font_size = 30
+text = "1 hz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="ColorRect6/SineWave-2_0/R1" to="ColorRect6/SineWave-2_0" method="_on_r_1_pressed"]
+[connection signal="pressed" from="ColorRect6/SineWave-2_0/R2" to="ColorRect6/SineWave-2_0" method="_on_r_2_pressed"]
+[connection signal="pressed" from="ColorRect6/SineWave-2_0/L1" to="ColorRect6/SineWave-2_0" method="_on_l_1_pressed"]
+[connection signal="pressed" from="ColorRect6/SineWave-2_0/L2" to="ColorRect6/SineWave-2_0" method="_on_l_2_pressed"]

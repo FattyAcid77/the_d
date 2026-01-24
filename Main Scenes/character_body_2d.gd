@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var ani: AnimatedSprite2D = $Sprite2D
 const SPEED = 300.0
 
+
+
 func _process(delta):
 	# ... (Keep your existing movement code here) ...
 	var velocity = Vector2.ZERO
