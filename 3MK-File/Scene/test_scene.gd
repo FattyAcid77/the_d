@@ -1,4 +1,4 @@
-extends Node2D
+class_name odai_Sami extends Node2D
 
 @onready var options: Control = $Options
 

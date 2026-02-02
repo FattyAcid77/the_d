@@ -21,9 +21,9 @@ buses/default_bus_layout="res://3MK-File/myshit/default_bus_layout.tres"
 [autoload]
 
 Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
-SceneManager="*res://control scene/SceneManager.gd"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
+SceneManager="*res://control scene/SceneManager.gd"
 
 [display]
 
@@ -113,3 +113,4 @@ Option={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_vertices_to_pixel=true

@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj47u2kbbmsen"]
+
+[ext_resource type="Texture2D" uid="uid://bvdmybxi4prd8" path="res://background_scenes/assets/R3bath_edited.png" id="1_r3om0"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_n7oxy"]
+a = Vector2(10, -4)
+b = Vector2(10, 123)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qowgh"]
+a = Vector2(0, 21)
+b = Vector2(-217, 21)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_j8kg8"]
+a = Vector2(12, -2)
+b = Vector2(-99, -2)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_caa6w"]
+b = Vector2(0, 117)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6i6a"]
+size = Vector2(92, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mu86n"]
+size = Vector2(42, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhts8"]
+size = Vector2(35, 26)
+
+[node name="BipolarBathBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(281, 179)
+texture = ExtResource("1_r3om0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(373, 194)
+shape = SubResource("SegmentShape2D_n7oxy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(387, 292)
+shape = SubResource("SegmentShape2D_qowgh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(375, 208)
+shape = SubResource("SegmentShape2D_j8kg8")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(179, 199)
+shape = SubResource("SegmentShape2D_caa6w")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(227, 228)
+shape = SubResource("RectangleShape2D_m6i6a")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(358, 278.5)
+shape = SubResource("RectangleShape2D_mu86n")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(312.5, 295)
+shape = SubResource("RectangleShape2D_uhts8")

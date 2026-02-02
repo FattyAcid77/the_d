@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://plj6ro4i2wsl"]
+
+[ext_resource type="PackedScene" uid="uid://cp4xvi28a82r0" path="res://background_scenes/Maz_Sad_Room_bgrd.tscn" id="1_1o505"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_2khpq"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_fjyj5"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_2khpq"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_rjkj3"]
+
+[node name="MazSadRoom" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_2khpq")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="MazSadRoomBgrd" parent="." instance=ExtResource("1_1o505")]
+script = ExtResource("3_rjkj3")
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_fjyj5")]
+camera_adj = NodePath("../MazSadRoomBgrd")
+
+[node name="Door_reg" parent="." instance=ExtResource("3_2khpq")]
+position = Vector2(736, 1469)
+scale = Vector2(1.5, 1.5)
+entery_direction = 0
+new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
+target_door_name = "Maz_Sad_Hall_North"
+this_door_name = "Maz_Sad_Room_Main"

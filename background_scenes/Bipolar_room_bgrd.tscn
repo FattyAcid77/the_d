@@ -1,16 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://vqb3opmxrsp4"]
+[gd_scene load_steps=5 format=3 uid="uid://vqb3opmxrsp4"]
 
-[ext_resource type="Texture2D" uid="uid://di8drkb8wxd26" path="res://background_scenes/assets/R3.png" id="1_e7cbw"]
+[ext_resource type="Texture2D" uid="uid://w4gcaxlajjfu" path="res://background_scenes/assets/R3-edited.png" id="1_e7cbw"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_w4loj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4loj"]
+size = Vector2(62, 159)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eraxy"]
+radius = 19.0
+height = 60.0
 
 [node name="BipolarRoomBgrd" type="Node2D"]
+script = ExtResource("1_w4loj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(625, 486.00003)
-scale = Vector2(1.4797047, 1.4797047)
+position = Vector2(628, 353)
 texture = ExtResource("1_e7cbw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(301, 284)
-polygon = PackedVector2Array(0, 0, -27, 0, -27, 234, 297, 234, 297, 304, 288, 304, 288, 363, 297, 363, 297, 387, 516, 387, 516, 350, 660, 350, 660, 387, 688, 387, 688, 312, 650, 312, 650, 78, 667, 78, 667, 66, 676, 66, 676, 78, 688, 78, 688, 2, 589, 3, 589, -15, 293, -15, 293, 5, 227, 5, 216, 5, 216, 172, 16, 172, 16, 0, 4, 0, 94, -97, 728, -84, 726, 419, 200, 419, 203, 292, -86, 308, -69, -69)
+position = Vector2(692, 262)
+polygon = PackedVector2Array(1, -1, 4, 35, -90, 36, -90, 49, -142, 49, -142, 162, -277, 162, -277, 36, -286, 36, -286, 47, -306, 47, -306, 204, -87, 203, -87, 308, 61, 307, 61, 282, 68, 282, 76, 275, 82, 275, 87, 278, 87, 283, 98, 283, 98, 277, 103, 270, 107, 270, 113, 275, 113, 282, 122, 282, 124, 279, 129, 279, 133, 282, 158, 282, 158, 307, 177, 307, 177, 256, 151, 256, 152, 99, 163, 99, 163, 90, 169, 90, 169, 98, 177, 98, 177, 47, 114, 47, 108, 35, 12, 34, 13, -5, 232, -1, 224, 346, -324, 337, -386, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(716, 434.5)
+shape = SubResource("RectangleShape2D_w4loj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(795, 446)
+shape = SubResource("CapsuleShape2D_eraxy")

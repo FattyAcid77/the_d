@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckgv15hoq1ph4"]
+[gd_scene load_steps=11 format=3 uid="uid://ckgv15hoq1ph4"]
 
 [ext_resource type="Texture2D" uid="uid://5p3ax7qst0xc" path="res://background_scenes/assets/f1entrynobg.png" id="1_8kdpn"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_ivfnr"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ipiny"]
 a = Vector2(-767, -112)
@@ -35,6 +36,7 @@ a = Vector2(-23, 6)
 b = Vector2(54, 4)
 
 [node name="Level1HallBgrd" type="Node2D"]
+script = ExtResource("1_ivfnr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(638, 360)

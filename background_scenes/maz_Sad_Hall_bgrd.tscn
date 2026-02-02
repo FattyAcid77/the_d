@@ -1,44 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://duxtjrjnpvlrf"]
+[gd_scene load_steps=4 format=3 uid="uid://duxtjrjnpvlrf"]
 
-[ext_resource type="Texture2D" uid="uid://xh8ge2kckvgv" path="res://background_scenes/assets/R3path.png" id="1_hou14"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_hou14"]
-a = Vector2(-2, -213)
-b = Vector2(-5, 547)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_8y64a"]
-a = Vector2(-6, -13)
-b = Vector2(-5, 766)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_dst67"]
-a = Vector2(190, 331)
-b = Vector2(762, 334)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_be8mu"]
-a = Vector2(214, 103)
-b = Vector2(973, 106)
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_8y64a"]
+[ext_resource type="Texture2D" uid="uid://mj0nhqirygsh" path="res://background_scenes/assets/R3path_edited.png" id="2_dst67"]
+[ext_resource type="PackedScene" uid="uid://mgb21jywr1us" path="res://background_scenes/Hall_colliosions.tscn" id="3_be8mu"]
 
 [node name="MazSadHallBgrd" type="Node2D"]
+script = ExtResource("1_8y64a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(160, 330)
-texture = ExtResource("1_hou14")
+position = Vector2(160, 329)
+texture = ExtResource("2_dst67")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(110, 138)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-28, 37)
-shape = SubResource("SegmentShape2D_hou14")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(156, -189)
-shape = SubResource("SegmentShape2D_8y64a")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-361, 140)
-shape = SubResource("SegmentShape2D_dst67")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-513, -34)
-shape = SubResource("SegmentShape2D_be8mu")
+[node name="StaticBody2D" parent="." instance=ExtResource("3_be8mu")]
+position = Vector2(161, 330)

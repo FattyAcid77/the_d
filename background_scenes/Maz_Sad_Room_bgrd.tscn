@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp4xvi28a82r0"]
+
+[ext_resource type="Texture2D" uid="uid://buqi2swhyga8l" path="res://background_scenes/assets/the living room.png" id="1_u0esu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcdab"]
+size = Vector2(471, 232)
+
+[node name="MazSadRoomBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1132, 743)
+texture = ExtResource("1_u0esu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(664, 1412)
+polygon = PackedVector2Array(1, 1, -122, 2, -122, -855, -88, -856, -90, -798, 8, -797, 8, -660, 471, -660, 470, -848, 510, -846, 510, -784, 1051, -789, 1056, -461, 978, -463, 974, -307, 847, -311, 849, -169, 973, -171, 973, -8, 850, -3, 850, -141, 808, -141, 808, -91, 744, -112, 742, -173, 521, -169, 519, -111, 459, -111, 455, -146, 406, -148, 397, -11, 18, 1, 17, 76, 1224, 98, 1219, -963, -242, -950, -219, 98)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1301.5, 970)
+shape = SubResource("RectangleShape2D_xcdab")

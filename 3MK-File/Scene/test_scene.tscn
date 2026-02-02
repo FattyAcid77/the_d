@@ -1,7 +1,6 @@
-[gd_scene load_steps=69 format=3 uid="uid://dsc6w8fpqobwd"]
+[gd_scene load_steps=68 format=3 uid="uid://dsc6w8fpqobwd"]
 
 [ext_resource type="Script" uid="uid://cb6n5ypexp7gt" path="res://3MK-File/Scene/test_scene.gd" id="1_4y116"]
-[ext_resource type="Texture2D" uid="uid://fkvndxqt85w8" path="res://background_scenes/assets/Gf hall.png" id="2_cp8eu"]
 [ext_resource type="Script" uid="uid://xen6dr6x6sfd" path="res://Main Scenes/character_body_2d.gd" id="2_e0eku"]
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="3_4y116"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="4_7e5tu"]
@@ -409,7 +408,6 @@ script = ExtResource("1_4y116")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(288, -2072)
 scale = Vector2(6.0705996, 24.349659)
-texture = ExtResource("2_cp8eu")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(632, 640)

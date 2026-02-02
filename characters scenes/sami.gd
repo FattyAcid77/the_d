@@ -1,11 +1,13 @@
 class_name Sami extends CharacterBody2D
 
 
-
 #up to change
 @export var speed = 5000.0
 @export var accel: float = 1200.0
 @export var input_enabled:bool = true
+@export var camera_adj: bgrd_node
+
+
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 @onready var amount: Label = $HUD/Coins/Amount
@@ -14,6 +16,7 @@ class_name Sami extends CharacterBody2D
 @onready var objectives: VBoxContainer = $HUD/QuestTracker/Details/Objectives
 @onready var quest_manger: Node2D = $QuestManger
 
+@onready var camera =  $Camera2D
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var can_move = true
@@ -25,7 +28,7 @@ func _ready() -> void:
 	Dialog_Global.player = self
 	quest_tracker.visible = false
 	scale = Vector2.ONE
-
+	set_camera_limits()
 
 
 #Keep in mind that Delta Time should be used consistently so that gameplay remains the same across different PCs, regardless of their hardware specifications
@@ -75,3 +78,14 @@ func disable():
 func enable():
 	input_enabled = true
 	visible = true
+	
+func set_camera_limits():
+	camera.limit_right = camera_adj.right_limits
+	print(camera.limit_right)
+	camera.limit_top = camera_adj.top_limits
+	print(camera.limit_top)
+	camera.limit_left = camera_adj.left_limits
+	print(camera.limit_left)
+	camera.limit_bottom = camera_adj.bottom_limits
+	print(camera.limit_bottom)
+	

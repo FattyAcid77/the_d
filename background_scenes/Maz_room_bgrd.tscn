@@ -1,45 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq0wmvhuq0hbt"]
+[gd_scene load_steps=7 format=3 uid="uid://bq0wmvhuq0hbt"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_dupmi"]
+[ext_resource type="Texture2D" uid="uid://6mqv31kgkqb6" path="res://background_scenes/assets/the room 1.png" id="1_5s0m3"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_jmtjh"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_5s0m3"]
-a = Vector2(-9, 423)
-b = Vector2(-9, -26)
+a = Vector2(-4, 967)
+b = Vector2(1, -334)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jmtjh"]
-a = Vector2(360, 34)
+a = Vector2(1015, 34)
 b = Vector2(-425, 34)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_31mtl"]
-a = Vector2(-76, 290)
-b = Vector2(-76, -175)
+a = Vector2(-53, 596)
+b = Vector2(-50, -331)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_sx4kc"]
-a = Vector2(419, -42)
+a = Vector2(1012, -41)
 b = Vector2(-428, -40)
 
 [node name="MazRoomBgrd" type="Node2D"]
+script = ExtResource("1_jmtjh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.286275, 0.329412, 0.411765, 1)
-position = Vector2(624, 367)
-scale = Vector2(745.5, 417)
-texture = SubResource("CanvasTexture_dupmi")
+position = Vector2(645, 601)
+texture = ExtResource("1_5s0m3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(262, 163)
+position = Vector2(49, 292)
 shape = SubResource("SegmentShape2D_5s0m3")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(653, 125)
+position = Vector2(308, 1121)
 shape = SubResource("SegmentShape2D_jmtjh")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1070, 307)
+position = Vector2(1295, 672)
 shape = SubResource("SegmentShape2D_31mtl")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(604, 613)
+position = Vector2(356, 576)
 shape = SubResource("SegmentShape2D_sx4kc")
