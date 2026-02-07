@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://beeg8oo70gdrn"]
+
+[ext_resource type="Texture2D" uid="uid://mj0nhqirygsh" path="res://background_scenes/assets/R3path_edited.png" id="1_blp2w"]
+[ext_resource type="PackedScene" uid="uid://mgb21jywr1us" path="res://background_scenes/Hall_colliosions.tscn" id="2_i7xgj"]
+
+[node name="OcdHallBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(344, 339)
+texture = ExtResource("1_blp2w")
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_i7xgj")]
+position = Vector2(346, 339)

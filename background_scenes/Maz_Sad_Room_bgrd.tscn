@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://buqi2swhyga8l" path="res://background_scenes/assets/the living room.png" id="1_u0esu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcdab"]
-size = Vector2(471, 232)
+size = Vector2(154, 62)
 
 [node name="MazSadRoomBgrd" type="Node2D"]
 
@@ -13,10 +13,10 @@ texture = ExtResource("1_u0esu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(664, 1412)
-polygon = PackedVector2Array(1, 1, -122, 2, -122, -855, -88, -856, -90, -798, 8, -797, 8, -660, 471, -660, 470, -848, 510, -846, 510, -784, 1051, -789, 1056, -461, 978, -463, 974, -307, 847, -311, 849, -169, 973, -171, 973, -8, 850, -3, 850, -141, 808, -141, 808, -91, 744, -112, 742, -173, 521, -169, 519, -111, 459, -111, 455, -146, 406, -148, 397, -11, 18, 1, 17, 76, 1224, 98, 1219, -963, -242, -950, -219, 98)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1301.5, 970)
+position = Vector2(1190, 822)
 shape = SubResource("RectangleShape2D_xcdab")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(999, 966)
+polygon = PackedVector2Array(0, 0, -64, 0, -63, -284, -53, -284, -53, -267, -22, -267, -21, -225, 5, -226, 5, -214, 103, -215, 103, -226, 131, -227, 132, -264, 328, -266, 327, -153, 303, -152, 302, -104, 259, -104, 259, -58, 302, -58, 302, -6, 263, -6, 262, -45, 248, -45, 247, -32, 226, -33, 226, -56, 151, -58, 150, -36, 128, -36, 127, -45, 114, -44, 113, 0, 1, 0, 3, 32, 373, 32, 366, -302, -122, -303, -114, 42)

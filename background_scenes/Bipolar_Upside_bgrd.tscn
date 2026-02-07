@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvr7ifju0uxkd"]
+
+[ext_resource type="Texture2D" uid="uid://b6xw14jcpll05" path="res://background_scenes/assets/Bipolar_Room_Upside_Edited.png" id="1_6dsi7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6dsi7"]
+radius = 17.0
+height = 64.0
+
+[node name="BipolarUpsideBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(347, 259)
+texture = ExtResource("1_6dsi7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(374, 457)
+polygon = PackedVector2Array(0, 1, -6, 1, -6, 16, -151, 16, -151, -9, -167, -17, -198, -22, -208, -12, -252, -11, -252, 16, -266, 16, -266, -30, -240, -30, -241, -193, -253, -193, -253, -200, -262, -200, -267, -200, -267, -241, -250, -241, -244, -235, -215, -238, -185, -238, -154, -239, -154, -252, -4, -252, -3, -238, 47, -238, 48, -127, 190, -127, 191, -239, 213, -239, 212, -87, -1, -88, 10, -113, 23, -174, 10, -181, 7, -173, -33, -183, -48, -139, -43, -138, -82, -51, -34, -29, -29, -29, -7, -76, -7, -35, 0, -35, 0, -1, 251, -7, 251, -272, -304, -278, -305, 60, 29, 44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(215, 326)
+shape = SubResource("CapsuleShape2D_6dsi7")

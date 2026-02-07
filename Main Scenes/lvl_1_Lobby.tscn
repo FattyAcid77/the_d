@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene load_steps=6 format=3 uid="uid://dxofprk7jlwg1"]
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_171b8"]
 [ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 
 [node name="Lvl1Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_171b8")
 player = NodePath("Sami")
-doors = [NodePath("door_reg_type2"), NodePath("door_reg_type3")]
+doors = [NodePath("door_reg_type2"), NodePath("door_reg_type3"), NodePath("Door_reg")]
 
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 
@@ -17,15 +18,22 @@ position = Vector2(645, 442)
 camera_adj = NodePath("../Level1HallBgrd")
 
 [node name="door_reg_type2" parent="." instance=ExtResource("4_171b8")]
-position = Vector2(650, 230)
+position = Vector2(650, 266)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_south"
 this_door_name = "lvl_1_lobby_north"
 
 [node name="door_reg_type3" parent="." instance=ExtResource("4_171b8")]
-position = Vector2(650, 693)
+position = Vector2(648, 618)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
 target_door_name = "Bipolar_Hall_north"
 this_door_name = "lvl_1_lobby_south"
+
+[node name="Door_reg" parent="." instance=ExtResource("5_hmgdi")]
+position = Vector2(254, 447)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/Elevator.tscn"
+target_door_name = "Elevator_Main"
+this_door_name = "lvl_1_lobby_West"

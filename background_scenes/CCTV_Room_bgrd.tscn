@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceomsmbkp7ymg"]
+
+[ext_resource type="Texture2D" uid="uid://bov58as1a1uhj" path="res://background_scenes/assets/cctv room.png" id="1_tlv3g"]
+
+[node name="CctvRoomBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(297, 184)
+texture = ExtResource("1_tlv3g")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(100, 269)
+polygon = PackedVector2Array(0, 0, 0, 61, 393, 60, 393, 39, 368, 39, 369, -44, 220, -43, 218, -22, 203, -11, 186, -18, 176, -45, 151, -43, 132, -42, 109, -42, 65, -40, 64, -66, 2, -66, 2, -41, -6, -41, -6, -3, -2, -3, -1, -1, -23, -1, -23, -89, 415, -84, 414, 83, -35, 78, -29, 17)

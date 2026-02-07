@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqp7w0wu2ysiu"]
+
+[ext_resource type="Texture2D" uid="uid://gsik68vr1ent" path="res://background_scenes/assets/F2-R-Suhaib edit.png" id="1_g7wiy"]
+
+[node name="Lvl2LobbyBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(549, 364)
+texture = ExtResource("1_g7wiy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(928, 473)
+polygon = PackedVector2Array(0, 0, 6, 0, 6, -44, 0, -44, -2, -163, -172, -162, -172, -193, -200, -193, -208, -185, -222, -185, -226, -193, -233, -193, -232, -113, -255, -113, -255, -194, -476, -194, -477, -187, -494, -186, -499, -194, -515, -195, -518, -187, -540, -188, -542, -194, -756, -194, -756, 71, -452, 71, -449, 71, -451, 145, -289, 145, -289, 136, -45, 137, -45, 92, -34, 92, -35, 77, -51, 65, -50, 43, -27, 28, -26, 0, -2, 0, -5, 175, -816, 175, -798, -240, 75, -220, 21, 15)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(428, 297)
+polygon = PackedVector2Array(0, 0, 28, 0, 31, 7, 32, 96, -2, 129, -233, 127, -233, 79, -198, 79, -198, 61, -183, 41, -175, 41, -160, 58, -159, 78, -19, 78, -5, 65, -40, 65, -41, 21, -20, 8, 1, 7, 1, 66, -11, 87, -215, 94, -9, 119, 23, 67, 25, 7)

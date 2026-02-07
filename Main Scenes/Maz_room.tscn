@@ -17,8 +17,10 @@ position = Vector2(569, 693)
 camera_adj = NodePath("../MazRoomBgrd")
 
 [node name="Door_reg" parent="." instance=ExtResource("4_wsgam")]
-position = Vector2(1252, 796)
+position = Vector2(851, 664)
+scale = Vector2(0.5, 0.5)
 entery_direction = 3
+push_distance = 50
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_West"
 this_door_name = "Maz_room"

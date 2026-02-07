@@ -1,23 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq0wmvhuq0hbt"]
+[gd_scene load_steps=3 format=3 uid="uid://bq0wmvhuq0hbt"]
 
 [ext_resource type="Texture2D" uid="uid://6mqv31kgkqb6" path="res://background_scenes/assets/the room 1.png" id="1_5s0m3"]
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_jmtjh"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_5s0m3"]
-a = Vector2(-4, 967)
-b = Vector2(1, -334)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jmtjh"]
-a = Vector2(1015, 34)
-b = Vector2(-425, 34)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_31mtl"]
-a = Vector2(-53, 596)
-b = Vector2(-50, -331)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_sx4kc"]
-a = Vector2(1012, -41)
-b = Vector2(-428, -40)
 
 [node name="MazRoomBgrd" type="Node2D"]
 script = ExtResource("1_jmtjh")
@@ -28,18 +12,6 @@ texture = ExtResource("1_5s0m3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(49, 292)
-shape = SubResource("SegmentShape2D_5s0m3")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(308, 1121)
-shape = SubResource("SegmentShape2D_jmtjh")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1295, 672)
-shape = SubResource("SegmentShape2D_31mtl")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(356, 576)
-shape = SubResource("SegmentShape2D_sx4kc")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(843, 686)
+polygon = PackedVector2Array(0, 0, -1, 97, -122, 97, -122, 55, -231, 55, -232, 96, -286, 93, -304, 43, -316, 11, -294, 8, -310, -20, -394, 29, -386, 33, -375, 30, -372, 21, -363, 21, -362, 0, -342, 1, -331, -4, -329, -49, -341, -59, -361, -59, -361, -84, -240, -83, -239, 1, -236, 6, -127, 6, -121, -8, -121, -84, -3, -84, 0, -2, 36, -8, 31, -113, -467, -112, -465, 158, 43, 142)

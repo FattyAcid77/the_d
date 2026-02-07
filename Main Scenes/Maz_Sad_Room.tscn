@@ -15,11 +15,11 @@ doors = [NodePath("Door_reg")]
 script = ExtResource("3_rjkj3")
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_fjyj5")]
+position = Vector2(1026, 790)
 camera_adj = NodePath("../MazSadRoomBgrd")
 
 [node name="Door_reg" parent="." instance=ExtResource("3_2khpq")]
-position = Vector2(736, 1469)
-scale = Vector2(1.5, 1.5)
+position = Vector2(1000, 968)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_North"

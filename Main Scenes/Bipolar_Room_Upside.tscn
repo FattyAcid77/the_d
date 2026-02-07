@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkqlk1vocf6yi"]
+
+[ext_resource type="PackedScene" uid="uid://cvr7ifju0uxkd" path="res://background_scenes/Bipolar_Upside_bgrd.tscn" id="1_3s6lr"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_sgphs"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_rdlk7"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_sgphs"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_xhck7"]
+
+[node name="BipolarRoomUpside" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_sgphs")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="BipolarUpsideBgrd" parent="." instance=ExtResource("1_3s6lr")]
+script = ExtResource("3_xhck7")
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_rdlk7")]
+position = Vector2(261, 256)
+camera_adj = NodePath("../BipolarUpsideBgrd")
+
+[node name="Door_reg" parent="." instance=ExtResource("3_sgphs")]
+position = Vector2(377, 437)
+scale = Vector2(0.5, 0.5)
+push_distance = 50
+new_scene_path = "res://Main Scenes/Bipolar_Bath_Uoside.tscn"
+target_door_name = "Bipolar_Bath_Upside_Main"
+this_door_name = "Bipolar_Room_Upside_Secondary"

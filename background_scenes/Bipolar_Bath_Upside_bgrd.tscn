@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn2xelatmd7gj"]
+
+[ext_resource type="Texture2D" uid="uid://px0r36t4u36p" path="res://background_scenes/assets/Bipolar_Bath_Upside_Edited.png" id="1_oysle"]
+
+[node name="BipolarBathUpsideBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(328, 171)
+texture = ExtResource("1_oysle")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(221, 211)
+polygon = PackedVector2Array(1, -1, 7, -1, 7, -12, 69, -11, 69, 2, 74, 8, 95, 8, 100, 4, 100, -12, 110, -12, 112, 42, 114, 44, 207, 46, 201, 57, 200, 85, 200, 92, 96, 92, 95, 62, 53, 62, 53, 43, 6, 44, 6, 37, 0, 37, 0, 1, -15, 1, -15, 116, 222, 115, 222, -30, -2, -25)

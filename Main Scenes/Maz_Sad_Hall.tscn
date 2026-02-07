@@ -9,12 +9,12 @@
 [node name="MazSadHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_v5c8h")
 player = NodePath("Sami")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2"), NodePath("Door_reg3")]
 
 [node name="MazSadHallBgrd" parent="." instance=ExtResource("1_4o7lu")]
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_ri0l0")]
-position = Vector2(269, 847)
+position = Vector2(152, 391)
 camera_adj = NodePath("../MazSadHallBgrd")
 
 [node name="Door_reg" parent="." instance=ExtResource("2_ri0l0")]
@@ -37,3 +37,10 @@ entery_direction = 1
 new_scene_path = "res://Main Scenes/Maz_room.tscn"
 target_door_name = "Maz_room"
 this_door_name = "Maz_Sad_Hall_West"
+
+[node name="Door_reg3" parent="." instance=ExtResource("2_ri0l0")]
+position = Vector2(260, 303)
+entery_direction = 3
+new_scene_path = "res://Main Scenes/Sad_Room.tscn"
+target_door_name = "Sad_Room_Main"
+this_door_name = "Maz_Sad_Hall_East"

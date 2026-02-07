@@ -78,7 +78,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qpl50"]
-height = 24.0
+radius = 11.0
+height = 22.0
 
 [node name="Sami" type="CharacterBody2D"]
 motion_mode = 1

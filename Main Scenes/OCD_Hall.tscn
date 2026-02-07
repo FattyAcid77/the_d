@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsikcwpia0fsi"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_7n0jy"]
+[ext_resource type="PackedScene" uid="uid://beeg8oo70gdrn" path="res://background_scenes/OCD_Hall_bgrd.tscn" id="2_i40uq"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_4r10t"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="4_sa4ac"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_jljya"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="6_ai3c8"]
+
+[node name="OcdHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_7n0jy")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
+
+[node name="OcdHallBgrd" parent="." instance=ExtResource("2_i40uq")]
+script = ExtResource("3_4r10t")
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("4_sa4ac")]
+camera_adj = NodePath("../OcdHallBgrd")
+
+[node name="Door_reg" parent="." instance=ExtResource("5_jljya")]
+position = Vector2(347, 636)
+entery_direction = 0
+new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
+target_door_name = "lvl_2_lobby_North"
+this_door_name = "OCD_Hall_South"
+
+[node name="door_reg_type2" parent="." instance=ExtResource("6_ai3c8")]
+position = Vector2(344, 209)
+entery_direction = 2
+this_door_name = "OCD_Hall_North"
+
+[node name="Door_reg2" parent="." instance=ExtResource("5_jljya")]
+position = Vector2(440, 493)
+entery_direction = 3
+new_scene_path = "res://Main Scenes/CCTV_Room.tscn"
+target_door_name = "CCTV_Room_Main"
+this_door_name = "OCD_Hall_East"

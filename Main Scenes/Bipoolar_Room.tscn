@@ -13,12 +13,13 @@ doors = [NodePath("Door_reg"), NodePath("Door_reg2")]
 [node name="BipolarRoomBgrd" parent="." instance=ExtResource("1_wn1qc")]
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_dltgl")]
-position = Vector2(124, 101)
+position = Vector2(630, 355)
 camera_adj = NodePath("../BipolarRoomBgrd")
 
 [node name="Door_reg" parent="." instance=ExtResource("3_l0xvq")]
 position = Vector2(726, 270)
 entery_direction = 2
+push_distance = 50
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
 target_door_name = "Bipolar_Hall_South"
 this_door_name = "Bipolar_Room_main"
@@ -26,7 +27,8 @@ this_door_name = "Bipolar_Room_main"
 [node name="Door_reg2" parent="." instance=ExtResource("3_l0xvq")]
 position = Vector2(602, 530)
 scale = Vector2(0.5, 0.5)
-entery_direction = 3
+entery_direction = 1
+push_distance = 50
 new_scene_path = "res://Main Scenes/Bipolar_Bath.tscn"
 target_door_name = "Bipolar_Bath_Main"
 this_door_name = "Bipolar_room_tobath"

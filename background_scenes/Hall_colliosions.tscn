@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mgb21jywr1us"]
+[gd_scene load_steps=8 format=3 uid="uid://mgb21jywr1us"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0l85j"]
 a = Vector2(-2, -213)
@@ -15,9 +15,6 @@ b = Vector2(762, 334)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1nbrg"]
 a = Vector2(214, 103)
 b = Vector2(973, 106)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5in5"]
-size = Vector2(50, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ogg7"]
 size = Vector2(20, 49)
@@ -49,10 +46,6 @@ shape = SubResource("SegmentShape2D_gfd38")
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
 position = Vector2(-574, -230)
 shape = SubResource("SegmentShape2D_1nbrg")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
-position = Vector2(62, -44)
-shape = SubResource("RectangleShape2D_q5in5")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
 position = Vector2(74, 141.5)

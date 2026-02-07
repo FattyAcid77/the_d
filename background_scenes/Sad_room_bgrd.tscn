@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnu0vjhulhch4"]
+
+[ext_resource type="Texture2D" uid="uid://dff46icrpgk1i" path="res://background_scenes/assets/the room 2.png" id="1_3jgqg"]
+
+[node name="SadRoomBgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(322, 274)
+texture = ExtResource("1_3jgqg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(448, 456)
+polygon = PackedVector2Array(0, 0, 69, 0, 66, -104, 33, -104, 32, -150, 5, -150, 4, -173, -11, -173, -11, -199, -46, -199, -46, -96, -165, -96, -165, -176, -200, -177, -201, -201, -239, -202, -239, -195, -284, -195, -284, -202, -292, -202, -292, -152, -321, -152, -321, -26, -266, -26, -266, -1, -226, -1, -226, -43, -94, -42, -91, -42, -91, 0, -1, 0, -3, 24, -356, 19, -353, -227, 100, -225, 95, 32)
