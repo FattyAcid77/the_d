@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvsoeqdnjllg5"]
+
+[ext_resource type="PackedScene" uid="uid://cq4m63fowkp87" path="res://background_scenes/Elevator_2_bgrd.tscn" id="1_d4k2c"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_aso7g"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_2matr"]
+
+[node name="Elevator2" type="Node2D"]
+
+[node name="Elevator2Bgrd" parent="." instance=ExtResource("1_d4k2c")]
+
+[node name="Door_reg" parent="." instance=ExtResource("2_aso7g")]
+position = Vector2(159, 246)
+
+[node name="Sami" parent="." instance=ExtResource("3_2matr")]

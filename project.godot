@@ -24,6 +24,7 @@ Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 SceneManager="*res://control scene/SceneManager.gd"
+PauseMenu="*res://control scene/Pause_Menu.tscn"
 
 [display]
 

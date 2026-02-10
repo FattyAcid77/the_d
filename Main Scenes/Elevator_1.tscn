@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu2q35ayocb5s"]
+
+[ext_resource type="PackedScene" uid="uid://cht8x5ihtykm0" path="res://background_scenes/Elevator_1_bgrd.tscn" id="1_01sm3"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_r02jt"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_dy6my"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_5dhi0"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_dy6my"]
+
+[node name="Elevator" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_r02jt")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="ElevatorBgrd" parent="." instance=ExtResource("1_01sm3")]
+script = ExtResource("3_5dhi0")
+
+[node name="Door_reg" parent="." instance=ExtResource("2_dy6my")]
+position = Vector2(285, 258)
+scale = Vector2(0.5, 0.5)
+entery_direction = 3
+push_distance = 25
+new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
+target_door_name = "lvl_1_lobby_West"
+this_door_name = "Elevator_Main"
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
+camera_adj = NodePath("../ElevatorBgrd")
