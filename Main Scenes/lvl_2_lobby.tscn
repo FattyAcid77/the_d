@@ -22,8 +22,8 @@ camera_adj = NodePath("../Lvl2LobbyBgrd")
 [node name="Door_reg" parent="." instance=ExtResource("3_rx0ui")]
 position = Vector2(942, 446)
 entery_direction = 3
-new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
-target_door_name = "lvl_1_lobby_West"
+new_scene_path = "res://Main Scenes/Elevator_2.tscn"
+target_door_name = "Elevator_2_Main"
 this_door_name = "lvl_2_lobby_east"
 
 [node name="door_reg_type2" parent="." instance=ExtResource("6_6eri3")]

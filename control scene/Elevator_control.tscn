@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvjps10m4rucf"]
+
+[ext_resource type="Script" uid="uid://dkp3pph0ldbo0" path="res://control scene/elevator_control.gd" id="1_e66lf"]
+
+[node name="ElevatorControl" type="CanvasLayer"]
+script = ExtResource("1_e66lf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 273.0
+offset_top = 127.0
+offset_right = 327.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="Button2" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
