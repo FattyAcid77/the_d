@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuf2n1fwsq115"]
+
+[ext_resource type="Texture2D" uid="uid://dbsvna74rkwyf" path="res://3MK-File/myshit/download.jpg" id="1_wi2qg"]
+
+[sub_resource type="Animation" id="Animation_ctn4s"]
+resource_name = "Billboard Animation"
+length = 0.27
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.3, 0.0, 1.3]
+}
+
+[sub_resource type="Animation" id="Animation_bcfud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yi5rg"]
+_data = {
+&"Billboard Animation": SubResource("Animation_ctn4s"),
+&"RESET": SubResource("Animation_bcfud")
+}
+
+[node name="Map-Light" type="Node2D"]
+
+[node name="Light-Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Shadow/PointLight2D2")
+libraries = {
+&"": SubResource("AnimationLibrary_yi5rg")
+}
+autoplay = "Billboard Animation"
+
+[node name="Shadow" type="CanvasModulate" parent="."]
+color = Color(0.13319641, 0.13319641, 0.13319635, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Shadow"]
+position = Vector2(644, 375.75)
+scale = Vector2(5.5135136, 3.4898646)
+texture = ExtResource("1_wi2qg")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Shadow"]
+position = Vector2(893.99994, 138.00002)
+scale = Vector2(2.5743246, 1.6294589)
+energy = 1.3
+texture = ExtResource("1_wi2qg")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Shadow"]
+position = Vector2(404, 136)
+scale = Vector2(2.5743246, 2.247162)
+energy = 1.3
+texture = ExtResource("1_wi2qg")

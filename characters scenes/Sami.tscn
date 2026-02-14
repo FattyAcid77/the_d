@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
 [ext_resource type="Texture2D" uid="uid://b55a7vyqwfkvs" path="res://3MK-File/TEST-ANIM/up w dr.png" id="3_25pd0"]
+[gd_scene load_steps=8 format=3 uid="uid://bkjad6iqtfo2y"]
+
+[ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="3_hq7kk"]
 [ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]
 [ext_resource type="Texture2D" uid="uid://d3vg3i04cpcd0" path="res://3MK-File/TEST-ANIM/down w dr.png" id="4_8ydvg"]
@@ -283,10 +286,13 @@ animations = [{
 "name": &"down",
 "speed": 8.0
 }]
+[ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qpl50"]
 radius = 11.0
 height = 22.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
 [node name="Sami" type="CharacterBody2D"]
 motion_mode = 1
@@ -376,3 +382,13 @@ size_flags_vertical = 3
 
 [node name="AreaIndicator" parent="." instance=ExtResource("8_25pd0")]
 position = Vector2(0, -60)
+[node name="Radio-Panel" parent="." instance=ExtResource("6_r3ftm")]
+anchor_right = 9.775001
+anchor_bottom = 4.083
+offset_left = -195.0
+offset_top = -210.0
+offset_right = -195.0
+offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_r3ftm")
