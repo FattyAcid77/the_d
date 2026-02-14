@@ -1,7 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkjad6iqtfo2y"]
-
-[ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
-[gd_scene load_steps=46 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=48 format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
