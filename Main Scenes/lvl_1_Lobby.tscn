@@ -1,10 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene load_steps=10 format=3 uid="uid://dxofprk7jlwg1"]
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_171b8"]
 [ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
+[ext_resource type="Texture2D" uid="uid://dbsvna74rkwyf" path="res://3MK-File/myshit/download.jpg" id="6_ctn4s"]
+
+[sub_resource type="Animation" id="Animation_ctn4s"]
+resource_name = "Billboard Animation"
+length = 0.27
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.3, 0.0, 1.3]
+}
+
+[sub_resource type="Animation" id="Animation_bcfud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yi5rg"]
+_data = {
+&"Billboard Animation": SubResource("Animation_ctn4s"),
+&"RESET": SubResource("Animation_bcfud")
+}
 
 [node name="Lvl1Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_171b8")
@@ -14,7 +53,7 @@ doors = [NodePath("door_reg_type2"), NodePath("door_reg_type3"), NodePath("Door_
 [node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_xriv7")]
-position = Vector2(645, 442)
+position = Vector2(660, 343)
 camera_adj = NodePath("../Level1HallBgrd")
 
 [node name="door_reg_type2" parent="." instance=ExtResource("4_171b8")]
@@ -37,3 +76,32 @@ entery_direction = 1
 new_scene_path = "res://Main Scenes/Elevator.tscn"
 target_door_name = "Elevator_Main"
 this_door_name = "lvl_1_lobby_West"
+
+[node name="Map-Light" type="Node2D" parent="."]
+
+[node name="Light-Animation" type="AnimationPlayer" parent="Map-Light"]
+root_node = NodePath("../Shadow/PointLight2D2")
+libraries = {
+&"": SubResource("AnimationLibrary_yi5rg")
+}
+autoplay = "Billboard Animation"
+
+[node name="Shadow" type="CanvasModulate" parent="Map-Light"]
+color = Color(0.13319641, 0.13319641, 0.13319635, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Map-Light/Shadow"]
+position = Vector2(644, 375.75)
+scale = Vector2(5.5135136, 3.4898646)
+texture = ExtResource("6_ctn4s")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Map-Light/Shadow"]
+position = Vector2(893.99994, 138.00002)
+scale = Vector2(2.5743246, 1.6294589)
+energy = 1.3
+texture = ExtResource("6_ctn4s")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Map-Light/Shadow"]
+position = Vector2(404, 136)
+scale = Vector2(2.5743246, 2.247162)
+energy = 1.3
+texture = ExtResource("6_ctn4s")
