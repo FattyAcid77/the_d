@@ -15,6 +15,7 @@ var transition_type: String = "fade_to_black"
 func _on_body_entered(body: Node2D) -> void:
 	if body is Sami:
 		player_inside = true
+		SceneManager.player_in_area = true
 	
 		#player_entered_door.emit(self)
 		#SceneManager.load_new_scene(new_scene_path)
@@ -53,3 +54,4 @@ func get_move_dir() -> Vector2:
 
 func _on_body_exited(body: Node2D) -> void:
 	player_inside = false
+	SceneManager.player_in_area = false

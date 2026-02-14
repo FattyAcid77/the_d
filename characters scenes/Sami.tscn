@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=47 format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]
 [ext_resource type="Texture2D" uid="uid://d3vg3i04cpcd0" path="res://3MK-File/TEST-ANIM/down w dr.png" id="4_8ydvg"]
 [ext_resource type="PackedScene" uid="uid://egkrqh00dy5t" path="res://control scene/Sami_Camera.tscn" id="5_qpl50"]
+[ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="8_25pd0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4p0up"]
 atlas = ExtResource("2_e70c1")
@@ -294,7 +295,7 @@ speed = 70.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uledl")
-animation = &"Right"
+animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 40)
@@ -372,3 +373,6 @@ size_flags_vertical = 3
 [node name="QuestManger" parent="." instance=ExtResource("4_6hsvr")]
 
 [node name="Camera2D" parent="." instance=ExtResource("5_qpl50")]
+
+[node name="AreaIndicator" parent="." instance=ExtResource("8_25pd0")]
+position = Vector2(0, -60)

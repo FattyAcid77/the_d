@@ -25,14 +25,16 @@ new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
 target_door_name = "lvl_1_lobby_West"
 this_door_name = "Elevator_1_Main"
 
-[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
-camera_adj = NodePath("../ElevatorBgrd")
-
 [node name="Elevator_Control_reg" parent="." instance=ExtResource("6_4lxvx")]
 position = Vector2(242, 218)
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
+position = Vector2(223, 213)
+camera_adj = NodePath("../ElevatorBgrd")
 
 [node name="ElevatorControl" parent="." instance=ExtResource("7_38pdo")]
 layer = 5
 visible = false
+this_scene_path = "res://Main Scenes/Elevator_1.tscn"
 
 [connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]
