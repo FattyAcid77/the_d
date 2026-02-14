@@ -16,6 +16,7 @@ class_name Sami extends CharacterBody2D
 @onready var objectives: VBoxContainer = $HUD/QuestTracker/Details/Objectives
 @onready var quest_manger: Node2D = $QuestManger
 @onready var ani: AnimatedSprite2D = $Sprite2D
+@onready var area_ind: area_indicator = $AreaIndicator
 
 @onready var camera =  $Camera2D
 @onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -65,12 +66,17 @@ func _physics_process(delta: float) -> void:
 		raycast()
 		move_and_slide()
 		
+		
+		
 
 func _process(delta: float) -> void:
 	#if input_enabled:
 		#input_direction = Input.get_vector("left", "right", "up", "down")
 		#desired_vel = input_direction.normalized() * speed
-		pass
+		if SceneManager.player_in_area:
+			area_ind.show_E()
+		else:
+			area_ind.hide_E()
 
 
 	
