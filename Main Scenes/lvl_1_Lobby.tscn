@@ -73,8 +73,8 @@ this_door_name = "lvl_1_lobby_south"
 [node name="Door_reg" parent="." instance=ExtResource("5_hmgdi")]
 position = Vector2(254, 447)
 entery_direction = 1
-new_scene_path = "res://Main Scenes/Elevator.tscn"
-target_door_name = "Elevator_Main"
+new_scene_path = "res://Main Scenes/Elevator_1.tscn"
+target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
 [node name="Map-Light" type="Node2D" parent="."]
