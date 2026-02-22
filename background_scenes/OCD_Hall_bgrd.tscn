@@ -1,13 +1,21 @@
 [gd_scene load_steps=3 format=3 uid="uid://beeg8oo70gdrn"]
 
-[ext_resource type="Texture2D" uid="uid://mj0nhqirygsh" path="res://background_scenes/assets/R3path_edited.png" id="1_blp2w"]
-[ext_resource type="PackedScene" uid="uid://mgb21jywr1us" path="res://background_scenes/Hall_colliosions.tscn" id="2_i7xgj"]
+[ext_resource type="Texture2D" uid="uid://d2sp6kcxiqamu" path="res://background_scenes/assets/f2-path.png" id="1_lgqx8"]
+[ext_resource type="Texture2D" uid="uid://bmic3c0t8kg2c" path="res://background_scenes/assets/micro-assets/f2-path-shredded.png" id="2_blp2w"]
 
 [node name="OcdHallBgrd" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(344, 339)
-texture = ExtResource("1_blp2w")
+z_index = -1
+position = Vector2(348, 321)
+texture = ExtResource("1_lgqx8")
 
-[node name="StaticBody2D" parent="." instance=ExtResource("2_i7xgj")]
-position = Vector2(346, 339)
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(348, 321)
+texture = ExtResource("2_blp2w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(325, 609)
+polygon = PackedVector2Array(-1, -1, -1, -7, -58, -7, -58, -117, -72, -117, -72, -153, -65, -153, -65, -160, -17, -161, -17, -212, 7, -212, 7, -252, -67, -252, -67, -320, -61, -304, -44, -304, -44, -317, -52, -317, -52, -410, 102, -410, 102, -398, 110, -398, 110, -331, 117, -331, 117, -296, 110, -296, 110, -275, 102, -275, 102, -233, 110, -233, 110, -186, 91, -188, 91, -180, 102, -161, 111, -161, 111, -152, 118, -152, 118, -117, 111, -116, 112, -84, 99, -92, 82, -82, 82, -33, 98, -23, 104, -23, 104, -6, 46, -6, 46, 1, 0, 0, 0, 23, 151, 25, 142, -433, -104, -434, -105, 29, -22, 26)

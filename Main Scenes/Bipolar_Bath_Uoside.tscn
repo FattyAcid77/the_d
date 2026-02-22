@@ -9,7 +9,7 @@
 [node name="BipolarBathUoside" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_m63uu")
 player = NodePath("Sami")
-doors = [NodePath("Door_reg")]
+doors = [NodePath("Door_reg"), NodePath("Door_reg2")]
 
 [node name="BipolarBathUpsideBgrd" parent="." instance=ExtResource("1_8lcvf")]
 script = ExtResource("3_pxo67")
@@ -26,3 +26,11 @@ push_distance = 50
 new_scene_path = "res://Main Scenes/Bipolar_Room_Upside.tscn"
 target_door_name = "Bipolar_Room_Upside_Secondary"
 this_door_name = "Bipolar_Bath_Upside_Main"
+
+[node name="Door_reg2" parent="." instance=ExtResource("3_m63uu")]
+position = Vector2(394, 212)
+entery_direction = 2
+push_distance = 50
+new_scene_path = "res://Main Scenes/Bipolar_Bath_HiddenDoor.tscn"
+target_door_name = "Bipolar_Bath_Hidden"
+this_door_name = "Bipolar_Bath_Upside_hidden"

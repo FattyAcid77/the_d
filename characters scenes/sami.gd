@@ -31,6 +31,7 @@ func _ready() -> void:
 	quest_tracker.visible = false
 	scale = Vector2.ONE
 	set_camera_limits()
+	area_ind.hide_E()
 
 
 #Keep in mind that Delta Time should be used consistently so that gameplay remains the same across different PCs, regardless of their hardware specifications
@@ -101,8 +102,7 @@ func _input(event) -> void:
 				target.start_interact()
 
 func orient(dir:Vector2) -> void:
-	#if dir.x:
-		#anim_sprite.flip_h
+	
 	pass
 
 func disable():
