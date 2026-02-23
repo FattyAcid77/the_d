@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://vqb3opmxrsp4"]
+[gd_scene load_steps=7 format=3 uid="uid://vqb3opmxrsp4"]
 
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_w4loj"]
+[ext_resource type="Texture2D" uid="uid://57wy3wasc6rp" path="res://background_scenes/assets/micro-assets/Bipolar-room-v2-High-Index.png" id="2_00vrw"]
 [ext_resource type="Texture2D" uid="uid://cqhxi620lbxf4" path="res://background_scenes/assets/Bipolar-room-v2.png" id="2_eraxy"]
 [ext_resource type="Texture2D" uid="uid://7dcravu3scwi" path="res://background_scenes/assets/micro-assets/Bipolar-room-v2-shreded-withoutrug.png" id="3_eraxy"]
 
@@ -14,8 +15,13 @@ height = 60.0
 [node name="BipolarRoomBgrd" type="Node2D"]
 script = ExtResource("1_w4loj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D3" type="Sprite2D" parent="."]
 z_index = -1
+position = Vector2(628, 353)
+texture = ExtResource("2_00vrw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(628, 353)
 texture = ExtResource("2_eraxy")
 
