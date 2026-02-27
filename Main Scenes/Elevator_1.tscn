@@ -10,7 +10,7 @@
 
 [node name="Elevator" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_r02jt")
-player = NodePath("Sami")
+player = NodePath("")
 doors = [NodePath("Door_reg")]
 
 [node name="ElevatorBgrd" parent="." instance=ExtResource("1_01sm3")]
@@ -28,13 +28,12 @@ this_door_name = "Elevator_1_Main"
 [node name="Elevator_Control_reg" parent="." instance=ExtResource("6_4lxvx")]
 position = Vector2(242, 218)
 
-[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
-position = Vector2(223, 213)
-camera_adj = NodePath("../ElevatorBgrd")
-
 [node name="ElevatorControl" parent="." instance=ExtResource("7_38pdo")]
 layer = 5
 visible = false
 this_scene_path = "res://Main Scenes/Elevator_1.tscn"
+
+[node name="Sami" parent="." instance=ExtResource("3_dy6my")]
+position = Vector2(232, 215)
 
 [connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]

@@ -16,10 +16,11 @@ doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")
 script = ExtResource("3_4r10t")
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("4_sa4ac")]
+position = Vector2(354, 288)
 camera_adj = NodePath("../OcdHallBgrd")
 
 [node name="Door_reg" parent="." instance=ExtResource("5_jljya")]
-position = Vector2(347, 636)
+position = Vector2(349, 636)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
 target_door_name = "lvl_2_lobby_North"
@@ -31,7 +32,8 @@ entery_direction = 2
 this_door_name = "OCD_Hall_North"
 
 [node name="Door_reg2" parent="." instance=ExtResource("5_jljya")]
-position = Vector2(440, 493)
+position = Vector2(451, 474)
+scale = Vector2(0.5, 0.5)
 entery_direction = 3
 new_scene_path = "res://Main Scenes/CCTV_Room.tscn"
 target_door_name = "CCTV_Room_Main"

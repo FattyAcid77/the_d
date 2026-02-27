@@ -7,7 +7,7 @@ var instance
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("E"):
+	if Input.is_action_just_pressed("Radio_button"):
 		if sami_radio:
 			instance = Radio_Sami.instantiate()
 			add_child(instance)

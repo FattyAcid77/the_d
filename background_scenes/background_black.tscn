@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bxcexbse8ov6a"]
+
+[node name="BlackgroundBlack" type="CanvasLayer"]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)

@@ -10,8 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
 [ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
+[ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4p0up"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uledl"]
 atlas = ExtResource("2_e70c1")
 region = Rect2(0, 0, 45, 94)
 
@@ -47,7 +48,7 @@ region = Rect2(315, 0, 45, 94)
 atlas = ExtResource("2_e70c1")
 region = Rect2(0, 94, 45, 94)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w8kyg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tjsc"]
 atlas = ExtResource("2_e70c1")
 region = Rect2(0, 0, 45, 94)
 
@@ -159,7 +160,7 @@ region = Rect2(0, 93, 33, 93)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4p0up")
+"texture": SubResource("AtlasTexture_uledl")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qt7mr")
@@ -191,7 +192,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w8kyg")
+"texture": SubResource("AtlasTexture_2tjsc")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5fckx")
@@ -286,24 +287,23 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qpl50"]
-radius = 11.0
-height = 22.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uledl"]
+size = Vector2(28, 20)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
 [node name="Sami" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("2_5wxjf")
-speed = 70.0
+speed = 100.0
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uledl")
-animation = &"Right"
+animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 40)
-shape = SubResource("CapsuleShape2D_qpl50")
+shape = SubResource("RectangleShape2D_uledl")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
@@ -397,3 +397,4 @@ position = Vector2(-0.99998474, 41.999996)
 scale = Vector2(0.035156284, 0.03515629)
 energy = 0.1
 texture = ExtResource("10_uledl")
+[node name="BlackgroundBlack" parent="." instance=ExtResource("12_uledl")]
