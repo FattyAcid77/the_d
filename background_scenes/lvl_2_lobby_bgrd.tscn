@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqp7w0wu2ysiu"]
+[gd_scene load_steps=3 format=3 uid="uid://cqp7w0wu2ysiu"]
 
 [ext_resource type="Texture2D" uid="uid://gsik68vr1ent" path="res://background_scenes/assets/F2-R-Suhaib edit.png" id="1_g7wiy"]
+[ext_resource type="Texture2D" uid="uid://cmt86qygnf2yv" path="res://3MK-File/myshit/2D_light.webp" id="2_r7nkx"]
 
 [node name="Lvl2LobbyBgrd" type="Node2D"]
 
@@ -17,3 +18,22 @@ polygon = PackedVector2Array(0, 0, 6, 0, 6, -44, 0, -44, -2, -163, -172, -162, -
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(428, 297)
 polygon = PackedVector2Array(0, 0, 28, 0, 31, 7, 32, 96, -2, 129, -233, 127, -233, 79, -198, 79, -198, 61, -183, 41, -175, 41, -160, 58, -159, 78, -19, 78, -5, 65, -40, 65, -41, 21, -20, 8, 1, 7, 1, 66, -11, 87, -215, 94, -9, 119, 23, 67, 25, 7)
+
+[node name="Light_lvl-2" type="Node2D" parent="."]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Light_lvl-2"]
+color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Light_lvl-2"]
+position = Vector2(644, 375.75)
+scale = Vector2(5.5135136, 3.4898646)
+energy = 0.6
+texture = ExtResource("2_r7nkx")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Light_lvl-2"]
+position = Vector2(866.2345, 139)
+scale = Vector2(1.4940195, 1.8945409)
+energy = 0.6
+texture = ExtResource("2_r7nkx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Light_lvl-2"]

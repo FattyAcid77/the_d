@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=50 format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://egkrqh00dy5t" path="res://control scene/Sami_Camera.tscn" id="5_qpl50"]
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
+[ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4p0up"]
 atlas = ExtResource("2_e70c1")
@@ -390,3 +391,9 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_r3ftm")
 
 [node name="AreaIndicator" parent="." instance=ExtResource("9_8ydvg")]
 position = Vector2(0, -56)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-0.99998474, 41.999996)
+scale = Vector2(0.035156284, 0.03515629)
+energy = 0.1
+texture = ExtResource("10_uledl")

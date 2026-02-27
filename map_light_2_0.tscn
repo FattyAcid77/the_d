@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuf2n1fwsq115"]
+[gd_scene load_steps=6 format=3 uid="uid://edwpxytlv63t"]
 
-[ext_resource type="Texture2D" uid="uid://cmt86qygnf2yv" path="res://3MK-File/myshit/2D_light.webp" id="2_fthax"]
+[ext_resource type="Texture2D" uid="uid://cmt86qygnf2yv" path="res://3MK-File/myshit/2D_light.webp" id="1_wlw44"]
+[ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="2_4ujl0"]
 
 [sub_resource type="Animation" id="Animation_ctn4s"]
 resource_name = "Billboard Animation"
@@ -9,14 +10,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shadow/PointLight2D2:energy")
+tracks/0/path = NodePath("Shadow/PointLight2D4:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.33333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.3, 0.0]
+"values": [0.0, 1.3]
 }
 
 [sub_resource type="Animation" id="Animation_bcfud"]
@@ -24,14 +25,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Shadow/PointLight2D2:energy")
+tracks/0/path = NodePath("Shadow/PointLight2D4:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.3]
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yi5rg"]
@@ -40,7 +41,7 @@ _data = {
 &"RESET": SubResource("Animation_bcfud")
 }
 
-[node name="Map-Light" type="Node2D"]
+[node name="Map-Light-2_0" type="Node2D"]
 
 [node name="Light-Animation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -51,19 +52,21 @@ autoplay = "Billboard Animation"
 [node name="Shadow" type="CanvasModulate" parent="."]
 color = Color(0.080783345, 0.080783345, 0.080783345, 1)
 
-[node name="PointLight2D2" type="PointLight2D" parent="Shadow"]
-position = Vector2(906.5664, 156.09523)
-scale = Vector2(0.9643256, 1.077381)
+[node name="PointLight2D" type="PointLight2D" parent="Shadow"]
+position = Vector2(644, 375.75)
+scale = Vector2(5.5135136, 3.4898646)
+texture = ExtResource("1_wlw44")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Shadow"]
+position = Vector2(404, 136)
+scale = Vector2(2.5743246, 2.247162)
 energy = 1.3
-texture = ExtResource("2_fthax")
+texture = ExtResource("1_wlw44")
 
 [node name="PointLight2D4" type="PointLight2D" parent="Shadow"]
-position = Vector2(651.625, 371)
-scale = Vector2(3.0888677, 2.0703127)
-texture = ExtResource("2_fthax")
+position = Vector2(897.99994, 135)
+scale = Vector2(1.8630394, 1.8945409)
+energy = 0.0
+texture = ExtResource("1_wlw44")
 
-[node name="PointLight2D" type="PointLight2D" parent="Shadow"]
-position = Vector2(404, 136)
-scale = Vector2(1.3925782, 1.2558594)
-energy = 1.3
-texture = ExtResource("2_fthax")
+[node name="Level1HallBgrd" parent="." instance=ExtResource("2_4ujl0")]
