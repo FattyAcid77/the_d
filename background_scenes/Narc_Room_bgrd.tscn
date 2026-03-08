@@ -1,22 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bp6dmypq8yftx"]
+[gd_scene load_steps=3 format=3 uid="uid://7rq06qruen07"]
 
-[ext_resource type="Texture2D" uid="uid://buqi2swhyga8l" path="res://background_scenes/assets/the living room.png" id="1_a4iri"]
+[ext_resource type="Texture2D" uid="uid://buqi2swhyga8l" path="res://background_scenes/assets/the living room.png" id="1_84uvc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ktne"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwf3p"]
 size = Vector2(154, 62)
 
-[node name="OcdRoomBgrd" type="Node2D"]
+[node name="NarcRoomBgrd" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(485, 318)
-texture = ExtResource("1_a4iri")
+position = Vector2(1132, 743)
+texture = ExtResource("1_84uvc")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-648, -424)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1191, 824)
-shape = SubResource("RectangleShape2D_0ktne")
+position = Vector2(1190, 822)
+shape = SubResource("RectangleShape2D_bwf3p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(999, 966)

@@ -10,7 +10,7 @@
 [node name="Lvl2Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
 player = NodePath("Sami")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2")]
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
 
 [node name="RadioRoomBgrd" parent="." instance=ExtResource("2_rx0ui")]
 script = ExtResource("3_6eri3")
@@ -32,3 +32,10 @@ entery_direction = 2
 new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
 target_door_name = "OCD_Hall_South"
 this_door_name = "lvl_2_lobby_North"
+
+[node name="Door_reg2" parent="." instance=ExtResource("3_rx0ui")]
+position = Vector2(146, 423)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/Elevator_2_left.tscn"
+target_door_name = "Elevator_2_Main"
+this_door_name = "lvl_2_lobby_west"

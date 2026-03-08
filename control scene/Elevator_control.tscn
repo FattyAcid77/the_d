@@ -5,33 +5,58 @@
 [node name="ElevatorControl" type="CanvasLayer"]
 script = ExtResource("1_e66lf")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -5.0
+offset_right = 640.0
+offset_bottom = 364.0
+color = Color(0, 0, 0, 0.101960786)
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -75.0
+offset_right = 123.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.5
+offset_top = -91.0
+offset_right = 105.5
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 273.0
-offset_top = 127.0
-offset_right = 327.0
-offset_bottom = 193.0
+offset_left = -27.0
+offset_top = -33.0
+offset_right = 27.0
+offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Control/VBoxContainer"]
-layout_mode = 2
-text = "1"
-
-[node name="Button2" type="Button" parent="Control/VBoxContainer"]
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "2"
 
-[connection signal="pressed" from="Control/VBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "1"
