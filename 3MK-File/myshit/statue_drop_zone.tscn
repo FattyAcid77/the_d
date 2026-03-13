@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cybm5wi8j5lxb"]
+
+[ext_resource type="Script" uid="uid://c6ie78egdr4h8" path="res://3MK-File/myshit/statue_drop_zone.gd" id="1_rtv7k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3xhb"]
+size = Vector2(56.537098, 53.003532)
+
+[node name="Statue-DropZone" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_rtv7k")
+
+[node name="DropZone-Shape" type="CollisionShape2D" parent="."]
+position = Vector2(9.536743e-07, 1.7881393e-07)
+shape = SubResource("RectangleShape2D_s3xhb")
+debug_color = Color(3.272891e-06, 0.6380512, 0.38813496, 0.41960785)

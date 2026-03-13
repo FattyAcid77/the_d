@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene load_steps=52 format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
 [ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
+[ext_resource type="PackedScene" uid="uid://cgabj4p2vw7ov" path="res://3MK-File/myshit/push_pull_logic.tscn" id="12_cd56y"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uledl"]
@@ -288,7 +289,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uledl"]
-size = Vector2(28, 20)
+size = Vector2(8, 15)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
@@ -302,7 +303,7 @@ sprite_frames = SubResource("SpriteFrames_uledl")
 animation = &"down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 40)
+position = Vector2(1, -4.5)
 shape = SubResource("RectangleShape2D_uledl")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -397,4 +398,12 @@ position = Vector2(-0.99998474, 41.999996)
 scale = Vector2(0.035156284, 0.03515629)
 energy = 0.1
 texture = ExtResource("10_uledl")
+
 [node name="BlackgroundBlack" parent="." instance=ExtResource("12_uledl")]
+
+[node name="Push-pull-Logic" parent="." instance=ExtResource("12_cd56y")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("..")

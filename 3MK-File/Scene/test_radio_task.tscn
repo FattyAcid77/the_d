@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://div4116ebqyig"]
+
+[ext_resource type="Texture2D" uid="uid://bwg7gne77o2tq" path="res://3MK-File/myshit/A_black_image.jpg" id="1_lpd0h"]
+
+[node name="Test_Radio-Task" type="Node2D"]
+
+[node name="ABlackImage" type="Sprite2D" parent="."]
+position = Vector2(400, 330)
+texture = ExtResource("1_lpd0h")

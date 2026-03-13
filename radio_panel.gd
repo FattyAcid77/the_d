@@ -1,6 +1,6 @@
 extends Panel
 var sami_radio: bool = true
-@export var Radio_Sami: PackedScene
+@export var Radio_Sami: PackedScene = preload("res://3MK-File/myshit/radio_2_0.tscn")
 var instance 
 
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d21mh37tcl1gk"]
+
+[ext_resource type="Script" uid="uid://wp2vxay0leg5" path="res://3MK-File/myshit/task_manager.gd" id="1_wfdah"]
+[ext_resource type="Script" uid="uid://hg827so14kmm" path="res://3MK-File/myshit/task_area.gd" id="2_gl366"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r8v1d"]
+radius = 15.033297
+
+[node name="Radio_Task" type="Node2D"]
+script = ExtResource("1_wfdah")
+
+[node name="Task_Area" type="Area2D" parent="."]
+scale = Vector2(6.2797832, 6.2797832)
+script = ExtResource("2_gl366")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Task_Area"]
+shape = SubResource("CircleShape2D_r8v1d")
+
+[connection signal="body_entered" from="Task_Area" to="." method="_on_task_area_body_entered"]

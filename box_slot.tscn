@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://degbpqilfkceq"]
+
+[ext_resource type="Script" uid="uid://dlm52b4yu6wkj" path="res://box_slot.gd" id="1_toby7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2uhue"]
+size = Vector2(472, 247)
+
+[node name="Box_Slot" type="Area2D"]
+script = ExtResource("1_toby7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(226, -113.5)
+shape = SubResource("RectangleShape2D_2uhue")

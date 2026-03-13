@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfg5qt63vhjc1"]
+
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="1_e5lkt"]
+[ext_resource type="Script" uid="uid://durn0cm44g242" path="res://Main Scenes/filter.gd" id="2_pb3ji"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3c6y"]
+size = Vector2(50, 42)
+
+[node name="MoveAble-Object" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 20.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(115, 664.00006)
+scale = Vector2(0.4375, 0.4375)
+texture = ExtResource("1_e5lkt")
+script = ExtResource("2_pb3ji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(112, 664)
+shape = SubResource("RectangleShape2D_g3c6y")

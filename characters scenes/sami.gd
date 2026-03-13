@@ -17,9 +17,12 @@ class_name Sami extends CharacterBody2D
 @onready var quest_manger: Node2D = $QuestManger
 @onready var ani: AnimatedSprite2D = $Sprite2D
 @onready var area_ind: area_indicator = $AreaIndicator
+@onready var pp_logic: Area2D = $"Push-pull-Logic"
 
 @onready var camera =  $Camera2D
-@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var push_force = 80
+
 
 var can_move = true
 var input_direction: Vector2 = Vector2.ZERO
@@ -66,8 +69,14 @@ func _physics_process(delta: float) -> void:
 		
 		raycast()
 		move_and_slide()
-		
-		
+	if Input.is_action_just_pressed("drag"):
+		for body in pp_logic.get_overlapping_bodies():
+			if body is RigidBody2D:
+				$PinJoint2D.node_b = body.get_path()
+				break
+	if Input.is_action_just_released("drag"):
+		$PinJoint2D.node_b = NodePath("")
+
 		
 
 func _process(delta: float) -> void:
