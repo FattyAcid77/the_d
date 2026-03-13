@@ -1,12 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene load_steps=7 format=3 uid="uid://dxofprk7jlwg1"]
 
 [ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 [ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
-[ext_resource type="PackedScene" uid="uid://d21mh37tcl1gk" path="res://3MK-File/myshit/Radio_Task.tscn" id="7_bcfud"]
-[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="8_yi5rg"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yi5rg"]
 polygon = PackedVector2Array(781, 131, 790, 121, 954, 121, 1013, 132)
@@ -41,10 +39,6 @@ target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
 [node name="Map-Light" parent="." instance=ExtResource("6_ctn4s")]
-
-[node name="Radio_Task" parent="." instance=ExtResource("7_bcfud")]
-position = Vector2(936, 420)
-Reward_Radio = ExtResource("8_yi5rg")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 light_mask = 2
