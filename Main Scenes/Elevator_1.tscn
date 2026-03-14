@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://c3ddty4kt06p8" path="res://control scene/elevator_control_reg.tscn" id="6_4lxvx"]
 [ext_resource type="PackedScene" uid="uid://dvjps10m4rucf" path="res://control scene/Elevator_control.tscn" id="7_38pdo"]
 
-[node name="Elevator" type="Node2D" node_paths=PackedStringArray("doors")]
+[node name="Elevator" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_r02jt")
+player = NodePath("Sami")
 doors = [NodePath("Door_reg")]
 
 [node name="ElevatorBgrd" parent="." instance=ExtResource("1_01sm3")]
@@ -35,7 +36,7 @@ position = Vector2(242, 218)
 layer = 5
 visible = false
 this_scene_path = "res://Main Scenes/Elevator_1.tscn"
-path_to_scene_1 = "res://Main Scenes/lvl_2_lobby.tscn"
+path_to_scene_1 = "res://Main Scenes/Elevator_2.tscn"
 path_to_scene_2 = "res://Main Scenes/Elevator_1.tscn"
 
 [connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]

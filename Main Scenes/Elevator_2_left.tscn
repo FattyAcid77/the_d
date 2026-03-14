@@ -19,7 +19,7 @@ script = ExtResource("2_ixtgn")
 [node name="Door_reg" parent="." instance=ExtResource("2_usdfj")]
 position = Vector2(288, 256)
 scale = Vector2(0.5, 0.5)
-entery_direction = 1
+entery_direction = 3
 push_distance = 50
 new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
 target_door_name = "lvl_2_lobby_west"

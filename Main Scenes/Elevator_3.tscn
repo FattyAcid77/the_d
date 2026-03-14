@@ -19,12 +19,16 @@ script = ExtResource("3_4h5io")
 [node name="Door_reg" parent="." instance=ExtResource("2_33k8n")]
 position = Vector2(266, 254)
 scale = Vector2(0.5, 0.5)
-entery_direction = 3
+entery_direction = 1
+new_scene_path = "res://Main Scenes/lvl_3_lobby.tscn"
+target_door_name = "lvl_3_lobby_East"
+this_door_name = "Elevator_3_Main"
 
 [node name="Elevator_Control_reg" parent="." instance=ExtResource("3_33k8n")]
 position = Vector2(338, 219)
 
 [node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_43knn")]
+position = Vector2(324, 215)
 camera_adj = NodePath("../Elevator3Bgrd")
 
 [node name="ElevatorControl" parent="." instance=ExtResource("7_nwfdn")]
