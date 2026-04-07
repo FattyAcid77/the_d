@@ -1,46 +1,57 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene format=3 uid="uid://dxofprk7jlwg1"]
 
-[ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="1_ojqlm"]
+[ext_resource type="PackedScene" uid="uid://dbp12leqpgush" path="res://3MK-File/Scene/lvl_1_hall_bgrd.tscn" id="1_yi5rg"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 [ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
+[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="6_yi5rg"]
+[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="7_0d2n7"]
+[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="8_hkdn2"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yi5rg"]
-polygon = PackedVector2Array(781, 131, 790, 121, 954, 121, 1013, 132)
+[sub_resource type="Resource" id="Resource_31cma"]
+script = ExtResource("8_hkdn2")
+icon = ExtResource("7_0d2n7")
+group = &"Item"
+item_type = "قتل"
+item_effect = "دماء"
+item_name = "سكين"
+metadata/_custom_type_script = "uid://cvugbs4ksvifo"
 
-[node name="Lvl1Lobby" type="Node2D"]
+[node name="Lvl1Lobby" type="Node2D" unique_id=509175152]
 
-[node name="Level1HallBgrd" parent="." instance=ExtResource("1_ojqlm")]
+[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yi5rg")]
+position = Vector2(440, 301)
 
-[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_xriv7")]
-position = Vector2(660, 343)
-camera_adj = NodePath("../Level1HallBgrd")
+[node name="Map-Light" parent="." unique_id=1960135155 instance=ExtResource("6_ctn4s")]
+position = Vector2(-455.00003, 154)
+scale = Vector2(0.74, 0.74)
 
-[node name="door_reg_type2" parent="." instance=ExtResource("4_171b8")]
-position = Vector2(650, 266)
+[node name="door_reg_type2" parent="." unique_id=6652575 groups=["Door"] instance=ExtResource("4_171b8")]
+position = Vector2(655, 266)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_south"
 this_door_name = "lvl_1_lobby_north"
 
-[node name="door_reg_type3" parent="." instance=ExtResource("4_171b8")]
-position = Vector2(648, 618)
+[node name="door_reg_type3" parent="." unique_id=505186258 groups=["Door"] instance=ExtResource("4_171b8")]
+position = Vector2(667, 612)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
 target_door_name = "Bipolar_Hall_north"
 this_door_name = "lvl_1_lobby_south"
 
-[node name="Door_reg" parent="." instance=ExtResource("5_hmgdi")]
-position = Vector2(254, 447)
+[node name="Door_reg" parent="." unique_id=1068525294 groups=["Door"] instance=ExtResource("5_hmgdi")]
+position = Vector2(285, 469)
 entery_direction = 1
 new_scene_path = "res://Main Scenes/Elevator_1.tscn"
 target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
-[node name="Map-Light" parent="." instance=ExtResource("6_ctn4s")]
+[node name="Item" parent="." unique_id=1669675773 instance=ExtResource("6_yi5rg")]
+position = Vector2(784, 462)
+item_config = SubResource("Resource_31cma")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-light_mask = 2
-visibility_layer = 2
-occluder = SubResource("OccluderPolygon2D_yi5rg")
+[node name="Sami" parent="." unique_id=1696226291 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_xriv7")]
+position = Vector2(710, 404)
+camera_adj = NodePath("../Lvl_1_Hall_BGRD")

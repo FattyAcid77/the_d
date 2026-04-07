@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dqtrpvlja2r00"]
+
+[ext_resource type="Script" uid="uid://dl8u2i2xiugo2" path="res://3MK-File/Resources/item_test.gd" id="1_ccgpx"]
+[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="2_2qp0d"]
+
+[sub_resource type="Resource" id="Resource_2qp0d"]
+script = ExtResource("2_2qp0d")
+metadata/_custom_type_script = "uid://cvugbs4ksvifo"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2qp0d"]
+
+[node name="Item" type="Area2D" unique_id=1669675773 groups=["Item"]]
+script = ExtResource("1_ccgpx")
+item_config = SubResource("Resource_2qp0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1431843897]
+shape = SubResource("CircleShape2D_2qp0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=812661779]
+scale = Vector2(0.02, 0.02)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

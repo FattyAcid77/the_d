@@ -9,14 +9,14 @@ class_name Sami extends CharacterBody2D
 
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
-
+@onready var inventory_ui: CanvasLayer = $"Inventory UI"
 @onready var amount: Label = $HUD/Coins/Amount
 @onready var quest_tracker: ColorRect = $HUD/QuestTracker
 @onready var title: Label = $HUD/QuestTracker/Details/Title
 @onready var objectives: VBoxContainer = $HUD/QuestTracker/Details/Objectives
 @onready var quest_manger: Node2D = $QuestManger
 @onready var ani: AnimatedSprite2D = $Sprite2D
-@onready var area_ind: area_indicator = $AreaIndicator
+
 @onready var pp_logic: Area2D = $"Push-pull-Logic"
 
 @onready var camera =  $Camera2D
@@ -34,7 +34,7 @@ func _ready() -> void:
 	quest_tracker.visible = false
 	scale = Vector2.ONE
 	set_camera_limits()
-	area_ind.hide_E()
+	inventory.player_ref(self)
 
 
 #Keep in mind that Delta Time should be used consistently so that gameplay remains the same across different PCs, regardless of their hardware specifications
@@ -84,9 +84,9 @@ func _process(delta: float) -> void:
 		#input_direction = Input.get_vector("left", "right", "up", "down")
 		#desired_vel = input_direction.normalized() * speed
 		if SceneManager.player_in_area:
-			area_ind.show_E()
+			pass
 		else:
-			area_ind.hide_E()
+			pass
 
 
 	
@@ -98,6 +98,10 @@ func raycast():
 
 
 func _input(event) -> void:
+	if Input.is_action_just_pressed("I"):
+		inventory_ui.visible = !inventory_ui.visible
+		get_tree().paused = !get_tree().paused
+	
 	#interact with a NPC/Quest
 	if event.is_action_pressed("ui_accept"):
 		var target = ray_cast_2d.get_collider()

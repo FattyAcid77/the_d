@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cwkwqre0ltexw"]
+
+[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="1_kil16"]
+[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="2_uqtjv"]
+[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="3_g4et3"]
+
+[sub_resource type="Resource" id="Resource_m80bl"]
+script = ExtResource("3_g4et3")
+icon = ExtResource("2_uqtjv")
+group = &"Item"
+item_type = "dmg"
+item_name = "Knife"
+metadata/_custom_type_script = "uid://cvugbs4ksvifo"
+
+[node name="Fixing" type="Node2D" unique_id=1807148059]
+
+[node name="Item" parent="." unique_id=1669675773 instance=ExtResource("1_kil16")]
+item_config = SubResource("Resource_m80bl")

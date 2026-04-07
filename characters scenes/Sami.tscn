@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bkjad6iqtfo2y"]
+[gd_scene format=3 uid="uid://bkjad6iqtfo2y"]
 
 [ext_resource type="Script" uid="uid://tgi5hehvcfwy" path="res://characters scenes/sami.gd" id="2_5wxjf"]
 [ext_resource type="Texture2D" uid="uid://blla10aedwqty" path="res://3MK-File/TEST-ANIM/right w dr.png" id="2_e70c1"]
@@ -9,9 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://egkrqh00dy5t" path="res://control scene/Sami_Camera.tscn" id="5_qpl50"]
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
+[ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="10_ehnog"]
 [ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
+[ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="11_8q06m"]
 [ext_resource type="PackedScene" uid="uid://cgabj4p2vw7ov" path="res://3MK-File/myshit/push_pull_logic.tscn" id="12_cd56y"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
+[ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="15_fonp4"]
+[ext_resource type="PackedScene" uid="uid://c1p54hwrqfphl" path="res://3MK-File/Scene/inventory_ui.tscn" id="16_iraew"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uledl"]
 atlas = ExtResource("2_e70c1")
@@ -289,31 +293,38 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uledl"]
-size = Vector2(8, 15)
+size = Vector2(21, 58)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
-[node name="Sami" type="CharacterBody2D"]
+[sub_resource type="Resource" id="Resource_fonp4"]
+script = ExtResource("10_ehnog")
+target_group = &"Item"
+icon = ExtResource("11_8q06m")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[node name="Sami" type="CharacterBody2D" unique_id=1696226291]
+process_mode = 3
 motion_mode = 1
 script = ExtResource("2_5wxjf")
 speed = 100.0
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1255613685]
 sprite_frames = SubResource("SpriteFrames_uledl")
 animation = &"down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -4.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=257719666]
+position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_uledl")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=2097463563]
 target_position = Vector2(0, 150)
 collide_with_areas = true
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2134570842]
 visible = false
 
-[node name="Coins" type="ColorRect" parent="HUD"]
+[node name="Coins" type="ColorRect" parent="HUD" unique_id=1202649050]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -324,7 +335,7 @@ offset_bottom = 129.0
 grow_horizontal = 0
 color = Color(0.141176, 0.141176, 0.141176, 0.788235)
 
-[node name="Icon" type="TextureRect" parent="HUD/Coins"]
+[node name="Icon" type="TextureRect" parent="HUD/Coins" unique_id=590172937]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -332,7 +343,7 @@ grow_vertical = 2
 texture = ExtResource("3_hq7kk")
 expand_mode = 2
 
-[node name="Amount" type="Label" parent="HUD/Coins"]
+[node name="Amount" type="Label" parent="HUD/Coins" unique_id=1209044048]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -347,14 +358,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "0"
 
-[node name="QuestTracker" type="ColorRect" parent="HUD"]
+[node name="QuestTracker" type="ColorRect" parent="HUD" unique_id=1956314590]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 316.0
 offset_bottom = 216.0
 color = Color(0.141176, 0.141176, 0.141176, 0.788235)
 
-[node name="Details" type="VBoxContainer" parent="HUD/QuestTracker"]
+[node name="Details" type="VBoxContainer" parent="HUD/QuestTracker" unique_id=1561322867]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -363,7 +374,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="HUD/QuestTracker/Details"]
+[node name="Title" type="Label" parent="HUD/QuestTracker/Details" unique_id=924016088]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.686275, 0.807843, 0.956863, 1)
 theme_override_font_sizes/font_size = 25
@@ -371,15 +382,15 @@ text = "العنوان"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Objectives" type="VBoxContainer" parent="HUD/QuestTracker/Details"]
+[node name="Objectives" type="VBoxContainer" parent="HUD/QuestTracker/Details" unique_id=609583493]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="QuestManger" parent="." instance=ExtResource("4_6hsvr")]
+[node name="QuestManger" parent="." unique_id=679597824 instance=ExtResource("4_6hsvr")]
 
-[node name="Camera2D" parent="." instance=ExtResource("5_qpl50")]
+[node name="Camera2D" parent="." unique_id=837766967 instance=ExtResource("5_qpl50")]
 
-[node name="Radio-Panel" parent="." instance=ExtResource("6_r3ftm")]
+[node name="Radio-Panel" parent="." unique_id=1162518636 instance=ExtResource("6_r3ftm")]
 anchor_right = 9.775001
 anchor_bottom = 4.083
 offset_left = -195.0
@@ -390,20 +401,51 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r3ftm")
 
-[node name="AreaIndicator" parent="." instance=ExtResource("9_8ydvg")]
-position = Vector2(0, -56)
+[node name="AreaIndicator" parent="." unique_id=1774947073 instance=ExtResource("9_8ydvg")]
+position = Vector2(1, 2)
+configurations = Array[ExtResource("10_ehnog")]([SubResource("Resource_fonp4")])
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1843097276]
 position = Vector2(-0.99998474, 41.999996)
 scale = Vector2(0.035156284, 0.03515629)
 energy = 0.1
 texture = ExtResource("10_uledl")
 
-[node name="BlackgroundBlack" parent="." instance=ExtResource("12_uledl")]
+[node name="BlackgroundBlack" parent="." unique_id=1467015273 instance=ExtResource("12_uledl")]
 
-[node name="Push-pull-Logic" parent="." instance=ExtResource("12_cd56y")]
+[node name="Push-pull-Logic" parent="." unique_id=217302339 instance=ExtResource("12_cd56y")]
 collision_layer = 4
 collision_mask = 4
 
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=677576551]
 node_a = NodePath("..")
+
+[node name="Inventory UI" type="CanvasLayer" parent="." unique_id=802695486]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Inventory UI" unique_id=1571352080]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19215687, 0.3764706, 0.32156864, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inventory UI/ColorRect" unique_id=1748826724]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55600005
+anchor_right = 0.85300004
+anchor_bottom = 0.36900002
+offset_left = -147.84003
+offset_right = -150.92004
+offset_bottom = -39.84001
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("15_fonp4")
+theme_override_font_sizes/normal_font_size = 60
+text = "الحقيبة"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Inventory_UI" parent="Inventory UI/ColorRect" unique_id=389799305 instance=ExtResource("16_iraew")]
+layout_mode = 1
