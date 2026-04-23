@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdcxg78mvqp7"]
+[gd_scene format=3 uid="uid://cdcxg78mvqp7"]
 
 [ext_resource type="Script" uid="uid://cv4kxwlq2db4a" path="res://drop_zone_reward.gd" id="1_poquw"]
 

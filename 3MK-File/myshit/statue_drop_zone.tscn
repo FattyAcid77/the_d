@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cybm5wi8j5lxb"]
+[gd_scene format=3 uid="uid://cybm5wi8j5lxb"]
 
 [ext_resource type="Script" uid="uid://c6ie78egdr4h8" path="res://3MK-File/myshit/statue_drop_zone.gd" id="1_rtv7k"]
 

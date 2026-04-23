@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj1fugbu6pove"]
+[gd_scene format=3 uid="uid://dj1fugbu6pove"]
 
 [ext_resource type="PackedScene" uid="uid://dm6vb6ittfr3l" path="res://3MK-File/Scene/statue.tscn" id="1_ong4c"]
 

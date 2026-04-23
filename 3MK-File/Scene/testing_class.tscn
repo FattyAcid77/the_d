@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://eagxb024pb83"]
+[gd_scene format=3 uid="uid://eagxb024pb83"]
 
 [ext_resource type="Script" uid="uid://c64k2j2wru1fc" path="res://test.gd" id="1_hyuga"]
 
