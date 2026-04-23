@@ -19,6 +19,7 @@ metadata/_edit_horizontal_guides_ = [624.0, 528.0]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(536, 328)
+zoom = Vector2(0.355, 0.355)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7eyv6")
@@ -58,10 +59,6 @@ grow_vertical = 2
 custom_minimum_size = Vector2(800, 300)
 layout_mode = 2
 script = ExtResource("1_fug20")
-amplitude = null
-wavelength = null
-wave_speed = null
-samples = null
 
 [node name="R1" type="Button" parent="ColorRect6/SineWave-2_0"]
 layout_mode = 0

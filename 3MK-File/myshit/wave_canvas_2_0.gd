@@ -1,13 +1,14 @@
 extends Control
 
-@export var amplitude: float = 80.0
+
+
+@export var amplitude: float = 200
 @export var wavelength: float = 150.0
-@export var wave_speed: float = 300.0
 @export var samples: int = 512
 
 var phase: float = 0.0
 
-var current_task: Area2D = null
+
 
 
 func _process(delta):
@@ -25,7 +26,7 @@ func _draw():
 		var t = float(i) / (samples - 1)
 		var x = t * rect.size.x
 
-		var freq = wave_speed / wavelength
+		var freq = amplitude / wavelength
 		var ang = TAU * freq * t + phase
 		var wrapped = fmod(ang, TAU)
 		if wrapped < 0: wrapped += TAU

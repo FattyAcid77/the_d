@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://iwtylqrfnx5c"]
+
+[ext_resource type="Script" uid="uid://b5rsvhk7x23yr" path="res://3MK-File/script/inventory_slot.gd" id="1_42eed"]
+[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="2_bfyh4"]
+[ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="3_75pi0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfyh4"]
+
+[node name="Inventory_slot" type="Control" unique_id=1954888188]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -566.0
+offset_bottom = -286.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42eed")
+
+[node name="OuterBoarder" type="ColorRect" parent="." unique_id=2011320769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.59607846, 0.93333334, 0.8, 1)
+
+[node name="MiddleBoarder" type="ColorRect" parent="." unique_id=243872370]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.95686275, 0.7921569, 0.24313726, 1)
+
+[node name="InnerBoarder" type="ColorRect" parent="." unique_id=3776585]
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -29.0
+offset_right = 29.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1506893, 0.36911857, 0.29091042, 1)
+
+[node name="Item_Icon" type="Sprite2D" parent="." unique_id=1597376169]
+position = Vector2(33, 31)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_bfyh4")
+
+[node name="Item_Quantity" type="Label" parent="." unique_id=1076578348]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 2.0
+offset_right = 60.0
+offset_bottom = 26.0
+theme_override_colors/font_outline_color = Color(0.95686275, 0.7921569, 0.24313726, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "1"
+horizontal_alignment = 2
+
+[node name="Item_Button" type="Button" parent="." unique_id=833961973]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bfyh4")
+
+[node name="Details_Panel" type="ColorRect" parent="." unique_id=1015517498]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -1.406
+anchor_right = 2.5
+offset_left = -96.0
+offset_top = -0.01599884
+offset_right = -96.0
+color = Color(0.59607846, 0.93333334, 0.8, 1)
+
+[node name="Item_name" type="Label" parent="Details_Panel" unique_id=683639496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "الأسم"
+horizontal_alignment = 2
+
+[node name="Item_Type" type="Label" parent="Details_Panel" unique_id=1955245039]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75000006
+anchor_right = 1.0
+anchor_bottom = 0.44400004
+offset_left = -2.0000076
+offset_top = 32.0
+offset_right = -2.0
+offset_bottom = 16.039997
+grow_horizontal = 0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "الفئة"
+horizontal_alignment = 2
+
+[node name="Item_effect" type="Label" parent="Details_Panel" unique_id=438851092]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75000006
+anchor_right = 1.0
+anchor_bottom = 0.44400004
+offset_left = -2.0000076
+offset_top = 64.0
+offset_right = -2.0
+offset_bottom = 48.039997
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.78431374, 0.8392157, 0.8509804, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "التأثير"
+horizontal_alignment = 2
+text_direction = 2
+language = "ar"
+
+[node name="Usage_panel" type="ColorRect" parent="." unique_id=1224971022]
+visible = false
+layout_mode = 0
+offset_left = -161.0
+offset_right = -1.0
+offset_bottom = 89.99956
+color = Color(0.59607846, 0.93333334, 0.8, 1)
+
+[node name="Use_Button" type="Button" parent="Usage_panel" unique_id=294631671]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 160.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "أستخدام"
+
+[node name="Drop_Button" type="Button" parent="Usage_panel" unique_id=1006418149]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 88.0
+theme_override_fonts/font = ExtResource("3_75pi0")
+text = "تخلص"
+
+[connection signal="focus_entered" from="." to="." method="_on_item_button_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_item_button_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_item_button_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_item_button_mouse_exited"]
+[connection signal="focus_entered" from="Item_Button" to="." method="_on_item_button_focus_entered"]
+[connection signal="focus_exited" from="Item_Button" to="." method="_on_item_button_focus_exited"]
+[connection signal="mouse_entered" from="Item_Button" to="." method="_on_item_button_mouse_entered"]
+[connection signal="mouse_exited" from="Item_Button" to="." method="_on_item_button_mouse_exited"]
+[connection signal="pressed" from="Usage_panel/Use_Button" to="." method="_on_use_button_pressed"]
+[connection signal="pressed" from="Usage_panel/Drop_Button" to="." method="_on_drop_button_pressed"]

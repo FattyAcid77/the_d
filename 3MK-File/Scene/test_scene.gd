@@ -27,17 +27,8 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("E"):
-		if radio_instance == null:
-			_open_radio()
-		else:
-			_close_radio()
-	if Input.is_action_just_pressed("Option"):
-		add_child(options)
-		if Input.is_action_just_pressed("Option"):
-			remove_child(options)
-	# Keep icons updated to reflect RadioGlobal state
-	vis()
+	pass
+
 
 
 # === RADIO OPEN / CLOSE ===
