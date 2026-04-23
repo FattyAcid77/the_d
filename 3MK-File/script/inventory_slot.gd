@@ -6,10 +6,17 @@ extends Control
 @onready var item_type: Label = $Details_Panel/Item_Type
 @onready var item_effect: Label = $Details_Panel/Item_effect
 @onready var usage_panel: ColorRect = $Usage_panel
+@onready var outer_boarder: ColorRect = $OuterBoarder
 
+
+signal drag_start(slot)
+signal drag_end()
 
 var item = null
 # Called when the node enters the scene tree for the first time.
+
+
+
 func _ready() -> void:
 	pass # Replace with function body.
 
@@ -17,6 +24,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+
+
+
+
 
 
 func _on_item_button_focus_entered() -> void:
@@ -56,7 +69,9 @@ func set_item(new_item):
 
 
 func _on_drop_button_pressed() -> void:
+	print("The button was clicked!")
 	if item != null:
+		print("The item is not null. Toggling panel.")
 		var drop_position = inventory.Player_ch.global_position
 		var drop_offset = Vector2(0, 50)
 		drop_offset = drop_offset.rotated(inventory.Player_ch.rotation)
@@ -65,4 +80,22 @@ func _on_drop_button_pressed() -> void:
 		usage_panel.visible = !usage_panel.visible
 
 func _on_use_button_pressed() -> void:
-	pass # Replace with function body.
+	if item != null:
+		# Example: Call a use function on your inventory/player
+		inventory.use_item(item)
+		# Then maybe remove it or hide the panel
+		usage_panel.visible = false
+
+
+func _on_item_button_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton: 
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+			if item != null:
+				usage_panel.visible = !usage_panel.visible
+		elif event.button_index == MOUSE_BUTTON_LEFT:
+			if event.is_pressed():
+				outer_boarder.modulate = Color()
+				drag_start.emit(self)
+			else:
+				outer_boarder.modulate = Color(1, 1, 1)
+				drag_end.emit()

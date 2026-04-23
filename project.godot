@@ -25,7 +25,6 @@ buses/default_bus_layout="res://3MK-File/myshit/default_bus_layout.tres"
 [autoload]
 
 Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
-RadioGlobal="*res://3MK-File/script/radio_global.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 SceneManager="*res://control scene/SceneManager.gd"
 PauseMenu="*res://control scene/Pause_Menu.tscn"
@@ -100,19 +99,23 @@ action={
 }
 Amp_U={
 "deadzone": 0.2,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194433,"key_label":0,"unicode":42,"location":0,"echo":false,"script":null)
+]
 }
 Amp_D={
 "deadzone": 0.2,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194434,"key_label":0,"unicode":47,"location":0,"echo":false,"script":null)
+]
 }
 Freq_U={
 "deadzone": 0.2,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194447,"key_label":0,"unicode":57,"location":0,"echo":false,"script":null)
+]
 }
 Freq_D={
 "deadzone": 0.2,
-"events": []
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194446,"key_label":0,"unicode":56,"location":0,"echo":false,"script":null)
+]
 }
 Option={
 "deadzone": 0.2,

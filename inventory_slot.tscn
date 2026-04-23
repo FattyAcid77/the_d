@@ -111,6 +111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_75pi0")
+theme_override_font_sizes/font_size = 24
 text = "الأسم"
 horizontal_alignment = 2
 
@@ -121,12 +122,13 @@ anchor_left = 0.75000006
 anchor_right = 1.0
 anchor_bottom = 0.44400004
 offset_left = -2.0000076
-offset_top = 32.0
+offset_top = 37.0
 offset_right = -2.0
-offset_bottom = 16.039997
+offset_bottom = 21.039997
 grow_horizontal = 0
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_75pi0")
+theme_override_font_sizes/font_size = 14
 text = "الفئة"
 horizontal_alignment = 2
 
@@ -137,14 +139,15 @@ anchor_left = 0.75000006
 anchor_right = 1.0
 anchor_bottom = 0.44400004
 offset_left = -2.0000076
-offset_top = 64.0
+offset_top = 60.0
 offset_right = -2.0
-offset_bottom = 48.039997
+offset_bottom = 44.039997
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.78431374, 0.8392157, 0.8509804, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_75pi0")
+theme_override_font_sizes/font_size = 14
 text = "التأثير"
 horizontal_alignment = 2
 text_direction = 2
@@ -152,10 +155,15 @@ language = "ar"
 
 [node name="Usage_panel" type="ColorRect" parent="." unique_id=1224971022]
 visible = false
-layout_mode = 0
-offset_left = -161.0
-offset_right = -1.0
+z_index = 5
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -225.0
+offset_right = -65.0
 offset_bottom = 89.99956
+grow_horizontal = 0
 color = Color(0.59607846, 0.93333334, 0.8, 1)
 
 [node name="Use_Button" type="Button" parent="Usage_panel" unique_id=294631671]
@@ -174,12 +182,9 @@ offset_bottom = 88.0
 theme_override_fonts/font = ExtResource("3_75pi0")
 text = "تخلص"
 
-[connection signal="focus_entered" from="." to="." method="_on_item_button_focus_entered"]
-[connection signal="focus_exited" from="." to="." method="_on_item_button_focus_exited"]
-[connection signal="mouse_entered" from="." to="." method="_on_item_button_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_item_button_mouse_exited"]
 [connection signal="focus_entered" from="Item_Button" to="." method="_on_item_button_focus_entered"]
 [connection signal="focus_exited" from="Item_Button" to="." method="_on_item_button_focus_exited"]
+[connection signal="gui_input" from="Item_Button" to="." method="_on_item_button_gui_input"]
 [connection signal="mouse_entered" from="Item_Button" to="." method="_on_item_button_mouse_entered"]
 [connection signal="mouse_exited" from="Item_Button" to="." method="_on_item_button_mouse_exited"]
 [connection signal="pressed" from="Usage_panel/Use_Button" to="." method="_on_use_button_pressed"]

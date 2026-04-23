@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ceueg64pshyby"]
+[gd_scene format=3 uid="uid://ceueg64pshyby"]
 
 [ext_resource type="Script" uid="uid://hg827so14kmm" path="res://3MK-File/myshit/task_area.gd" id="1_s6qlr"]
+
+[sub_resource type="PackedScene" id="PackedScene_s6qlr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hu5s5"]
 radius = 114.54257
 
-[node name="Task_area" type="Area2D"]
+[node name="Task_area" type="Area2D" unique_id=1212510058]
 script = ExtResource("1_s6qlr")
+reward_scene = SubResource("PackedScene_s6qlr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=879396953]
 shape = SubResource("CircleShape2D_hu5s5")

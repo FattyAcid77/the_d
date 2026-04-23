@@ -3,6 +3,7 @@ extends Node2D
 
 @export_category("DropZone")
 @export var DropZone: Array[Area2D]
+
 @export_category("Rewards")
 @export var Spawn: PackedScene
 
@@ -18,7 +19,16 @@ func zone_check():
 		if zone.Done == false:
 			fill = false
 			break
+			
 	if fill == true:
 		print("GJ!")
 		Reward = true
 		
+		# 1. Instantiate the blueprint into a new local variable called 'spawn'
+		var spawn = Spawn.instantiate()
+		
+		# 2. Set its position to match this Node2D
+		spawn.global_position = global_position
+		
+		# 3. Add it to the game world
+		get_tree().current_scene.add_child(spawn)
