@@ -1,12 +1,38 @@
-class_name bgrd_node extends Node2D
+extends Node2D
 
-@onready var bgrd_asset: Sprite2D = $Sprite2D
-@onready var texture_pos = bgrd_asset.position
 
-@onready var half_length: Vector2 = Vector2(bgrd_asset.texture.get_size().x / 2.0, 0)
-@onready var half_height: Vector2 = Vector2(0, bgrd_asset.texture.get_size().y / 2.0)
+@export var map_bounds_data: MapBoundsData 
 
-@onready var right_limits: int = int(texture_pos.x + half_length.x)
-@onready var bottom_limits :int = int(texture_pos.y + half_height.y)
-@onready var left_limits: int = int(texture_pos.x - half_length.x)
-@onready var top_limits: int = int(texture_pos.y - half_height.y)
+func _ready():
+	calculate_master_bounds()
+
+func calculate_master_bounds():
+	if not map_bounds_data:
+		push_error("MapBoundsData resource is missing from the level!")
+		return
+
+	var master_rect = Rect2()
+	var found_layers = false
+
+	
+	for child in get_children():
+		if child is TileMapLayer:
+			
+			var grid_rect: Rect2i = child.get_used_rect()
+			var tile_size: Vector2i = child.tile_set.tile_size
+			
+			
+			var world_pos = Vector2(grid_rect.position * tile_size)
+			var world_size = Vector2(grid_rect.size * tile_size)
+			var layer_rect = Rect2(world_pos, world_size)
+			
+			
+			if not found_layers:
+				master_rect = layer_rect
+				found_layers = true
+			else:
+				master_rect = master_rect.merge(layer_rect)
+	
+	
+	if found_layers:
+		map_bounds_data.current_bounds = master_rect

@@ -5,7 +5,7 @@ class_name Sami extends CharacterBody2D
 @export var speed = 5000.0
 @export var accel: float = 1200.0
 @export var input_enabled:bool = true
-@export var camera_adj: bgrd_node
+@export var stats: HealthData
 
 
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -29,11 +29,12 @@ var input_direction: Vector2 = Vector2.ZERO
 var desired_vel: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	print("Game Started! Sami's Health is: ", stats.current_health)
 	#Need To Be Ref to the Global to use in other Scenes
 	Dialog_Global.player = self
 	quest_tracker.visible = false
 	scale = Vector2.ONE
-	set_camera_limits()
+
 	inventory.player_ref(self)
 
 
@@ -125,13 +126,8 @@ func enable():
 	input_enabled = true
 	visible = true
 	
-func set_camera_limits():
-	camera.limit_right = camera_adj.right_limits
-	print(camera.limit_right)
-	camera.limit_top = camera_adj.top_limits
-	print(camera.limit_top)
-	camera.limit_left = camera_adj.left_limits
-	print(camera.limit_left)
-	camera.limit_bottom = camera_adj.bottom_limits
-	print(camera.limit_bottom)
-	
+
+
+
+func apply_item():
+	pass

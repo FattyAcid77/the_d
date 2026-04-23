@@ -20,12 +20,18 @@ var player_range: bool
 
 
 
-var scene_2_path : String = "res://3MK-File/Scene/inventory.tscn"
+
+var scene_2_path : String = "res://3MK-File/Resources/item.tscn"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		icon.texture = item_config.icon
+		
+		# FIX: Force check if Sami is already overlapping us when we spawn!
+		for body in get_overlapping_bodies():
+			if body.name == "Sami":
+				player_range = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +50,8 @@ func pickable():
 		"effect": item_config.item_effect,
 		"name": item_config.item_name,
 		"scene_path": scene_2_path,
-		"texture": item_config.icon
+		"texture": item_config.icon,
+		"heal_amount": item_config.heal_amount # <-- Add it to the dictionary!
 	}
 	
 	if inventory.Player_ch != null:
@@ -64,7 +71,20 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func set_item_data(data):
+	# 1. Update the local script variables (What you already had)
 	item_type = data["type"]
 	item_name = data["name"]
 	item_effect = data["effect"]
 	item_texture = data["texture"]
+	
+	# 2. Update the actual picture on the screen!
+	# (Make sure "Sprite2D" matches the exact name of your item's sprite node)
+	
+	
+	# 3. Update the 'Item Config' resource so it remembers what it is when you pick it up again!
+	# (Note: Change 'item_config' to whatever variable name you used to export 'Item Config' in your script)
+	if item_config != null: 
+		item_config.item_name = data["name"]
+		item_config.item_type = data["type"]
+		item_config.item_effect = data["effect"]
+		item_config.icon = data["texture"]

@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://dpdyays8575ft"]
+
+[ext_resource type="Script" uid="uid://cgevr75uhtxbc" path="res://3MK-File/Scene/radio_ui.gd" id="1_bbljo"]
+[ext_resource type="Script" uid="uid://c8j8kgpw2nmnp" path="res://saw_tooth_display.gd" id="2_bbljo"]
+[ext_resource type="Texture2D" uid="uid://dxwmt2mwuf2ic" path="res://3MK-File/radio-2.png" id="2_yr24d"]
+[ext_resource type="FontFile" uid="uid://bud1f0ks3i856" path="res://FD_Testing/Fonts/PixelAE-Bold.ttf" id="3_yr24d"]
+[ext_resource type="Texture2D" uid="uid://bpbjotuatsk47" path="res://3MK-File/radio-button-right-5.png" id="5_vcuhg"]
+[ext_resource type="Texture2D" uid="uid://csfxhuxwism5p" path="res://3MK-File/radio-button-left-5.png" id="6_drljo"]
+[ext_resource type="Texture2D" uid="uid://bkxregksg6ip5" path="res://3MK-File/radio-button-left-shadow-2.png" id="7_mpp5l"]
+[ext_resource type="Texture2D" uid="uid://dddwqq15q73vx" path="res://3MK-File/radio-button-righ-shadow-2.png" id="8_e4pv2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yr24d"]
+
+[sub_resource type="Animation" id="Animation_bbljo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Radio_buttons/RadioButtonRight2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Radio_buttons/RadioButtonLeft2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yr24d"]
+resource_name = "amp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Radio_buttons/RadioButtonLeft2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9868032, 2, 3, 4, 5, 6, 7, 8, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 6.2831855, 1.2566371, 1.8849556, 2.5132742, 3.1415927, 3.7699113, 4.3982296, 5.0265484, 5.6548667]
+}
+
+[sub_resource type="Animation" id="Animation_8lgca"]
+resource_name = "wl"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Radio_buttons/RadioButtonRight2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99603856),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_neypu"]
+_data = {
+&"RESET": SubResource("Animation_bbljo"),
+&"amp": SubResource("Animation_yr24d"),
+&"wl": SubResource("Animation_8lgca")
+}
+
+[node name="Radio_UI" type="Control" unique_id=771193366]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bbljo")
+
+[node name="Radio_txt" type="TextureRect" parent="." unique_id=425869244]
+z_index = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_yr24d")
+
+[node name="Frequancy" type="Label" parent="Radio_txt" unique_id=2020079003]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.003
+anchor_top = 0.59400004
+anchor_right = 0.216
+anchor_bottom = 0.71900004
+offset_left = -0.07999992
+offset_top = 0.1599884
+offset_right = -0.2400055
+offset_bottom = 0.15997314
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_yr24d")
+theme_override_font_sizes/font_size = 30
+text = "1 hz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Radio_txt" unique_id=311130703]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 269.0
+offset_right = 151.0
+offset_bottom = 301.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yr24d")
+
+[node name="Screen_Mask" type="ColorRect" parent="Radio_txt/Panel" unique_id=155628654]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 119.0
+offset_bottom = 31.0
+color = Color(0.012617188, 0.012617188, 0.012617188, 0)
+
+[node name="SawTooth_Display" type="Control" parent="Radio_txt/Panel" unique_id=1666105305]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = -1.0
+offset_right = 117.0
+offset_bottom = 31.0
+script = ExtResource("2_bbljo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2133932729]
+libraries/ = SubResource("AnimationLibrary_neypu")
+
+[node name="Radio_buttons" type="Node2D" parent="." unique_id=403988419]
+z_index = 1
+
+[node name="RadioButtonRight2" type="Sprite2D" parent="Radio_buttons" unique_id=68119318]
+position = Vector2(137, 325)
+texture = ExtResource("5_vcuhg")
+
+[node name="RadioButtonLeft2" type="Sprite2D" parent="Radio_buttons" unique_id=1835936219]
+position = Vector2(42, 325)
+texture = ExtResource("6_drljo")
+
+[node name="RadioButtonLeftShadow" type="Sprite2D" parent="Radio_buttons" unique_id=1656109171]
+position = Vector2(42, 325)
+texture = ExtResource("7_mpp5l")
+
+[node name="RadioButtonRighShadow" type="Sprite2D" parent="Radio_buttons" unique_id=1176241472]
+position = Vector2(137, 325)
+texture = ExtResource("8_e4pv2")

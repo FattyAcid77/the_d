@@ -1,27 +1,35 @@
 [gd_scene format=3 uid="uid://dxofprk7jlwg1"]
 
 [ext_resource type="PackedScene" uid="uid://dbp12leqpgush" path="res://3MK-File/Scene/lvl_1_hall_bgrd.tscn" id="1_yi5rg"]
+[ext_resource type="Script" uid="uid://t3upyfjrqiib" path="res://mapBounds.gd" id="2_0d2n7"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 [ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
-[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="6_yi5rg"]
-[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="7_0d2n7"]
-[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="8_hkdn2"]
+[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="8_hkdn2"]
+[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="9_31cma"]
+[ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
+[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="10_j8yc2"]
+[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="11_31cma"]
 
-[sub_resource type="Resource" id="Resource_31cma"]
-script = ExtResource("8_hkdn2")
-icon = ExtResource("7_0d2n7")
-group = &"Item"
-item_type = "قتل"
-item_effect = "دماء"
-item_name = "سكين"
+[sub_resource type="Resource" id="Resource_hkdn2"]
+script = ExtResource("2_0d2n7")
+metadata/_custom_type_script = "uid://t3upyfjrqiib"
+
+[sub_resource type="Resource" id="Resource_ogs6s"]
+script = ExtResource("10_j8yc2")
+icon = ExtResource("9_31cma")
+group = &"Items"
+item_type = "Puzzle"
+item_effect = "BrainFart"
+item_name = "get gudd"
 metadata/_custom_type_script = "uid://cvugbs4ksvifo"
 
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152]
 
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yi5rg")]
-position = Vector2(440, 301)
+position = Vector2(447, 301)
+map_bounds_data = SubResource("Resource_hkdn2")
 
 [node name="Map-Light" parent="." unique_id=1960135155 instance=ExtResource("6_ctn4s")]
 position = Vector2(-455.00003, 154)
@@ -48,10 +56,15 @@ new_scene_path = "res://Main Scenes/Elevator_1.tscn"
 target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
-[node name="Item" parent="." unique_id=1669675773 instance=ExtResource("6_yi5rg")]
-position = Vector2(784, 462)
-item_config = SubResource("Resource_31cma")
+[node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("2_xriv7")]
+position = Vector2(690, 451)
 
-[node name="Sami" parent="." unique_id=1696226291 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_xriv7")]
-position = Vector2(710, 404)
-camera_adj = NodePath("../Lvl_1_Hall_BGRD")
+[node name="Knife_Item" parent="." unique_id=1066712327 instance=ExtResource("9_ogs6s")]
+position = Vector2(832, 454)
+
+[node name="Item2" parent="." unique_id=1669675773 instance=ExtResource("8_hkdn2")]
+position = Vector2(837, 494)
+item_config = SubResource("Resource_ogs6s")
+
+[node name="Movable-Object" parent="." unique_id=851682968 instance=ExtResource("11_31cma")]
+position = Vector2(837, 494)
