@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://edwpxytlv63t"]
+[gd_scene format=3 uid="uid://edwpxytlv63t"]
 
 [ext_resource type="Texture2D" uid="uid://cmt86qygnf2yv" path="res://3MK-File/myshit/2D_light.webp" id="1_wlw44"]
 [ext_resource type="PackedScene" uid="uid://ckgv15hoq1ph4" path="res://background_scenes/level_1_hall_bgrd.tscn" id="2_4ujl0"]

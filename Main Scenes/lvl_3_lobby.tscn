@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2wwqrdyyx2h7"]
+
+[ext_resource type="PackedScene" uid="uid://debm3glfieapw" path="res://background_scenes/lvl_3_lobby_bgrd.tscn" id="1_o7f1r"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_sailq"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_03qw1"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_k5edk"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="3_shg4i"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="5_k5edk"]
+
+[node name="Lvl3Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_sailq")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="Lvl3LobbyBgrd" parent="." instance=ExtResource("1_o7f1r")]
+script = ExtResource("3_k5edk")
+
+[node name="Door_reg" parent="." instance=ExtResource("2_03qw1")]
+position = Vector2(917, 416)
+entery_direction = 3
+new_scene_path = "res://Main Scenes/Elevator_3.tscn"
+target_door_name = "Elevator_3_Main"
+this_door_name = "lvl_3_lobby_East"
+
+[node name="door_reg_type2" parent="." instance=ExtResource("3_shg4i")]
+position = Vector2(539, 234)
+
+[node name="door_reg_type3" parent="." instance=ExtResource("3_shg4i")]
+position = Vector2(530, 599)
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_k5edk")]
+camera_adj = NodePath("../Lvl3LobbyBgrd")

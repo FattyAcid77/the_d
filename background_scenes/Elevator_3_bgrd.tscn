@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://rchcbj2jpdi7"]
+
+[ext_resource type="Texture2D" uid="uid://b3ay60n2sto2u" path="res://background_scenes/assets/elevator_floor_3.png" id="1_mn68x"]
+
+[node name="Elevator3Bgrd" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(318, 175)
+texture = ExtResource("1_mn68x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(45, 117)
+polygon = PackedVector2Array(0, 0, -90, 0, -90, -73, 0, -72, 0, -49, 7, -49, 9, -19, -2, -19, 0, -1, 26, 0, 31, -97, -118, -92, -133, 55, 32, 34)

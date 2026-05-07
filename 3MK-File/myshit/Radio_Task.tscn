@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d21mh37tcl1gk"]
+[gd_scene format=3 uid="uid://d21mh37tcl1gk"]
 
 [ext_resource type="Script" uid="uid://wp2vxay0leg5" path="res://3MK-File/myshit/task_manager.gd" id="1_wfdah"]
 [ext_resource type="Script" uid="uid://hg827so14kmm" path="res://3MK-File/myshit/task_area.gd" id="2_gl366"]

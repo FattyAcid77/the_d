@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfg5qt63vhjc1"]
+[gd_scene format=3 uid="uid://dfg5qt63vhjc1"]
 
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="1_e5lkt"]
 [ext_resource type="Script" uid="uid://durn0cm44g242" path="res://Main Scenes/filter.gd" id="2_pb3ji"]

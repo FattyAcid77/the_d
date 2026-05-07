@@ -17,7 +17,8 @@ doors = [NodePath("Door_reg")]
 script = ExtResource("3_gbft3")
 
 [node name="Door_reg" parent="." instance=ExtResource("2_aso7g")]
-position = Vector2(159, 246)
+position = Vector2(172, 253)
+scale = Vector2(0.5, 0.5)
 entery_direction = 1
 push_distance = 50
 new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
@@ -36,6 +37,9 @@ position = Vector2(247, 217)
 [node name="ElevatorControl" parent="." instance=ExtResource("7_qu6j4")]
 visible = false
 this_scene_path = "res://Main Scenes/Elevator_2.tscn"
+path_to_scene_1 = "res://Main Scenes/Elevator_2.tscn"
+path_to_scene_2 = "res://Main Scenes/Elevator_1.tscn"
 
 [connection signal="body_entered" from="Elevator_Control_reg" to="Sami" method="_on_elevator_control_reg_body_entered"]
 [connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]
+[connection signal="body_exited" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_exited"]

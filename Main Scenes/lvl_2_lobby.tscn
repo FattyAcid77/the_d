@@ -1,34 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs1udu46rfe70"]
+[gd_scene format=3 uid="uid://cs1udu46rfe70"]
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_o0alp"]
 [ext_resource type="PackedScene" uid="uid://ctbx86vm8lsvv" path="res://background_scenes/lvl_2_lobby_bgrdv2.tscn" id="2_rx0ui"]
-[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_6eri3"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="6_6eri3"]
 
-[node name="Lvl2Lobby" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+[node name="Lvl2Lobby" type="Node2D" unique_id=651412082 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
 player = NodePath("Sami")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2")]
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
 
-[node name="RadioRoomBgrd" parent="." instance=ExtResource("2_rx0ui")]
-script = ExtResource("3_6eri3")
+[node name="lvl2_Lobby_bgrd" parent="." unique_id=1059811953 instance=ExtResource("2_rx0ui")]
 
-[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_o0alp")]
+[node name="Sami" parent="." unique_id=393327693 instance=ExtResource("2_o0alp")]
 position = Vector2(627, 448)
-camera_adj = NodePath("../RadioRoomBgrd")
 
-[node name="Door_reg" parent="." instance=ExtResource("3_rx0ui")]
+[node name="Door_reg" parent="." unique_id=1099763282 instance=ExtResource("3_rx0ui")]
 position = Vector2(926, 417)
 entery_direction = 3
 new_scene_path = "res://Main Scenes/Elevator_2.tscn"
 target_door_name = "Elevator_2_Main"
 this_door_name = "lvl_2_lobby_east"
 
-[node name="door_reg_type2" parent="." instance=ExtResource("6_6eri3")]
+[node name="door_reg_type2" parent="." unique_id=911117535 instance=ExtResource("6_6eri3")]
 position = Vector2(536, 234)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
 target_door_name = "OCD_Hall_South"
 this_door_name = "lvl_2_lobby_North"
+
+[node name="Door_reg2" parent="." unique_id=199103109 instance=ExtResource("3_rx0ui")]
+position = Vector2(146, 423)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/Elevator_2_left.tscn"
+target_door_name = "Elevator_2_Main"
+this_door_name = "lvl_2_lobby_west"

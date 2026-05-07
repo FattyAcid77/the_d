@@ -17,3 +17,11 @@ func open_Elevetor_Control_UI() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Sami:
 		player_inside = true
+		SceneManager.player_in_area = true
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if body is Sami:
+		player_inside = true
+		SceneManager.player_in_area = true
+	

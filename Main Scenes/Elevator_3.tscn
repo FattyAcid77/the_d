@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://b16nrvdn4y57a"]
+
+[ext_resource type="PackedScene" uid="uid://rchcbj2jpdi7" path="res://background_scenes/Elevator_3_bgrd.tscn" id="1_4lb4n"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_5mxd3"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_33k8n"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_4h5io"]
+[ext_resource type="PackedScene" uid="uid://c3ddty4kt06p8" path="res://control scene/elevator_control_reg.tscn" id="3_33k8n"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="6_43knn"]
+[ext_resource type="PackedScene" uid="uid://c4jkvy4u1n5ug" path="res://control scene/Elevator_control_2.tscn" id="7_nwfdn"]
+
+[node name="Elevator3" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_5mxd3")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="Elevator3Bgrd" parent="." instance=ExtResource("1_4lb4n")]
+script = ExtResource("3_4h5io")
+
+[node name="Door_reg" parent="." instance=ExtResource("2_33k8n")]
+position = Vector2(266, 254)
+scale = Vector2(0.5, 0.5)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/lvl_3_lobby.tscn"
+target_door_name = "lvl_3_lobby_East"
+this_door_name = "Elevator_3_Main"
+
+[node name="Elevator_Control_reg" parent="." instance=ExtResource("3_33k8n")]
+position = Vector2(338, 219)
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_43knn")]
+position = Vector2(324, 215)
+camera_adj = NodePath("../Elevator3Bgrd")
+
+[node name="ElevatorControl" parent="." instance=ExtResource("7_nwfdn")]
+visible = false
+this_scene_path = "res://Main Scenes/Elevator_3.tscn"
+path_to_scene_1 = "res://Main Scenes/Elevator_3.tscn"
+path_to_scene_2 = "res://Main Scenes/Elevator_2_left.tscn"
+
+[connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]
+[connection signal="body_exited" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_exited"]

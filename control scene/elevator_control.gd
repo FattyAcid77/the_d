@@ -5,11 +5,10 @@ class_name Elevator_control_UI extends CanvasLayer
 @onready var sami: Sami = $"../Sami"
 
 
-var path_to_scene_1: String = "res://Main Scenes/Elevator_2.tscn"
-var path_to_scene_2: String = "res://Main Scenes/Elevator_1.tscn"
+@export var path_to_scene_1: String 
+@export var path_to_scene_2: String 
 
-
-func _on_button_2_pressed() -> void:
+func _on_button_pressed() -> void:
 	if path_to_scene_1 == this_scene_path:
 		visible = false
 		sami.enable()
@@ -17,9 +16,7 @@ func _on_button_2_pressed() -> void:
 		visible = false
 		SceneManager.load_new_scene(path_to_scene_1)
 
-
-
-func _on_button_pressed() -> void:
+func _on_button_2_pressed() -> void:
 	if path_to_scene_2 == this_scene_path:
 		visible = false
 		sami.enable()
