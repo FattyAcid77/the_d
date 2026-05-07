@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bpb0wh30ebnmf"]
+
+[ext_resource type="PackedScene" uid="uid://cybm5wi8j5lxb" path="res://3MK-File/myshit/statue_drop_zone.tscn" id="1_rxxr5"]
+[ext_resource type="PackedScene" uid="uid://ceueg64pshyby" path="res://3MK-File/myshit/task_area.tscn" id="2_fsr35"]
+
+[node name="LvL_Puzzle" type="Node2D" unique_id=624265698]
+
+[node name="Statue-DropZone" parent="." unique_id=966571687 instance=ExtResource("1_rxxr5")]
+position = Vector2(75, 254)
+
+[node name="Task_area" parent="." unique_id=1212510058 node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_fsr35")]
+position = Vector2(391, 130)
+spawn_point = NodePath("../SpawnPoint")
+
+[node name="SpawnPoint" type="Marker2D" parent="." unique_id=1709877675]
+position = Vector2(388, 132)
