@@ -32,7 +32,5 @@ func calculate_master_bounds():
 				found_layers = true
 			else:
 				master_rect = master_rect.merge(layer_rect)
-	
-	
 	if found_layers:
 		map_bounds_data.current_bounds = master_rect

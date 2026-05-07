@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj1fugbu6pove"]
+[gd_scene format=3 uid="uid://dj1fugbu6pove"]
 
 [ext_resource type="PackedScene" uid="uid://dm6vb6ittfr3l" path="res://3MK-File/Scene/statue.tscn" id="1_ong4c"]
 
@@ -8,9 +8,7 @@ friction = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwt7e"]
 size = Vector2(36.75, 34.625)
 
-[node name="Movable-Object" type="RigidBody2D" groups=["Statue"]]
-collision_layer = 4
-collision_mask = 4
+[node name="Movable-Object" type="RigidBody2D" unique_id=647352341 groups=["Statue"]]
 physics_material_override = SubResource("PhysicsMaterial_uwt7e")
 gravity_scale = 0.0
 inertia = 20.0
@@ -18,7 +16,7 @@ lock_rotation = true
 linear_damp_mode = 1
 linear_damp = 14.0
 
-[node name="Statue" parent="." instance=ExtResource("1_ong4c")]
+[node name="Statue" parent="." unique_id=1416027951 instance=ExtResource("1_ong4c")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1739809445]
 shape = SubResource("RectangleShape2D_uwt7e")

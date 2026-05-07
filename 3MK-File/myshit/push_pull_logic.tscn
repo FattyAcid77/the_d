@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgabj4p2vw7ov"]
+[gd_scene format=3 uid="uid://cgabj4p2vw7ov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rne5g"]
 radius = 52.009613
 
-[node name="Push-pull-Logic" type="Area2D"]
+[node name="Push-pull-Logic" type="Area2D" unique_id=98324626]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305067403]
+scale = Vector2(1.1, 1.1)
 shape = SubResource("CircleShape2D_rne5g")
 debug_color = Color(0.665535, 0.5115466, 0.05106076, 0.41960785)

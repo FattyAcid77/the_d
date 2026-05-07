@@ -71,18 +71,20 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func set_item_data(data):
-	# 1. Update the local script variables (What you already had)
 	item_type = data["type"]
 	item_name = data["name"]
 	item_effect = data["effect"]
 	item_texture = data["texture"]
-	
-	# 2. Update the actual picture on the screen!
-	# (Make sure "Sprite2D" matches the exact name of your item's sprite node)
-	
-	
-	# 3. Update the 'Item Config' resource so it remembers what it is when you pick it up again!
-	# (Note: Change 'item_config' to whatever variable name you used to export 'Item Config' in your script)
+	if icon != null:
+		icon.texture = data["texture"]
+	if item_config != null: 
+		item_config = item_config.duplicate() 
+		item_config.item_name = data["name"]
+		item_config.item_type = data["type"]
+		item_config.item_effect = data["effect"]
+		item_config.icon = data["texture"]
+		if data.has("heal_amount"):
+			item_config.heal_amount = data["heal_amount"]
 	if item_config != null: 
 		item_config.item_name = data["name"]
 		item_config.item_type = data["type"]
