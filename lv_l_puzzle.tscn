@@ -1,16 +1,29 @@
 [gd_scene format=3 uid="uid://bpb0wh30ebnmf"]
 
+[ext_resource type="PackedScene" uid="uid://c0pn8g2eecwku" path="res://f_2_cell_room.tscn" id="1_egaj7"]
 [ext_resource type="PackedScene" uid="uid://cybm5wi8j5lxb" path="res://3MK-File/myshit/statue_drop_zone.tscn" id="1_rxxr5"]
 [ext_resource type="PackedScene" uid="uid://ceueg64pshyby" path="res://3MK-File/myshit/task_area.tscn" id="2_fsr35"]
+[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="4_dfgc4"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="4_o3u7i"]
 
 [node name="LvL_Puzzle" type="Node2D" unique_id=624265698]
 
+[node name="F2_Cell-Room" parent="." unique_id=1977770180 instance=ExtResource("1_egaj7")]
+position = Vector2(453, 350)
+
 [node name="Statue-DropZone" parent="." unique_id=966571687 instance=ExtResource("1_rxxr5")]
-position = Vector2(75, 254)
+position = Vector2(545, 376)
 
 [node name="Task_area" parent="." unique_id=1212510058 node_paths=PackedStringArray("spawn_point") instance=ExtResource("2_fsr35")]
-position = Vector2(391, 130)
+position = Vector2(405, 358)
+reward_scene = ExtResource("4_dfgc4")
 spawn_point = NodePath("../SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1709877675]
-position = Vector2(388, 132)
+position = Vector2(408, 348)
+
+[node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("4_o3u7i")]
+position = Vector2(483, 453)
+
+[node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("4_dfgc4")]
+position = Vector2(451, 373)

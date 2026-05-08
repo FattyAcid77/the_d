@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
 [ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="15_fonp4"]
 [ext_resource type="PackedScene" uid="uid://c1p54hwrqfphl" path="res://3MK-File/Scene/inventory_ui.tscn" id="16_iraew"]
+[ext_resource type="Resource" uid="uid://qj5axspq1moj" path="res://3MK-File/myshit/MapBoundsData.tres" id="18_6mkmm"]
 [ext_resource type="Script" uid="uid://b4b3c3bypp8p1" path="res://characters scenes/health_ui.gd" id="19_q1iex"]
 [ext_resource type="Texture2D" uid="uid://x0sbp1aph1ii" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="20_dr7rm"]
 [ext_resource type="Texture2D" uid="uid://bodr8gin7n06p" path="res://3MK-File/radio-button-left-3.png" id="21_nq4w5"]
@@ -880,6 +881,7 @@ size_flags_vertical = 3
 [node name="QuestManger" parent="." unique_id=679597824 instance=ExtResource("4_6hsvr")]
 
 [node name="Camera2D" parent="." unique_id=837766967 instance=ExtResource("5_qpl50")]
+map_bounds_data = ExtResource("18_6mkmm")
 
 [node name="Radio-Panel" parent="." unique_id=1162518636 instance=ExtResource("6_r3ftm")]
 z_index = 2

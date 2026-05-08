@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dj1fugbu6pove"]
 
 [ext_resource type="PackedScene" uid="uid://dm6vb6ittfr3l" path="res://3MK-File/Scene/statue.tscn" id="1_ong4c"]
+[ext_resource type="Texture2D" uid="uid://qhp5yonxt5ce" path="res://3MK-File/mirror.png" id="2_uwt7e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uwt7e"]
 friction = 0.0
@@ -17,6 +18,8 @@ linear_damp_mode = 1
 linear_damp = 14.0
 
 [node name="Statue" parent="." unique_id=1416027951 instance=ExtResource("1_ong4c")]
+scale = Vector2(1, 1)
+texture = ExtResource("2_uwt7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1739809445]
 shape = SubResource("RectangleShape2D_uwt7e")
