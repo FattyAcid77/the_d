@@ -4,3 +4,4 @@
 
 [node name="Camera2D" type="Camera2D" unique_id=1734614443]
 script = ExtResource("1_ixfyl")
+Map_Multiplayer = 0.037
