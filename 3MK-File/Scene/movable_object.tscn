@@ -10,6 +10,8 @@ friction = 0.0
 size = Vector2(36.75, 34.625)
 
 [node name="Movable-Object" type="RigidBody2D" unique_id=647352341 groups=["Statue"]]
+collision_layer = 4
+collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_uwt7e")
 gravity_scale = 0.0
 inertia = 20.0

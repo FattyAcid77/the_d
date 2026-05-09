@@ -120,6 +120,7 @@ func _handle_movement_and_animation() -> void:
 
 func _handle_drag_input() -> void:
 	if Input.is_action_just_pressed("drag"):
+		print("Pushing")
 		# Find the closest grabbable body that is in front of us.
 		var best_body: RigidBody2D = null
 		var best_distance: float = INF

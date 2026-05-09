@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 [ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
+[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="8_yi5rg"]
 [ext_resource type="PackedScene" uid="uid://nlc54nt4rc85" path="res://cube_item.tscn" id="9_0d2n7"]
 [ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
 
@@ -49,3 +50,6 @@ position = Vector2(808, 449)
 
 [node name="Cube_item2" parent="." unique_id=527186714 instance=ExtResource("9_0d2n7")]
 position = Vector2(832, 454)
+
+[node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("8_yi5rg")]
+position = Vector2(682, 463)

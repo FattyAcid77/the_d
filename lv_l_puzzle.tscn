@@ -24,6 +24,3 @@ position = Vector2(408, 348)
 
 [node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("4_o3u7i")]
 position = Vector2(483, 453)
-
-[node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("4_dfgc4")]
-position = Vector2(451, 373)

@@ -780,7 +780,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04j5i"]
-size = Vector2(58, 103)
+size = Vector2(14, 56)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
@@ -806,7 +806,7 @@ animation = &"PL_UP"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=257719666]
-position = Vector2(1, -2.5)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_04j5i")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2097463563]
@@ -909,6 +909,8 @@ texture = ExtResource("10_uledl")
 [node name="BlackgroundBlack" parent="." unique_id=1467015273 instance=ExtResource("12_uledl")]
 
 [node name="Push-pull-Logic" parent="." unique_id=217302339 instance=ExtResource("12_cd56y")]
+position = Vector2(0, 1)
+scale = Vector2(1.7666459, 1.7666459)
 collision_layer = 4
 collision_mask = 4
 
