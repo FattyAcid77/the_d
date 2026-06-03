@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://j0fxoil05ao8"]
+
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_dmwpb"]
+[ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="2_x5vt8"]
+[ext_resource type="Texture2D" uid="uid://c7dy00eytr4nq" path="res://background_scenes/assets/lvl_1_lobby_V3.png1.webp" id="3_718fm"]
+
+[node name="Lvl_1_Hall_BGRD" type="Node2D" unique_id=1479894374]
+script = ExtResource("1_dmwpb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2144631675]
+position = Vector2(400, 264)
+texture = ExtResource("3_718fm")
+
+[node name="Map-Light" parent="." unique_id=483239772 instance=ExtResource("2_x5vt8")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=926340373]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=287879135]
+polygon = PackedVector2Array(16, 177, 16, 448, 323, 448, 323, 512, 488, 513, 488, 512, 733, 512, 733, 469, 784, 469, 784, 177, 760, 177, 760, 208, 607, 210, 607, 177, 570, 177, 570, 184, 570, 186, 551, 186, 551, 177, 540, 177, 541, 259, 523, 259, 523, 177, 297, 177, 297, 185, 279, 186, 280, 177, 258, 177, 258, 185, 236, 185, 236, 177, 17, 177, 19, 147, 821, 143, 829, 571, -26, 558)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1894635505]
+polygon = PackedVector2Array(276, 197, 302, 197, 304, 199, 305, 204, 305, 292, 273, 323, 44, 324, 44, 278, 80, 278, 80, 273, 83, 270, 82, 265, 79, 264, 78, 261, 91, 252, 92, 240, 96, 239, 114, 254, 114, 277, 259, 277, 273, 263, 274, 250, 269, 250, 253, 263, 236, 252, 236, 219, 255, 205, 258, 205, 259, 219, 276, 219)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1223887415]
+polygon = PackedVector2Array(783, 369, 749, 373, 748, 405, 738, 410, 730, 419, 726, 439, 734, 447, 743, 449, 742, 468)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1957467474]
+polygon = PackedVector2Array(683, 299, 704, 305, 717, 302, 714, 269, 698, 265)

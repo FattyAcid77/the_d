@@ -1,15 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://duxtjrjnpvlrf"]
+[gd_scene format=3 uid="uid://duxtjrjnpvlrf"]
 
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_8y64a"]
-[ext_resource type="Texture2D" uid="uid://mj0nhqirygsh" path="res://background_scenes/assets/R3path_edited.png" id="2_dst67"]
-[ext_resource type="PackedScene" uid="uid://mgb21jywr1us" path="res://background_scenes/Hall_colliosions.tscn" id="3_be8mu"]
+[ext_resource type="Texture2D" uid="uid://qmdj52d8oa6c" path="res://background_scenes/assets/f1-above-path.png" id="2_dst67"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="3_be8mu"]
 
-[node name="MazSadHallBgrd" type="Node2D"]
+[node name="MazSadHallBgrd" type="Node2D" unique_id=541756911]
 script = ExtResource("1_8y64a")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1461655248]
 position = Vector2(160, 329)
 texture = ExtResource("2_dst67")
 
-[node name="StaticBody2D" parent="." instance=ExtResource("3_be8mu")]
-position = Vector2(161, 330)
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=90600801]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1433334856]
+position = Vector2(85, 203)
+polygon = PackedVector2Array(-1, 2, -1, 13, -16, 13, -16, 87, -4, 88, -5, 125, -16, 125, -16, 208, -7, 207, -6, 292, -16, 292, -16, 394, -7, 394, -7, 417, 156, 417, 156, 394, 164, 394, 164, 376, 156, 376, 156, 338, 156, 332, 144, 332, 144, 319, 164, 319, 164, 230, 156, 230, 156, 191, 164, 191, 164, 133, 111, 133, 109, 111, 116, 71, 90, 71, 90, 19, 113, 19, 113, 31, 144, 30, 143, 19, 150, 18, 150, 2, 1, 2, 186, -10, 192, 438, -37, 436, -35, -3)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1934179570]
+position = Vector2(158, 386.5)
+scale = Vector2(0.34375003, 0.8183594)
+shadow_enabled = true
+texture = ExtResource("3_be8mu")

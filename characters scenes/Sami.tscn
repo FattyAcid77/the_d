@@ -18,8 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
 [ext_resource type="PackedScene" uid="uid://dpdyays8575ft" path="res://3MK-File/Scene/radio_ui.tscn" id="9_15qbd"]
 [ext_resource type="Texture2D" uid="uid://751tiq2h17a3" path="res://3MK-File/myshit/sami push up (1).png" id="9_q2bl2"]
-[ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="10_ehnog"]
-[ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
+[ext_resource type="Script" path="res://Indic_config.gd" id="10_ehnog"]
+[ext_resource type="Texture2D" uid="uid://v0ypk64h6ho8" path="res://background_scenes/assets/Lights/Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
 [ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="11_8q06m"]
 [ext_resource type="PackedScene" uid="uid://cgabj4p2vw7ov" path="res://3MK-File/myshit/push_pull_logic.tscn" id="12_cd56y"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
@@ -655,7 +655,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dr7rm"]
-radius = 52.585644
+radius = 18.027756
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
@@ -678,7 +678,7 @@ animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=257719666]
-position = Vector2(0.5, 2)
+position = Vector2(0, 42)
 shape = SubResource("CircleShape2D_dr7rm")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2097463563]
@@ -772,9 +772,11 @@ position = Vector2(1, 2)
 configurations = Array[ExtResource("10_ehnog")]([SubResource("Resource_fonp4")])
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1843097276]
-position = Vector2(-0.99998474, 41.999996)
-scale = Vector2(0.035156284, 0.03515629)
-energy = 0.1
+visible = false
+position = Vector2(7.6293945e-06, 42)
+scale = Vector2(0.14448929, 0.105061844)
+energy = 1.6
+shadow_enabled = true
 texture = ExtResource("10_uledl")
 
 [node name="BlackgroundBlack" parent="." unique_id=1467015273 instance=ExtResource("12_uledl")]

@@ -1,70 +1,34 @@
-[gd_scene format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene format=3 uid="uid://dmk4k45w2yyus"]
 
-[ext_resource type="PackedScene" uid="uid://dbp12leqpgush" path="res://3MK-File/Scene/lvl_1_hall_bgrd.tscn" id="1_yi5rg"]
-[ext_resource type="Script" uid="uid://t3upyfjrqiib" path="res://mapBounds.gd" id="2_0d2n7"]
+[ext_resource type="PackedScene" uid="uid://j0fxoil05ao8" path="res://background_scenes/lvl_1_lobby_bgrd.tscn" id="1_171b8"]
 [ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
-[ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
-[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="8_hkdn2"]
-[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="9_31cma"]
-[ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
-[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="10_j8yc2"]
-[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="11_31cma"]
-
-[sub_resource type="Resource" id="Resource_hkdn2"]
-script = ExtResource("2_0d2n7")
-metadata/_custom_type_script = "uid://t3upyfjrqiib"
-
-[sub_resource type="Resource" id="Resource_ogs6s"]
-script = ExtResource("10_j8yc2")
-icon = ExtResource("9_31cma")
-group = &"Items"
-item_type = "Puzzle"
-item_effect = "BrainFart"
-item_name = "get gudd"
-metadata/_custom_type_script = "uid://cvugbs4ksvifo"
 
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152]
 
-[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yi5rg")]
-position = Vector2(447, 301)
-map_bounds_data = SubResource("Resource_hkdn2")
-
-[node name="Map-Light" parent="." unique_id=1960135155 instance=ExtResource("6_ctn4s")]
-position = Vector2(-455.00003, 154)
-scale = Vector2(0.74, 0.74)
+[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_171b8")]
 
 [node name="door_reg_type2" parent="." unique_id=6652575 groups=["Door"] instance=ExtResource("4_171b8")]
-position = Vector2(655, 266)
+position = Vector2(406, 168)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_south"
 this_door_name = "lvl_1_lobby_north"
 
 [node name="door_reg_type3" parent="." unique_id=505186258 groups=["Door"] instance=ExtResource("4_171b8")]
-position = Vector2(667, 612)
+position = Vector2(411, 516)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
 target_door_name = "Bipolar_Hall_north"
 this_door_name = "lvl_1_lobby_south"
 
 [node name="Door_reg" parent="." unique_id=1068525294 groups=["Door"] instance=ExtResource("5_hmgdi")]
-position = Vector2(285, 469)
+position = Vector2(14, 350)
 entery_direction = 1
 new_scene_path = "res://Main Scenes/Elevator_1.tscn"
 target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
 [node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("2_xriv7")]
-position = Vector2(690, 451)
-
-[node name="Knife_Item" parent="." unique_id=1066712327 instance=ExtResource("9_ogs6s")]
-position = Vector2(832, 454)
-
-[node name="Item2" parent="." unique_id=1669675773 instance=ExtResource("8_hkdn2")]
-position = Vector2(837, 494)
-item_config = SubResource("Resource_ogs6s")
-
-[node name="Movable-Object" parent="." unique_id=851682968 instance=ExtResource("11_31cma")]
-position = Vector2(837, 494)
+position = Vector2(441, 353)

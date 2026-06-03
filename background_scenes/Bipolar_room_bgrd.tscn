@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://vqb3opmxrsp4"]
+[gd_scene format=3 uid="uid://vqb3opmxrsp4"]
 
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_w4loj"]
-[ext_resource type="Texture2D" uid="uid://57wy3wasc6rp" path="res://background_scenes/assets/micro-assets/Bipolar-room-v2-High-Index.png" id="2_00vrw"]
-[ext_resource type="Texture2D" uid="uid://cqhxi620lbxf4" path="res://background_scenes/assets/Bipolar-room-v2.png" id="2_eraxy"]
-[ext_resource type="Texture2D" uid="uid://7dcravu3scwi" path="res://background_scenes/assets/micro-assets/Bipolar-room-v2-shreded-withoutrug.png" id="3_eraxy"]
+[ext_resource type="Texture2D" uid="uid://b55050qo56318" path="res://background_scenes/assets/Bipolar_room_V3.png" id="2_w4loj"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="3_eraxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4loj"]
 size = Vector2(62, 113)
@@ -12,34 +11,37 @@ size = Vector2(62, 113)
 radius = 19.0
 height = 60.0
 
-[node name="BipolarRoomBgrd" type="Node2D"]
+[node name="BipolarRoomBgrd" type="Node2D" unique_id=201269252]
 script = ExtResource("1_w4loj")
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(628, 353)
-texture = ExtResource("2_00vrw")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=874804656]
+position = Vector2(627, 354)
+texture = ExtResource("2_w4loj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -2
-position = Vector2(628, 353)
-texture = ExtResource("2_eraxy")
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=978309112]
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(628, 353)
-texture = ExtResource("3_eraxy")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=605762264]
 position = Vector2(692, 262)
 polygon = PackedVector2Array(1, -1, 4, 39, -86, 38, -87, 53, -134, 53, -132, 167, -283, 168, -280, 36, -284, 37, -284, 49, -302, 50, -302, 199, -84, 198, -83, 303, 58, 304, 59, 295, 67, 295, 78, 295, 84, 295, 87, 295, 90, 295, 98, 295, 102, 295, 105, 295, 108, 295, 111, 295, 114, 295, 122, 295, 126, 295, 130, 295, 134, 295, 158, 295, 158, 307, 177, 307, 177, 256, 151, 256, 152, 99, 163, 99, 163, 90, 169, 90, 169, 98, 177, 98, 175, 49, 114, 50, 107, 38, 12, 39, 13, -5, 232, -1, 224, 346, -324, 337, -386, -24)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1776874623]
 position = Vector2(716, 457.5)
 shape = SubResource("RectangleShape2D_w4loj")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=898884649]
 position = Vector2(795, 446)
 shape = SubResource("CapsuleShape2D_eraxy")
+
+[node name="Lights" type="Node2D" parent="." unique_id=296994953]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=1963907600]
+position = Vector2(734.00006, 436.125)
+scale = Vector2(0.47460938, 0.50830084)
+shadow_enabled = true
+texture = ExtResource("3_eraxy")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights" unique_id=1793964626]
+position = Vector2(618, 380)
+scale = Vector2(0.90625, 0.3046875)
+shadow_enabled = true
+texture = ExtResource("3_eraxy")
