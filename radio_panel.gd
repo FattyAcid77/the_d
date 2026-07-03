@@ -9,6 +9,7 @@ var instance
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Radio_button"):
 		if sami_radio:
+			print("radui spawn")
 			instance = Radio_Sami.instantiate()
 			add_child(instance)
 			instance.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

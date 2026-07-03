@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bli6uvpcufk08"]
+
+[ext_resource type="Script" uid="uid://hbknhrp56k4p" path="res://3MK-File/myshit/beam_mirror.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(12, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oe2c2"]
+radius = 76.23647
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt2qr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5clr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2bv4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvd27"]
+
+[node name="BeamMirror" type="RigidBody2D" unique_id=1062965430]
+editor_description = "from it's name it acts as a reflector for the beam light"
+gravity_scale = 0.0
+script = ExtResource("1")
+rotate_speed = 0.004
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1191718366]
+shape = SubResource("2")
+
+[node name="InteractZone" type="Area2D" parent="." unique_id=1756483178]
+position = Vector2(1, 0)
+collision_layer = 0
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="InteractZone" unique_id=1364124550]
+shape = SubResource("CircleShape2D_oe2c2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=1016768335]
+position = Vector2(19, 23)
+shape = SubResource("RectangleShape2D_mt2qr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractZone" unique_id=980691947]
+position = Vector2(19, -20)
+shape = SubResource("RectangleShape2D_w5clr")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="InteractZone" unique_id=931170903]
+position = Vector2(-24, -22)
+shape = SubResource("RectangleShape2D_u2bv4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="InteractZone" unique_id=1893021169]
+position = Vector2(-24, 25)
+shape = SubResource("RectangleShape2D_rvd27")

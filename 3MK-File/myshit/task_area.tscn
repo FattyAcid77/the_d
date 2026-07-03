@@ -8,9 +8,12 @@
 radius = 114.54257
 
 [node name="Task_area" type="Area2D" unique_id=1212510058]
+collision_mask = 5
 script = ExtResource("1_s6qlr")
 reward_scene = SubResource("PackedScene_s6qlr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=879396953]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_hu5s5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

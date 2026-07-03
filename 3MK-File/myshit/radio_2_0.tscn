@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bdb8u7sdvpkpf"]
 
 [ext_resource type="FontFile" uid="uid://bud1f0ks3i856" path="res://FD_Testing/Fonts/PixelAE-Bold.ttf" id="1_2s7x8"]
-[ext_resource type="Script" uid="uid://xge56wrortoc" path="res://3MK-File/myshit/radio_2_0.gd" id="1_7eyv6"]
 [ext_resource type="Script" uid="uid://c0w22c7isxg3y" path="res://3MK-File/myshit/wave_canvas_2_0.gd" id="1_fug20"]
 [ext_resource type="Script" uid="uid://b2doajo0thihn" path="res://3MK-File/myshit/sine_wave_2_0.gd" id="1_tfhuu"]
 [ext_resource type="Texture2D" uid="uid://dfdxvanu3t3c5" path="res://3MK-File/radio.png" id="2_go0ig"]
-[ext_resource type="AudioStream" uid="uid://baarxvvuwwyt4" path="res://3MK-File/soundwave.ogg" id="4_7eyv6"]
 [ext_resource type="Texture2D" uid="uid://cymefgrmrkcvj" path="res://3MK-File/radio-buttons.png" id="7_m0b1o"]
+[ext_resource type="PackedScene" uid="uid://drun4hsast33v" path="res://3MK-File/Scene/puzzle_wave_visualizer.tscn" id="8_pwv"]
+[ext_resource type="AudioStream" uid="uid://bmgsobh40b5lj" path="res://ding.ogg" id="9_ding"]
 
 [node name="Radio-2_0" type="Control" unique_id=677950613]
 layout_mode = 3
@@ -19,7 +19,6 @@ offset_right = -163.0
 offset_bottom = -110.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7eyv6")
 metadata/_edit_vertical_guides_ = [168.0, 896.0]
 metadata/_edit_horizontal_guides_ = [624.0, 528.0]
 
@@ -30,12 +29,6 @@ texture = ExtResource("2_go0ig")
 [node name="RadioButtons" type="Sprite2D" parent="Sprite2D" unique_id=1141954686]
 position = Vector2(-1, 3)
 texture = ExtResource("7_m0b1o")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=477985285]
-stream = ExtResource("4_7eyv6")
-volume_db = -24.275
-pitch_scale = 2.46
-autoplay = true
 
 [node name="ColorRect6" type="ColorRect" parent="." unique_id=321644943]
 clip_contents = true
@@ -133,11 +126,15 @@ offset_bottom = -7.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_2s7x8")
 theme_override_font_sizes/font_size = 30
-text = "1 hz"
+text = "1 Khz"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1057583932]
+[node name="DingPlayer" type="AudioStreamPlayer" parent="." unique_id=353906145]
+stream = ExtResource("9_ding")
+
+[node name="PuzzleWaveVisualizer" parent="." unique_id=1776360124 instance=ExtResource("8_pwv")]
+position = Vector2(5, 3)
 
 [connection signal="pressed" from="ColorRect6/SineWave-2_0/R1" to="ColorRect6/SineWave-2_0" method="_on_r_1_pressed"]
 [connection signal="pressed" from="ColorRect6/SineWave-2_0/R2" to="ColorRect6/SineWave-2_0" method="_on_r_2_pressed"]

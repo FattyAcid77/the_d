@@ -790,7 +790,7 @@ target_group = &"Item"
 icon = ExtResource("11_8q06m")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
-[node name="Sami" type="CharacterBody2D" unique_id=1696226291]
+[node name="Sami" type="CharacterBody2D" unique_id=1696226291 groups=["Player"]]
 process_mode = 3
 z_index = 1
 collision_layer = 5
@@ -956,3 +956,4 @@ script = ExtResource("19_q1iex")
 stats = ExtResource("2_q1iex")
 full_sprite = ExtResource("20_dr7rm")
 empty_sprite = ExtResource("21_nq4w5")
+

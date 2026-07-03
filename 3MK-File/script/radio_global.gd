@@ -13,11 +13,12 @@ var state4:bool= false
 var state5:bool= false
 var state6:bool= false
 
+const RADIO_MIN: int = 530
+const RADIO_MAX: int = 1700
 
-
-
-var radio: int = 530
-
+var radio: int = 530 :
+	set(val):
+		radio = clamp(val, RADIO_MIN, RADIO_MAX)
 
 func _ready() -> void:
 	print(radio)

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HealthData" format=3]
+
+[ext_resource type="Script" uid="uid://c2wmm6et0gmxy" path="res://health_point_data.gd" id="1_hpd"]
+
+[resource]
+script = ExtResource("1_hpd")
+metadata/_custom_type_script = "uid://c2wmm6et0gmxy"

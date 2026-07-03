@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://lsntbesactwk"]
+
+[ext_resource type="Script" uid="uid://cyu2c4glyhte7" path="res://puzzle_sound.gd" id="1_uc6tx"]
+[ext_resource type="AudioStream" uid="uid://bmgsobh40b5lj" path="res://ding.ogg" id="2_rhjri"]
+
+[node name="Puzzle_Sound" type="Node2D" unique_id=1172052767]
+script = ExtResource("1_uc6tx")
+enter_sound = ExtResource("2_rhjri")

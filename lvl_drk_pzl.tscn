@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://btlri4xc537f0"]
+
+[ext_resource type="PackedScene" uid="uid://c0pn8g2eecwku" path="res://f_2_cell_room.tscn" id="1_61tx4"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_na7yv"]
+[ext_resource type="PackedScene" uid="uid://ceueg64pshyby" path="res://3MK-File/myshit/task_area.tscn" id="3_8wgt8"]
+[ext_resource type="PackedScene" path="res://3MK-File/myshit/beam_emitter.tscn" id="4_8wgt8"]
+[ext_resource type="PackedScene" uid="uid://bli6uvpcufk08" path="res://3MK-File/myshit/beam_mirror.tscn" id="5_3eooq"]
+[ext_resource type="PackedScene" path="res://3MK-File/myshit/beam_receiver.tscn" id="6_rsxay"]
+
+[node name="Lvl_DRK_PZL" type="Node2D" unique_id=1954816252]
+
+[node name="F2_Cell-Room" parent="." unique_id=1977770180 instance=ExtResource("1_61tx4")]
+position = Vector2(453, 350)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="F2_Cell-Room" unique_id=405660190]
+position = Vector2(-453, -350)
+color = Color(0.2159017, 0.21590173, 0.2159017, 1)
+
+[node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("2_na7yv")]
+position = Vector2(485, 408)
+
+[node name="Task_area" parent="." unique_id=1212510058 instance=ExtResource("3_8wgt8")]
+position = Vector2(333, 384)
+reward_action = 1
+next_world_path = "res://lv_l_puzzle.tscn"
+
+[node name="BeamEmitter" parent="." unique_id=744463058 instance=ExtResource("4_8wgt8")]
+position = Vector2(428, 565)
+beam_color = Color(0, 0, 0, 1)
+source_portal_id = "portal_1"
+
+[node name="BeamMirror" parent="." unique_id=1062965430 instance=ExtResource("5_3eooq")]
+position = Vector2(571, 370)
+mirror_mass = 23.0
+push_damping = 15.0
+spin_damping = 25.0
+push_force = 15000.0
+
+[node name="BeamReceiver" parent="." unique_id=1695652372 instance=ExtResource("6_rsxay")]
+position = Vector2(457, 269)
+puzzle_id = "Complete"

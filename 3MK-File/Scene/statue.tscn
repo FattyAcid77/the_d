@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://dm6vb6ittfr3l"]
 
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="1_swxkw"]
-[ext_resource type="Script" uid="uid://rnj2mnbulpks" path="res://3MK-File/Scene/statue.gd" id="2_5eo7a"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfeya"]
 size = Vector2(182.38586, 166.76462)
 
 [node name="Statue" type="Sprite2D"]
 scale = Vector2(0.28261012, 0.28261012)
 texture = ExtResource("1_swxkw")
-script = ExtResource("2_5eo7a")
 
 [node name="Area2D" type="Area2D" parent="."]
 

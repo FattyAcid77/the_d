@@ -1,58 +1,98 @@
 extends Area2D
 
-# --- TASK SETTINGS ---
+enum RewardType { SPAWN_ITEM, CHANGE_SCENE }
+
 @export_group("Task Settings")
+@export var puzzle_name: String = ""
 @export var required_amplitude: float = 120.0
 @export var required_wavelength: float = 150.0
-@export var tolerance: float = 2.0 # Allows the player to be slightly off and still win
+@export var tolerance: float = 2.0
 
-# --- THE REWARD ---
-@export_group("The Reward")
+@export var puzzle_id: String = ""
+
+@export_group("Reward Behavior")
+@export var reward_action: RewardType = RewardType.SPAWN_ITEM
+
+@export_subgroup("Spawn Settings")
 @export var reward_scene: PackedScene
-@export var spawn_point: Marker2D # Optional: A specific node to spawn the reward at
+@export var spawn_point: Marker2D
+
+@export_subgroup("Transition Settings")
+@export_file("*.tscn") var next_world_path: String = ""
 
 var is_solved: bool = false
+var player_inside: bool = false
+
+func _ready() -> void:
+
+	
+	if puzzle_id != "" and GameState.is_solved(puzzle_id):
+		is_solved = true
+		_apply_solved_state()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Sami:
+		player_inside = true
+		if puzzle_id != "":
+			GameState.enter_puzzle(puzzle_id, puzzle_name)
+		# If the puzzle is already solved and it's a portal, teleport them instantly
+		if is_solved and reward_action == RewardType.CHANGE_SCENE:
+			go_to_next_world()
+
+func _on_body_exited(body: Node2D) -> void:
+	if body is Sami:
+		player_inside = false
 
 func _process(_delta: float) -> void:
-	# If the puzzle is already solved, don't keep checking
+	# Stop checking if it's already solved
 	if is_solved:
 		return
 		
-	check_puzzle_completion()
+	# Only check the waves if the player is currently standing inside
+	if player_inside:
+		check_puzzle_completion()
 
 func check_puzzle_completion() -> void:
-	# Grab the live values from your Autoload
-	var current_amp = WaveCanvas20.amplitude
-	var current_wave = WaveCanvas20.wavelength
+	var amp_ok = abs(WaveCanvas20.amplitude - required_amplitude) <= tolerance
+	var wave_ok = abs(WaveCanvas20.wavelength - required_wavelength) <= tolerance
 	
-	# Check if the player's values are within the acceptable tolerance range
-	var amp_is_correct = abs(current_amp - required_amplitude) <= tolerance
-	var wave_is_correct = abs(current_wave - required_wavelength) <= tolerance
-	
-	# If both are correct, trigger the win state!
-	if amp_is_correct and wave_is_correct:
-		spawn_reward()
-		queue_free()
+	if amp_ok and wave_ok:
+		is_solved = true
+		execute_reward()
+
+func execute_reward() -> void:
+	if puzzle_id != "":
+		GameState.solve_puzzle(puzzle_id)
+		
+	match reward_action:
+		RewardType.SPAWN_ITEM:
+			spawn_reward()
+		RewardType.CHANGE_SCENE:
+			go_to_next_world()
+
+func _apply_solved_state() -> void:
+	match reward_action:
+		RewardType.SPAWN_ITEM:
+			spawn_reward()
+		RewardType.CHANGE_SCENE:
+			pass # Do nothing yet; wait for the player to walk into the area to teleport
+
 func spawn_reward() -> void:
-	is_solved = true
-	print("Radio Frequency Matched! Spawning Reward...")
-	
-	# Safety check to make sure you dragged the scene into the inspector
 	if reward_scene == null:
-		push_warning("Wait! You forgot to assign the Reward Scene in the Inspector!")
+		push_warning("Reward Scene not assigned on puzzle: " + puzzle_id)
 		return
 		
-	# 1. Create a new instance of the reward
-	var reward_instance = reward_scene.instantiate()
+	var instance = reward_scene.instantiate()
+	instance.global_position = spawn_point.global_position if spawn_point else global_position
 	
-	# 2. Figure out where to put it
-	if spawn_point != null:
-		reward_instance.global_position = spawn_point.global_position
-	else:
-		# Defaults to the center of the Task_area if no spawn point is assigned
-		reward_instance.global_position = global_position 
-		
-	# 3. Add it to the game world (we add it to the main scene root so it isn't stuck inside the Area2D)
-	get_tree().current_scene.add_child(reward_instance)
-	
-	# Optional: Play a success sound effect here!
+	# call_deferred is safer when adding nodes during signal/physics processing
+	get_tree().current_scene.call_deferred("add_child", instance)
+
+func go_to_next_world() -> void:
+	if next_world_path == "":
+		push_warning("Next World Path not assigned on puzzle: " + puzzle_id)
+		return
+	var scene_path := get_tree().current_scene.scene_file_path
+	for mirror in get_tree().get_nodes_in_group("beam_mirror"):
+		GameState.save_mirror(scene_path, mirror.name, mirror.global_position, mirror.rotation)
+	get_tree().change_scene_to_file(next_world_path)
