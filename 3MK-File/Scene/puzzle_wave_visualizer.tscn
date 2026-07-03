@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://drun4hsast33v"]
+
+[ext_resource type="Script" uid="uid://btm5ft3buija4" path="res://puzzle_wave_visualizer.gd" id="1_p0341"]
+
+[node name="PuzzleWaveVisualizer" type="Node2D" unique_id=1950941156]
+script = ExtResource("1_p0341")

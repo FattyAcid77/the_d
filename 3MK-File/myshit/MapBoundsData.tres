@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="MapBoundsData" format=3 uid="uid://qj5axspq1moj"]
+
+[ext_resource type="Script" uid="uid://t3upyfjrqiib" path="res://mapBounds.gd" id="1_x5orl"]
+
+[resource]
+script = ExtResource("1_x5orl")
+metadata/_custom_type_script = "uid://t3upyfjrqiib"

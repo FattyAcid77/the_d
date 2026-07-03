@@ -1,34 +1,59 @@
-[gd_scene format=3 uid="uid://dmk4k45w2yyus"]
+[gd_scene format=3 uid="uid://dxofprk7jlwg1"]
 
-[ext_resource type="PackedScene" uid="uid://j0fxoil05ao8" path="res://background_scenes/lvl_1_lobby_bgrd.tscn" id="1_171b8"]
-[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_xriv7"]
+[ext_resource type="PackedScene" uid="uid://dbp12leqpgush" path="res://3MK-File/Scene/lvl_1_hall_bgrd.tscn" id="1_yi5rg"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_171b8"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
+[ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
+[ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="8_yi5rg"]
+[ext_resource type="PackedScene" uid="uid://nlc54nt4rc85" path="res://cube_item.tscn" id="9_0d2n7"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="9_31cma"]
+[ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="9_hkdn2"]
+[ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
 
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152]
 
-[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_171b8")]
+[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yi5rg")]
+position = Vector2(447, 301)
+
+[node name="Map-Light" parent="." unique_id=1960135155 instance=ExtResource("6_ctn4s")]
+position = Vector2(-429.00003, 180)
+scale = Vector2(0.74, 0.74)
 
 [node name="door_reg_type2" parent="." unique_id=6652575 groups=["Door"] instance=ExtResource("4_171b8")]
-position = Vector2(406, 168)
+position = Vector2(655, 266)
 entery_direction = 2
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_south"
 this_door_name = "lvl_1_lobby_north"
 
 [node name="door_reg_type3" parent="." unique_id=505186258 groups=["Door"] instance=ExtResource("4_171b8")]
-position = Vector2(411, 516)
+position = Vector2(667, 612)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Hall.tscn"
 target_door_name = "Bipolar_Hall_north"
 this_door_name = "lvl_1_lobby_south"
 
 [node name="Door_reg" parent="." unique_id=1068525294 groups=["Door"] instance=ExtResource("5_hmgdi")]
-position = Vector2(14, 350)
+position = Vector2(285, 469)
 entery_direction = 1
 new_scene_path = "res://Main Scenes/Elevator_1.tscn"
 target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
-[node name="Sami" parent="." unique_id=1696226291 instance=ExtResource("2_xriv7")]
-position = Vector2(441, 353)
+[node name="Knife_Item" parent="." unique_id=1066712327 instance=ExtResource("9_ogs6s")]
+position = Vector2(832, 454)
+
+[node name="Cube_item" parent="." unique_id=15824891 instance=ExtResource("9_0d2n7")]
+position = Vector2(808, 449)
+
+[node name="Cube_item2" parent="." unique_id=527186714 instance=ExtResource("9_0d2n7")]
+position = Vector2(832, 454)
+
+[node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("8_yi5rg")]
+position = Vector2(682, 463)
+
+[node name="Grab_Mirror" parent="." unique_id=900130970 instance=ExtResource("9_hkdn2")]
+position = Vector2(902, 576)
+
+[node name="Sami_Doctor" parent="." unique_id=2001215541 instance=ExtResource("9_31cma")]
+position = Vector2(716, 427)

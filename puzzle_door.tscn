@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://n02bxy01iyyy"]
+
+[ext_resource type="Script" uid="uid://cjm5unj2phy1g" path="res://puzzle_door.gd" id="1_xhq47"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwdgn"]
+size = Vector2(121, 96)
+
+[node name="Puzzle_Door" type="Area2D" unique_id=315635850]
+editor_description = "It was used as a Demo to check if the completion of the task works or not where the light hits"
+script = ExtResource("1_xhq47")
+scene = "uid://dxofprk7jlwg1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907872813]
+shape = SubResource("RectangleShape2D_fwdgn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

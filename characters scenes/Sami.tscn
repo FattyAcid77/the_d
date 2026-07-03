@@ -9,22 +9,25 @@
 [ext_resource type="PackedScene" uid="uid://qs2vk0ytby3u" path="res://FD_Testing/New_Diloage_System/Quest/QuestManger.tscn" id="4_6hsvr"]
 [ext_resource type="Texture2D" uid="uid://d3vg3i04cpcd0" path="res://3MK-File/TEST-ANIM/down w dr.png" id="4_8ydvg"]
 [ext_resource type="Texture2D" uid="uid://bhire3x0rk731" path="res://3MK-File/myshit/sami pull left.png" id="4_nf57x"]
+[ext_resource type="Texture2D" uid="uid://b8tc7y6ljtxpk" path="res://3MK-File/myshit/sami pull down.png" id="5_04j5i"]
 [ext_resource type="Texture2D" uid="uid://dgv86ko2niebr" path="res://3MK-File/myshit/sami pull right.png" id="5_h6sqf"]
 [ext_resource type="PackedScene" uid="uid://egkrqh00dy5t" path="res://control scene/Sami_Camera.tscn" id="5_qpl50"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="6_20pqq"]
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="6_r3ftm"]
 [ext_resource type="Texture2D" uid="uid://6q05yfdx341s" path="res://3MK-File/myshit/sami push left (1).png" id="7_04j5i"]
 [ext_resource type="Texture2D" uid="uid://bs4lwhs22wtcu" path="res://3MK-File/myshit/sami push right (1).png" id="8_6mkmm"]
+[ext_resource type="Texture2D" uid="uid://bmig2fbyly6fu" path="res://3MK-File/myshit/sami pull up.png" id="8_q2bl2"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="9_8ydvg"]
 [ext_resource type="PackedScene" uid="uid://dpdyays8575ft" path="res://3MK-File/Scene/radio_ui.tscn" id="9_15qbd"]
 [ext_resource type="Texture2D" uid="uid://751tiq2h17a3" path="res://3MK-File/myshit/sami push up (1).png" id="9_q2bl2"]
-[ext_resource type="Script" path="res://Indic_config.gd" id="10_ehnog"]
-[ext_resource type="Texture2D" uid="uid://v0ypk64h6ho8" path="res://background_scenes/assets/Lights/Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
+[ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="10_ehnog"]
+[ext_resource type="Texture2D" uid="uid://eek54c0buvpj" path="res://Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="10_uledl"]
 [ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="11_8q06m"]
 [ext_resource type="PackedScene" uid="uid://cgabj4p2vw7ov" path="res://3MK-File/myshit/push_pull_logic.tscn" id="12_cd56y"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="12_uledl"]
 [ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="15_fonp4"]
 [ext_resource type="PackedScene" uid="uid://c1p54hwrqfphl" path="res://3MK-File/Scene/inventory_ui.tscn" id="16_iraew"]
+[ext_resource type="Resource" uid="uid://qj5axspq1moj" path="res://3MK-File/myshit/MapBoundsData.tres" id="18_6mkmm"]
 [ext_resource type="Script" uid="uid://b4b3c3bypp8p1" path="res://characters scenes/health_ui.gd" id="19_q1iex"]
 [ext_resource type="Texture2D" uid="uid://x0sbp1aph1ii" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="20_dr7rm"]
 [ext_resource type="Texture2D" uid="uid://bodr8gin7n06p" path="res://3MK-File/radio-button-left-3.png" id="21_nq4w5"]
@@ -68,6 +71,38 @@ region = Rect2(315, 0, 45, 94)
 [sub_resource type="AtlasTexture" id="AtlasTexture_57axd"]
 atlas = ExtResource("2_e70c1")
 region = Rect2(0, 94, 45, 94)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rbbf"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(0, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrlro"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(33, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23viv"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(66, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmtvh"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(99, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur6sn"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(132, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35gsw"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(165, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg83b"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(198, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opt0g"]
+atlas = ExtResource("5_04j5i")
+region = Rect2(231, 0, 33, 92)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uinxi"]
 atlas = ExtResource("4_nf57x")
@@ -116,6 +151,38 @@ region = Rect2(54, 0, 54, 89)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vvii8"]
 atlas = ExtResource("5_h6sqf")
 region = Rect2(0, 0, 54, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12vll"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(0, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nq4rb"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(33, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qde55"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(66, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my3ui"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(99, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtb4n"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(132, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb63o"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(165, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjdxl"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(198, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p84sg"]
+atlas = ExtResource("8_q2bl2")
+region = Rect2(231, 0, 33, 89)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4p5bb"]
 atlas = ExtResource("6_20pqq")
@@ -397,6 +464,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6rbbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrlro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23viv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmtvh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur6sn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35gsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg83b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opt0g")
+}],
+"loop": true,
+"name": &"PL_DOWN",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_uinxi")
 }, {
 "duration": 1.0,
@@ -439,6 +535,35 @@ animations = [{
 }],
 "loop": true,
 "name": &"PL_RIGHT",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12vll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nq4rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qde55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my3ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtb4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb63o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjdxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p84sg")
+}],
+"loop": true,
+"name": &"PL_UP",
 "speed": 5.0
 }, {
 "frames": [{
@@ -654,8 +779,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dr7rm"]
-radius = 18.027756
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04j5i"]
+size = Vector2(14, 56)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3ftm"]
 
@@ -665,8 +790,11 @@ target_group = &"Item"
 icon = ExtResource("11_8q06m")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
-[node name="Sami" type="CharacterBody2D" unique_id=1696226291]
+[node name="Sami" type="CharacterBody2D" unique_id=1696226291 groups=["Player"]]
 process_mode = 3
+z_index = 1
+collision_layer = 5
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("2_5wxjf")
 speed = 100.0
@@ -674,12 +802,12 @@ stats = ExtResource("2_q1iex")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1255613685]
 sprite_frames = SubResource("SpriteFrames_uledl")
-animation = &"Idle"
+animation = &"PL_UP"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=257719666]
-position = Vector2(0, 42)
-shape = SubResource("CircleShape2D_dr7rm")
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_04j5i")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=2097463563]
 target_position = Vector2(0, 150)
@@ -753,6 +881,7 @@ size_flags_vertical = 3
 [node name="QuestManger" parent="." unique_id=679597824 instance=ExtResource("4_6hsvr")]
 
 [node name="Camera2D" parent="." unique_id=837766967 instance=ExtResource("5_qpl50")]
+map_bounds_data = ExtResource("18_6mkmm")
 
 [node name="Radio-Panel" parent="." unique_id=1162518636 instance=ExtResource("6_r3ftm")]
 z_index = 2
@@ -772,16 +901,16 @@ position = Vector2(1, 2)
 configurations = Array[ExtResource("10_ehnog")]([SubResource("Resource_fonp4")])
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1843097276]
-visible = false
-position = Vector2(7.6293945e-06, 42)
-scale = Vector2(0.14448929, 0.105061844)
-energy = 1.6
-shadow_enabled = true
+position = Vector2(-0.99998474, 41.999996)
+scale = Vector2(0.035156284, 0.03515629)
+energy = 0.1
 texture = ExtResource("10_uledl")
 
 [node name="BlackgroundBlack" parent="." unique_id=1467015273 instance=ExtResource("12_uledl")]
 
 [node name="Push-pull-Logic" parent="." unique_id=217302339 instance=ExtResource("12_cd56y")]
+position = Vector2(0, 1)
+scale = Vector2(1.7666459, 1.7666459)
 collision_layer = 4
 collision_mask = 4
 
@@ -827,3 +956,4 @@ script = ExtResource("19_q1iex")
 stats = ExtResource("2_q1iex")
 full_sprite = ExtResource("20_dr7rm")
 empty_sprite = ExtResource("21_nq4w5")
+

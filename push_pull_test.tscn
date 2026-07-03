@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://xbkl13k8jg4w"]
+
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="2_mirror"]
+
+[node name="Push_Pull_Test" type="Node2D" unique_id=116622147]
+
+[node name="Player" parent="." unique_id=1884832330 instance=ExtResource("1_player")]
+position = Vector2(300, 340)
+
+[node name="Grab_Mirror" parent="." unique_id=1263306281 instance=ExtResource("2_mirror")]
+position = Vector2(460, 300)
+
+[node name="Grab_Mirror2" parent="." unique_id=1930954970 instance=ExtResource("2_mirror")]
+position = Vector2(460, 420)

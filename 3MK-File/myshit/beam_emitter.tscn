@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b5sncjyheeycp"]
+
+[ext_resource type="Script" uid="uid://31tkifykpfyt" path="res://3MK-File/myshit/beam_emitter.gd" id="1"]
+
+[node name="BeamEmitter" type="Node2D" unique_id=1974177612]
+editor_description = "it get the portal ID so it can use the beam and it helps for saving data of the beam to use in other worlds!"
+script = ExtResource("1")

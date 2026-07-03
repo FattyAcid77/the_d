@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://nlc54nt4rc85"]
+
+[ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="1_58bb0"]
+[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="2_xb6da"]
+[ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="3_8mjpt"]
+
+[sub_resource type="Resource" id="Resource_8e1jk"]
+script = ExtResource("3_8mjpt")
+icon = ExtResource("2_xb6da")
+group = &"Items"
+item_type = "Top"
+item_effect = "e"
+item_name = "e"
+heal_amount = 1
+metadata/_custom_type_script = "uid://cvugbs4ksvifo"
+
+[node name="Cube_item" type="Node2D" unique_id=15824891]
+
+[node name="Item" parent="." unique_id=1669675773 instance=ExtResource("1_58bb0")]
+item_config = SubResource("Resource_8e1jk")
