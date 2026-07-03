@@ -12,9 +12,11 @@ var direction : Vector2 = Vector2.ZERO
 var move_speed : float = 100.0
 
 # push / pull
+const PUSH_HOLD_DISTANCE: float = 46    # matches the arm reach in the PS_ sprites (77px frames)
+const PULL_HOLD_DISTANCE: float = 34.0    # PL_ sprites reach less far (54px frames), tune to taste
 var focus_grabbable: Node = null          # object whose zone we're standing in
 var grabbed: Node = null                  # object we're holding
-var grab_offset: Vector2 = Vector2.ZERO   # player->object, locked when we grab
+var grab_offset: Vector2 = Vector2.ZERO   # player->object; side locked at grab, distance follows the pose
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,6 +39,19 @@ func _process( delta ):
 
 func _physics_process( delta ):
 	move_and_slide()
+
+	# holding something above us draws in front of it; holding something below
+	# draws behind it, so it doesn't look like our feet are stomping through it.
+	# Only ever nudge the winner UP to 1, never push either one negative — the
+	# floor sits at the default z_index 0, and dropping below that makes
+	# whichever one we push down vanish behind it.
+	if grabbed != null:
+		if grabbed.global_position.y >= global_position.y:
+			z_index = 0
+			grabbed.z_index = 1   # it's below us, draw it in front
+		else:
+			z_index = 1           # it's above us, draw us in front
+			grabbed.z_index = 0
 
 
 # Turns the raw input into a facing (down/up/left/right) and flips the sprite.
@@ -110,6 +125,9 @@ func _dir4(vec: Vector2) -> String:
 # The pull art is named weirdly: up/down by where you move, left/right by where
 # you face, so we just flip the y.
 func play_push_pull_anim(pushing: bool) -> void:
+	# push and pull are drawn with different reach, so the held distance follows the pose
+	if grabbed != null:
+		grab_offset = grab_offset.normalized() * (PUSH_HOLD_DISTANCE if pushing else PULL_HOLD_DISTANCE)
 	if pushing:
 		update_drag_animation("PS", cardinal_direction)
 	else:
@@ -121,16 +139,26 @@ func try_start_grab() -> bool:
 	if focus_grabbable == null:
 		return false
 	grabbed = focus_grabbable
-	grab_offset = grabbed.global_position - global_position   # lock which side it's on
+	# lock which side the object is on; play_push_pull_anim sets the actual distance
+	var to_object: Vector2 = grabbed.global_position - global_position
+	var side: Vector2
+	if abs(to_object.x) >= abs(to_object.y):
+		side = Vector2.RIGHT if to_object.x >= 0 else Vector2.LEFT
+	else:
+		side = Vector2.DOWN if to_object.y >= 0 else Vector2.UP
+	grab_offset = side * PUSH_HOLD_DISTANCE
 	if grabbed.has_method("on_grabbed"):
 		grabbed.on_grabbed(self)
 	return true
 
 
 func end_grab() -> void:
-	if grabbed != null and grabbed.has_method("on_released"):
-		grabbed.on_released(self)
+	if grabbed != null:
+		if grabbed.has_method("on_released"):
+			grabbed.on_released(self)
+		grabbed.z_index = 0
 	grabbed = null
+	z_index = 0
 
 
 # keep the held object pinned at the locked offset so it can't slip past us

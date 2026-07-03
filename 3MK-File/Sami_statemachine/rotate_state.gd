@@ -41,7 +41,7 @@ func Exit() -> void:
 	_stepping = false
 
 
-func Process(delta: float) -> state:
+func Process(_delta: float) -> state:
 	if not Input.is_action_pressed("action") or player.focus_grabbable == null:
 		return walk if player.direction != Vector2.ZERO else idle
 
@@ -49,7 +49,6 @@ func Process(delta: float) -> state:
 	player.velocity = Vector2.ZERO
 
 	if _stepping:
-		_advance(delta)
 		return null
 
 	# between steps: start the next one if a direction is held
@@ -58,6 +57,14 @@ func Process(delta: float) -> state:
 		_begin_step(deg_to_rad(step_degrees), true)
 	elif along < -ALIGN_THRESHOLD:
 		_begin_step(-deg_to_rad(step_degrees), false)
+	return null
+
+
+# the actual motion happens here, not in Process, so move_and_collide gets a
+# fixed timestep to work with instead of a variable one
+func Physics(_delta: float) -> state:
+	if _stepping:
+		_advance(_delta)
 	return null
 
 
@@ -76,8 +83,17 @@ func _advance(delta: float) -> void:
 	var f: float = clamp(_t, 0.0, 1.0)
 	var eased: float = f * f * (3.0 - 2.0 * f)   # smoothstep
 
+	# sweep toward the arc position instead of teleporting there, so a wall in
+	# the way stops us right at the collision instead of clipping through it
+	var target: Vector2 = _pivot + _from_offset.rotated(_step_rot * eased)
+	var motion: Vector2 = target - player.global_position
+	var collision := player.move_and_collide(motion)
+	if collision:
+		_stepping = false   # blocked mid-arc — stop here, don't force through the wall
+		player.face_toward(_mirror.global_position - player.global_position)
+		return
+
 	_mirror.rotation = _from_rot + _step_rot * eased
-	player.global_position = _pivot + _from_offset.rotated(_step_rot * eased)   # follow the arc
 	player.face_toward(_mirror.global_position - player.global_position)
 
 	if f >= 1.0:
