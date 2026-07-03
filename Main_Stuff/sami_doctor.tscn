@@ -715,13 +715,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgi43"]
 size = Vector2(13, 75)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
-
 [sub_resource type="Resource" id="Resource_areaindcfg"]
 script = ExtResource("23_indicconfig")
 target_group = &"Item"
 icon = ExtResource("24_tile0011")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
 
 [node name="Sami_Doctor" type="CharacterBody2D" unique_id=2001215541 groups=["Player"]]
 motion_mode = 1
@@ -738,6 +738,12 @@ autoplay = "Idle_down"
 position = Vector2(-2.5, 0.5)
 shape = SubResource("RectangleShape2D_jgi43")
 
+[node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
+position = Vector2(1, 0)
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
+
 [node name="Statemachine" type="Node" parent="." unique_id=1492896408]
 script = ExtResource("15_7dkr7")
 
@@ -753,8 +759,6 @@ script = ExtResource("18_drag0")
 
 [node name="Rotate" type="Node" parent="Statemachine" unique_id=1721650722]
 script = ExtResource("19_rot0")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
 
 [node name="UI" type="Node" parent="." unique_id=766651730]
 
@@ -810,13 +814,6 @@ vertical_alignment = 1
 [node name="Inventory_UI" parent="UI/Inventory UI/ColorRect" unique_id=1077590972 instance=ExtResource("20_invui")]
 layout_mode = 1
 
-[node name="AreaIndicator" parent="UI" unique_id=1016601047 instance=ExtResource("22_areaind")]
-position = Vector2(1, 2)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
-
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
-[node name="Health_point" parent="UI" instance=ExtResource("28_healthui")]
-
-[node name="Health_UI" parent="UI/Health_point" index="0"]
-stats = ExtResource("29_healthstats")
+[node name="Health_point" parent="UI" unique_id=1038099802 instance=ExtResource("28_healthui")]
