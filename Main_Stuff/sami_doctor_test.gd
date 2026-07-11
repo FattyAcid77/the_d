@@ -1,5 +1,9 @@
 class_name PlayerTest extends CharacterBody2D
 
+#--------camera settings ----------
+@export var camera_adj: bgrd_node
+@onready var sami_camera = $Camera2D
+
 ## TEST-ONLY character for prototyping push / pull animations.
 ##
 ## This is completely separate from your real Player (sami_doctor.gd) and does
@@ -10,6 +14,9 @@ class_name PlayerTest extends CharacterBody2D
 ##   grab        = hold F. While holding it and moving:
 ##                   move toward the way you face = PUSH  (PS_ animation)
 ##                   move away from the way you face = PULL (PL_ animation)
+
+func _ready() -> void:
+	camera_limit_set()
 
 @onready var anim: AnimatedSprite2D = $Sprite2D
 
@@ -126,3 +133,9 @@ func AnimDirection4() -> String:
 		return "LEFT"
 	else:
 		return "RIGHT"
+
+func camera_limit_set() -> void:
+	sami_camera.limit_top = camera_adj.top_limit
+	sami_camera.limit_right = camera_adj.right_limit
+	sami_camera.limit_bottom = camera_adj.bot_limit
+	sami_camera.limit_left = camera_adj.left_limit

@@ -29,6 +29,7 @@ var ray_length: float = 50.0
 @onready var ani: AnimatedSprite2D = $Sprite2D
 @onready var pp_logic: Area2D = $"Push-pull-Logic"
 @onready var camera = $Camera2D
+@export var camera_adj
 
 # --- Animation system ---
 
@@ -67,6 +68,7 @@ func _ready() -> void:
 	quest_tracker.visible = false
 	scale = Vector2.ONE
 	inventory.player_ref(self)
+	camera_limit_adj()
 
 
 func _physics_process(delta: float) -> void:
@@ -255,3 +257,9 @@ func enable() -> void:
 
 func apply_item() -> void:
 	pass
+
+func camera_limit_adj() -> void:
+	var top_limit = 
+	var right_limit = 
+	var bot_limit = 
+	var left_limit = 

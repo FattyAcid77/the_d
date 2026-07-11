@@ -1,15 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://ceomsmbkp7ymg"]
+[gd_scene format=3 uid="uid://ceomsmbkp7ymg"]
 
-[ext_resource type="Texture2D" uid="uid://bov58as1a1uhj" path="res://background_scenes/assets/cctv room.png" id="1_tlv3g"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_drg7g"]
+[ext_resource type="Texture2D" uid="uid://drgxfiiiv8dnq" path="res://background_scenes/assets/f2-cctv.png" id="1_hd4bp"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="2_drg7g"]
 
-[node name="CctvRoomBgrd" type="Node2D"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bm65t"]
+polygon = PackedVector2Array(368, 90, 325, 69, 258, 69, 217, 90, 217, 155, 146, 217, 225, 60, 337, 60, 394, 88, 429, 235, 369, 155)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(297, 184)
-texture = ExtResource("1_tlv3g")
+[node name="CctvRoomBgrd" type="Node2D" unique_id=1456596676]
+script = ExtResource("1_drg7g")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1761748500]
+position = Vector2(293, 172)
+texture = ExtResource("1_hd4bp")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(100, 269)
-polygon = PackedVector2Array(0, 0, 0, 61, 393, 60, 393, 39, 368, 39, 369, -44, 220, -43, 218, -22, 203, -11, 186, -18, 176, -45, 151, -43, 132, -42, 109, -42, 65, -40, 64, -66, 2, -66, 2, -41, -6, -41, -6, -3, -2, -3, -1, -1, -23, -1, -23, -89, 415, -84, 414, 83, -35, 78, -29, 17)
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=542418261]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=48359081]
+position = Vector2(95, 186)
+polygon = PackedVector2Array(0, -1, 0, 133, 272, 133, 272, 71, 358, 70, 358, 133, 396, 133, 396, 109, 371, 109, 371, 27, 219, 27, 219, 55, 179, 55, 179, 29, 67, 29, 67, 1, 2, -1, 414, 7, 415, 151, -26, 151)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1708823528]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Node2D" unique_id=17318919]
+color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Node2D" unique_id=1065833810]
+position = Vector2(294, 112)
+scale = Vector2(0.71875, 0.6484375)
+shadow_enabled = true
+shadow_item_cull_mask = 5
+texture = ExtResource("2_drg7g")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D" unique_id=248320716]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_bm65t")
+occluder_light_mask = 4

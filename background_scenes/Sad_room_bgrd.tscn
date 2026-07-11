@@ -1,15 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnu0vjhulhch4"]
+[gd_scene format=3 uid="uid://dnu0vjhulhch4"]
 
 [ext_resource type="Texture2D" uid="uid://dff46icrpgk1i" path="res://background_scenes/assets/the room 2.png" id="1_3jgqg"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="2_nxl6r"]
 
-[node name="SadRoomBgrd" type="Node2D"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eht6i"]
+polygon = PackedVector2Array(170, 102, 520, 102, 520, 64, 168, 64)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SadRoomBgrd" type="Node2D" unique_id=160804365]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1771516004]
 position = Vector2(322, 274)
 texture = ExtResource("1_3jgqg")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1370526107]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1507253714]
 position = Vector2(448, 456)
 polygon = PackedVector2Array(0, 0, 69, 0, 66, -104, 33, -104, 32, -150, 5, -150, 4, -173, -11, -173, -11, -199, -46, -199, -46, -96, -165, -96, -165, -176, -200, -177, -201, -201, -239, -202, -239, -195, -284, -195, -284, -202, -292, -202, -292, -152, -321, -152, -321, -26, -266, -26, -266, -1, -226, -1, -226, -43, -94, -42, -91, -42, -91, 0, -1, 0, -3, 24, -356, 19, -353, -227, 100, -225, 95, 32)
+
+[node name="Lights" type="Node2D" parent="." unique_id=1301292572]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lights" unique_id=33406684]
+color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=1652123952]
+position = Vector2(336.00003, 130)
+scale = Vector2(0.77343756, 0.34375003)
+shadow_enabled = true
+texture = ExtResource("2_nxl6r")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights" unique_id=1206058593]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_eht6i")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights" unique_id=229488128]
+position = Vector2(321.5, 348.5)
+scale = Vector2(0.7675781, 0.40429688)
+texture = ExtResource("2_nxl6r")
