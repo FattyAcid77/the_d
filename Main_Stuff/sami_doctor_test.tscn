@@ -30,6 +30,12 @@
 [ext_resource type="PackedScene" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
 [ext_resource type="Resource" path="res://3MK-File/Resources/PlayerHealth_Test.tres" id="29_healthstats"]
 
+[sub_resource type="Resource" id="Resource_areaindcfg"]
+script = ExtResource("23_indicconfig")
+target_group = &"Item"
+icon = ExtResource("24_tile0011")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hg3f6"]
 atlas = ExtResource("2_y61mo")
 region = Rect2(0, 0, 45, 94)
@@ -713,20 +719,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jgi43"]
-size = Vector2(13, 75)
+size = Vector2(13, 37)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
-
-[sub_resource type="Resource" id="Resource_areaindcfg"]
-script = ExtResource("23_indicconfig")
-target_group = &"Item"
-icon = ExtResource("24_tile0011")
-metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
 [node name="Sami_Doctor_test" type="CharacterBody2D" unique_id=2001215541 groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_wvwk7")
 stats = ExtResource("29_healthstats")
+
+[node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
+position = Vector2(1, 2)
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
 position = Vector2(1, 0)
@@ -736,7 +740,7 @@ autoplay = "Idle_down"
 frame_progress = 0.7881053
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041668416]
-position = Vector2(-2.5, 0.5)
+position = Vector2(-2.5, 19.5)
 shape = SubResource("RectangleShape2D_jgi43")
 
 [node name="Statemachine" type="Node" parent="." unique_id=1492896408]
@@ -756,6 +760,7 @@ script = ExtResource("18_drag0")
 script = ExtResource("19_rot0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
+limit_smoothed = true
 
 [node name="UI" type="Node" parent="." unique_id=766651730]
 
@@ -810,10 +815,6 @@ vertical_alignment = 1
 
 [node name="Inventory_UI" parent="UI/Inventory UI/ColorRect" unique_id=1077590972 instance=ExtResource("20_invui")]
 layout_mode = 1
-
-[node name="AreaIndicator" parent="UI" unique_id=1016601047 instance=ExtResource("22_areaind")]
-position = Vector2(1, 2)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
 
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 

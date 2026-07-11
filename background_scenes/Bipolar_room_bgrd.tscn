@@ -11,6 +11,9 @@ size = Vector2(62, 113)
 radius = 19.0
 height = 60.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eraxy"]
+polygon = PackedVector2Array(604, 466, 386, 466, 601, 585, 604, 570)
+
 [node name="BipolarRoomBgrd" type="Node2D" unique_id=201269252]
 script = ExtResource("1_w4loj")
 
@@ -35,13 +38,12 @@ shape = SubResource("CapsuleShape2D_eraxy")
 [node name="Lights" type="Node2D" parent="." unique_id=296994953]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=1963907600]
-position = Vector2(734.00006, 436.125)
-scale = Vector2(0.47460938, 0.50830084)
+position = Vector2(628.5, 436.125)
+scale = Vector2(0.9355467, 0.50830084)
+energy = 0.7
 shadow_enabled = true
 texture = ExtResource("3_eraxy")
 
-[node name="PointLight2D2" type="PointLight2D" parent="Lights" unique_id=1793964626]
-position = Vector2(618, 380)
-scale = Vector2(0.90625, 0.3046875)
-shadow_enabled = true
-texture = ExtResource("3_eraxy")
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Lights" unique_id=2014690106]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_eraxy")

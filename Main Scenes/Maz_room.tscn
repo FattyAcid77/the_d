@@ -2,31 +2,25 @@
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_83pxp"]
 [ext_resource type="PackedScene" uid="uid://bq0wmvhuq0hbt" path="res://background_scenes/Maz_room_bgrd.tscn" id="2_upgb1"]
-[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_jrcq8"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="4_83pxp"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_wsgam"]
 
 [node name="MazRoom" type="Node2D" unique_id=1305410230 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_83pxp")
-player = NodePath("Sami")
+player = NodePath("")
 doors = [NodePath("Door_reg")]
 
 [node name="MazRoomBgrd" parent="." unique_id=2078873881 instance=ExtResource("2_upgb1")]
 position = Vector2(-152, 15)
 
-[node name="Sami" parent="." unique_id=359314040 instance=ExtResource("3_jrcq8")]
-position = Vector2(569, 693)
-
 [node name="Door_reg" parent="." unique_id=19206427 instance=ExtResource("4_wsgam")]
-position = Vector2(851, 664)
-scale = Vector2(0.5, 0.5)
+position = Vector2(703, 682)
+scale = Vector2(0.7, 0.7)
 entery_direction = 3
 push_distance = 50
 new_scene_path = "res://Main Scenes/Maz_Sad_Hall.tscn"
 target_door_name = "Maz_Sad_Hall_West"
 this_door_name = "Maz_room"
 
-[node name="control_1" type="Node" parent="." unique_id=795007931]
-
-[node name="control_2" type="Node" parent="." unique_id=2047625400]
-
-[node name="control_3" type="Node" parent="." unique_id=1386369688]
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("4_83pxp")]
+camera_adj = NodePath("../MazRoomBgrd")

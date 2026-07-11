@@ -3,18 +3,15 @@
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_k8ewv"]
 [ext_resource type="PackedScene" uid="uid://d1nhhvl0ugdg0" path="res://background_scenes/BipolarHallBgrd.tscn" id="1_qravw"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_myw4k"]
-[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_e7oh6"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_7xqw0"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="5_7xqw0"]
 
 [node name="BipolarHall" type="Node2D" unique_id=1496393445 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_k8ewv")
-player = NodePath("Sami")
+player = NodePath("")
 doors = [NodePath("door_reg_type2"), NodePath("Door_reg")]
 
 [node name="BipolarHallBgrd" parent="." unique_id=1652384099 instance=ExtResource("1_qravw")]
-
-[node name="Sami" parent="." unique_id=2041710705 instance=ExtResource("3_e7oh6")]
-position = Vector2(161, 271)
 
 [node name="door_reg_type2" parent="." unique_id=187596709 instance=ExtResource("4_7xqw0")]
 position = Vector2(155, 191)
@@ -29,3 +26,6 @@ entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Room.tscn"
 target_door_name = "Bipolar_Room_main"
 this_door_name = "Bipolar_Hall_South"
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_7xqw0")]
+camera_adj = NodePath("../BipolarHallBgrd")

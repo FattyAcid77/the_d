@@ -23,7 +23,7 @@ polygon = PackedVector2Array(0, 0, -1, 97, -122, 97, -122, 55, -231, 55, -232, 9
 [node name="Lights" type="Node2D" parent="." unique_id=88103466]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Lights" unique_id=1640646914]
-color = Color(0.68307734, 0.6830774, 0.68307734, 1)
+color = Color(0.39215687, 0.39215687, 0.39215687, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights/CanvasModulate" unique_id=830348744]
 position = Vector2(647.5, 678)

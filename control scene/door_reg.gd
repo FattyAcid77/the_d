@@ -13,7 +13,7 @@ var transition_type: String = "fade_to_black"
 
 #هذي الفنكشن اللي تشتغل لما يدخل اللاعب ال aera 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Sami:
+	if body is Player:
 		player_inside = true
 		SceneManager.player_in_area = true
 	
