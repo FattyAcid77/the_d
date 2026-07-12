@@ -8,7 +8,7 @@
 
 [node name="BipolarHall" type="Node2D" unique_id=1496393445 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_k8ewv")
-player = NodePath("")
+player = NodePath("Sami_Doctor_test")
 doors = [NodePath("door_reg_type2"), NodePath("Door_reg")]
 
 [node name="BipolarHallBgrd" parent="." unique_id=1652384099 instance=ExtResource("1_qravw")]

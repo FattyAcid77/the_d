@@ -19,5 +19,5 @@ camera_adj = NodePath("../CctvRoomBgrd")
 position = Vector2(83, 236)
 entery_direction = 1
 new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
-target_door_name = "OCD_to_CCTV"
+target_door_name = "Hall_to_CCTV"
 this_door_name = "CCTV_room"

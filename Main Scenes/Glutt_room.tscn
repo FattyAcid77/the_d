@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c0ynewq0oyt8c"]
+
+[ext_resource type="PackedScene" uid="uid://5axv8h6jfqk" path="res://background_scenes/Glutt_room_bgrd.tscn" id="1_1fcwo"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_6gr8a"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_ab3n2"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_6gr8a"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_raja0"]
+
+[node name="GluttRoom" type="Node2D" unique_id=1954357830 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_6gr8a")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg")]
+
+[node name="GluttRoomBgrd" parent="." unique_id=1733879597 instance=ExtResource("1_1fcwo")]
+script = ExtResource("3_raja0")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_ab3n2")]
+camera_adj = NodePath("../GluttRoomBgrd")
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("3_6gr8a")]
+position = Vector2(367, 172)
+entery_direction = 2
+new_scene_path = "res://Main Scenes/Glutt_hall.tscn"
+target_door_name = "Hall_glutt_room"
+this_door_name = "Glutt_room"
