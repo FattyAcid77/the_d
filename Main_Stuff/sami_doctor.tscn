@@ -812,4 +812,4 @@ layout_mode = 1
 
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
-[node name="Health_point" parent="UI" unique_id=1038099802 instance=ExtResource("28_healthui")]
+[node name="Health_point" parent="UI" unique_id=1790946993 instance=ExtResource("28_healthui")]
