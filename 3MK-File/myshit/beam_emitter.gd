@@ -20,6 +20,7 @@ var _active: bool = true
 var _prev_portal: String = ""
 
 func _ready() -> void:
+	add_to_group("beam_emitter")   # so task_puzzle_area can sweep it on solve
 	z_index = 10
 	z_as_relative = false  # Absolute z — never overridden by a parent node
 	if source_portal_id != "":
@@ -92,9 +93,11 @@ func _cast() -> void:
 			break
 		elif body is CharacterBody2D or body is Area2D:
 			# Player, NPCs, and any non-beam Area2D (e.g. push-pull zones) — pass through.
-			# Add to exclude so the same body isn't re-hit, nudge origin past the surface.
+			# Exclude and re-cast from the SAME origin. Advancing the origin here used
+			# to land it inside a mirror the player was hugging, and rays that start
+			# inside a shape never hit it — the reflection vanished with the player
+			# standing next to the mirror.
 			exclude.append(body.get_rid())
-			origin = hit.position + dir * 1.0
 		else:
 			# StaticBody2D, TileMap walls, or any other solid geometry — beam stops.
 			_points.append(to_local(hit.position))

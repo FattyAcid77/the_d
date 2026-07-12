@@ -31,6 +31,7 @@ PauseMenu="*res://control scene/Pause_Menu.tscn"
 inventory="*uid://c8n0i2wxuxhwm"
 GameState="*uid://bigwu0rmjy4mr"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
+RadioSignals="*res://3MK-File/script/radio_signal_manager.gd"
 
 [display]
 

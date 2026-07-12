@@ -1,6 +1,6 @@
 extends Node
 
-## Plays a sound when the player enters a puzzle.
+## Plays the ding when the player completes a puzzle.
 ## Also sets up a "PuzzleSFX" audio bus with a SpectrumAnalyzer
 ## so puzzle_wave_visualizer.gd can read real frequency data.
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 		_player = AudioStreamPlayer.new()
 	_player.bus = BUS_NAME
 	add_child(_player)
-	GameState.puzzle_entered.connect(_on_puzzle_entered)
+	GameState.puzzle_completed.connect(_on_puzzle_completed)
 
 func _setup_bus() -> void:
 	if AudioServer.get_bus_index(BUS_NAME) != -1:
@@ -32,7 +32,7 @@ func _setup_bus() -> void:
 	effect.buffer_length = 0.1
 	AudioServer.add_bus_effect(idx, effect)
 
-func _on_puzzle_entered(_puzzle_id: String, _puzzle_name: String) -> void:
+func _on_puzzle_completed(_puzzle_id: String, _puzzle_name: String) -> void:
 	if enter_sound:
 		_player.stream = enter_sound
 		_player.play()

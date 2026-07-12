@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://c0pn8g2eecwku" path="res://f_2_cell_room.tscn" id="1_egaj7"]
 [ext_resource type="Texture2D" uid="uid://bcjg8r8xeklmt" path="res://3MK-File/myshit/f2-cell3 (1).png" id="2_ebq58"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="4_o3u7i"]
 [ext_resource type="PackedScene" uid="uid://b5sncjyheeycp" path="res://3MK-File/myshit/beam_emitter.tscn" id="6_dfgc4"]
 [ext_resource type="PackedScene" path="res://3MK-File/myshit/task_puzzle_area.tscn" id="7_qjl3q"]
 [ext_resource type="PackedScene" uid="uid://q8iajgdh8par" path="res://3MK-File/myshit/beam_receiver.tscn" id="8_ebq58"]
-[ext_resource type="Script" uid="uid://baqj5rj2iep6a" path="res://3MK-File/myshit/mirror_frequency_entry.gd" id="8_x2ftw"]
 [ext_resource type="PackedScene" uid="uid://n02bxy01iyyy" path="res://puzzle_door.tscn" id="8_xxchj"]
 [ext_resource type="Texture2D" uid="uid://cpqty5idouqq2" path="res://3MK-File/myshit/jail.3.png" id="10_1aqcx"]
 [ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="10_f58pg"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="11_1aqcx"]
+[ext_resource type="PackedScene" uid="uid://kx7ryt12er25" path="res://3MK-File/Scene/quest_signal.tscn" id="11_qsig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f58pg"]
 atlas = ExtResource("10_1aqcx")
@@ -306,16 +306,9 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="Resource" id="Resource_1aqcx"]
-script = ExtResource("8_x2ftw")
-metadata/_custom_type_script = "uid://baqj5rj2iep6a"
-
-[sub_resource type="Resource" id="Resource_f58pg"]
-script = ExtResource("8_x2ftw")
-frequency = 630
-metadata/_custom_type_script = "uid://baqj5rj2iep6a"
-
 [node name="LvL_Puzzle" type="Node2D" unique_id=624265698]
+editor_description = "the animation is 6.8 seconds
+"
 
 [node name="F2_Cell-Room" parent="." unique_id=1977770180 instance=ExtResource("1_egaj7")]
 position = Vector2(453, 350)
@@ -334,6 +327,7 @@ rotation = 1.1114796
 [node name="Puzzle_Door" parent="." unique_id=315635850 instance=ExtResource("8_xxchj")]
 position = Vector2(459, 283)
 required_puzzle_id = "beam_puzzle_1"
+animation_delay = 11.2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Puzzle_Door" unique_id=1084027384]
 position = Vector2(-8, 66)
@@ -343,14 +337,19 @@ sprite_frames = SubResource("SpriteFrames_en7sv")
 position = Vector2(304, 363)
 puzzle_id = "beam_puzzle_1"
 puzzle_name = "Beam Puzzle"
-mirror_entries = Array[ExtResource("8_x2ftw")]([SubResource("Resource_1aqcx"), SubResource("Resource_f58pg")])
 
 [node name="Grab_Mirror" parent="Task_Puzzel_Area" unique_id=1622856254 instance=ExtResource("10_f58pg")]
 position = Vector2(172, 101)
+unlock_frequency = 530
 
 [node name="Grab_Mirror2" parent="Task_Puzzel_Area" unique_id=606392294 instance=ExtResource("10_f58pg")]
-visible = false
 position = Vector2(270, 100)
+unlock_frequency = 630
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("4_o3u7i")]
-position = Vector2(514, 411)
+[node name="QuestSignal_BeamPuzzle" parent="." unique_id=1268663369 instance=ExtResource("11_qsig")]
+position = Vector2(304, 363)
+puzzle_id = "beam_puzzle_1"
+signal_radius = 100.0
+
+[node name="Sami_Doctor" parent="." unique_id=2001215541 instance=ExtResource("11_1aqcx")]
+position = Vector2(466, 376)

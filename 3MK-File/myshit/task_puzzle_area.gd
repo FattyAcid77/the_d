@@ -1,60 +1,46 @@
 extends Area2D
 class_name TaskPuzzleArea
 
+# marks the puzzle room: reports entry to GameState for quest tracking, and
+# once the door has fully finished opening, sweeps the beam gear away so only
+# the door is left. assumes one beam puzzle + one door per scene. mirrors
+# handle their own radio visibility (see unlock_frequency on the mirror
+# scripts).
+
 @export var puzzle_id: String = ""
 @export var puzzle_name: String = ""
-@export var mirror_entries: Array[MirrorFrequencyEntry] = []
 
-var _player_inside: bool = false
-var _last_radio: int = -9999
+var _cleared: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-	_update_mirrors(RadioGlobal.radio)
-
-func _process(_delta: float) -> void:
-	if not _player_inside:
-		return
-	var current: int = RadioGlobal.radio
-	if current == _last_radio:
-		return
-	_last_radio = current
-	_update_mirrors(current)
-
-func _update_mirrors(freq: int) -> void:
-	var player := get_tree().get_first_node_in_group("Player")
-	for entry in mirror_entries:
-		if entry == null:
-			continue
-		var mirror := get_node_or_null(entry.mirror_path)
-		if mirror == null:
-			push_warning("TaskPuzzleArea: mirror_path not found → " + str(entry.mirror_path))
-			continue
-		var matched: bool = (entry.frequency == freq)
-		mirror.visible = matched
-		# Beam still reflects (raycast ignores collision-exceptions).
-		# Player passes through when invisible.
-		if mirror is RigidBody2D and player != null:
-			if matched:
-				mirror.remove_collision_exception_with(player)
-			else:
-				mirror.add_collision_exception_with(player)
-		# Disable E / snap-zone interaction while invisible.
-		var iz: Node = mirror.get_node_or_null("InteractZone")
-		if iz != null and iz is Area2D:
-			iz.set_deferred("monitoring", matched)
-			iz.set_deferred("monitorable", matched)
+	for door in get_tree().get_nodes_in_group("puzzle_door"):
+		if door.required_puzzle_id == puzzle_id:
+			door.door_finished_opening.connect(_on_door_finished_opening)
+			break
+	# coming back into an already solved room: gear is long gone
+	if puzzle_id != "" and GameState.is_solved(puzzle_id):
+		_clear_beam_pieces.call_deferred(true)
 
 func _on_body_entered(body: Node2D) -> void:
-	# Group-based so it works for BOTH the real Sami and the test player.
-	if body.is_in_group("Player"):
-		_player_inside = true
-		_last_radio = -9999
-		_update_mirrors(RadioGlobal.radio)
-		if puzzle_id != "":
-			GameState.enter_puzzle(puzzle_id, puzzle_name)
+	if body.is_in_group("Player") and puzzle_id != "":
+		GameState.enter_puzzle(puzzle_id, puzzle_name)
 
-func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		_player_inside = false
+func _on_door_finished_opening() -> void:
+	_clear_beam_pieces(false)
+
+func _clear_beam_pieces(instant: bool) -> void:
+	if _cleared:
+		return
+	_cleared = true
+	var pieces: Array = []
+	pieces.append_array(get_tree().get_nodes_in_group("beam_emitter"))
+	pieces.append_array(get_tree().get_nodes_in_group("beam_mirror"))
+	pieces.append_array(get_tree().get_nodes_in_group("beam_receiver"))
+	for p in pieces:
+		if instant or not p is CanvasItem:
+			p.queue_free()
+		else:
+			var tw := create_tween()
+			tw.tween_property(p, "modulate:a", 0.0, 1.0)
+			tw.tween_callback(p.queue_free)
