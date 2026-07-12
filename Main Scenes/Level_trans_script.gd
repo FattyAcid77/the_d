@@ -1,6 +1,6 @@
 class_name Level extends Node2D
 
-@export var player: Sami
+@export var player: Player
 @export var doors: Array[Door_reg]
 
 var data: LevelDataHandoff

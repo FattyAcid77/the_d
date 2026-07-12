@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bol73ep6ekrc"]
+
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_c57rx"]
+[ext_resource type="Texture2D" uid="uid://caxhbcgl4scqg" path="res://background_scenes/assets/f2-down-path.png" id="2_hqtgs"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="3_hqtgs"]
+
+[node name="GluttHallBgrd" type="Node2D" unique_id=1900176403]
+script = ExtResource("1_c57rx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1008375774]
+position = Vector2(287, 309)
+texture = ExtResource("2_hqtgs")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1098535794]
+position = Vector2(-59, -11)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=163331829]
+position = Vector2(325, 609)
+polygon = PackedVector2Array(-1, -1, -1, -7, -58, -7, -58, -117, -72, -117, -72, -153, -65, -153, -65, -160, -17, -161, -17, -212, 7, -212, 7, -252, -67, -252, -67, -320, -61, -304, -44, -304, -44, -317, -52, -317, -52, -410, 102, -410, 102, -398, 110, -398, 110, -331, 117, -331, 117, -296, 110, -296, 110, -275, 102, -275, 102, -233, 110, -233, 110, -186, 91, -188, 91, -180, 102, -161, 111, -161, 111, -152, 118, -152, 118, -117, 111, -116, 112, -84, 99, -92, 82, -82, 82, -33, 98, -23, 104, -23, 104, -6, 46, -6, 46, 1, 0, 0, 0, 23, 151, 25, 142, -433, -104, -434, -105, 29, -22, 26)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1278933123]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Node2D" unique_id=1154499213]
+color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Node2D" unique_id=141008395]
+position = Vector2(284, 386)
+scale = Vector2(0.3457031, 0.7753907)
+energy = 0.7
+shadow_enabled = true
+texture = ExtResource("3_hqtgs")

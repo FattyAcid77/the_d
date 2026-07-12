@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu2q35ayocb5s"]
+[gd_scene format=3 uid="uid://bu2q35ayocb5s"]
 
 [ext_resource type="PackedScene" uid="uid://cht8x5ihtykm0" path="res://background_scenes/Elevator_1_bgrd.tscn" id="1_01sm3"]
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_r02jt"]
@@ -8,19 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://c3ddty4kt06p8" path="res://control scene/elevator_control_reg.tscn" id="6_4lxvx"]
 [ext_resource type="PackedScene" uid="uid://dvjps10m4rucf" path="res://control scene/Elevator_control.tscn" id="7_38pdo"]
 
-[node name="Elevator" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+[node name="Elevator" type="Node2D" unique_id=547493953 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_r02jt")
 player = NodePath("Sami")
 doors = [NodePath("Door_reg")]
 
-[node name="ElevatorBgrd" parent="." instance=ExtResource("1_01sm3")]
+[node name="ElevatorBgrd" parent="." unique_id=185608878 instance=ExtResource("1_01sm3")]
 script = ExtResource("3_5dhi0")
 
-[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
+[node name="Sami" parent="." unique_id=13486402 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
 position = Vector2(232, 215)
 camera_adj = NodePath("../ElevatorBgrd")
 
-[node name="Door_reg" parent="." instance=ExtResource("2_dy6my")]
+[node name="Door_reg" parent="." unique_id=961692796 instance=ExtResource("2_dy6my")]
 position = Vector2(285, 258)
 scale = Vector2(0.5, 0.5)
 entery_direction = 3
@@ -29,10 +29,10 @@ new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
 target_door_name = "lvl_1_lobby_West"
 this_door_name = "Elevator_1_Main"
 
-[node name="Elevator_Control_reg" parent="." instance=ExtResource("6_4lxvx")]
+[node name="Elevator_Control_reg" parent="." unique_id=1113558963 instance=ExtResource("6_4lxvx")]
 position = Vector2(242, 218)
 
-[node name="ElevatorControl" parent="." instance=ExtResource("7_38pdo")]
+[node name="ElevatorControl" parent="." unique_id=1403304194 instance=ExtResource("7_38pdo")]
 layer = 5
 visible = false
 this_scene_path = "res://Main Scenes/Elevator_1.tscn"

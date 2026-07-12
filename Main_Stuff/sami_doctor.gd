@@ -7,6 +7,12 @@ class_name Player extends CharacterBody2D
 # inventory panel, toggled with I. lives under UI.
 @onready var inventory: CanvasLayer = get_node_or_null("UI/Inventory UI")
 
+@export var input_enabled: bool = true
+
+#-------camera settings----------
+@export var camera_adj: bgrd_node
+@onready var sami_camera = $Camera2D
+
 var cardinal_direction : Vector2 = Vector2.DOWN
 var direction : Vector2 = Vector2.ZERO
 var move_speed : float = 100.0
@@ -20,6 +26,7 @@ var grab_offset: Vector2 = Vector2.ZERO   # player->object; side locked at grab,
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	camera_limit_set()
 	# Hand ourselves to the state machine so every state can control us.
 	state_machine.Initialize(self)
 	if inventory != null:
@@ -174,3 +181,19 @@ func drag_follow() -> void:
 func _set_inventory(on: bool) -> void:
 	inventory.visible = on
 	inventory.process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
+
+func camera_limit_set() -> void:
+	sami_camera.limit_top = camera_adj.top_limits
+	sami_camera.limit_right = camera_adj.right_limits
+	sami_camera.limit_bottom = camera_adj.bottom_limits
+	sami_camera.limit_left = camera_adj.left_limits
+
+func enable() -> void:
+	input_enabled = true
+	visible = true
+
+func disable() -> void:
+	input_enabled = false
+
+func orient(dir: Vector2) -> void:
+	pass
