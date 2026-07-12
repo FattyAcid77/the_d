@@ -1,6 +1,6 @@
 extends Area2D
 
-const DialgueSystemPreload = preload("res://FD_Testing/Diloage_System/dialogueSystem.tscn")
+const DialgueSystemPreload = preload("res://FD_Testing/Diloage_System(WIP)/dialogueSystem.tscn")
 
 
 @export var activate_instant: bool

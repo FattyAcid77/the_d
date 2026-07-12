@@ -2,7 +2,7 @@ extends Node2D
 #We Can Change The DialogueButton Scene Styles to sute our Game Needs, Under ThemeOverrides
 
 #change This For the Dircotry of the Button.tcn
-const DialogueButtonPreload = preload("res://FD_Testing/Diloage_System/DialogueButton.tscn")
+const DialogueButtonPreload = preload("res://FD_Testing/Diloage_System(WIP)/DialogueButton.tscn")
 
 #This to hold RichText And Sprite And keep code Clean
 @onready var DialogueLabel: RichTextLabel = $HBoxContainer/VBoxContainer/RichTextLabel
