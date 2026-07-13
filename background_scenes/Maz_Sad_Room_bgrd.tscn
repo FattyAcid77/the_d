@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cp4xvi28a82r0"]
 
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_l6exp"]
 [ext_resource type="Texture2D" uid="uid://buqi2swhyga8l" path="res://background_scenes/assets/the living room.png" id="1_u0esu"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="2_xcdab"]
 
@@ -10,6 +11,7 @@ size = Vector2(154, 62)
 polygon = PackedVector2Array(933, 530, 1331, 530, 1121, 518)
 
 [node name="MazSadRoomBgrd" type="Node2D" unique_id=508454425]
+script = ExtResource("1_l6exp")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=603166047]
 position = Vector2(1132, 743)

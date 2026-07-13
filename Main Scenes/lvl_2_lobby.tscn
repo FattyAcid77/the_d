@@ -9,7 +9,7 @@
 [node name="Lvl2Lobby" type="Node2D" unique_id=651412082 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
 player = NodePath("Sami_Doctor_test")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2"), NodePath("door_reg_type3")]
 
 [node name="lvl2_Lobby_bgrd" parent="." unique_id=1059811953 instance=ExtResource("2_rx0ui")]
 

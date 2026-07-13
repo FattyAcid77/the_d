@@ -22,3 +22,6 @@ position = Vector2(158, 386.5)
 scale = Vector2(0.34375003, 0.8183594)
 shadow_enabled = true
 texture = ExtResource("3_be8mu")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=761837179]
+color = Color(0.39215687, 0.39215687, 0.39215687, 1)

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://w3c76cjvjohj"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_up5w7"]
+[ext_resource type="PackedScene" uid="uid://j0fxoil05ao8" path="res://background_scenes/lvl_1_lobby_bgrd.tscn" id="2_7iwvo"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="3_cqvki"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="4_ic8ic"]
+
+[node name="Scene1" type="Node2D" unique_id=579100701 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_up5w7")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("door_reg_type2")]
+
+[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("2_7iwvo")]
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_cqvki")]
+position = Vector2(431, 375)
+camera_adj = NodePath("../Lvl_1_Hall_BGRD")
+
+[node name="door_reg_type2" parent="." unique_id=1646241525 instance=ExtResource("4_ic8ic")]
+position = Vector2(405, 177)
+entery_direction = 2
+new_scene_path = "res://scenario_1/Hall_scene.tscn"
+target_door_name = "hall_1"
+this_door_name = "scene1_door"
