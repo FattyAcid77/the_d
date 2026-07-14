@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctbx86vm8lsvv"]
 
 [ext_resource type="Texture2D" uid="uid://blpqqo3cq8wf1" path="res://background_scenes/assets/f2-r.png" id="1_bbolw"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_ngxfb"]
 [ext_resource type="Texture2D" uid="uid://cmt86qygnf2yv" path="res://3MK-File/myshit/2D_light.webp" id="2_jrfhv"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="3_ngxfb"]
 
@@ -17,6 +18,7 @@ polygon = PackedVector2Array(540, 296, 540, 22, 778, 22, 778, 174, 793, 9, 524, 
 polygon = PackedVector2Array(452, 518, 145, 519, 452, 599)
 
 [node name="lvl2_Lobby_bgrd" type="Node2D" unique_id=1059811953]
+script = ExtResource("1_ngxfb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=238339206]
 position = Vector2(526, 335)

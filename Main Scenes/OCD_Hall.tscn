@@ -9,7 +9,7 @@
 
 [node name="OcdHall" type="Node2D" unique_id=706794165 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_7n0jy")
-player = NodePath("")
+player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2"), NodePath("Door_reg3")]
 
 [node name="OcdHallBgrd" parent="." unique_id=264336554 instance=ExtResource("2_i40uq")]
@@ -31,9 +31,9 @@ this_door_name = "OCD_Hall_North"
 position = Vector2(451, 474)
 scale = Vector2(0.7, 0.7)
 entery_direction = 3
-new_scene_path = "res://Main Scenes/CCTV_Room.tscn"
-target_door_name = "CCTV_Room_Main"
-this_door_name = "OCD_Hall_East"
+new_scene_path = "res://Main Scenes/Research_room.tscn"
+target_door_name = "Research_door"
+this_door_name = "Hall_research"
 
 [node name="Door_reg3" parent="." unique_id=1549867704 instance=ExtResource("5_jljya")]
 position = Vector2(443, 296)
@@ -41,6 +41,7 @@ scale = Vector2(0.7, 0.7)
 entery_direction = 3
 new_scene_path = "res://Main Scenes/OCD_room.tscn"
 target_door_name = "CCTV_room"
-this_door_name = "OCD_to_CCTV"
+this_door_name = "Hall_to_CCTV"
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("6_7n0jy")]
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_7n0jy")]
+camera_adj = NodePath("../OcdHallBgrd")
