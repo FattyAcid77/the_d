@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dlgv2uimain01"]
+
+[ext_resource type="Script" uid="uid://cs1ifk0eppgy2" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_ui.gd" id="1_dui"]
+[ext_resource type="Texture2D" uid="uid://bk1taec66nu7" path="res://FD_Testing/GameSystems/DialogV2/text_box.png" id="3_tex"]
+
+[node name="DialogUI" type="CanvasLayer" node_paths=PackedStringArray("box", "portrait_rect", "name_label", "text_label", "choices_box", "topics_box", "leave_button", "audio", "layout_margin")]
+script = ExtResource("1_dui")
+text_direction_mode = 0
+box = NodePath("Box")
+portrait_rect = NodePath("Box/Portrait")
+name_label = NodePath("Box/NameLabel")
+text_label = NodePath("Box/Margin/Rows/Text")
+choices_box = NodePath("Box/Margin/Rows/Choices")
+topics_box = NodePath("Box/Margin/Rows/Topics")
+leave_button = NodePath("Box/Close")
+audio = NodePath("Audio")
+layout_margin = NodePath("Box/Margin")
+
+[node name="Box" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -260.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BG" type="TextureRect" parent="Box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tex")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="NameLabel" type="Label" parent="Box"]
+anchor_left = 0.038
+anchor_top = 0.19
+anchor_right = 0.22
+anchor_bottom = 0.34
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name"
+vertical_alignment = 1
+clip_text = true
+
+[node name="Margin" type="MarginContainer" parent="Box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="Box/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Text" type="RichTextLabel" parent="Box/Margin/Rows"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = false
+scroll_active = false
+
+[node name="Choices" type="VBoxContainer" parent="Box/Margin/Rows"]
+layout_mode = 2
+
+[node name="Topics" type="HBoxContainer" parent="Box/Margin/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Close" type="Button" parent="Box"]
+anchor_left = 0.935
+anchor_top = 0.28
+anchor_right = 0.978
+anchor_bottom = 0.52
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+text = "X"
+
+[node name="Portrait" type="TextureRect" parent="Box"]
+visible = false
+anchor_left = 0.83
+anchor_top = 0.3
+anchor_right = 0.96
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nlc54nt4rc85"]
 
 [ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="1_58bb0"]
-[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="2_xb6da"]
+[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/Temp_Stuff/Visual Stuff/Icons_Temp/Rubic.png" id="2_xb6da"]
 [ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="3_8mjpt"]
 
 [sub_resource type="Resource" id="Resource_8e1jk"]

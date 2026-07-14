@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bl5xmmitfhybt"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_nhb2p"]
+[ext_resource type="PackedScene" uid="uid://d1nhhvl0ugdg0" path="res://background_scenes/BipolarHallBgrd.tscn" id="2_6utgk"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="3_02rfp"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_dvgmf"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="5_fkvws"]
+[ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="6_lcfit"]
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="7_cwvtk"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="8_xm1p7"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="9_umn7m"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="10_hjqyu"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="11_0k2bt"]
+[ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="12_m5504"]
+[ext_resource type="Script" uid="uid://eqkod3vr65xj" path="res://FD_Testing/GameSystems/Cutscene/cutscene_trigger.gd" id="14_cwvtk"]
+[ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="14_xm1p7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xm1p7"]
+
+[sub_resource type="Resource" id="Resource_umn7m"]
+script = ExtResource("8_xm1p7")
+text = "Hello"
+speaker_name = "FD"
+set_flags = Array[String](["Video"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_hjqyu"]
+script = ExtResource("7_cwvtk")
+id = "entry"
+lines = Array[ExtResource("8_xm1p7")]([SubResource("Resource_umn7m")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_0k2bt"]
+script = ExtResource("11_0k2bt")
+branches = Array[ExtResource("7_cwvtk")]([SubResource("Resource_hjqyu")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5504"]
+atlas = ExtResource("14_xm1p7")
+region = Rect2(99, 0, 33, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x31t4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5504")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_3y0b6"]
+script = ExtResource("12_m5504")
+npc_name = "Jawad"
+sprite_frames = SubResource("SpriteFrames_x31t4")
+dialog = SubResource("Resource_0k2bt")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[node name="BipolarHall" type="Node2D" unique_id=1496393445 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_nhb2p")
+player = NodePath("Sami_Doctor")
+doors = [NodePath("door_reg_type2"), NodePath("Door_reg")]
+
+[node name="BipolarHallBgrd" parent="." unique_id=1652384099 instance=ExtResource("2_6utgk")]
+
+[node name="door_reg_type2" parent="." unique_id=187596709 instance=ExtResource("3_02rfp")]
+position = Vector2(155, 191)
+entery_direction = 2
+new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
+target_door_name = "lvl_1_lobby_south"
+this_door_name = "Bipolar_Hall_north"
+
+[node name="Door_reg" parent="." unique_id=739377036 instance=ExtResource("4_dvgmf")]
+position = Vector2(156, 625)
+entery_direction = 0
+new_scene_path = "res://Main Scenes/Bipolar_Room.tscn"
+target_door_name = "Bipolar_Room_main"
+this_door_name = "Bipolar_Hall_South"
+
+[node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_fkvws")]
+position = Vector2(157, 276)
+camera_adj = NodePath("../BipolarHallBgrd")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1290630022]
+position = Vector2(160, 379)
+scale = Vector2(6.76, 1)
+script = ExtResource("14_cwvtk")
+video_path = "uid://dy0ak0lxwtgbb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=189259943]
+shape = SubResource("RectangleShape2D_xm1p7")
+
+[node name="NPC" parent="." unique_id=564381059 instance=ExtResource("6_lcfit")]
+position = Vector2(163, 479)
+npc_resource = SubResource("Resource_3y0b6")

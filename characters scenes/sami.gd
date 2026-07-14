@@ -259,7 +259,7 @@ func apply_item() -> void:
 	pass
 
 func camera_limit_adj() -> void:
-	var top_limit = 
-	var right_limit = 
-	var bot_limit = 
-	var left_limit = 
+	var top_limit = null
+	var right_limit = null
+	var bot_limit = null
+	var left_limit = null
