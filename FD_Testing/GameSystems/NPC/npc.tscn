@@ -4,15 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npc"]
-radius = 10.0
-height = 30.0
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC" type="CharacterBody2D" unique_id=1293972803]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_npc")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1247219245]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874200481]
 shape = SubResource("CapsuleShape2D_npc")
 
-[node name="DialogTrigger" parent="." instance=ExtResource("2_trg")]
+[node name="DialogTrigger" parent="." unique_id=1396179693 instance=ExtResource("2_trg")]

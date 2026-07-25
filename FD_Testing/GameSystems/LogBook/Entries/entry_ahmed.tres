@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://c6kbljs5xk4ac"]
+
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+
+[sub_resource type="Resource" id="fact1"]
+script = ExtResource("2")
+flag = "ahmed_saw_apple"
+text = "Ahmed says he saw the apple already eaten this morning."
+
+[resource]
+script = ExtResource("1")
+id = "ahmed"
+title = "Ahmed's Story"
+color = Color(0.3, 0.65, 0.9, 1)
+board_position = Vector2(260, -140)
+facts = Array[ExtResource("2")]([SubResource("fact1")])
+links_to = Array[String](["apple"])

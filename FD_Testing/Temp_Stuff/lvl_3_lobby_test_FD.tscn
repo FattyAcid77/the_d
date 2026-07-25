@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://djb4uhvemxhq4"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_k2buf"]
+[ext_resource type="PackedScene" uid="uid://debm3glfieapw" path="res://background_scenes/lvl_3_lobby_bgrd.tscn" id="2_i5opr"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_pj0je"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_qsk85"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="5_rt4vi"]
+
+[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_k2buf")
+player = NodePath("")
+doors = [NodePath("Door_reg")]
+
+[node name="Lvl3LobbyBgrd" parent="." unique_id=935252586 instance=ExtResource("2_i5opr")]
+script = ExtResource("3_pj0je")
+
+[node name="Door_reg" parent="." unique_id=942710479 instance=ExtResource("4_qsk85")]
+position = Vector2(917, 416)
+entery_direction = 3
+target_door_name = "Elevator_3_Main"
+this_door_name = "lvl_3_lobby_East"
+
+[node name="door_reg_type2" parent="." unique_id=1561475788 instance=ExtResource("5_rt4vi")]
+position = Vector2(539, 234)
+
+[node name="door_reg_type3" parent="." unique_id=1161476748 instance=ExtResource("5_rt4vi")]
+position = Vector2(530, 599)

@@ -17,6 +17,8 @@ enum TextDir { AUTO, LTR, RTL }
 @export var pitch_max: float = 1.1
 @export var keyword_color: String = "#ffd24a"    ## colour of clickable words
 @export var text_direction_mode: TextDir = TextDir.AUTO
+## Text of the "end conversation" button in the topic hub (Arabic works).
+@export var leave_label: String = "Leave"
 
 @export var box: Control                  ## the whole visual container to show/hide
 @export var portrait_rect: TextureRect    ## optional
@@ -141,7 +143,11 @@ func _request_close() -> void:
 # --- main loop -------------------------------------------------------------
 
 func _run() -> void:
-	await _play_branch("entry")
+	var start := _pick_branch()
+	if start == "":
+		push_warning("DialogUI: no playable branch in this dialog.")
+		return
+	await _play_branch(start)
 	if _end_all:
 		return
 	while true:
@@ -159,6 +165,19 @@ func _run() -> void:
 		if _leave_pressed or _end_all:
 			_leave_pressed = false
 			return
+
+
+## Chooses what the NPC says when the player talks. Branches are checked
+## IN ORDER — the first one whose flag conditions pass is played.
+## So put the MOST SPECIFIC branch FIRST and the default greeting LAST.
+func _pick_branch() -> String:
+	for b in _dialog.branches:
+		if b == null or b.is_topic:
+			continue
+		if not b.can_play():
+			continue
+		return b.id
+	return "entry" if _dialog.get_branch("entry") else ""
 
 
 func _play_branch(branch_id: String) -> void:
@@ -342,13 +361,17 @@ func _topic_mode(topics: Array) -> void:
 		btn.pressed.connect(func() -> void: _picked_topic = branch_id)
 		topics_box.add_child(btn)
 	topics_box.visible = true
+	var leave_btn := Button.new()
+	leave_btn.text = leave_label
+	leave_btn.pressed.connect(func() -> void: _leave_pressed = true)
+	topics_box.add_child(leave_btn)
 	if topics_box.get_child_count() > 0:
 		topics_box.get_child(0).grab_focus()
 	_lock_input(0.2)
+	# NOTE: interact does NOT close the hub — the player picks a topic or
+	# presses Leave / the X. (Pressing E by habit shouldn't end the talk.)
 	while _picked_topic == "" and not _leave_pressed and not _end_all and _clicked_topic == "":
 		await get_tree().process_frame
-		if _interact_pressed():
-			_leave_pressed = true
 	if _clicked_topic != "":
 		_picked_topic = _clicked_topic
 		_clicked_topic = ""
@@ -359,6 +382,22 @@ func _topic_mode(topics: Array) -> void:
 func _collect_topics() -> Array:
 	var seen := {}
 	var out := []
+	# 1) branches that declare themselves as topics
+	for b in _dialog.branches:
+		if b == null or not b.is_topic or b.id == "entry":
+			continue
+		if b.unlock_flag != "" and not Flags.is_set(b.unlock_flag):
+			continue
+		if b.ask_once and Flags.is_set("topic_seen:" + b.id):
+			continue
+		if seen.has(b.id):
+			continue
+		seen[b.id] = true
+		out.append({
+			"branch": b.id,
+			"label": b.topic_label if b.topic_label != "" else b.id,
+		})
+	# 2) topics unlocked by clickable keywords inside lines
 	for b in _dialog.branches:
 		for line in b.lines:
 			if line == null:

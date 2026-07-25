@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://c6emo2bnom4cw"]
+
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+
+[sub_resource type="Resource" id="fact1"]
+script = ExtResource("2")
+flag = "knife_in_azoz_room"
+text = "he used a knife to cut the Apple, crumbs are still on the knife. Fresh ones."
+
+[resource]
+script = ExtResource("1")
+id = "azoz_room"
+title = "Crumbs in Azoz's Room"
+board_position = Vector2(260, 160)
+facts = Array[ExtResource("2")]([SubResource("fact1")])
+links_to = Array[String](["hospital"])

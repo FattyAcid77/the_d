@@ -12,27 +12,76 @@
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="10_hjqyu"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="11_0k2bt"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="12_m5504"]
-[ext_resource type="Script" uid="uid://eqkod3vr65xj" path="res://FD_Testing/GameSystems/Cutscene/cutscene_trigger.gd" id="14_cwvtk"]
+[ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="14_umn7m"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="14_xm1p7"]
+[ext_resource type="Texture2D" uid="uid://cn7l2lgns7pv4" path="res://FD_Testing/Temp_Stuff/Visual Stuff/Icons_Temp/Apple.png" id="15_hjqyu"]
+[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="16_hjqyu"]
+[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="17_0k2bt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xm1p7"]
+[sub_resource type="Resource" id="Resource_cpy1e"]
+script = ExtResource("8_xm1p7")
+text = "You see that apple over there??"
+speaker_name = "Sami"
+show_if_flag = "apple_eaten"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_morsw"]
+script = ExtResource("8_xm1p7")
+text = "Yah?"
+speaker_name = "FD"
+show_if_flag = "apple_eaten"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_m4vrw"]
+script = ExtResource("8_xm1p7")
+text = "You eat it?"
+speaker_name = "Sami"
+show_if_flag = "apple_eaten"
+set_flags = Array[String](["fd_in_bathroom"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_5i03s"]
+script = ExtResource("8_xm1p7")
+text = "No, i was in the Bathrom"
+speaker_name = "FD"
+show_if_flag = "apple_eaten"
+set_flags = Array[String]([""])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_j2rdc"]
+script = ExtResource("7_cwvtk")
+id = "apple_eaten"
+require_flags = Array[String](["apple_eaten"])
+lines = Array[ExtResource("8_xm1p7")]([SubResource("Resource_cpy1e"), SubResource("Resource_morsw"), SubResource("Resource_m4vrw"), SubResource("Resource_5i03s")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_umn7m"]
 script = ExtResource("8_xm1p7")
 text = "Hello"
 speaker_name = "FD"
-set_flags = Array[String](["Video"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_xm1p7"]
+script = ExtResource("8_xm1p7")
+text = "Yo"
+speaker_name = "Sami"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_0r35e"]
+script = ExtResource("8_xm1p7")
+text = "You need somthing?"
+speaker_name = "FD"
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_hjqyu"]
 script = ExtResource("7_cwvtk")
 id = "entry"
-lines = Array[ExtResource("8_xm1p7")]([SubResource("Resource_umn7m")])
+lines = Array[ExtResource("8_xm1p7")]([SubResource("Resource_umn7m"), SubResource("Resource_xm1p7"), SubResource("Resource_0r35e")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_0k2bt"]
 script = ExtResource("11_0k2bt")
-branches = Array[ExtResource("7_cwvtk")]([SubResource("Resource_hjqyu")])
+branches = Array[ExtResource("7_cwvtk")]([SubResource("Resource_j2rdc"), SubResource("Resource_hjqyu")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m5504"]
@@ -52,23 +101,76 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_3y0b6"]
 script = ExtResource("12_m5504")
-npc_name = "Jawad"
+npc_name = "FD"
 sprite_frames = SubResource("SpriteFrames_x31t4")
 dialog = SubResource("Resource_0k2bt")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_m5504"]
+script = ExtResource("8_xm1p7")
+text = "what is this???"
+speaker_name = "Sami"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_x31t4"]
+script = ExtResource("8_xm1p7")
+text = "Is this an apple???"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_4k82i"]
+script = ExtResource("10_hjqyu")
+word = "EATEN"
+unlock_flag = "apple_eaten"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_igd7x"]
+script = ExtResource("8_xm1p7")
+text = "AND IT IS EATEN??"
+set_flags = Array[String](["apple_eaten"])
+keywords = Array[ExtResource("10_hjqyu")]([SubResource("Resource_4k82i")])
+action_name = "checkpoint"
+action_args = [2]
+wait_for_action = true
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_4h60p"]
+script = ExtResource("7_cwvtk")
+id = "entry"
+lines = Array[ExtResource("8_xm1p7")]([SubResource("Resource_m5504"), SubResource("Resource_x31t4"), SubResource("Resource_igd7x")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_de78i"]
+script = ExtResource("11_0k2bt")
+branches = Array[ExtResource("7_cwvtk")]([SubResource("Resource_4h60p")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r35e"]
 
 [node name="BipolarHall" type="Node2D" unique_id=1496393445 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_nhb2p")
 player = NodePath("Sami_Doctor")
 doors = [NodePath("door_reg_type2"), NodePath("Door_reg")]
 
+[node name="GameStateMachine" type="Node" parent="." unique_id=1547814113]
+script = ExtResource("16_hjqyu")
+
+[node name="Start" type="Node" parent="GameStateMachine" unique_id=1566700070]
+script = ExtResource("17_0k2bt")
+hide_groups = Array[String](["statue_area"])
+auto_advance_when_flag = "FD_talk"
+next_state = "Met_FD"
+
+[node name="Met_FD" type="Node" parent="GameStateMachine" unique_id=1707887676]
+script = ExtResource("17_0k2bt")
+show_groups = Array[String](["statue_area"])
+
 [node name="BipolarHallBgrd" parent="." unique_id=1652384099 instance=ExtResource("2_6utgk")]
 
 [node name="door_reg_type2" parent="." unique_id=187596709 instance=ExtResource("3_02rfp")]
 position = Vector2(155, 191)
-entery_direction = 2
-new_scene_path = "res://Main Scenes/lvl_1_Lobby.tscn"
-target_door_name = "lvl_1_lobby_south"
+entery_direction = 0
+new_scene_path = "res://Main Scenes/lvl_3_lobby.tscn"
+target_door_name = "lvl_3_lobby_FD"
 this_door_name = "Bipolar_Hall_north"
 
 [node name="Door_reg" parent="." unique_id=739377036 instance=ExtResource("4_dvgmf")]
@@ -79,18 +181,21 @@ target_door_name = "Bipolar_Room_main"
 this_door_name = "Bipolar_Hall_South"
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_fkvws")]
-position = Vector2(157, 276)
+position = Vector2(140, 352)
 camera_adj = NodePath("../BipolarHallBgrd")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1290630022]
-position = Vector2(160, 379)
-scale = Vector2(6.76, 1)
-script = ExtResource("14_cwvtk")
-video_path = "uid://dy0ak0lxwtgbb"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=189259943]
-shape = SubResource("RectangleShape2D_xm1p7")
-
-[node name="NPC" parent="." unique_id=564381059 instance=ExtResource("6_lcfit")]
+[node name="NPC" parent="." unique_id=564381059 groups=["Nothing"] instance=ExtResource("6_lcfit")]
 position = Vector2(163, 479)
 npc_resource = SubResource("Resource_3y0b6")
+
+[node name="DialogTrigger" parent="." unique_id=227325031 instance=ExtResource("14_umn7m")]
+position = Vector2(214, 405)
+dialog = SubResource("Resource_de78i")
+
+[node name="Sprite2D" type="Sprite2D" parent="DialogTrigger" unique_id=600691097]
+position = Vector2(-1, -9)
+scale = Vector2(0.15717734, 0.15717734)
+texture = ExtResource("15_hjqyu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DialogTrigger" unique_id=209479900]
+shape = SubResource("RectangleShape2D_0r35e")

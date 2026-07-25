@@ -1,21 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://s5tbohsvvwni"]
+[gd_scene format=3 uid="uid://s5tbohsvvwni"]
 
 [ext_resource type="Script" uid="uid://fxamm14xxj5x" path="res://Save-Load-Feature/S-L_Script.gd" id="1_5v8ap"]
 
-[node name="Options" type="Control"]
+[node name="Options" type="Control" unique_id=128149940]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_5v8ap")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1561194557]
 modulate = Color(0.5370113, 0.5370113, 0.5370113, 1)
 layout_mode = 0
 offset_right = 1304.0
 offset_bottom = 736.0
 
-[node name="Save" type="Button" parent="."]
+[node name="Save" type="Button" parent="." unique_id=1215246392]
 layout_mode = 0
 offset_left = 976.0
 offset_top = 448.0
@@ -23,7 +23,7 @@ offset_right = 1232.0
 offset_bottom = 576.0
 text = "Save"
 
-[node name="Load" type="Button" parent="."]
+[node name="Load" type="Button" parent="." unique_id=1886199153]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 440.0

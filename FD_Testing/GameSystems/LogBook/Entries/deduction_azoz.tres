@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LogDeduction" format=3 uid="uid://cj0m4nh1v6otg"]
+
+[ext_resource type="Script" uid="uid://0dnatqchxfhb" path="res://FD_Testing/GameSystems/LogBook/log_deduction.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "azoz_deduction"
+required_entries = Array[String](["apple", "ahmed", "azoz_room"])
+board_position = Vector2(0, 220)
+result_title = "AZOZ ATE THE APPLE"
+result_text = "Eaten apple + Ahmed's timing + crumbs in his room. It was Azoz all along."
+result_color = Color(0.95, 0.45, 0.2, 1)
+result_flag = "azoz_ate_apple"

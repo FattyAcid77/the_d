@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+number = 1
+title = "After the statue puzzle"
+state_name = "Awakened"
+set_flags = Array[String](["Video", "statue_solved"])
