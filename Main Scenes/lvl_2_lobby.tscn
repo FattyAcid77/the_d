@@ -8,8 +8,8 @@
 
 [node name="Lvl2Lobby" type="Node2D" unique_id=651412082 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
-player = NodePath("")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2")]
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("Door_reg2"), NodePath("door_reg_type3")]
 
 [node name="lvl2_Lobby_bgrd" parent="." unique_id=1059811953 instance=ExtResource("2_rx0ui")]
 
@@ -37,8 +37,10 @@ this_door_name = "lvl_2_lobby_west"
 [node name="door_reg_type3" parent="." unique_id=1646241525 instance=ExtResource("6_6eri3")]
 position = Vector2(531, 589)
 entery_direction = 0
-new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
+new_scene_path = "res://Main Scenes/Glutt_hall.tscn"
 target_door_name = "Glutt_hall_north"
 this_door_name = "Lvl2_lobby_south"
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("5_rx0ui")]
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_rx0ui")]
+position = Vector2(530, 398)
+camera_adj = NodePath("../lvl2_Lobby_bgrd")

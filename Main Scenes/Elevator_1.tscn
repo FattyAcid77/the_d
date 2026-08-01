@@ -4,21 +4,17 @@
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_r02jt"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_dy6my"]
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_5dhi0"]
-[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="3_dy6my"]
 [ext_resource type="PackedScene" uid="uid://c3ddty4kt06p8" path="res://control scene/elevator_control_reg.tscn" id="6_4lxvx"]
 [ext_resource type="PackedScene" uid="uid://dvjps10m4rucf" path="res://control scene/Elevator_control.tscn" id="7_38pdo"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="7_ld0cy"]
 
 [node name="Elevator" type="Node2D" unique_id=547493953 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_r02jt")
-player = NodePath("Sami")
+player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg")]
 
 [node name="ElevatorBgrd" parent="." unique_id=185608878 instance=ExtResource("1_01sm3")]
 script = ExtResource("3_5dhi0")
-
-[node name="Sami" parent="." unique_id=13486402 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_dy6my")]
-position = Vector2(232, 215)
-camera_adj = NodePath("../ElevatorBgrd")
 
 [node name="Door_reg" parent="." unique_id=961692796 instance=ExtResource("2_dy6my")]
 position = Vector2(285, 258)
@@ -38,6 +34,9 @@ visible = false
 this_scene_path = "res://Main Scenes/Elevator_1.tscn"
 path_to_scene_1 = "res://Main Scenes/Elevator_2.tscn"
 path_to_scene_2 = "res://Main Scenes/Elevator_1.tscn"
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("7_ld0cy")]
+camera_adj = NodePath("../ElevatorBgrd")
 
 [connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]
 [connection signal="body_exited" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_exited"]

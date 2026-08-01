@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bd2tp4t42je1u"]
+
+[ext_resource type="Script" uid="uid://cpg8eghbhgtry" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_trigger.gd" id="1_trg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trg"]
+radius = 34.0
+
+[node name="DialogTrigger" type="Area2D"]
+script = ExtResource("1_trg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_trg")
+
+[node name="Prompt" type="Node2D" parent="."]
+position = Vector2(0, -44)
+
+[node name="Mark" type="Label" parent="Prompt"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 20
+text = "!"
+horizontal_alignment = 1

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BloodType" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Breath/blood_type.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "stage2"
+color = Color(0.55, 0.08, 0.14, 1)
+stain_scale = 1.1
+affects_ground = false
+first_spill_flag = "spilled_stage2"

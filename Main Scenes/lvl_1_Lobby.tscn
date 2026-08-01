@@ -13,7 +13,7 @@
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_hkdn2")
 player = NodePath("Sami_Doctor_test")
-doors = [NodePath("Door_reg"), NodePath("door_reg_type2"), NodePath("door_reg_type3")]
+doors = [NodePath("door_reg_type2"), NodePath("door_reg_type3"), NodePath("Door_reg")]
 
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("2_0d2n7")]
 

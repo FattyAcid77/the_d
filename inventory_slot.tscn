@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://iwtylqrfnx5c"]
 
 [ext_resource type="Script" uid="uid://b5rsvhk7x23yr" path="res://3MK-File/script/inventory_slot.gd" id="1_42eed"]
-[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Knife.png" id="2_bfyh4"]
+[ext_resource type="Texture2D" uid="uid://bj4wbvs6f2tcv" path="res://FD_Testing/Temp_Stuff/Visual Stuff/Icons_Temp/Knife.png" id="2_bfyh4"]
 [ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="3_75pi0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfyh4"]

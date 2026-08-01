@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DeathCause" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Death/death_cause.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "suffocation"
+row = 2
+label = ""
+note = "Ran out of air."

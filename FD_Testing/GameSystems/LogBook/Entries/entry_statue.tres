@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LogEntry" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+
+[sub_resource type="Resource" id="fact1"]
+script = ExtResource("2")
+flag = "statue_solved"
+text = "The statue woke up when all four speakers sang the right numbers. It can speak."
+
+[resource]
+script = ExtResource("1")
+id = "statue"
+title = "The Statue"
+color = Color(0.85, 0.55, 0.25, 1)
+board_position = Vector2(120, 40)
+facts = [SubResource("fact1")]
+links_to = Array[String]([])

@@ -2,27 +2,466 @@
 
 [ext_resource type="PackedScene" uid="uid://debm3glfieapw" path="res://background_scenes/lvl_3_lobby_bgrd.tscn" id="1_o7f1r"]
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_sailq"]
-[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_03qw1"]
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_k5edk"]
-[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="3_shg4i"]
+[ext_resource type="PackedScene" uid="uid://biwlg3wu0837a" path="res://FD_Testing/GameSystems/Puzzle/statue_puzzle_example.tscn" id="5_sailq"]
+[ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="6_83ett"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="6_k5edk"]
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="7_hfd0h"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="8_gmla1"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="9_qme8w"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="10_iq4ux"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="11_idite"]
+[ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="12_4k670"]
+[ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="13_hfd0h"]
+[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="14_qme8w"]
+[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="15_iq4ux"]
+[ext_resource type="Script" uid="uid://eqkod3vr65xj" path="res://FD_Testing/GameSystems/Cutscene/cutscene_trigger.gd" id="16_iq4ux"]
+[ext_resource type="Resource" uid="uid://dfxa4bpehxlxs" path="res://FD_Testing/GameSystems/Cutscene/example_comic.tres" id="17_idite"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="18_4k670"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="18_v8wcs"]
+[ext_resource type="Texture2D" uid="uid://cjlgcx68s0dyt" path="res://3MK-File/TEST-ANIM/Player-down.tres" id="20_rtr1t"]
+[ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="21_oth73"]
+[ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
+[ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
+[ext_resource type="Resource" uid="uid://1qlxg1lccy0k" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
 
-[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player", "doors")]
+[sub_resource type="Resource" id="Resource_h0mp1"]
+script = ExtResource("8_gmla1")
+text = "There were a apple... that were eaten... know anything about it?"
+speaker_name = "Sami"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_ldlnt"]
+script = ExtResource("8_gmla1")
+text = "I SAW IT IN AZOZ ROOM THIS MORNING"
+speaker_name = "Ahmed"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_de0em"]
+script = ExtResource("8_gmla1")
+text = "I KNOW NOTHING PLEASE DO NOT HURT ME"
+speaker_name = "Ahmed"
+set_flags = Array[String](["ahmed_saw_apple"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_buur1"]
+script = ExtResource("7_hfd0h")
+id = "apple_eaten"
+require_flags = Array[String](["apple_eaten"])
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_h0mp1"), SubResource("Resource_ldlnt"), SubResource("Resource_de0em")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_4k670"]
+script = ExtResource("8_gmla1")
+text = "Hello"
+speaker_name = "Ahmed"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_oktg8"]
+script = ExtResource("8_gmla1")
+text = "Hi?"
+speaker_name = "Sami"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_bkopv"]
+script = ExtResource("8_gmla1")
+text = "Its a butfuel day today... birds are singing, flowers are bloming"
+speaker_name = "Ahmed"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_ug341"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+blocked_by_flags = Array[String](["apple_eaten"])
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_4k670"), SubResource("Resource_oktg8"), SubResource("Resource_bkopv")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_731e0"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_buur1"), SubResource("Resource_ug341")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_qlnu4"]
+script = ExtResource("12_4k670")
+npc_name = "Ahmed"
+dialog = SubResource("Resource_731e0")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_v8wcs"]
+script = ExtResource("8_gmla1")
+text = "This is a knife...."
+set_flags = Array[String](["FD_Bathrom"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_weiwv"]
+script = ExtResource("8_gmla1")
+text = "Did he use it to cut up the apple?"
+set_flags = Array[String](["knife_in_azoz_room", "FD_talk"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_rtr1t"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_v8wcs"), SubResource("Resource_weiwv")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_oth73"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_rtr1t")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmla1"]
+atlas = ExtResource("13_hfd0h")
+region = Rect2(0, 0, 33, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qme8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmla1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_idite"]
+script = ExtResource("12_4k670")
+npc_name = "FD"
+sprite_frames = SubResource("SpriteFrames_qme8w")
+dialog = SubResource("Resource_oth73")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idite"]
+size = Vector2(94, 88)
+
+[sub_resource type="Resource" id="Resource_i5dnf"]
+script = ExtResource("8_gmla1")
+text = "YES...YES IT WAS ME"
+speaker_name = "AZOZ"
+action_name = "checkpoint"
+action_args = [3]
+wait_for_action = true
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_0owj3"]
+script = ExtResource("7_hfd0h")
+id = "azoz ate apple"
+require_flags = Array[String](["azoz_ate_apple"])
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_i5dnf")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_cfm55"]
+script = ExtResource("8_gmla1")
+text = "..."
+speaker_name = "Azoz"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_5ygl5"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_cfm55")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_m2n10"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_0owj3"), SubResource("Resource_5ygl5")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5dnf"]
+atlas = ExtResource("18_v8wcs")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0owj3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5dnf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_h8623"]
+script = ExtResource("12_4k670")
+npc_name = "Azoz"
+sprite_frames = SubResource("SpriteFrames_0owj3")
+dialog = SubResource("Resource_m2n10")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_racjh"]
+script = ExtResource("8_gmla1")
+text = "i am happy to be here"
+speaker_name = "Yazzed"
+show_if_flag = "sun"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_38kcd"]
+script = ExtResource("10_iq4ux")
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_m5ssl"]
+script = ExtResource("8_gmla1")
+text = "I am sad"
+hide_if_flag = "sun"
+set_flags = Array[String](["sad"])
+keywords = Array[ExtResource("10_iq4ux")]([SubResource("Resource_38kcd")])
+camera_target = Vector2(30, 30)
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_vn28n"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_racjh"), SubResource("Resource_m5ssl")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_prw6r"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_vn28n")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdjb3"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(0, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc5a5"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(33, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlqiq"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(66, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2he0o"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(99, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wfem"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(132, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srgnv"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(165, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lntt"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(198, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2itw"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(231, 0, 33, 93)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lm71t"]
+atlas = ExtResource("20_rtr1t")
+region = Rect2(0, 93, 33, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dd00y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdjb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc5a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlqiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2he0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wfem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srgnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lntt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2itw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lm71t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_bac7x"]
+script = ExtResource("12_4k670")
+npc_name = "Yazed"
+sprite_frames = SubResource("SpriteFrames_dd00y")
+dialog = SubResource("Resource_prw6r")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_ichw6"]
+script = ExtResource("8_gmla1")
+text = "what the medcine doc"
+action_name = "prescription_show"
+wait_for_action = true
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_20q5e"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_ichw6")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_l6pn3"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_20q5e")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_mrteh"]
+script = ExtResource("12_4k670")
+npc_name = "The Nurse"
+dialog = SubResource("Resource_l6pn3")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_jhva0"]
+script = ExtResource("8_gmla1")
+text = "so, what brings you today doc?"
+speaker_name = "FUCKING SOMEONE"
+action_name = "prescription_entry"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_4kwv6"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_jhva0")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_fynqu"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_4kwv6")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_wc5to"]
+script = ExtResource("12_4k670")
+npc_name = "checkpoint"
+dialog = SubResource("Resource_fynqu")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_jdjb3"]
+script = ExtResource("8_gmla1")
+text = "you  is dead"
+speaker_name = "FAHD"
+action_name = "kill"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_kc5a5"]
+script = ExtResource("7_hfd0h")
+id = "entry"
+lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_jdjb3")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_xlqiq"]
+script = ExtResource("11_idite")
+branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_kc5a5")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkopv"]
+
+[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player")]
 script = ExtResource("1_sailq")
-player = NodePath("")
-doors = [NodePath("Door_reg")]
+player = NodePath("Sami_Doctor")
+
+[node name="GameStateMachine" type="Node" parent="." unique_id=686998481]
+script = ExtResource("14_qme8w")
+
+[node name="Start" type="Node" parent="GameStateMachine" unique_id=646055488]
+script = ExtResource("15_iq4ux")
+hide_groups = Array[String](["statue_area"])
+auto_advance_when_flag = "Nothing"
+next_state = "Nothing_Matter"
+
+[node name="Met_FD" type="Node" parent="GameStateMachine" unique_id=692040357]
+script = ExtResource("15_iq4ux")
+show_groups = Array[String](["statue_area"])
+auto_advance_when_flag = "Nothing"
+next_state = "Nothing_Matter"
 
 [node name="Lvl3LobbyBgrd" parent="." unique_id=935252586 instance=ExtResource("1_o7f1r")]
 script = ExtResource("3_k5edk")
 
-[node name="Door_reg" parent="." unique_id=942710479 instance=ExtResource("2_03qw1")]
-position = Vector2(917, 416)
-entery_direction = 3
-new_scene_path = "res://Main Scenes/Elevator_3.tscn"
-target_door_name = "Elevator_3_Main"
-this_door_name = "lvl_3_lobby_East"
+[node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_k5edk")]
+position = Vector2(371, 406)
+camera_adj = NodePath("../Lvl3LobbyBgrd")
 
-[node name="door_reg_type2" parent="." unique_id=1561475788 instance=ExtResource("3_shg4i")]
-position = Vector2(539, 234)
+[node name="StatuePuzzle" parent="." unique_id=1258403952 groups=["statue_area"] instance=ExtResource("5_sailq")]
+position = Vector2(720, 463.00003)
+scale = Vector2(0.31, 0.31)
 
-[node name="door_reg_type3" parent="." unique_id=1161476748 instance=ExtResource("3_shg4i")]
-position = Vector2(530, 599)
+[node name="NPC" parent="." unique_id=1496377515 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(603, 366)
+npc_resource = SubResource("Resource_qlnu4")
+
+[node name="NPC2" parent="." unique_id=697453048 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(484, 331)
+npc_resource = SubResource("Resource_idite")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1404938324]
+position = Vector2(296, 404)
+script = ExtResource("16_iq4ux")
+comic = ExtResource("17_idite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=204304978]
+position = Vector2(-64, 15)
+shape = SubResource("RectangleShape2D_idite")
+
+[node name="Azoz" parent="Area2D" unique_id=1804397539 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(204, 144)
+npc_resource = SubResource("Resource_h8623")
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("18_4k670")]
+position = Vector2(536, 260)
+entery_direction = 0
+new_scene_path = "res://FD_Testing/Temp_Stuff/Bipolar_Hall_Fd_Test.tscn"
+target_door_name = "Bipolar_Hall_north"
+this_door_name = "lvl_3_lobby_FD"
+
+[node name="Yazed" parent="." unique_id=569669017 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(392, 434)
+npc_resource = SubResource("Resource_bac7x")
+
+[node name="NPC3" parent="." unique_id=1293972803 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(740, 540)
+npc_resource = SubResource("Resource_mrteh")
+
+[node name="NPC4" parent="." unique_id=1410505619 groups=["Nothing"] instance=ExtResource("6_83ett")]
+position = Vector2(605, 543)
+npc_resource = SubResource("Resource_wc5to")
+
+[node name="DialogTrigger" parent="." unique_id=793013839 instance=ExtResource("21_oth73")]
+position = Vector2(320, 491)
+dialog = SubResource("Resource_xlqiq")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=2023173997]
+position = Vector2(642, 459)
+script = ExtResource("22_ug341")
+item = ExtResource("23_h0mp1")
+amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=603840668]
+shape = SubResource("RectangleShape2D_bkopv")
+
+[node name="Area2D3" type="Area2D" parent="." unique_id=1622657557]
+position = Vector2(645, 491)
+script = ExtResource("22_ug341")
+item = ExtResource("24_h0mp1")
+amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" unique_id=1211225760]
+shape = SubResource("RectangleShape2D_bkopv")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1828562991]
+position = Vector2(482, 368)
+script = ExtResource("23_bkopv")
+cell_size = Vector2(46, 46)
+wanted = Array[String](["stage1", "", "", "", "", "", "", "", ""])

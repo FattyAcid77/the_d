@@ -13,7 +13,8 @@ doors = [NodePath("door_reg_type2"), NodePath("Door_reg"), NodePath("Door_reg2")
 
 [node name="GluttHallBgrd" parent="." unique_id=1900176403 instance=ExtResource("1_qbcyd")]
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_1rr41")]
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_1rr41")]
+camera_adj = NodePath("../GluttHallBgrd")
 
 [node name="door_reg_type2" parent="." unique_id=1646241525 instance=ExtResource("3_t7gi0")]
 position = Vector2(286, 180)
@@ -45,6 +46,14 @@ this_door_name = "Hall_cell3"
 
 [node name="Door_reg4" parent="." unique_id=1271433515 instance=ExtResource("5_or8qc")]
 position = Vector2(384, 463)
+entery_direction = 3
+new_scene_path = "res://Main Scenes/Glutt_cell4.tscn"
+target_door_name = "Cell4"
+this_door_name = "Hall_cell4"
 
 [node name="Door_reg5" parent="." unique_id=766597832 instance=ExtResource("5_or8qc")]
 position = Vector2(288, 603)
+entery_direction = 0
+new_scene_path = "res://Main Scenes/Glutt_room.tscn"
+target_door_name = "Glutt_room"
+this_door_name = "Hall_glutt_room"

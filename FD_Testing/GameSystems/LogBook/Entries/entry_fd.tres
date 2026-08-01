@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://b47h5hsqcpian"]
+
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dqyfdv1tnv3gp" path="res://FD_Testing/GameSystems/LogBook/Notes/Note_2.png" id="2_b5sxy"]
+
+[sub_resource type="Resource" id="fact1"]
+script = ExtResource("2")
+flag = "Video"
+text = "FD told me about the video. Something happened here before."
+
+[sub_resource type="Resource" id="fact2"]
+script = ExtResource("2")
+flag = "apple_eaten"
+text = "Someone ate the apple. FD swears it wasn't him."
+
+[resource]
+script = ExtResource("1")
+id = "fd"
+always_visible = true
+title = "FD"
+picture = ExtResource("2_b5sxy")
+color = Color(0.3, 0.65, 0.9, 1)
+board_position = Vector2(-200, -60)
+facts = Array[ExtResource("2")]([SubResource("fact1"), SubResource("fact2")])
+links_to = Array[String](["statue"])

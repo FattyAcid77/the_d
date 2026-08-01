@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_hmgdi"]
 [ext_resource type="PackedScene" uid="uid://cuf2n1fwsq115" path="res://map_light.tscn" id="6_ctn4s"]
 [ext_resource type="PackedScene" uid="uid://dqtrpvlja2r00" path="res://3MK-File/Resources/item.tscn" id="8_hkdn2"]
-[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/New_Diloage_System/Visual Stuff/Icons_Temp/Rubic.png" id="9_31cma"]
+[ext_resource type="Texture2D" uid="uid://b4nj2ysb5yphh" path="res://FD_Testing/Temp_Stuff/Visual Stuff/Icons_Temp/Rubic.png" id="9_31cma"]
 [ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
 [ext_resource type="Script" uid="uid://cvugbs4ksvifo" path="res://3MK-File/Resources/item.gd" id="10_j8yc2"]
 [ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="11_31cma"]

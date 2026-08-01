@@ -73,6 +73,7 @@ func drop_item(item_data, target_position):
 
 # Let's say 'item_to_use' is the dictionary you created in pickable()
 func use_item(item_to_use):
+	if MedicalItems.use(item_to_use): return
 	# Check if this item actually heals
 	if item_to_use.has("heal_amount") and item_to_use["heal_amount"] > 0:
 		

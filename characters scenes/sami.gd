@@ -259,10 +259,14 @@ func apply_item() -> void:
 	pass
 
 func camera_limit_adj() -> void:
-	# Left unfinished. The four locals here had no right-hand side, which was a
-	# syntax error that stopped this whole file parsing — and with it the `Sami`
-	# global class, which is why task_area.gd was failing to load too.
-	# They were only locals and were never applied to the camera, so making this
-	# a no-op changes no behaviour. The call at line 71 still resolves.
-	# See Main_Stuff/sami_doctor.gd camera_limit_set() for the working version.
-	pass
+	if camera_adj == null:
+		push_warning("camera_adj not assigned on %s — camera limits left at default" % name)
+		return
+	var top_limit = camera_adj.top_limits
+	var right_limit = camera_adj.right_limits
+	var bot_limit = camera_adj.bottom_limits
+	var left_limit = camera_adj.left_limits
+	camera.limit_top = top_limit
+	camera.limit_right = right_limit
+	camera.limit_bottom = bot_limit
+	camera.limit_left = left_limit

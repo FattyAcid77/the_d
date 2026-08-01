@@ -8,7 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bhire3x0rk731" path="res://3MK-File/myshit/sami pull left.png" id="6_10rwc"]
 [ext_resource type="Texture2D" uid="uid://dgv86ko2niebr" path="res://3MK-File/myshit/sami pull right.png" id="7_2ieb1"]
 [ext_resource type="Texture2D" uid="uid://bmig2fbyly6fu" path="res://3MK-File/myshit/sami pull up.png" id="8_3rkym"]
+[ext_resource type="Texture2D" uid="uid://bodr8gin7n06p" path="res://3MK-File/radio-button-left-3.png" id="8_do6xx"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="9_ag5su"]
+[ext_resource type="Texture2D" uid="uid://cbhoew3xisrrl" path="res://3MK-File/radio-button-left-4.png" id="9_o77qo"]
+[ext_resource type="Texture2D" uid="uid://bpbjotuatsk47" path="res://3MK-File/radio-button-right-5.png" id="10_1f6mo"]
 [ext_resource type="Texture2D" uid="uid://6q05yfdx341s" path="res://3MK-File/myshit/sami push left (1).png" id="10_xeifs"]
 [ext_resource type="Texture2D" uid="uid://bs4lwhs22wtcu" path="res://3MK-File/myshit/sami push right (1).png" id="11_mvwyh"]
 [ext_resource type="Texture2D" uid="uid://751tiq2h17a3" path="res://3MK-File/myshit/sami push up (1).png" id="12_324dx"]
@@ -16,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://b55a7vyqwfkvs" path="res://3MK-File/TEST-ANIM/up w dr.png" id="14_4u6n7"]
 [ext_resource type="Script" uid="uid://csdollpucdl0j" path="res://3MK-File/Sami_statemachine/Sami_statemachine.gd" id="15_7dkr7"]
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="15_oevct"]
-[ext_resource type="PackedScene" uid="uid://dpdyays8575ft" path="res://3MK-File/Scene/radio_ui.tscn" id="16_5ek7p"]
 [ext_resource type="Script" uid="uid://tglhmvofnukt" path="res://3MK-File/Sami_statemachine/Idle_state.gd" id="16_yr7xf"]
 [ext_resource type="Script" uid="uid://5l6qdqaxjo6g" path="res://3MK-File/Sami_statemachine/walk_state.gd" id="17_24ppx"]
 [ext_resource type="Script" uid="uid://ldxs6xhdy3jl" path="res://3MK-File/Sami_statemachine/drag_state.gd" id="18_drag0"]
@@ -25,10 +27,51 @@
 [ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="21_pixaefont"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="22_areaind"]
 [ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="23_indicconfig"]
+[ext_resource type="Script" uid="uid://njvdpatop08m" path="res://FD_Testing/GameSystems/Death/death_state.gd" id="24_eu0h5"]
 [ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="24_tile0011"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="27_mqpgr"]
-[ext_resource type="PackedScene" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
+[ext_resource type="PackedScene" uid="uid://be3qnkolom80x" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
 [ext_resource type="Resource" path="res://3MK-File/Resources/PlayerHealth_Doctor.tres" id="29_healthstats"]
+[ext_resource type="Script" uid="uid://cbhx56y44765k" path="res://FD_Testing/GameSystems/Health/health_watcher.gd" id="31_3wmba"]
+[ext_resource type="Script" uid="uid://dab4b5wvg32fc" path="res://FD_Testing/GameSystems/Breath/breath_component.gd" id="36_mmxgd"]
+[ext_resource type="Script" uid="uid://cbh722yxlu57y" path="res://FD_Testing/GameSystems/Health/wound_component.gd" id="37_6b7p2"]
+[ext_resource type="Script" uid="uid://d0wff16bqgrq2" path="res://FD_Testing/GameSystems/Breath/blood_type.gd" id="37_grvch"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Breath/Types/blood_stage1.tres" id="38_heea1"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Breath/Types/blood_stage2.tres" id="39_g8iw6"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Breath/Types/blood_stage3.tres" id="40_ejdnq"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Breath/Types/blood_stage4.tres" id="41_er2r4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wmba"]
+atlas = ExtResource("5_p75en")
+region = Rect2(0, 0, 33, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhe1i"]
+atlas = ExtResource("6_10rwc")
+region = Rect2(0, 0, 54, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsiy4"]
+atlas = ExtResource("7_2ieb1")
+region = Rect2(0, 0, 54, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x82yj"]
+atlas = ExtResource("9_ag5su")
+region = Rect2(0, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmxgd"]
+atlas = ExtResource("8_3rkym")
+region = Rect2(0, 0, 33, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heea1"]
+atlas = ExtResource("8_do6xx")
+region = Rect2(0, 0, 26, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8iw6"]
+atlas = ExtResource("9_o77qo")
+region = Rect2(0, 0, 26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejdnq"]
+atlas = ExtResource("10_1f6mo")
+region = Rect2(0, 0, 26, 26)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hg3f6"]
 atlas = ExtResource("2_y61mo")
@@ -382,6 +425,55 @@ region = Rect2(0, 94, 33, 94)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3wmba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhe1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsiy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x82yj")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmxgd")
+}],
+"loop": true,
+"name": &"Hold_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_heea1")
+}],
+"loop": true,
+"name": &"Hold_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8iw6")
+}],
+"loop": true,
+"name": &"Hold_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejdnq")
+}],
+"loop": true,
+"name": &"Hold_4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_hg3f6")
 }],
 "loop": 1,
@@ -731,7 +823,7 @@ stats = ExtResource("29_healthstats")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rwi67")
-animation = &"Walk_Side"
+animation = &"Idle_down"
 autoplay = "Idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041668416]
@@ -760,6 +852,9 @@ script = ExtResource("18_drag0")
 [node name="Rotate" type="Node" parent="Statemachine" unique_id=1721650722]
 script = ExtResource("19_rot0")
 
+[node name="Death" type="Node" parent="Statemachine" unique_id=747849020]
+script = ExtResource("24_eu0h5")
+
 [node name="UI" type="Node" parent="." unique_id=766651730]
 
 [node name="Tools" type="CanvasLayer" parent="UI" unique_id=2052687184]
@@ -776,7 +871,6 @@ offset_right = 8.0
 offset_bottom = -152.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oevct")
-Radio_Sami = ExtResource("16_5ek7p")
 metadata/_edit_use_anchors_ = true
 
 [node name="Inventory UI" type="CanvasLayer" parent="UI" unique_id=1693625034]
@@ -812,3 +906,14 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=1790946993 instance=ExtResource("28_healthui")]
+
+[node name="HealthWatcher" type="Node" parent="." unique_id=1263484406]
+script = ExtResource("31_3wmba")
+
+[node name="Breath" type="Node2D" parent="." unique_id=1217061111]
+script = ExtResource("36_mmxgd")
+stage_blood = Array[ExtResource("37_grvch")]([ExtResource("38_heea1"), ExtResource("39_g8iw6"), ExtResource("40_ejdnq"), ExtResource("41_er2r4")])
+stage_animations = Array[String](["Hold_1", "Hold_2", "Hold_3", "Hold_4"])
+
+[node name="Wounds" type="Node" parent="." unique_id=1449223049]
+script = ExtResource("37_6b7p2")

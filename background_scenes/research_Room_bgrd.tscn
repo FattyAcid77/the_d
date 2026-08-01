@@ -1,3 +1,17 @@
 [gd_scene format=3 uid="uid://bml5qsvrw41qh"]
 
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_lcf0a"]
+[ext_resource type="Texture2D" uid="uid://b37f0moeipfx3" path="res://background_scenes/assets/f2-researechroom.png" id="1_tp1cf"]
+
 [node name="ResearchRoomBgrd" type="Node2D" unique_id=1742286866]
+script = ExtResource("1_lcf0a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=941415183]
+position = Vector2(322, 174)
+texture = ExtResource("1_tp1cf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=509260443]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1851958156]
+position = Vector2(298, 154)
+polygon = PackedVector2Array(-271, 34, -270, 167, -134, 167, -134, 139, -137, 139, -137, 116, -65, 115, -40, 115, -40, 94, -16, 94, -16, 115, 15, 115, 17, 111, 30, 104, 36, 104, 36, 114, 42, 114, 42, 141, 63, 141, 63, 166, 145, 166, 143, 89, 149, 83, 160, 81, 173, 67, 177, 65, 192, 65, 192, 55, -152, 52, -159, 49, -215, 48, -220, 35, -268, 35, -42, -43, 392, -17, 358, 245, -327, 219, -324, 32)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://capbwl3rbls7n"]
+[gd_scene format=3 uid="uid://capbwl3rbls7n"]
 
 [ext_resource type="Script" uid="uid://bbt4p7ggounqx" path="res://radio_panel.gd" id="1_cyy35"]
-[ext_resource type="PackedScene" uid="uid://bdb8u7sdvpkpf" path="res://3MK-File/myshit/radio_2_0.tscn" id="2_fe5ir"]
 
-[node name="Radio-Panel" type="Panel"]
+[node name="Radio-Panel" type="Panel" unique_id=258842910]
 anchors_preset = -1
 anchor_right = 0.44200003
 anchor_bottom = 0.358
@@ -12,4 +11,3 @@ offset_bottom = 20.119995
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_cyy35")
-Radio_Sami = ExtResource("2_fe5ir")
