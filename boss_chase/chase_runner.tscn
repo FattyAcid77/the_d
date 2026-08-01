@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://boss_chase/chase_runner.gd" id="1_runner"]
+[ext_resource type="Script" path="res://boss_chase/chase_slow_effect.gd" id="2_slow"]
+[ext_resource type="Script" path="res://boss_chase/chase_camera.gd" id="3_camera"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="4_icon"]
+[ext_resource type="Resource" path="res://boss_chase/resources/chase_runner_health.tres" id="5_health"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_runner"]
+radius = 9.0
+
+[node name="ChaseRunner" type="CharacterBody2D" groups=["chase_runner"]]
+z_index = 2
+motion_mode = 1
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("1_runner")
+stats = ExtResource("5_health")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("4_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_runner")
+
+[node name="Slow" type="Node" parent="."]
+script = ExtResource("2_slow")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+script = ExtResource("3_camera")

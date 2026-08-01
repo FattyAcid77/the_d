@@ -38,8 +38,8 @@ func Remove_item(item_type,item_effect):
 			return true
 	return false
 
-func player_ref(Sami):
-	Player_ch = Sami
+func player_ref(player_node):
+	Player_ch = player_node
 
 
 # Renamed from drop_position to calculate_drop_position

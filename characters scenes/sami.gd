@@ -29,7 +29,7 @@ var ray_length: float = 50.0
 @onready var ani: AnimatedSprite2D = $Sprite2D
 @onready var pp_logic: Area2D = $"Push-pull-Logic"
 @onready var camera = $Camera2D
-@export var camera_adj
+@export var camera_adj: bgrd_node
 
 # --- Animation system ---
 
@@ -259,7 +259,10 @@ func apply_item() -> void:
 	pass
 
 func camera_limit_adj() -> void:
-	var top_limit = 
-	var right_limit = 
-	var bot_limit = 
-	var left_limit = 
+	# Left unfinished. The four locals here had no right-hand side, which was a
+	# syntax error that stopped this whole file parsing — and with it the `Sami`
+	# global class, which is why task_area.gd was failing to load too.
+	# They were only locals and were never applied to the camera, so making this
+	# a no-op changes no behaviour. The call at line 71 still resolves.
+	# See Main_Stuff/sami_doctor.gd camera_limit_set() for the working version.
+	pass

@@ -384,7 +384,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hg3f6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle_Side",
 "speed": 5.0
 }, {
@@ -392,7 +392,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_20pqq")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle_down",
 "speed": 5.0
 }, {
@@ -400,7 +400,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0wwpp")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle_up",
 "speed": 5.0
 }, {
@@ -429,7 +429,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opt0g")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PL_DOWN",
 "speed": 5.0
 }, {
@@ -452,7 +452,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xctoa")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PL_LEFT",
 "speed": 5.0
 }, {
@@ -475,7 +475,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vvii8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PL_RIGHT",
 "speed": 5.0
 }, {
@@ -504,7 +504,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p84sg")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PL_UP",
 "speed": 5.0
 }, {
@@ -533,7 +533,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mxom2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PS_DOWN",
 "speed": 5.0
 }, {
@@ -562,7 +562,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wl6vt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PS_LEFT",
 "speed": 5.0
 }, {
@@ -591,7 +591,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iewps")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PS_RIGHT",
 "speed": 5.0
 }, {
@@ -620,7 +620,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7vvtw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"PS_UP",
 "speed": 5.0
 }, {
@@ -649,7 +649,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57axd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Walk_Side",
 "speed": 7.0
 }, {
@@ -678,7 +678,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ggfrc")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Walk_down",
 "speed": 8.0
 }, {
@@ -707,7 +707,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4fwrh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Walk_up",
 "speed": 7.0
 }]
@@ -766,7 +766,6 @@ script = ExtResource("19_rot0")
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
-layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
