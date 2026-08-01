@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c4t8uhv5j2t4w"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_62usn"]
+[ext_resource type="PackedScene" uid="uid://debm3glfieapw" path="res://background_scenes/lvl_3_lobby_bgrd.tscn" id="2_ab8m0"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_poj6v"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_12qsx"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="5_rs7hr"]
+[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="6_graxu"]
+[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="7_bf71g"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="8_3xmfg"]
+[ext_resource type="PackedScene" uid="uid://g7vkec88g4gi" path="res://FD_Testing/GameSystems/BossFight/boss_fight_test.tscn" id="9_62usn"]
+
+[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_62usn")
+player = NodePath("Sami_Doctor")
+doors = [NodePath("Door/Door_reg")]
+
+[node name="Lvl3LobbyBgrd" parent="." unique_id=935252586 instance=ExtResource("2_ab8m0")]
+script = ExtResource("3_poj6v")
+
+[node name="Door" type="Node" parent="." unique_id=2088017385]
+
+[node name="Door_reg" parent="Door" unique_id=942710479 instance=ExtResource("4_12qsx")]
+position = Vector2(917, 416)
+entery_direction = 3
+target_door_name = "Elevator_3_Main"
+this_door_name = "lvl_3_lobby_East"
+
+[node name="door_reg_type2" parent="Door" unique_id=1561475788 instance=ExtResource("5_rs7hr")]
+position = Vector2(539, 234)
+
+[node name="door_reg_type3" parent="Door" unique_id=1161476748 instance=ExtResource("5_rs7hr")]
+position = Vector2(530, 599)
+
+[node name="GameStateMachine" type="Node" parent="." unique_id=121626889]
+script = ExtResource("6_graxu")
+
+[node name="Start" type="Node" parent="GameStateMachine" unique_id=1450877935]
+script = ExtResource("7_bf71g")
+hide_groups = Array[String](["statue_area"])
+auto_advance_when_flag = "Nothing"
+next_state = "Nothing_Matter"
+
+[node name="Met_FD" type="Node" parent="GameStateMachine" unique_id=1673545895]
+script = ExtResource("7_bf71g")
+show_groups = Array[String](["statue_area"])
+auto_advance_when_flag = "Nothing"
+next_state = "Nothing_Matter"
+
+[node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("8_3xmfg")]
+position = Vector2(370, 443)
+camera_adj = NodePath("../Lvl3LobbyBgrd")
+
+[node name="YazzedFight" parent="." unique_id=1908176927 instance=ExtResource("9_62usn")]
+position = Vector2(552, 386)
+scale = Vector2(0.36663154, 0.36663154)

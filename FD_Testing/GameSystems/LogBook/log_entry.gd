@@ -20,6 +20,17 @@ class_name LogEntry extends Resource
 ## Optional picture on the card (portrait, screenshot, drawing).
 @export var picture: Texture2D
 
+@export_group("Note art")
+## The pinned-note image for this entry (Notes/Note_1.png etc). Cards are
+## sized from this texture, so different notes are naturally different sizes.
+@export var note_icon: Texture2D
+
+## Multiplies the note's natural size on the board.
+@export var icon_scale: float = 1.0
+
+## Small rotation for a hand-pinned look (degrees, e.g. -6 .. 6).
+@export var icon_tilt: float = 0.0
+
 ## Card color — use it to group themes (people, places, mysteries...).
 @export var color: Color = Color(0.85, 0.65, 0.25)
 

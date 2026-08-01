@@ -1,12 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://be3qnkolom80x"]
 
 [ext_resource type="Script" uid="uid://b4b3c3bypp8p1" path="res://characters scenes/health_ui.gd" id="1_hui"]
 [ext_resource type="Texture2D" uid="uid://x0sbp1aph1ii" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0000.png" id="2_full"]
 [ext_resource type="Texture2D" uid="uid://bodr8gin7n06p" path="res://3MK-File/radio-button-left-3.png" id="3_empty"]
 
-[node name="Health_point" type="CanvasLayer"]
+[node name="Health_point" type="CanvasLayer" unique_id=1420038823]
 
-[node name="Health_UI" type="HBoxContainer" parent="."]
+[node name="Health_UI" type="HBoxContainer" parent="." unique_id=122142232]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_hui")

@@ -29,7 +29,7 @@ var ray_length: float = 50.0
 @onready var ani: AnimatedSprite2D = $Sprite2D
 @onready var pp_logic: Area2D = $"Push-pull-Logic"
 @onready var camera = $Camera2D
-@export var camera_adj
+@export var camera_adj = bgrd_node
 
 # --- Animation system ---
 

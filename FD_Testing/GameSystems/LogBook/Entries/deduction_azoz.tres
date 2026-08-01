@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="LogDeduction" format=3 uid="uid://cj0m4nh1v6otg"]
+[gd_resource type="Resource" script_class="LogDeduction" load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://0dnatqchxfhb" path="res://FD_Testing/GameSystems/LogBook/log_deduction.gd" id="1"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_deduction.gd" id="1"]
 
 [resource]
 script = ExtResource("1")

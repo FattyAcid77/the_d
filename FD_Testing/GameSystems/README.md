@@ -357,3 +357,375 @@ number + a checksum — wrong or invented medicine = "does not exist".
 !! NEVER change the syllable tables or checkpoint numbers after release —
    they ARE the players' written-down codes.
 Popup texts are exports on the autoload (set them to Arabic if you like).
+
+================================================================
+## 14. LOGBOOK UI — the clipboard
+================================================================
+The board is now drawn as the clipboard art (BOARD_UI.png):
+- The world behind is BLURRED (blur_background.gdshader; falls back to a
+  plain dim if the shader is missing).
+- Opening SLIDES the clipboard up from the bottom (slide_seconds export),
+  closing slides it back down.
+- The board is INFINITE by default (infinite_board export): pan forever in
+  any direction. Notes are still CLIPPED to the paper (a SubViewport does
+  the clipping, so nothing spills onto the wooden frame at any zoom).
+  Press HOME or SPACE to snap back to your notes if you pan into emptiness.
+  Turn infinite_board OFF to limit panning to the notes plus a margin.
+- Fit knobs: board_scale (how much screen the clipboard fills) and
+  paper_rect (x/y/w/h fractions of the paper window inside the art).
+- Cards are the note PNGs: on a LogEntry set `note_icon` (Notes/Note_1.png
+  ...), `icon_scale`, and `icon_tilt` for a hand-pinned look. Card size
+  comes from the texture, so different notes are different sizes.
+  Drop new note art from the artist into LogBook/Notes/ any time.
+- Paper area is measured from the art (PAPER_L/T/R/B constants). If the
+  artist changes the clipboard, update those four fractions.
+
+================================================================
+## 15. DEATH — animation, clipboard, retry from checkpoint
+================================================================
+SETUP: autoload #7 —
+  Deaths -> res://FD_Testing/GameSystems/Death/deaths.gd
+Then on the autoload set `main_menu_scene` (what QUIT loads).
+
+SAMI'S DEATH STATE: add a Node named exactly "Death" under his
+Statemachine and attach Death/death_state.gd. When the art is ready, add
+animations named Death_down / Death_up / Death_Side (or just "Death") to
+his SpriteFrames — the state picks whichever exists. No art yet = he
+simply freezes, no errors.
+
+KILL THE PLAYER:
+	Deaths.kill("bleeding")            # id of a DeathCause
+	Deaths.kill("bleeding", 1.5)       # longer animation beat
+	dialog line: action_name = "kill", action_args = ["bleeding"]
+
+WHAT HAPPENS (in order):
+  1. input off, Sami's Death state plays his death animation
+  2. the clipboard SLIDES UP from the bottom
+  3. the board ANIMATION plays: BoardAnim/death_board_00..19.png
+	 (your GIF, converted to 20 PNG frames — Godot can't play .gif)
+  4. the writing appears: REAL-WORLD time of death, the cause, and the
+	 CheckMark.png next to it
+  5. RETRY / QUIT become clickable (disabled until then)
+Timing knobs: default_anim_seconds, slide_seconds, frame_seconds,
+write_delay. Placement knobs: header_pos, time_label_pos, time_value_pos,
+cause_label_pos, cause_value_pos, check_pos, retry_rect, quit_rect.
+IMPORTANT: the board art ALREADY DRAWS its own words (DECEASED, TIME:,
+CAUSE OF DEATH, the three checkbox rows, RETRY, QUIT). So the screen only
+adds TWO things on top: the clock value, and the CHECK MARK on the right
+row. RETRY/QUIT are invisible hitboxes sitting on the printed boxes.
+Placement knobs (measured from the art): time_value_pos, check_first_pos,
+check_row_spacing, retry_rect, quit_rect.
+Each DeathCause has a `row` (0 = Bleeding, 1 = Infection, 2 = Unknown) —
+that's which printed box gets ticked. Leave its `label` empty since the
+names are printed; fill it only if you also want the cause written out.
+
+CAUSES OF DEATH: DeathCause .tres files in Death/Causes/ (id + label +
+note). Three examples included. Every cause the player has ever died from
+is remembered as a flag "died_of:<id>", and "death_count" counts deaths —
+so a "ways you have died" collection screen is easy later.
+
+RETRY: restores the player's last prescription checkpoint (flags, state,
+scene). No checkpoint yet? It reloads the scene, and if you called
+Deaths.set_respawn(pos) it puts them back there.
+QUIT: loads main_menu_scene.
+
+TUNING THE CLIPBOARD TEXT: the positions of TIME / CAUSE / checkboxes /
+RETRY / QUIT are exports on the Deaths autoload, as fractions of the art
+(time_value_pos, cause_value_pos, check_pos, retry_rect, quit_rect).
+Nudge them until they sit on the drawn lines.
+
+================================================================
+## 16. HEALTH -> DEATH, and the DEATH BOARD AS SPRITEFRAMES
+================================================================
+HP HITS 0 = DEATH: add Health/health_watcher.gd as a CHILD NODE of Sami.
+It reads his `stats` resource and calls Deaths.kill() at 0. It auto-detects
+the health property name (current_health / health / hp / ...) and PRINTS
+which one it found on first run — if it guesses wrong, type the right name
+into `health_property`. Set `death_cause` to the DeathCause id you want.
+
+BOARD ANIMATION IS NOW A SPRITEFRAMES: Death/board_frames.tres, animation
+name "death", 20 frames at 6.67 fps with the last frame held. Open it in
+Godot's SpriteFrames panel to reorder frames, change per-frame duration,
+or add new ones — no code. `anim_speed_scale` on the Deaths autoload
+multiplies the speed. (Your GIF is already converted into these frames.)
+
+================================================================
+## 17. HOLD BREATH, BLOOD, TOXIC AIR, BLOOD PUZZLE
+================================================================
+SETUP: autoload #8 —
+  BloodWorld -> res://FD_Testing/GameSystems/Breath/blood_world.gd
+Input Map: add an action `hold_breath` (e.g. Shift or Ctrl).
+
+A) THE MECHANIC — add Breath/breath_component.gd as a child of Sami,
+   NAMED EXACTLY "Breath" (toxic areas and the health watcher look it up
+   by that name).
+   - 4 stages x 4 seconds = 16 seconds total (stage_seconds, stage_count).
+   - While holding, he CANNOT suffocate.
+   - `stage_animations`: e.g. ["Hold_1","Hold_2","Hold_3","Hold_4"] — add
+     those to his SpriteFrames when the art is ready. Until then each
+	 stage tints him a colder blue (stage_tints), so it's already readable.
+   - `recover_seconds`: breathing time needed before holding again.
+   - Signals: breath_started / stage_changed(stage) / breath_released /
+	 breath_failed / blood_spilled — hook UI, sound, camera shake to these.
+
+B) BLEEDING — set `is_bleeding = true` on the Breath node when Sami is cut
+   (from your damage code). Then each stage spills the BloodType in
+   `stage_blood[stage]`. Four are included in Breath/Types/ (blood_stage1..4)
+   going from bright red to almost black-purple, so the colour tells the
+   player how long they've been holding on. `affects_ground` marks the
+   types that react with the floor.
+
+C) TOXIC AIR — add an Area2D with Breath/toxic_area.gd + a CollisionShape2D.
+   Inside it, NOT holding your breath = `grace_seconds` then death.
+   Holding your breath pauses the countdown. `active_flag` / `disabled_flag`
+   let a room become dangerous (or get fixed) as the story moves.
+   Signals: player_entered / player_exited / warning(time_left) for UI.
+
+D) THE FLOOR PUZZLE — add a Node2D with Breath/blood_grid.gd where the
+   top-left of the grid should sit. It's a @tool script: the grid DRAWS
+   ITSELF IN THE EDITOR so you can line it up with your tiles.
+   - `columns`, `rows`, `cell_size` — any shape you want.
+   - `wanted`: one blood-type id per cell, left-to-right/top-to-bottom;
+	 "" = that cell doesn't matter. Wanted cells are highlighted in-editor
+     with their id written on them.
+   - Bleed the right type on the right cell -> `solved_flag` is raised.
+   - `lock_cells` stops a correct cell from being ruined; without it the
+     player can cover a mistake by bleeding the right type on top.
+   - `clear_grid()` wipes it (a mop, a lever, a cutscene).
+   Cells are matched by BloodType `id`, so the puzzle is "which blood goes
+   where" — i.e. how long Sami must hold his breath before bleeding on each
+   spot. Grids register themselves; spills anywhere find them automatically.
+
+================================================================
+## 18. DAMAGE & BLEEDING (the "damage code")
+================================================================
+WHERE THE NODES GO ON SAMI (all DIRECT children, names matter):
+    Sami_Doctor
+    ├── Statemachine   (Idle / Walk / Drag / Rotate / Death)
+    ├── Breath         <- breath_component.gd   ("Breath")
+    ├── Wounds         <- wound_component.gd    ("Wounds")
+    └── ...
+The Breath component must NOT go inside the Statemachine — that node only
+collects `state` children, and other systems look up "Breath" as a direct
+child of the player.
+
+A) WOUNDS — Health/wound_component.gd, child named "Wounds".
+   Hurt him from anywhere:
+       $Wounds.take_damage(1)                    # plain hit
+       $Wounds.take_damage(1, "bleeding", true)  # a hit that CUTS
+       $Wounds.cut("bleeding")                   # cut, no damage
+   Patch him up:
+       $Wounds.bandage()      /  $Wounds.heal(1)  /  $Wounds.full_heal()
+   It finds your HealthData automatically (same auto-detect as the health
+   watcher, and it PRINTS what it found). A wound sets Breath.is_bleeding
+   for you — that's the link that makes the 4 breath stages spill blood.
+   Options: bleed_damage (health lost per second while bleeding, 0 = none),
+   bleed_seconds (auto-clot, 0 = until bandaged), drip_while_bleeding +
+   drip_blood (a blood trail between the stage spills),
+   invulnerable_seconds, handle_death.
+   Signals: damaged / wound_opened / wound_closed / health_changed / died.
+
+B) HAZARDS — Health/damage_area.gd on an Area2D + CollisionShape2D.
+   damage, opens_wound (turns a hazard into a CUT), cause_id,
+   once_per_entry vs repeating (repeat_seconds), one_shot,
+   active_flag / disabled_flag so hazards appear and get cleaned up.
+
+C) HEALTH -> DEATH: WoundComponent already kills him at 0 health
+   (handle_death). Use HealthWatcher INSTEAD if damage comes from other
+   devs' code that doesn't go through Wounds — don't use both with
+   handle_death on, or you'd double-fire.
+
+D) BREATH ANIMATIONS: see Health/SAMI_PATCH.md — his states call
+   UpdateAnimation() every frame, so hold-breath animations need a 2-line
+   hook in sami_doctor.gd. Without the patch everything still works; the
+   stages just tint him instead.
+
+================================================================
+## 19. RADIO STATUE PUZZLE (speakers + statue + board)
+================================================================
+Uses the other dev's radio: it only READS RadioGlobal.radio, and changes
+nothing in their code.
+
+THE LOOP
+  The speakers are dead on their own. Stand next to one and it follows the
+  radio LIVE — tuning the radio retunes that speaker. Walk away and it
+  keeps the last frequency. The statue hears the speakers and answers with
+  a MOOD + a NUMBER:
+      HAPPY = wrong frequency, the number is a DECOY
+      SAD   = right frequency, the number is REAL
+  Real numbers go on the BOARD. Once they're all collected, the player
+  drags the tiles into the right order to finish.
+
+A) SPEAKERS — Area2D + CollisionShape2D + StatuePuzzle/radio_speaker.gd.
+   Set `speaker_index` 0..3. Optional children: HzLabel (shows the tuned
+   frequency — turn `show_hz` off for a harder puzzle) and Ring (shown
+   while the player is inside).
+
+B) STATUE — Node2D + StatuePuzzle/radio_statue.gd.
+   - `speakers`: drag the four speaker nodes in, in index order
+   - `responses`: the StatueResponse .tres files it can answer to
+   - `sprite` + anim_idle / anim_happy / anim_sad
+   - `board`: the NumberBoard node
+   - `combo_speakers`: which two form the second half (default 2 and 3)
+   A speech bubble shows what it says; real answers show in blue.
+
+C) RESPONSES — StatueResponse .tres in StatuePuzzle/Responses/:
+   speaker_a + hz_a (and speaker_b + hz_b with `use_second` for combos),
+   mood (HAPPY = decoy, SAD = real), and `spoken` — one number, or a
+   sequence separated by spaces ("17 88") for combos.
+   Seven examples are included: three decoys, two single answers, one
+   combo decoy and one combo answer.
+
+D) COMBOS — when BOTH combo speakers hold a frequency, a button appears
+   next to the statue. Pressing it plays them together and the statue
+   answers with a whole sequence.
+
+E) BOARD — Area2D + StatuePuzzle/number_board.gd.
+   - While the statue is sad, walk to the board and press interact to
+	 WRITE that number down. The FIRST one writes itself (auto_write_first)
+	 so the player learns what the board is for.
+   - Press interact again (nothing pending) to OPEN the board and drag
+	 tiles to reorder. Matching `solution` raises `solved_flag`.
+   - `starting_numbers` puts jumbled numbers on it from the start.
+
+FREQUENCIES: the radio is an int, 530..1700, moving in steps of 10 (L1/R1
+= +/-10, L2/R2 = +/-100). So every target must be a MULTIPLE OF 10 in that
+range, or the player can never reach it.
+
+================================================================
+## 20. ELECTRO PUZZLE (sequence -> timed run -> main generator)
+================================================================
+TEST IT: instance ElectroPuzzle/electro_puzzle_test.tscn into a level with
+Sami. Three switches, a main gen, an ice patch and a water patch, all
+placeholder rectangles.
+
+THE FLOW
+ 1. SEQUENCE — flip the three gens in order (order_index 0,1,2). Wrong
+	order = buzz, everything resets. Right order = they blow.
+ 2. SAMI'S LINE — `after_switches_dialog` plays once ("We need to go to the
+    main Gen"). It pauses; the timer waits for it.
+ 3. THE RUN — countdown starts, lights flicker, chase music plays, Haji
+    shouts `callout_lines` every `callout_every` seconds WITHOUT pausing.
+ 4. MAIN GEN — reach it and flip it. If its `required_hz` is set, the RADIO
+	must be tuned there too (multiple of 10, 530..1700) — that's your
+	"explode it with the radio" ending.
+ 5. FAIL — timer hits 0. `on_fail`: RESET_ONLY / KILL_PLAYER /
+	RELOAD_CHECKPOINT.
+
+PIECES
+- electro_gen.gd (Area2D): order_index, is_main, floor_number, required_hz,
+  optional Sprite (anim off/on/blown), Light, Prompt children.
+- electro_puzzle.gd (Node): the brain. Drag the gens + main_gen + lights in.
+  Signals: switch_accepted / sequence_wrong / run_started / run_tick /
+  callout / run_failed / puzzle_solved. Flags: electro_switches_done,
+  electro_puzzle_solved.
+- power_lights.gd (CanvasLayer): darkness + flicker, countdown bar, and the
+  non-blocking callout line. Connect run_started -> on_run_started and
+  run_tick -> on_run_tick (already wired in the test scene).
+- floor_effect.gd (Area2D): ICE (slides past corners), WATER (wades),
+  PUSH (a current). Can also deal damage_per_second and open wounds.
+  It never touches Sami's movement code — it runs after him and nudges him
+  with move_and_collide, so the other dev's player script stays untouched.
+
+FLOORS: your 2 / 2 / 1 layout is just `floor_number` on each gen plus where
+you place them; the puzzle doesn't care which room they're in.
+
+================================================================
+## 21. DEATH SCREEN — new art + hand-drawn clock
+================================================================
+- The board animation now uses the NEW 26-frame GIF, extracted to
+  Death/BoardAnim/ and wired into Death/board_frames.tres (SpriteFrames,
+  animation "death"). Edit timing/order in Godot's SpriteFrames panel.
+- The new art has FOUR checkbox rows: Bleeding / Infection / Suffocation /
+  Unknown. The DeathCause `row` values are set to 0/1/2/3 to match, so
+  Deaths.kill("suffocation") ticks the third box.
+- THE CLOCK IS DRAWN WITH YOUR NUMBER IMAGES. Numbers-0-9.png was sliced
+  into Death/Digits/digit_0..9.png and the time is built from those
+  sprites — no font needed. Knobs on the Deaths autoload:
+    use_digit_images (off = fall back to the font)
+    digit_spacing, colon_width, digit_scale, time_value_pos
+  Digits are baseline-aligned automatically since they're different
+  heights, and drawn with Nearest filtering so they stay crisp.
+
+================================================================
+## 22. CONNECTING TO THE OTHER DEV'S RADIO
+================================================================
+SETUP: autoload —
+  RadioLink -> res://FD_Testing/GameSystems/StatuePuzzle/radio_link.gd
+(Their side needs RadioGlobal and WaveCanvas20 as autoloads, and the
+Radio-Panel inside Sami's UI at UI/Tools/Radio-Panel.)
+
+HOW THEIR RADIO ACTUALLY WORKS
+  RadioGlobal.radio   int, 530..1700  <- the ONE source of truth
+  radio_ui.gd derives WaveCanvas20.wavelength from it (amplitude is fixed)
+  Tuning keys: Freq_U / Freq_D = +/-10,  Amp_U / Amp_D = +/-100
+  Radio_button (Q) opens/closes the radio; radio_panel.gd SPAWNS the UI
+  and frees it when closed.
+
+>>> IMPORTANT: tuning only works while the radio UI is OPEN, because
+	radio_ui.gd is the node reading those keys. It doesn't exist when the
+    radio is shut. So the player: opens the radio, tunes, and the speaker
+	they're standing in follows along live. <<<
+
+RadioLink gives our systems a safe front door — it never writes to their
+code and degrades quietly if the radio isn't in the project:
+  RadioLink.available()              is the radio system present?
+  RadioLink.frequency()              current Hz
+  RadioLink.is_tuned_to(hz, tol)     for puzzle checks
+  RadioLink.is_open()                is the radio UI on screen?
+  RadioLink.is_reachable(hz)         can the player actually dial this?
+  RadioLink.set_frequency(hz)        force it (cutscenes/tests; snaps to 10)
+  RadioLink.wavelength() / amplitude()
+  signals: frequency_changed(hz) / radio_opened / radio_closed
+
+WHO USES IT
+- RadioSpeaker (statue puzzle): follows RadioGlobal.radio live while the
+  player stands in it. `needs_radio_open` (default ON) means it only
+  listens while the radio UI is up — turn it off for a looser feel.
+- ElectroGen (main generator): `required_hz` uses RadioLink.is_tuned_to().
+- RadioStatue: on startup it WARNS about any response frequency that isn't
+  reachable (not a multiple of 10, or outside 530..1700), so a puzzle can
+  never be accidentally impossible.
+
+NOTE: their radio_panel.gd adds itself to the group "radio_panel" — that's
+how RadioLink.is_open() finds it without any node paths.
+
+================================================================
+## 23. YAZZED BOSS FIGHT
+================================================================
+TEST: instance BossFight/boss_fight_test.tscn into a level with Sami and
+walk into the trigger. Everything uses Godot's icon as a placeholder.
+(If your project has icon.png rather than icon.svg, repoint the texture.)
+
+THE THREE STAGES
+ 1. The TV DROPS. Yazzed charges with a readable 1s wind-up and slams into
+	it himself. One TV hit -> stage 2.
+ 2. The TV LIFTS AWAY. Chip his HP with traps and throwables until it hits
+	`stage3_hp` (50 by default) -> the TV comes back down.
+ 3. He's FAST (0.5s wind-up) and BOUNCY. The first charge and the bounce
+    right after hunt Sami; sometimes he charges a WALL on purpose to come
+    back from a strange angle (`wall_feint_chance`). Later bounces are
+    random and NEVER toward the TV. Dodge late so he overshoots into it.
+	Second TV hit = dead -> `victory_comic` plays (Nada's panels).
+ Sami dying: call BossFight.reset_fight() — Yazzed goes back to full.
+
+PIECES (every number below is an export)
+- yazzed_boss.gd: max_hp, telegraph/rest/speed per stage, stun_seconds,
+  max_bounces, wall_feint_chance, bounce_speed_keep, contact damage +
+  cooldown, anim names (idle/telegraph/charge/stunned/hurt/dead), and
+  built-in squash-stretch + wind-up rattle so it reads with NO art.
+- boss_tv.gd: drop_height, drop_seconds, land bounce, lift_seconds,
+  max_hits, hit particles, anim names. Joins group "boss_tv" so stage-3
+  bounces know to avoid it.
+- boss_object.gd: kind = TRAP / THROWABLE / HAZARD. boss_damage,
+  player_damage + cuts, debuff_seconds + debuff_name, throw_speed/range,
+  boss_can_push + push_speed, one_use + respawn_seconds, spin and hop.
+  Throwables: interact to pick up, interact again to throw.
+- boss_juice.gd: shake(), hit_stop(), flash(), zoom_punch() — all tunable.
+  The TV shakes the screen on landing and on every hit.
+- boss_fight.gd: wires it together. intro_dialog, stage_pause, stage3_hp,
+  victory_comic / victory_video, won_flag, health bar.
+
+SIGNALS to hang more juice on: charge_started, charge_ended, wall_hit,
+tv_hit, player_hit, stunned_started, damaged, died, stage_changed,
+boss_damaged, fight_won, fight_reset.

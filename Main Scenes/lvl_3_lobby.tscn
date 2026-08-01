@@ -21,6 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="18_v8wcs"]
 [ext_resource type="Texture2D" uid="uid://cjlgcx68s0dyt" path="res://3MK-File/TEST-ANIM/Player-down.tres" id="20_rtr1t"]
 [ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="21_oth73"]
+[ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
+[ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
+[ext_resource type="Resource" uid="uid://1qlxg1lccy0k" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
 
 [sub_resource type="Resource" id="Resource_h0mp1"]
 script = ExtResource("8_gmla1")
@@ -346,9 +350,9 @@ metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="Resource" id="Resource_jdjb3"]
 script = ExtResource("8_gmla1")
-text = "everyone is dead"
+text = "you  is dead"
 speaker_name = "FAHD"
-set_flags = Array[String](["Nothing"])
+action_name = "kill"
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_kc5a5"]
@@ -361,6 +365,8 @@ metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 script = ExtResource("11_idite")
 branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_kc5a5")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkopv"]
 
 [node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player")]
 script = ExtResource("1_sailq")
@@ -385,7 +391,7 @@ next_state = "Nothing_Matter"
 script = ExtResource("3_k5edk")
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_k5edk")]
-position = Vector2(534, 415)
+position = Vector2(371, 406)
 camera_adj = NodePath("../Lvl3LobbyBgrd")
 
 [node name="StatuePuzzle" parent="." unique_id=1258403952 groups=["statue_area"] instance=ExtResource("5_sailq")]
@@ -435,3 +441,27 @@ npc_resource = SubResource("Resource_wc5to")
 [node name="DialogTrigger" parent="." unique_id=793013839 instance=ExtResource("21_oth73")]
 position = Vector2(320, 491)
 dialog = SubResource("Resource_xlqiq")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=2023173997]
+position = Vector2(642, 459)
+script = ExtResource("22_ug341")
+item = ExtResource("23_h0mp1")
+amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=603840668]
+shape = SubResource("RectangleShape2D_bkopv")
+
+[node name="Area2D3" type="Area2D" parent="." unique_id=1622657557]
+position = Vector2(645, 491)
+script = ExtResource("22_ug341")
+item = ExtResource("24_h0mp1")
+amount = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" unique_id=1211225760]
+shape = SubResource("RectangleShape2D_bkopv")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1828562991]
+position = Vector2(482, 368)
+script = ExtResource("23_bkopv")
+cell_size = Vector2(46, 46)
+wanted = Array[String](["stage1", "", "", "", "", "", "", "", ""])

@@ -6,14 +6,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_r8v1d"]
 radius = 15.033297
 
-[node name="Radio_Task" type="Node2D"]
+[node name="Radio_Task" type="Node2D" unique_id=1064547640]
 script = ExtResource("1_wfdah")
 
-[node name="Task_Area" type="Area2D" parent="."]
+[node name="Task_Area" type="Area2D" parent="." unique_id=1358134201]
 scale = Vector2(6.2797832, 6.2797832)
 script = ExtResource("2_gl366")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Task_Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Task_Area" unique_id=1099018796]
 shape = SubResource("CircleShape2D_r8v1d")
 
 [connection signal="body_entered" from="Task_Area" to="." method="_on_task_area_body_entered"]

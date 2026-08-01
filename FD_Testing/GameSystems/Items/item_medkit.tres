@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MedicalItem" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+action = 4
+type = "medkit"
+display_name = "Med Kit"
+effect = "Heals and stops bleeding"
+quantity = 1
+heal_amount = 3.0
+cut_cause = "bleeding"
+use_flag = "used_medkit"

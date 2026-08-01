@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatueResponse" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/StatuePuzzle/statue_response.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+speakers = Array[int]([0])
+frequencies = Array[int]([800])
+stage = 1
+mood = 0
+spoken = "29"
+heard_flag = ""

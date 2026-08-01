@@ -1,0 +1,114 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b8086h0h337jy"]
+
+[ext_resource type="Texture2D" uid="uid://d1q2k0pijccwc" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_00.png" id="0"]
+[ext_resource type="Texture2D" uid="uid://b21cwtos4t70j" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_01.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dvl3i08kji4lf" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_02.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://e3sbt7e4sp1" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_03.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bpy6kgor0ew87" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_04.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b2354ivj5y2hc" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_05.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cnl6q10x2vnc3" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_06.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c6tayycadaxfj" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_07.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dhesodmmb4lyc" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_08.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bt5kqytlbdyye" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_09.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://2r8x3d2854g6" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_10.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://xaoad8ne4m7x" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_11.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dslyio6ogh038" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_12.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://c52omknni6mpv" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_13.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://brfmd0w7ouqpi" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_14.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://g8kxmalaed8c" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_15.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://st83cikopcs7" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_16.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://c0f0km7h5tqm8" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_17.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://c2ykgneb2evjm" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_18.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://don035tioym0s" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_19.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://dmoqtdipsf5nb" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_20.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dsnyiq7jxog14" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_21.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://otjbkstqdgar" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_22.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://qxmr7h4qf4jo" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_23.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://330psyvlspyg" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_24.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://c7p4281fjxkhx" path="res://FD_Testing/GameSystems/Death/BoardAnim/death_board_25.png" id="25"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24")
+}, {
+"duration": 3.33,
+"texture": ExtResource("25")
+}],
+"loop": false,
+"name": &"death",
+"speed": 6.6667
+}]
