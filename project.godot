@@ -14,13 +14,14 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="The_D_2.0"
+config/name="(D.) 2.0"
+run/main_scene="uid://c6svmmsd10lex"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://3MK-File/myshit/icon.svg"
 
 [audio]
 
-buses/default_bus_layout="res://3MK-File/myshit/default_bus_layout.tres"
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 [autoload]
 
@@ -31,9 +32,11 @@ PauseMenu="*res://control scene/Pause_Menu.tscn"
 inventory="*uid://c8n0i2wxuxhwm"
 GameState="*uid://bigwu0rmjy4mr"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
+RadioSignals="*res://3MK-File/script/radio_signal_manager.gd"
 PlayerManger="*uid://dvovtcq4mhex7"
 Flags="*uid://gl8q17gkvqy2"
 DialogManager="*uid://c08trmqh1ib25"
+Audio="*res://audio/audio.tscn"
 Cutscene="*uid://cf06cgcstrci7"
 GameProgress="*uid://so47hie2hno2"
 LogBook="*uid://cxk7nl8x4cdch"
