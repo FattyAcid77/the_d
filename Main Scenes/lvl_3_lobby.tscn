@@ -24,7 +24,7 @@
 [ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
 [ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
 [ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
-[ext_resource type="Resource" uid="uid://1qlxg1lccy0k" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
 
 [sub_resource type="Resource" id="Resource_h0mp1"]
 script = ExtResource("8_gmla1")

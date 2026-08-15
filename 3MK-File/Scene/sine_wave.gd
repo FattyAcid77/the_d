@@ -11,7 +11,7 @@ func _ready():
 		wave_canvas.amplitude = task_data.target_amplitude
 		wave_canvas.wavelength = task_data.target_wavelength
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("Amp_U"):
 		wave_canvas.amplitude += AMP_STEP
 

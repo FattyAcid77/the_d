@@ -101,8 +101,8 @@ func set_frequency(hz: int) -> void:
 	var rg := get_node_or_null("/root/RadioGlobal")
 	if rg == null:
 		return
-	var snapped: int = int(round(float(hz) / 10.0)) * 10
-	rg.radio = clampi(snapped, min_hz(), max_hz())
+	var snapped_hz: int = int(round(float(hz) / 10.0)) * 10
+	rg.radio = clampi(snapped_hz, min_hz(), max_hz())
 
 
 ## Is this a frequency the player can actually reach?

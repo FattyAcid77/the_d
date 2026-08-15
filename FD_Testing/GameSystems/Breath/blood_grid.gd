@@ -120,6 +120,7 @@ func stain_at(world_pos: Vector2, type: BloodType) -> bool:
 	if debug_log:
 		var want: String = wanted[idx] if idx < wanted.size() else ""
 		var cx: int = idx % columns
+		@warning_ignore("integer_division") # row index - discarding the remainder is the point
 		var cy: int = idx / columns
 		print("BloodGrid '%s': cell %d (col %d, row %d) got '%s' — wants '%s' %s"
 				% [name, idx, cx, cy, type.id, want,

@@ -5,7 +5,7 @@ var Done: bool = false
 @export_category("Statue Side")
 @export_enum("All", "Left", "Right", "Up", "Down") var required_side: String = "All"
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Done:
 		return
 

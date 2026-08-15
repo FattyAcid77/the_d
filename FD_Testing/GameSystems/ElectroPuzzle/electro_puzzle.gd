@@ -214,7 +214,7 @@ func _fail() -> void:
 			if n >= 0 and Prescription.get_checkpoint(n) != null:
 				Prescription.apply(n)
 			else:
-				get_tree().reload_current_scene()
+				SceneManager.reload_current_scene()
 		_:
 			_reset_all()
 

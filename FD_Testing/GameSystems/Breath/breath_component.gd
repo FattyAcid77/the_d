@@ -229,9 +229,9 @@ func _apply_stage_look(s: int) -> void:
 	if not _bind_anim():
 		return
 	if s < stage_animations.size():
-		var name: String = stage_animations[s]
-		if name != "" and _anim.sprite_frames and _anim.sprite_frames.has_animation(name):
-			_anim.play(name)
+		var anim_name: String = stage_animations[s]
+		if anim_name != "" and _anim.sprite_frames and _anim.sprite_frames.has_animation(anim_name):
+			_anim.play(anim_name)
 			return
 	if s < stage_tints.size():
 		_anim.modulate = stage_tints[s]

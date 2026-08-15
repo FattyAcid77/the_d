@@ -5,7 +5,7 @@ const speed = 300.0
 var push_force = 80
 var input_direction: Vector2 = Vector2.ZERO
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _physics_process(delta: float) -> void:

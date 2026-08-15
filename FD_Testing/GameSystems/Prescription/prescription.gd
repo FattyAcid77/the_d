@@ -164,7 +164,7 @@ func apply(number: int) -> void:
 	checkpoint_applied.emit(number)
 	if c.scene:
 		get_tree().paused = false
-		get_tree().change_scene_to_packed.call_deferred(c.scene)
+		SceneManager.load_new_packed(c.scene)
 
 
 # ==========================================================================

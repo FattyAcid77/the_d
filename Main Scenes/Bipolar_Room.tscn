@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="4_73pjy"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_cjcbp"]
 
-[node name="BipoolarRoom" type="Node2D" unique_id=913653249 node_paths=PackedStringArray("doors")]
+[node name="BipoolarRoom" type="Node2D" unique_id=913653249 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_73pjy")
+player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg"), NodePath("Door_reg2")]
 
 [node name="BipolarRoomBgrd" parent="." unique_id=1843866423 instance=ExtResource("2_ts3ve")]

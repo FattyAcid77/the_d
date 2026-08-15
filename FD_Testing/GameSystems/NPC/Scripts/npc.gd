@@ -68,14 +68,14 @@ func _set_cardinal() -> void:
 func _update_animation() -> void:
 	if anim == null or anim.sprite_frames == null:
 		return
-	var state := "Walk" if direction != Vector2.ZERO else "Idle"
+	var move_state := "Walk" if direction != Vector2.ZERO else "Idle"
 	var suffix := "down"
 	if cardinal_direction == Vector2.UP:
 		suffix = "up"
 	elif cardinal_direction == Vector2.LEFT or cardinal_direction == Vector2.RIGHT:
 		suffix = "Side"
 	anim.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
-	var anim_name := state + "_" + suffix
+	var anim_name := move_state + "_" + suffix
 	if anim.animation == anim_name:
 		return
 	if anim.sprite_frames.has_animation(anim_name):

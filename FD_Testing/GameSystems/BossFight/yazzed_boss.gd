@@ -75,6 +75,7 @@ enum BossState { IDLE, TELEGRAPH, CHARGING, STUNNED, HURT, DEAD }
 
 var hp: float
 var stage: int = 1
+@warning_ignore("shadowed_global_identifier") # "state" is also a global class in state.gd
 var state: BossState = BossState.IDLE
 var active: bool = false          ## the BossFight node turns this on
 

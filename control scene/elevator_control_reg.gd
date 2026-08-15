@@ -5,7 +5,7 @@ class_name Elevator_Control_reg extends Area2D
 
 var player_inside:bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player_inside and Input.is_action_just_pressed("action"):
 		open_Elevetor_Control_UI()
 

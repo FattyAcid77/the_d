@@ -30,12 +30,19 @@ func _ready() -> void:
 		
 		# FIX: Force check if Sami is already overlapping us when we spawn!
 		for body in get_overlapping_bodies():
-			if body.name == "Sami":
+			if _is_player(body):
 				player_range = true
 
 
+# was a hardcoded `body.name == "Sami"`, which failed in every level where the
+# player node is named something else (Sami_Doctor_test). All player scenes are
+# in the "Player" group, so match on that instead
+func _is_player(body: Node) -> bool:
+	return body.is_in_group("Player") or body is Player or body is Sami
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		icon.texture = item_config.icon
 	if player_range and Input.is_action_just_pressed("action"):
@@ -61,12 +68,12 @@ func pickable():
 		print("ERROR: Could not pick up! Player_ch is null in the Global inventory!")
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Sami":
+	if _is_player(body):
 		player_range = true
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if body.name == "Sami":
+	if _is_player(body):
 		player_range = false
 
 
