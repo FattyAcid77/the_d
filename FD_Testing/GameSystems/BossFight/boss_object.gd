@@ -92,9 +92,9 @@ func _process(_delta: float) -> void:
 	if kind != Kind.THROWABLE or flying:
 		return
 	if held:
-		if Input.is_action_just_pressed("interact"):
+		if InputAccess.just_pressed():
 			_throw()
-	elif _player_in and Input.is_action_just_pressed("interact"):
+	elif _player_in and InputAccess.just_pressed():
 		_pick_up()
 
 

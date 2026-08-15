@@ -34,7 +34,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if _player_in and not DialogManager.is_active \
 			and Time.get_ticks_msec() >= _cooldown_until \
-			and Input.is_action_just_pressed("interact"):
+			and InputAccess.just_pressed():
 		_start()
 
 

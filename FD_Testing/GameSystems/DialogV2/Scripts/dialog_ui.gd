@@ -45,7 +45,7 @@ const BODY_BOTTOM := 0.10
 const NAME_FONT_ART := 22.0
 const BODY_FONT_ART := 20.0
 
-const FALLBACK_SOUND := "res://GameSystems/DialogV2/dialogue_noise.mp3"
+const FALLBACK_SOUND := "res://FD_Testing/GameSystems/DialogV2/dialogue_noise.mp3"
 
 var _dialog: Dialog
 var _speaker_default := ""
@@ -99,6 +99,12 @@ func _fit_box() -> void:
 		text_label.add_theme_font_size_override("normal_font_size", maxi(10, int(BODY_FONT_ART * s)))
 	if leave_button:
 		leave_button.add_theme_font_size_override("font_size", maxi(10, int(NAME_FONT_ART * s)))
+
+
+## Ends the dialog early and cleanly, wherever it currently is.
+## Used by DialogManager.stop() and the "end_dialog" action.
+func finish() -> void:
+	_end_all = true
 
 
 func hide_ui() -> void:
@@ -220,7 +226,7 @@ func _play_branch(branch_id: String) -> void:
 			continue
 
 		_apply_line_direction(line.text)
-		name_label.text = line.speaker_name if line.speaker_name != "" else _speaker_default
+		name_label.text = tr(line.speaker_name) if line.speaker_name != "" else tr(_speaker_default)
 		await _typewrite(line)
 		if _end_all:
 			return
@@ -310,7 +316,7 @@ func _typewrite(line: DialogLine) -> void:
 
 
 func _build_bbcode(line: DialogLine) -> String:
-	var t := line.text
+	var t := tr(line.text)
 	for kw in line.keywords:
 		if kw == null or kw.word == "":
 			continue
@@ -333,7 +339,7 @@ func _ask_choices(choices: Array[DialogChoice]) -> DialogChoice:
 		if c.show_if_flag != "" and not Flags.is_set(c.show_if_flag):
 			continue
 		var btn := Button.new()
-		btn.text = c.text
+		btn.text = tr(c.text)
 		btn.pressed.connect(func() -> void: _chosen_choice = c)
 		choices_box.add_child(btn)
 		any = true
@@ -356,13 +362,13 @@ func _topic_mode(topics: Array) -> void:
 	_leave_pressed = false
 	for t in topics:
 		var btn := Button.new()
-		btn.text = t["label"]
+		btn.text = tr(t["label"])
 		var branch_id: String = t["branch"]
 		btn.pressed.connect(func() -> void: _picked_topic = branch_id)
 		topics_box.add_child(btn)
 	topics_box.visible = true
 	var leave_btn := Button.new()
-	leave_btn.text = leave_label
+	leave_btn.text = tr(leave_label)
 	leave_btn.pressed.connect(func() -> void: _leave_pressed = true)
 	topics_box.add_child(leave_btn)
 	if topics_box.get_child_count() > 0:
@@ -439,7 +445,7 @@ func _wait_advance_or_meta() -> String:
 func _interact_pressed() -> bool:
 	if Time.get_ticks_msec() < _input_lock_until:
 		return false
-	return Input.is_action_just_pressed("interact")
+	return InputAccess.just_pressed()
 
 
 func _lock_input(seconds: float) -> void:

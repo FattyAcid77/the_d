@@ -222,7 +222,7 @@ func _build_ui() -> void:
 	_layer.add_child(box)
 
 	_name_label = Label.new()
-	_name_label.text = health_bar_name
+	_name_label.text = tr(health_bar_name)
 	_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_name_label.add_theme_font_size_override("font_size", 20)
 	box.add_child(_name_label)

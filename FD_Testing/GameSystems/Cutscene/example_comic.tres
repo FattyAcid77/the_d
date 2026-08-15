@@ -1,31 +1,25 @@
-[gd_resource type="Resource" script_class="Comic" format=3 uid="uid://dfxa4bpehxlxs"]
+[gd_resource type="Resource" script_class="Comic" format=3 uid="uid://c7drqucrjd6da"]
 
 [ext_resource type="Script" uid="uid://reitkr4qid0b" path="res://FD_Testing/GameSystems/Cutscene/comic.gd" id="1"]
 [ext_resource type="Script" uid="uid://dcfwyebtc01qh" path="res://FD_Testing/GameSystems/Cutscene/comic_panel.gd" id="2"]
-[ext_resource type="VideoStream" uid="uid://duwnl5p6n3mkt" path="res://FD_Testing/GameSystems/Cutscene/Vids/Vid_1.ogv" id="2_ar04l"]
-[ext_resource type="VideoStream" uid="uid://dy0ak0lxwtgbb" path="res://FD_Testing/GameSystems/Cutscene/Vids/test_anime.ogv" id="2_nucwe"]
-[ext_resource type="VideoStream" uid="uid://chgfvq3uhdd31" path="res://FD_Testing/GameSystems/Cutscene/Vids/Vid_2.ogv" id="3_nucwe"]
-[ext_resource type="VideoStream" uid="uid://c8sdjlwja4fv4" path="res://FD_Testing/GameSystems/Cutscene/Vids/Vid_3.ogv" id="4_feoia"]
-
-[sub_resource type="Resource" id="Resource_feoia"]
-script = ExtResource("2")
-video = ExtResource("2_nucwe")
-metadata/_custom_type_script = "uid://dcfwyebtc01qh"
+[ext_resource type="VideoStream" uid="uid://duero7aqx7utd" path="res://FD_Testing/GameSystems/Cutscene/Vid_1.ogv" id="3"]
+[ext_resource type="VideoStream" uid="uid://bdp12pk23rxjo" path="res://FD_Testing/GameSystems/Cutscene/Vid_2.ogv" id="4"]
+[ext_resource type="VideoStream" uid="uid://d4kdnmm3o156t" path="res://FD_Testing/GameSystems/Cutscene/Vid_3.ogv" id="5"]
 
 [sub_resource type="Resource" id="panel1"]
 script = ExtResource("2")
-video = ExtResource("2_ar04l")
+video = ExtResource("3")
 set_flags = Array[String](["comic_started"])
 
 [sub_resource type="Resource" id="panel2"]
 script = ExtResource("2")
-video = ExtResource("3_nucwe")
+video = ExtResource("4")
 
 [sub_resource type="Resource" id="panel3"]
 script = ExtResource("2")
-video = ExtResource("4_feoia")
+video = ExtResource("5")
 set_flags = Array[String](["comic_watched"])
 
 [resource]
 script = ExtResource("1")
-panels = Array[ExtResource("2")]([SubResource("Resource_feoia"), SubResource("panel1"), SubResource("panel2"), SubResource("panel3")])
+panels = Array[ExtResource("2")]([SubResource("panel1"), SubResource("panel2"), SubResource("panel3")])

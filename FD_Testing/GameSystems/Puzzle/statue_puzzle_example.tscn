@@ -1,71 +1,34 @@
-[gd_scene format=3 uid="uid://biwlg3wu0837a"]
+[gd_scene load_steps=3 format=3 uid="uid://puzstatueex001"]
 
-[ext_resource type="Script" uid="uid://cxtagvom8qlbu" path="res://FD_Testing/GameSystems/Puzzle/puzzle_statue.gd" id="1_st"]
-[ext_resource type="PackedScene" uid="uid://biwhkjmvfb37a" path="res://FD_Testing/GameSystems/Puzzle/puzzle_speaker.tscn" id="2_spk"]
-[ext_resource type="Texture2D" uid="uid://b8tc7y6ljtxpk" path="res://3MK-File/myshit/sami pull down.png" id="3_nu4ea"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Puzzle/puzzle_statue.gd" id="1_st"]
+[ext_resource type="PackedScene" uid="uid://puzspeaker0001" path="res://FD_Testing/GameSystems/Puzzle/puzzle_speaker.tscn" id="2_spk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_71jwo"]
-atlas = ExtResource("3_nu4ea")
-region = Rect2(132, 0, 33, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w1ppx"]
-atlas = ExtResource("3_nu4ea")
-region = Rect2(99, 0, 33, 92)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kegwp"]
-atlas = ExtResource("3_nu4ea")
-region = Rect2(165, 0, 33, 92)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_hhck0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_71jwo")
-}],
-"loop": true,
-"name": &"half",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w1ppx")
-}],
-"loop": true,
-"name": &"sad",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kegwp")
-}],
-"loop": true,
-"name": &"solved",
-"speed": 5.0
-}]
-
-[node name="StatuePuzzle" type="Node2D" unique_id=1258403952 node_paths=PackedStringArray("right_speaker_a", "right_speaker_b", "left_speaker_a", "left_speaker_b", "sprite")]
+[node name="StatuePuzzle" type="Node2D" node_paths=PackedStringArray("right_speaker_a", "right_speaker_b", "left_speaker_a", "left_speaker_b", "sprite")]
 script = ExtResource("1_st")
 right_speaker_a = NodePath("Speaker1")
 right_speaker_b = NodePath("Speaker4")
 left_speaker_a = NodePath("Speaker2")
 left_speaker_b = NodePath("Speaker3")
 sprite = NodePath("StatueSprite")
+right_target_a = 1
+right_target_b = 4
+left_target_a = 2
+left_target_b = 3
 
-[node name="StatueSprite" type="AnimatedSprite2D" parent="." unique_id=1932580812]
-sprite_frames = SubResource("SpriteFrames_hhck0")
-animation = &"sad"
+[node name="StatueSprite" type="AnimatedSprite2D" parent="."]
 
-[node name="Speaker1" parent="." unique_id=856471972 instance=ExtResource("2_spk")]
+[node name="Speaker1" parent="." instance=ExtResource("2_spk")]
 position = Vector2(160, -100)
+speaker_id = 1
 
-[node name="Speaker4" parent="." unique_id=83973067 instance=ExtResource("2_spk")]
+[node name="Speaker4" parent="." instance=ExtResource("2_spk")]
 position = Vector2(160, 100)
 speaker_id = 4
 
-[node name="Speaker2" parent="." unique_id=1402491219 instance=ExtResource("2_spk")]
+[node name="Speaker2" parent="." instance=ExtResource("2_spk")]
 position = Vector2(-160, -100)
 speaker_id = 2
 
-[node name="Speaker3" parent="." unique_id=108193189 instance=ExtResource("2_spk")]
+[node name="Speaker3" parent="." instance=ExtResource("2_spk")]
 position = Vector2(-160, 100)
 speaker_id = 3

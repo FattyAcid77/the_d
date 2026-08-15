@@ -6,6 +6,8 @@
 script = ExtResource("1")
 action = 4
 type = "medkit"
+max_stack = 5
+needs_big_slot = false
 display_name = "Med Kit"
 effect = "Heals and stops bleeding"
 quantity = 1

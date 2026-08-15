@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapRoomDef" format=3 uid="uid://uudv17hhf0j"]
+
+[ext_resource type="Script" uid="uid://cl511egawlnqj" path="res://FD_Testing/GameSystems/Map/map_room_def.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://vduof5evr3u7" path="res://FD_Testing/GameSystems/Map/Rooms/Art/ABOVE_PATH.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_script")
+id = "above_path"
+display_name = "Upper Corridor"
+art = ExtResource("2_art")
