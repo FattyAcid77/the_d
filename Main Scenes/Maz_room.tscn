@@ -7,14 +7,13 @@
 
 [node name="MazRoom" type="Node2D" unique_id=1305410230 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_83pxp")
-player = NodePath("")
+player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg")]
 
 [node name="MazRoomBgrd" parent="." unique_id=2078873881 instance=ExtResource("2_upgb1")]
-position = Vector2(-152, 15)
 
 [node name="Door_reg" parent="." unique_id=19206427 instance=ExtResource("4_wsgam")]
-position = Vector2(703, 682)
+position = Vector2(852, 662)
 scale = Vector2(0.7, 0.7)
 entery_direction = 3
 push_distance = 50

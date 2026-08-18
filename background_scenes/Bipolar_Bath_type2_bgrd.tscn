@@ -1,29 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw4hkeans2enw"]
+[gd_scene format=3 uid="uid://cw4hkeans2enw"]
 
 [ext_resource type="Texture2D" uid="uid://dvg2km3gwvnn8" path="res://background_scenes/assets/f1-bi-pathroom-open.png" id="1_6qxc0"]
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_txybh"]
 [ext_resource type="Texture2D" uid="uid://bfjybowee5ghd" path="res://background_scenes/assets/micro-assets/bipolar_bath_shredded.png" id="2_yv54e"]
 
-[node name="BipolarBathType2Bgrd" type="Node2D"]
+[node name="BipolarBathType2Bgrd" type="Node2D" unique_id=1686295111]
 script = ExtResource("1_txybh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=222507150]
 z_index = -3
 position = Vector2(302, 169)
 texture = ExtResource("1_6qxc0")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=251507341]
 visibility_layer = 4
 z_index = 2
 position = Vector2(302, 169)
 texture = ExtResource("2_yv54e")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1128936025]
 position = Vector2(1, 1)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=515487190]
 position = Vector2(402, 280)
-polygon = PackedVector2Array(-1, 0, -48, 0, -48, 14, -89, 14, -89, 20, -200, 19, -200, 14, -194, 11, -194, -15, -201, -21, -201, -41, -126, -41, -126, -25, -109, -27, -104, -36, -104, -83, -94, -83, -94, -64, -65, -64, -65, -83, -1, -83, -1, -71, 4, -71, 4, -35, -2, -35, -1, -32, -1, -1, 13, -1, 13, -93, -210, -92, -210, 29, 11, 27)
+polygon = PackedVector2Array(-1, 0, -48, 0, -48, 14, -89, 14, -89, 20, -200, 19, -200, 14, -194, 11, -194, -15, -201, -21, -201, -41, -125, -42, -124, -40, -114, -40, -106, -40, -106, -83, -94, -83, -94, -64, -65, -64, -65, -83, -1, -83, -1, -71, 4, -71, 4, -35, -2, -35, -1, -32, -1, -1, 13, -1, 13, -93, -210, -92, -210, 29, 11, 27)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=410886863]
 polygon = PackedVector2Array(349, 198, 351, 212, 361, 215, 384, 215, 392, 211, 393, 196, 390, 196, 390, 209, 383, 213, 360, 212, 354, 209)

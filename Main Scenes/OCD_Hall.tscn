@@ -39,7 +39,7 @@ this_door_name = "Hall_research"
 position = Vector2(443, 296)
 scale = Vector2(0.7, 0.7)
 entery_direction = 3
-new_scene_path = "res://Main Scenes/OCD_room.tscn"
+new_scene_path = "res://Main Scenes/CCTV_Room.tscn"
 target_door_name = "CCTV_room"
 this_door_name = "Hall_to_CCTV"
 

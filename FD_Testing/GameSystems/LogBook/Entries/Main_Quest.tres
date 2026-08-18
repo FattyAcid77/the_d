@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://cbfiip8eug3b"]
+
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="1_m3pc2"]
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="2_vlhxt"]
+
+[sub_resource type="Resource" id="Resource_m3pc2"]
+script = ExtResource("1_m3pc2")
+text = "أول يوم لي، لم يعطني أحد أي تعليمات. عامل النظافة يبدو ودودا بشكل غريب، أظن أنه يجب علي سؤاله أولا."
+metadata/_custom_type_script = "uid://mxsko0p5e6lk"
+
+[resource]
+script = ExtResource("2_vlhxt")
+id = "Main_Quest"
+always_visible = true
+title = "أول يوم"
+color = Color(0.015831865, 0.31803864, 0.33875233, 1)
+facts = Array[ExtResource("1_m3pc2")]([SubResource("Resource_m3pc2")])
+metadata/_custom_type_script = "uid://k4hq8184ugq7"

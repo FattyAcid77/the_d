@@ -17,7 +17,6 @@ text = "Someone ate the apple. FD swears it wasn't him."
 [resource]
 script = ExtResource("1")
 id = "fd"
-always_visible = true
 title = "FD"
 picture = ExtResource("2_b5sxy")
 color = Color(0.3, 0.65, 0.9, 1)

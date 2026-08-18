@@ -39,12 +39,15 @@ target_door_name = "Elevator_1_Main"
 this_door_name = "lvl_1_lobby_West"
 
 [node name="Knife_Item" parent="." unique_id=1066712327 instance=ExtResource("9_ogs6s")]
+visible = false
 position = Vector2(832, 454)
 
 [node name="Cube_item" parent="." unique_id=15824891 instance=ExtResource("9_0d2n7")]
+visible = false
 position = Vector2(808, 449)
 
 [node name="Cube_item2" parent="." unique_id=527186714 instance=ExtResource("9_0d2n7")]
+visible = false
 position = Vector2(832, 454)
 
 [node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("8_yi5rg")]
@@ -54,5 +57,5 @@ position = Vector2(682, 463)
 position = Vector2(902, 576)
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("9_31cma")]
-position = Vector2(426, 331)
+position = Vector2(461, 322)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")

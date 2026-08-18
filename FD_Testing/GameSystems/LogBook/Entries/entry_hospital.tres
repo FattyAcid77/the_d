@@ -11,7 +11,6 @@ text = "The hospital. Something is wrong here — I should talk to people and wr
 [resource]
 script = ExtResource("1")
 id = "hospital"
-always_visible = true
 title = "The Hospital"
 picture = ExtResource("2_pl7hx")
 color = Color(0.55, 0.75, 0.55, 1)

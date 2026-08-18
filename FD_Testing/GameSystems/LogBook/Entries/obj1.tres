@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://1lq3bouajwld"]
+
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="1_jrpek"]
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="2_ks684"]
+
+[sub_resource type="Resource" id="Resource_hijat"]
+script = ExtResource("1_jrpek")
+flag = "initial_dialouge_done"
+text = " الشخصية الأولى تبغا مني غرض من الغرفة الثانية"
+metadata/_custom_type_script = "uid://mxsko0p5e6lk"
+
+[sub_resource type="Resource" id="Resource_jrpek"]
+script = ExtResource("1_jrpek")
+flag = "Scene2_obj1_item_unlocked"
+text = "الشخصية الثانية قالتلي إنه الغرض موجود في الغرفة الثانية على الأرض"
+metadata/_custom_type_script = "uid://mxsko0p5e6lk"
+
+[resource]
+script = ExtResource("2_ks684")
+id = "Objective_1"
+title = "المهمة الأساسية"
+color = Color(0.3660219, 0.7485674, 0.8416225, 1)
+facts = Array[ExtResource("1_jrpek")]([SubResource("Resource_hijat"), SubResource("Resource_jrpek")])
+metadata/_custom_type_script = "uid://0dnatqchxfhb"

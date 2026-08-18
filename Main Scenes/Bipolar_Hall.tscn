@@ -28,4 +28,5 @@ target_door_name = "Bipolar_Room_main"
 this_door_name = "Bipolar_Hall_South"
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_7xqw0")]
+position = Vector2(155, 318)
 camera_adj = NodePath("../BipolarHallBgrd")
