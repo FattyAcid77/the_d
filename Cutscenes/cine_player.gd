@@ -1,5 +1,5 @@
 @tool
-class_name CinePlayer
+class_name CutSceneMaker_v1Player
 extends CanvasLayer
 ## A whole cutscene in one node: a sprite-sheet animation, a timeline of
 ## beats, and a dialogue box. Everything is set in the Inspector.
@@ -7,14 +7,13 @@ extends CanvasLayer
 ## TO MAKE ONE:
 ##   1. Duplicate `cine_player.tscn` and rename it.
 ##   2. Drop your PNG into `sheet`, set `frame_count` and `fps`.
-##   3. Fill in `steps`. Each step is a CineStep — see cine_step.gd.
+##   3. Open the "Cutscene" dock at the bottom and drag markers onto the
+##      timeline. Scrub the playhead to see any moment of the scene.
 ##   4. Drop an Area2D in the level and drag it into `trigger_area`.
-## No script edits, ever.
 ##
-## ARABIC WORKS OUT OF THE BOX. Godot's default font has Arabic glyphs, and
-## direction is handled in `_ready()`. You only need to touch the font if you
-## want a different look (Box/Text and Box/Name -> Theme Overrides -> Fonts);
-## check any replacement actually has Arabic glyphs, or you get empty boxes.
+## ARABIC WORKS OUT OF THE BOX. Direction is set to AUTO in `_ready()`, which
+## keeps trailing punctuation ("...", ".") on the left of an Arabic line.
+## Forcing RTL by hand throws it to the wrong end — that was measured.
 ##
 ## IT ALWAYS GIVES CONTROL BACK. Every exit path — finishing, skipping, an
 ## error, or the scene changing underneath it — goes through `_finish()`,
@@ -30,6 +29,8 @@ const SKIP_ACTION: StringName = &"interact"
 ## How tall each cinematic bar is at full strength, in viewport pixels.
 const BAR_HEIGHT: float = 36.0
 
+enum ArtFit { FILL, FIT, NONE }
+
 @export_group("Picture")
 ## The sprite sheet. Must be a vertical strip of equal frames.
 @export var sheet: Texture2D:
@@ -44,13 +45,22 @@ const BAR_HEIGHT: float = 36.0
 		_apply_sheet()
 		update_configuration_warnings()
 ## Frames per second the strip plays at.
-@export var fps: float = 10.0
-## Repeat the strip until the timeline runs out, instead of stopping on the
-## last frame.
+@export var fps: float = 10.0:
+	set(value):
+		fps = maxf(0.0, value)
+## Repeat the strip until the timeline runs out.
 @export var loop: bool = false
+## How the picture is sized against the screen.
+##   FILL  covers the whole screen, cropping whatever overflows (default)
+##   FIT   shows the whole frame, leaving bars if the shape does not match
+##   NONE  leaves the Art node's scale exactly as you set it by hand
+@export var art_fit: ArtFit = ArtFit.FILL:
+	set(value):
+		art_fit = value
+		_apply_sheet()
 
 @export_group("Timeline")
-@export var steps: Array[CineStep] = []:
+@export var steps: Array[CutSceneMaker_v1Step] = []:
 	set(value):
 		steps = value
 		update_configuration_warnings()
@@ -60,30 +70,45 @@ const BAR_HEIGHT: float = 36.0
 @export var type_speed: float = 30.0
 
 @export_group("Playing")
-## Walk into this and the cutscene starts. Leave empty to start it yourself
-## by calling `play()`.
+## Walk into this and the cutscene starts. Leave empty to call `play()`.
 @export var trigger_area: Area2D
+## Start the moment the scene loads. Use this for a cutscene that IS the
+## scene, or a test scene — without it, a nested CutSceneMaker_v1Player just sits there
+## waiting for a trigger area or a call to play().
+@export var autoplay: bool = false
 ## Let the player hold the skip key to end it early.
 @export var skippable: bool = true
-## Name of a flag that remembers this cutscene was seen, e.g. "saw_door".
-## Leave empty to let it replay every time. Note: flags reset when the game
-## is closed, because nothing in the project saves them yet.
+## Only play once this flag is written. Empty = no requirement.
+@export var require_flag: String = ""
+## Flag written when this ends, and checked before it starts, so it plays once.
 @export var seen_id: String = ""
+
+@export_group("Ending")
+## Where this cutscene can go when it finishes. Checked TOP TO BOTTOM — the
+## first exit whose flags pass is taken, so put the specific ones first and a
+## plain fallback last. Empty list = just end and stay where you are.
+@export var next_scenes: Array[CutSceneMaker_v1Next] = []:
+	set(value):
+		next_scenes = value
+		update_configuration_warnings()
+
+## Editor only. Scrub this to see the cutscene at any moment. Has no effect
+## at runtime. The timeline dock drives it for you.
+@export_range(0.0, 60.0, 0.01) var preview_time: float = 0.0:
+	set(value):
+		preview_time = value
+		if Engine.is_editor_hint():
+			preview_at(value)
 
 @onready var art: Sprite2D = $Art
 @onready var top_bar: ColorRect = $TopBar
 @onready var bottom_bar: ColorRect = $BottomBar
 @onready var fade: ColorRect = $Fade
 @onready var box: Control = $Box
-@onready var name_label: Label = $Box/Name
-## A plain Label, not a RichTextLabel, on purpose. Label has a real
-## horizontal_alignment property that aligns physically, so Arabic sits against
-## the right edge with its punctuation on the left. RichTextLabel can only be
-## aligned with BBCode, and BBCode alignment is logical — "right" there means
-## "end of line", which in RTL is the left side, i.e. exactly wrong.
 @onready var text_label: Label = $Box/Text
+@onready var sfx: AudioStreamPlayer = $Sfx
 
-var _queue: Array[CineStep] = []
+var _queue: Array[CutSceneMaker_v1Step] = []
 var _t: float = 0.0
 var _next: int = 0
 var _started: bool = false
@@ -96,20 +121,28 @@ var _was_paused: bool = false
 var _bars: float = 0.0
 var _cam: Camera2D = null
 var _cam_home: Vector2 = Vector2.ZERO
+var _line_timer: Tween = null
+var _preview_cam: Camera2D = null
+var _preview_cam_home: Vector2 = Vector2.ZERO
+var _preview_homes: Dictionary = {}   # moved node -> its untouched position
+## True when _finish() is running because the node is being removed, rather
+## than because the cutscene reached its end. Changing scene in that case
+## would fight whatever is already tearing the tree down.
+var _exiting: bool = false
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS  # keep running while we pause the game
 	_apply_sheet()
 
-	# Set here with the engine's own constant rather than as a number in the
-	# .tscn, because the numeric values are not what you'd guess — AUTO is 0.
-	# AUTO reads the line and picks the direction itself, which puts Arabic
-	# against the right edge with its punctuation on the left. Forcing a
-	# direction by hand is what threw "..." to the wrong end of the line.
+	# Set with the engine's own constant, not a number in the .tscn — the
+	# numeric values are not what you'd guess (AUTO is 0). AUTO reads the line
+	# and picks the direction itself, which is the only setting that keeps
+	# Arabic punctuation on the correct side.
 	text_label.text_direction = Control.TEXT_DIRECTION_AUTO
-	name_label.text_direction = Control.TEXT_DIRECTION_AUTO
+
 	if Engine.is_editor_hint():
+		preview_at(preview_time)
 		return
 
 	visible = false
@@ -120,12 +153,15 @@ func _ready() -> void:
 
 	# A scene change mid-cutscene must not leave the game paused and the
 	# player frozen. This is the safety net for every path we didn't think of.
-	tree_exiting.connect(_finish)
+	tree_exiting.connect(_on_tree_exiting)
 
 	if trigger_area != null:
 		trigger_area.body_entered.connect(_on_body_entered)
-	elif get_tree().current_scene == self:
-		play()  # this scene was run on its own with F6
+	elif autoplay or get_tree().current_scene == self:
+		# `current_scene == self` only catches a cutscene run directly with F6.
+		# A CutSceneMaker_v1Player sitting inside a bigger scene is NOT the current scene,
+		# so it needs `autoplay` or it will never start on its own.
+		play()
 
 
 #region /// playing
@@ -134,15 +170,16 @@ func _ready() -> void:
 func play() -> void:
 	if _started or _finished:
 		return
+	if require_flag != "" and not Flags.is_set(require_flag):
+		return
 	if seen_id != "" and Flags.is_set(seen_id):
 		return
 	if not _validate():
 		return
 
-	_queue = steps.duplicate()
-	_queue.sort_custom(func(a: CineStep, b: CineStep) -> bool: return a.at_time < b.at_time)
+	_queue = sorted_steps()
 
-	_cam = get_viewport().get_camera_2d()
+	_cam = find_camera()
 	if _cam != null:
 		_cam_home = _cam.position  # local, so we can put it back exactly
 
@@ -152,6 +189,9 @@ func play() -> void:
 
 	_started = true
 	visible = true
+	box.visible = false
+	fade.color.a = 0.0
+	_set_bars(0.0)
 	set_process(true)
 
 
@@ -186,7 +226,7 @@ func _process(delta: float) -> void:
 		if _holding:
 			return
 
-	if _t >= _end_time():
+	if _t >= end_time():
 		_finish()
 
 
@@ -201,29 +241,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-func _run(step: CineStep) -> void:
+func _run(step: CutSceneMaker_v1Step) -> void:
 	match step.kind:
-		CineStep.Kind.SAY:
+		CutSceneMaker_v1Step.Kind.SAY:
 			_say(step)
-		CineStep.Kind.CAMERA:
+		CutSceneMaker_v1Step.Kind.CAMERA:
 			_pan(step)
-		CineStep.Kind.MOVE:
+		CutSceneMaker_v1Step.Kind.MOVE:
 			_move(step)
-		CineStep.Kind.FADE:
+		CutSceneMaker_v1Step.Kind.FADE:
 			_slide(fade, "color:a", step.amount, step.duration)
-		CineStep.Kind.LETTERBOX:
+		CutSceneMaker_v1Step.Kind.LETTERBOX:
 			_slide_bars(step.amount, step.duration)
-		CineStep.Kind.SOUND:
-			Audio.play_ui_audio(step.sound)
-		CineStep.Kind.FLAG:
+		CutSceneMaker_v1Step.Kind.SOUND:
+			_play_sound(step)
+		CutSceneMaker_v1Step.Kind.FLAG:
 			Flags.set_flag(step.flag_name)
 
 
-## Ends the cutscene early. Flags still get set, so the world doesn't end up
-## in a half-finished state just because someone skipped.
+## Ends the cutscene early. Flags still get written, so the world doesn't end
+## up half-updated just because someone skipped.
 func _skip_to_end() -> void:
 	while _next < _queue.size():
-		if _queue[_next].kind == CineStep.Kind.FLAG:
+		if _queue[_next].kind == CutSceneMaker_v1Step.Kind.FLAG:
 			Flags.set_flag(_queue[_next].flag_name)
 		_next += 1
 	_finish()
@@ -242,6 +282,10 @@ func _finish() -> void:
 	_holding = false
 	_typing = false
 	visible = false
+	# Audio does not care that the layer is hidden, so without this a sound
+	# would keep playing after the cutscene is over. Stopping here makes the
+	# behaviour match what the timeline's end marker shows.
+	sfx.stop()
 
 	if is_inside_tree():
 		get_tree().paused = _was_paused  # put it back, don't assume it was false
@@ -253,27 +297,85 @@ func _finish() -> void:
 		Flags.set_flag(seen_id)
 	finished.emit()
 
+	if not _exiting:
+		_go_to_next()
+
+
+func _on_tree_exiting() -> void:
+	_exiting = true
+	_finish()
+
+
+## Picks the first exit whose flags pass and changes to it. Deferred, because
+## swapping the scene from inside a finish callback would pull the tree out
+## from under the code still running.
+func _go_to_next() -> void:
+	var exit: CutSceneMaker_v1Next = pick_next()
+	if exit == null or exit.scene == null:
+		return
+	get_tree().change_scene_to_packed.call_deferred(exit.scene)
+
+
+## The exit that would be taken right now, or null. Public so the timeline
+## dock can show you which branch is currently live.
+func pick_next() -> CutSceneMaker_v1Next:
+	for exit in next_scenes:
+		if exit != null and exit.can_take():
+			return exit
+	return null
+
 #endregion
 
 
 #region /// beats
 
-func _say(step: CineStep) -> void:
+func _say(step: CutSceneMaker_v1Step) -> void:
+	# Any pending auto-hide belongs to the previous line, so drop it first or
+	# it will yank this new line off the screen early.
+	if _line_timer != null and _line_timer.is_valid():
+		_line_timer.kill()
+		_line_timer = null
+
 	if step.text.is_empty():
 		box.visible = false
 		return
-	name_label.text = step.speaker
-	name_label.visible = step.speaker != ""
-	# Plain assignment. Do NOT wrap this in alignment tags, and do not force a
-	# text_direction here — `_ready()` sets AUTO, which was measured to be the
-	# only setting that keeps trailing punctuation ("...", ".") on the left of
-	# an Arabic line. Alignment comes from the label's horizontal_alignment.
-	text_label.text = step.text
+	text_label.text = subtitle_of(step)
 	text_label.visible_characters = 0
 	box.visible = true
 	_typing = true
 	_typed = 0.0
 	_holding = step.hold
+
+	# A line that does not wait for the player can instead be given a length on
+	# the timeline: it shows for `duration`, then takes itself away.
+	if step.is_timed_line():
+		_line_timer = create_tween()
+		_line_timer.tween_interval(step.duration)
+		_line_timer.tween_callback(func() -> void: box.visible = false)
+
+
+## God of War style: no box, no name plate — the speaker is folded into one
+## centred line, e.g. "Atreus: Hraezlyr." Centring also sidesteps the whole
+## left/right alignment problem, since it reads correctly in any language.
+func subtitle_of(step: CutSceneMaker_v1Step) -> String:
+	if step.speaker.is_empty():
+		return step.text
+	return "%s: %s" % [step.speaker, step.text]
+
+
+## Plays a SOUND step, cutting it short if the clip was trimmed on the
+## timeline. The stop is scheduled on a tween created by this node, which is
+## PROCESS_MODE_ALWAYS, so it still fires while the game is paused.
+func _play_sound(step: CutSceneMaker_v1Step) -> void:
+	if step.sound == null:
+		return
+	sfx.stop()
+	sfx.stream = step.sound
+	sfx.play()
+	if step.is_trimmed():
+		var t: Tween = create_tween()
+		t.tween_interval(step.duration)
+		t.tween_callback(sfx.stop)
 
 
 ## First press finishes the typewriter, second press moves on.
@@ -290,20 +392,22 @@ func _stop_typing() -> void:
 	text_label.visible_characters = -1  # -1 means "show everything"
 
 
-func _pan(step: CineStep) -> void:
+func _pan(step: CutSceneMaker_v1Step) -> void:
 	if _cam == null or not is_instance_valid(_cam):
 		push_warning("%s: CAMERA step skipped, no active Camera2D." % name)
 		return
-	# The camera has limit_left/right/top/bottom set from the map bounds, so a
-	# target outside those limits will silently clamp. If a pan looks like it
-	# stopped short, that's why.
 	_slide(_cam, "global_position", step.to_position, step.duration)
 
 
-func _move(step: CineStep) -> void:
-	var node: Node2D = _resolve(step.target) as Node2D
+func _move(step: CutSceneMaker_v1Step) -> void:
+	var node: Node = _resolve(step.target)
 	if node == null:
-		push_warning("%s: MOVE step skipped, '%s' is not a Node2D." % [name, step.target])
+		push_warning("%s: MOVE skipped — no node named '%s' inside this cutscene or in the level around it." % [name, step.target])
+		return
+	# Node2D and Control both have global_position; anything else has no
+	# position to slide, so say so rather than failing silently.
+	if not (node is Node2D or node is Control):
+		push_warning("%s: MOVE skipped — '%s' is a %s, which has no position." % [name, step.target, node.get_class()])
 		return
 	_slide(node, "global_position", step.to_position, step.duration)
 
@@ -333,30 +437,196 @@ func _set_bars(amount: float) -> void:
 #endregion
 
 
-#region /// picture
+#region /// editor preview
 
-func _apply_sheet() -> void:
+## Puts the scene into the state it would be in at `t` seconds. Used by the
+## timeline dock and the Preview Time slider.
+##
+## Holds are ignored here on purpose: `at_time` is treated as absolute, so
+## scrubbing shows you where a beat sits on the strip. At runtime a held line
+## stops the clock, which shifts everything after it.
+func preview_at(t: float) -> void:
 	if art == null or not is_instance_valid(art):
 		return
-	art.texture = sheet
-	art.vframes = maxi(1, frame_count)
-	art.frame = 0
+
+	art.frame = frame_at(t)
+	_set_bars(_channel_at(CutSceneMaker_v1Step.Kind.LETTERBOX, t))
+	fade.color.a = _channel_at(CutSceneMaker_v1Step.Kind.FADE, t)
+	_preview_camera(t)
+	_preview_moves(t)
+
+	var line: CutSceneMaker_v1Step = say_at(t)
+	if line == null:
+		box.visible = false
+	else:
+		box.visible = true
+		text_label.text = subtitle_of(line)
+		text_label.visible_characters = -1
+	visible = true
 
 
-func _update_frame() -> void:
-	if sheet == null or frame_count <= 1 or fps <= 0.0:
+## Puts everything the preview borrowed back where it was: the camera, and
+## every node a MOVE step slid. The dock calls this the moment you stop
+## dragging, so a scrub can never be saved into the scene.
+func end_preview() -> void:
+	if _preview_cam != null and is_instance_valid(_preview_cam):
+		_preview_cam.global_position = _preview_cam_home
+	_preview_cam = null
+	for node in _preview_homes.keys():
+		if is_instance_valid(node):
+			node.global_position = _preview_homes[node]
+	_preview_homes.clear()
+
+
+## Moves the real Camera2D to where it would be at `t`, so scrubbing shows
+## camera work instead of leaving it invisible until you press play.
+##
+## The camera's starting spot is remembered on the first scrub of a drag and
+## handed back by `end_preview()`.
+func _preview_camera(t: float) -> void:
+	var cam: Camera2D = find_camera()
+	if cam == null:
 		return
-	var f: int = int(_t * fps)
+	if cam != _preview_cam:
+		_preview_cam = cam
+		_preview_cam_home = cam.global_position
+	cam.global_position = camera_at(t, _preview_cam_home)
+
+
+## Where the camera sits at `t`, solved from the CAMERA steps.
+func camera_at(t: float, from: Vector2) -> Vector2:
+	return _solve_position(_steps_of_kind(CutSceneMaker_v1Step.Kind.CAMERA), t, from)
+
+
+## Walks a list of position steps and returns where the thing is at `t`.
+## Shared by CAMERA and MOVE: both chain from wherever the previous step left
+## off, and both interpolate when `t` lands mid-slide.
+func _solve_position(list: Array, t: float, from: Vector2) -> Vector2:
+	var pos: Vector2 = from
+	for step in list:
+		if t >= step.at_time + step.duration:
+			pos = step.to_position
+		elif t > step.at_time:
+			var k: float = (t - step.at_time) / maxf(step.duration, 0.0001)
+			pos = pos.lerp(step.to_position, k)
+			break
+		else:
+			break
+	return pos
+
+
+func _steps_of_kind(kind: int) -> Array:
+	var out: Array = []
+	for step in sorted_steps():
+		if step.kind == kind:
+			out.append(step)
+	return out
+
+
+## Same idea as the camera preview, but for every node a MOVE step targets.
+## Several MOVE steps on one node chain together, exactly like at runtime.
+##
+## Each node's untouched position is remembered the first time it is previewed,
+## so scrubbing back to 0 returns everything to where you left it.
+func _preview_moves(t: float) -> void:
+	var by_node: Dictionary = {}
+	for step in _steps_of_kind(CutSceneMaker_v1Step.Kind.MOVE):
+		var node: Node = _resolve(step.target)
+		if node == null or not (node is Node2D or node is Control):
+			continue
+		if not by_node.has(node):
+			by_node[node] = []
+		by_node[node].append(step)
+
+	for node in by_node.keys():
+		if not is_instance_valid(node):
+			continue
+		if not _preview_homes.has(node):
+			_preview_homes[node] = node.global_position
+		node.global_position = _solve_position(by_node[node], t, _preview_homes[node])
+
+
+## The camera a CAMERA step will drive. Uses the active one at runtime; in the
+## editor there is no "active" camera, so it falls back to the first Camera2D
+## in the scene around this cutscene.
+func find_camera() -> Camera2D:
+	if is_inside_tree():
+		var active: Camera2D = get_viewport().get_camera_2d()
+		if active != null:
+			return active
+	var root: Node = get_parent()
+	return _first_camera(root) if root != null else null
+
+
+func _first_camera(n: Node) -> Camera2D:
+	for child in n.get_children():
+		if child is Camera2D:
+			return child
+		var found: Camera2D = _first_camera(child)
+		if found != null:
+			return found
+	return null
+
+
+## Which sheet frame is showing at `t`.
+func frame_at(t: float) -> int:
+	if sheet == null or frame_count <= 1 or fps <= 0.0:
+		return 0
+	var f: int = int(t * fps)
 	if loop:
 		f = f % frame_count
-	art.frame = clampi(f, 0, frame_count - 1)
+	return clampi(f, 0, frame_count - 1)
+
+
+## The SAY step that would be on screen at `t`, or null if the box is hidden.
+func say_at(t: float) -> CutSceneMaker_v1Step:
+	var found: CutSceneMaker_v1Step = null
+	for step in sorted_steps():
+		if step.kind != CutSceneMaker_v1Step.Kind.SAY or step.at_time > t:
+			continue
+		if step.text.is_empty():
+			found = null                       # an empty line hides the box
+		elif step.is_timed_line() and t > step.at_time + step.duration:
+			found = null                       # this line has already timed out
+		else:
+			found = step
+	return found
+
+
+## Value of a fading channel (FADE / LETTERBOX) at `t`, interpolated mid-slide
+## so scrubbing through a fade actually looks like a fade.
+func _channel_at(kind: int, t: float) -> float:
+	var value: float = 0.0
+	for step in sorted_steps():
+		if step.kind != kind:
+			continue
+		if t >= step.at_time + step.duration:
+			value = step.amount
+		elif t > step.at_time:
+			var k: float = (t - step.at_time) / maxf(step.duration, 0.0001)
+			value = lerpf(value, step.amount, k)
+			break
+		else:
+			break
+	return value
+
+
+## Steps in time order. The exported array keeps whatever order you typed.
+func sorted_steps() -> Array[CutSceneMaker_v1Step]:
+	var out: Array[CutSceneMaker_v1Step] = []
+	for step in steps:
+		if step != null:
+			out.append(step)
+	out.sort_custom(func(a: CutSceneMaker_v1Step, b: CutSceneMaker_v1Step) -> bool: return a.at_time < b.at_time)
+	return out
 
 
 ## The cutscene ends when both the last beat and the animation are done.
-func _end_time() -> float:
+func end_time() -> float:
 	var last: float = 0.0
-	for step in _queue:
-		last = maxf(last, step.at_time)
+	for step in steps:
+		if step != null:
+			last = maxf(last, step.at_time + step.span())
 	var anim: float = 0.0
 	if not loop and frame_count > 1 and fps > 0.0:
 		anim = float(frame_count) / fps
@@ -365,10 +635,55 @@ func _end_time() -> float:
 #endregion
 
 
+#region /// picture
+
+func _apply_sheet() -> void:
+	if art == null or not is_instance_valid(art):
+		return
+	art.texture = sheet
+	art.vframes = maxi(1, frame_count)
+	art.frame = 0
+	_fit_art()
+
+
+## Scales the picture to the screen so a sheet does not have to be authored at
+## exactly the game's resolution. Without this you must work the scale out by
+## hand for every new sheet, which is the one sum this system was meant to
+## spare you.
+func _fit_art() -> void:
+	if art_fit == ArtFit.NONE or sheet == null or frame_count < 1:
+		return
+	var frame_w: float = float(sheet.get_width())
+	var frame_h: float = float(sheet.get_height()) / float(frame_count)
+	if frame_w <= 0.0 or frame_h <= 0.0:
+		return
+
+	# Measured against the DESIGN size, not the window: the stretch setting
+	# scales the whole canvas afterwards, so working in window pixels would
+	# double-apply it.
+	var view := Vector2(
+		float(ProjectSettings.get_setting("display/window/size/viewport_width", 640)),
+		float(ProjectSettings.get_setting("display/window/size/viewport_height", 360)))
+
+	var sx: float = view.x / frame_w
+	var sy: float = view.y / frame_h
+	var factor: float = maxf(sx, sy) if art_fit == ArtFit.FILL else minf(sx, sy)
+	art.scale = Vector2(factor, factor)
+	art.position = view * 0.5
+
+
+func _update_frame() -> void:
+	if sheet == null or frame_count <= 1 or fps <= 0.0:
+		return
+	art.frame = frame_at(_t)
+
+#endregion
+
+
 #region /// helpers and complaints
 
 ## Duck-typed on purpose: any player with these flags works, and a level with
-## no player at all is fine too. Matches how deaths.gd does it.
+## no player at all is fine too.
 func _freeze_player(frozen: bool) -> void:
 	for node in get_tree().get_nodes_in_group("Player"):
 		if "input_enabled" in node:
@@ -377,14 +692,22 @@ func _freeze_player(frozen: bool) -> void:
 			node.can_move = not frozen
 
 
-## Paths in a step are written as seen from the level, not from this node.
+## Finds the node a MOVE step points at.
+##
+## Looks INSIDE the cutscene first, then in the level around it. Inside is the
+## common case — anything you want to slide across a full-screen cutscene has
+## to be a child of this CanvasLayer, because a CanvasLayer draws in screen
+## space and level nodes are not in the same coordinate system.
 func _resolve(path: NodePath) -> Node:
 	if path.is_empty():
 		return null
-	var from: Node = get_parent()
-	if from == null:
-		from = self
-	return from.get_node_or_null(path)
+	var found: Node = get_node_or_null(path)
+	if found != null:
+		return found
+	var parent: Node = get_parent()
+	if parent != null:
+		return parent.get_node_or_null(path)
+	return null
 
 
 ## Refuses to start on broken data, and says exactly which step is broken.
@@ -406,20 +729,23 @@ func _problems() -> PackedStringArray:
 	if sheet != null and frame_count < 1:
 		out.append("frame_count must be at least 1.")
 	for i in steps.size():
-		var step: CineStep = steps[i]
+		var step: CutSceneMaker_v1Step = steps[i]
 		if step == null:
-			out.append("Step %d is empty — pick a CineStep for it." % i)
+			out.append("Step %d is empty — pick a CutSceneMaker_v1Step for it." % i)
 			continue
 		match step.kind:
-			CineStep.Kind.MOVE:
+			CutSceneMaker_v1Step.Kind.MOVE:
 				if step.target.is_empty():
 					out.append("Step %d (MOVE) has no target node." % i)
-			CineStep.Kind.SOUND:
+			CutSceneMaker_v1Step.Kind.SOUND:
 				if step.sound == null:
 					out.append("Step %d (SOUND) has no sound." % i)
-			CineStep.Kind.FLAG:
+			CutSceneMaker_v1Step.Kind.FLAG:
 				if step.flag_name.is_empty():
 					out.append("Step %d (FLAG) has no flag name." % i)
+	for j in next_scenes.size():
+		if next_scenes[j] == null:
+			out.append("Exit %d is empty — pick a CutSceneMaker_v1Next for it." % j)
 	return out
 
 

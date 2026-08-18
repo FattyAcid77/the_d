@@ -1,18 +1,22 @@
-[gd_scene format=3 uid="uid://bwahkjkljaix5"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://bbwii4betpdt1" path="res://Cutscenes/cine_player.gd" id="1_cine"]
-[ext_resource type="Texture2D" uid="uid://b3nsr7045ixai" path="res://Cutscenes/text_box.png" id="2_box"]
+[ext_resource type="Script" path="res://Cutscenes/cine_player.gd" id="1_cine"]
 
-[node name="CinePlayer" type="CanvasLayer" unique_id=313728890]
+[node name="CinePlayer" type="CanvasLayer"]
 process_mode = 3
 layer = 90
 script = ExtResource("1_cine")
+frame_count = 1
+fps = 10.0
+extra_time = 0.5
+type_speed = 30.0
+skippable = true
 
-[node name="Art" type="Sprite2D" parent="." unique_id=1943505909]
+[node name="Art" type="Sprite2D" parent="."]
 texture_filter = 2
 position = Vector2(320, 180)
 
-[node name="Fade" type="ColorRect" parent="." unique_id=482085597]
+[node name="Fade" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,15 +25,13 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="TopBar" type="ColorRect" parent="." unique_id=1134716973]
-anchors_preset = 10
+[node name="TopBar" type="ColorRect" parent="."]
 anchor_right = 1.0
 grow_horizontal = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="BottomBar" type="ColorRect" parent="." unique_id=1687213782]
-anchors_preset = 12
+[node name="BottomBar" type="ColorRect" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,52 +40,34 @@ grow_vertical = 0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Box" type="Control" parent="." unique_id=519328620]
-layout_mode = 3
-anchors_preset = 7
+[node name="Box" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -240.0
-offset_top = -138.0
-offset_right = 240.0
-offset_bottom = -8.0
+offset_left = -280.0
+offset_top = -104.0
+offset_right = 280.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="BG" type="TextureRect" parent="Box" unique_id=1121698435]
-layout_mode = 0
+[node name="Text" type="Label" parent="Box"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_box")
-expand_mode = 1
-
-[node name="Name" type="Label" parent="Box" unique_id=1790021277]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 118.0
-offset_bottom = 50.0
-text = "Name"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
 horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-
-[node name="Text" type="Label" parent="Box" unique_id=412943635]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = 42.0
-offset_right = -20.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 2
+vertical_alignment = 2
 autowrap_mode = 3
 visible_characters_behavior = 1
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]

@@ -14,8 +14,3 @@ debug_color = Color(0.93290305, 0.21163288, 0.39077115, 0.41960785)
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1092672576]
 position = Vector2(-1.1920929e-07, -59)
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]

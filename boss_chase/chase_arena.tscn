@@ -17,11 +17,11 @@ size = Vector2(208, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deadend"]
 size = Vector2(176, 16)
 
-[sub_resource type="Resource" id="Resource_d0jm1"]
+[sub_resource type="Resource" id="Resource_pyarj"]
 resource_local_to_scene = true
 script = ExtResource("4_pyarj")
 
-[sub_resource type="Resource" id="Resource_n7mwr"]
+[sub_resource type="Resource" id="Resource_d0jm1"]
 resource_local_to_scene = true
 script = ExtResource("4_pyarj")
 
@@ -145,12 +145,12 @@ position = Vector2(65, 1895)
 
 [node name="Boss" parent="World" unique_id=1008954834 node_paths=PackedStringArray("runner") instance=ExtResource("3_boss")]
 position = Vector2(88, 28)
-stats = SubResource("Resource_d0jm1")
+stats = SubResource("Resource_pyarj")
 runner = NodePath("../Runner")
 
 [node name="Runner" parent="World" unique_id=1670695800 node_paths=PackedStringArray("boss") instance=ExtResource("2_runner")]
 position = Vector2(88, 148)
-stats = SubResource("Resource_n7mwr")
+stats = SubResource("Resource_d0jm1")
 boss = NodePath("../Boss")
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=609040814 node_paths=PackedStringArray("runner", "boss")]
