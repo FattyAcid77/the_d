@@ -24,7 +24,6 @@ buses/default_bus_layout="uid://bk2t0kh1o201u"
 
 [autoload]
 
-Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 SceneManager="*res://control scene/SceneManager.gd"
 PauseMenu="*res://control scene/Pause_Menu.tscn"
@@ -42,6 +41,7 @@ Prescription="*uid://cvlogukklxp3a"
 Deaths="*uid://cfax3lx6m7ias"
 BloodWorld="*uid://kl7jkxuygf1h"
 MedicalItems="*uid://11p0y6srcukh"
+PopupWindows="*res://FD_Testing/GameSystems/Windows/popup_windows.gd"
 RadioLink="*uid://kjonwbueabvc"
 
 [display]
