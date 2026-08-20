@@ -17,6 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://cn7l2lgns7pv4" path="res://FD_Testing/Temp_Stuff/Visual Stuff/Icons_Temp/Apple.png" id="15_hjqyu"]
 [ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="16_hjqyu"]
 [ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="17_0k2bt"]
+[ext_resource type="Script" uid="uid://d2qaygk6m7flo" path="res://FD_Testing/GameSystems/Map/map_room.gd" id="18_0k2bt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k2bt"]
+size = Vector2(177, 411)
 
 [sub_resource type="Resource" id="Resource_cpy1e"]
 script = ExtResource("8_xm1p7")
@@ -151,6 +155,22 @@ script = ExtResource("1_nhb2p")
 player = NodePath("Sami_Doctor")
 doors = [NodePath("door_reg_type2"), NodePath("Door_reg")]
 
+[node name="Walk_Area" type="Node2D" parent="." unique_id=1881724224]
+visible = false
+rotation = -0.0035986314
+scale = Vector2(0.99999994, 0.99999994)
+script = ExtResource("18_0k2bt")
+room_id = "above_path"
+show_bounds = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walk_Area" unique_id=845515834]
+visible = false
+light_mask = 0
+visibility_layer = 0
+position = Vector2(153.5, 394.5)
+shape = SubResource("RectangleShape2D_0k2bt")
+debug_color = Color(1, 0, 1, 0.21176471)
+
 [node name="GameStateMachine" type="Node" parent="." unique_id=1547814113]
 script = ExtResource("16_hjqyu")
 
@@ -174,14 +194,13 @@ target_door_name = "lvl_3_lobby_FD"
 this_door_name = "Bipolar_Hall_north"
 
 [node name="Door_reg" parent="." unique_id=739377036 instance=ExtResource("4_dvgmf")]
-position = Vector2(156, 625)
+position = Vector2(159, 598)
 entery_direction = 0
 new_scene_path = "res://Main Scenes/Bipolar_Room.tscn"
-target_door_name = "Bipolar_Room_main"
+target_door_name = "lvl_3_lobby_FD"
 this_door_name = "Bipolar_Hall_South"
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_fkvws")]
-position = Vector2(140, 352)
 camera_adj = NodePath("../BipolarHallBgrd")
 
 [node name="NPC" parent="." unique_id=564381059 groups=["Nothing"] instance=ExtResource("6_lcfit")]

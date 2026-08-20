@@ -206,7 +206,7 @@ func _build_ui() -> void:
 	vb.add_theme_constant_override("separation", 14)
 	_entry.add_child(vb)
 	var title := Label.new()
-	title.text = "PHARMACY — enter your prescription"
+	title.text = tr("PHARMACY — enter your prescription")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 20)
 	vb.add_child(title)
@@ -225,11 +225,11 @@ func _build_ui() -> void:
 	buttons.add_theme_constant_override("separation", 20)
 	vb.add_child(buttons)
 	var ok := Button.new()
-	ok.text = "Fill prescription"
+	ok.text = tr("Fill prescription")
 	ok.pressed.connect(_on_entry_confirm)
 	buttons.add_child(ok)
 	var cancel := Button.new()
-	cancel.text = "Cancel"
+	cancel.text = tr("Cancel")
 	cancel.pressed.connect(close_entry)
 	buttons.add_child(cancel)
 
@@ -291,7 +291,7 @@ func _on_entry_confirm() -> void:
 		if _wrong_tries >= wrong_tries_before_lock:
 			_wrong_tries = 0
 			_locked_until = now + int(lock_seconds * 1000.0)
-			_entry_msg.text = invalid_text + "\nThe pharmacist checks the records..."
+			_entry_msg.text = tr(invalid_text) + "\nThe pharmacist checks the records..."
 		else:
 			_entry_msg.text = invalid_text
 		return
@@ -314,7 +314,7 @@ func _show_popup(text: String) -> void:
 ## keypress — so the player can never miss writing their prescription down.
 func _show_popup_held(text: String) -> void:
 	_popup_label.text = text
-	_popup_hint.text = dismiss_text
+	_popup_hint.text = tr(dismiss_text)
 	_popup.visible = true
 	_holding = true
 	# Only take the pause if nobody else already has it (a dialog or cutscene
@@ -326,7 +326,7 @@ func _show_popup_held(text: String) -> void:
 	await get_tree().create_timer(0.35, true, false, true).timeout   # ignore the press that got here
 	while _holding:
 		await get_tree().process_frame
-		if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("ui_accept"):
+		if InputAccess.just_pressed() or InputAccess.just_pressed("ui_accept"):
 			_holding = false
 	_popup.visible = false
 	if i_paused:

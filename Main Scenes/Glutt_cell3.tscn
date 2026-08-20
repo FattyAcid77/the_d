@@ -13,7 +13,7 @@ doors = [NodePath("Door_reg")]
 [node name="GluttCell1Bgrd" parent="." unique_id=2147212927 instance=ExtResource("2_ex70b")]
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_xdv4w")]
-camera_adj = NodePath("")
+camera_adj = NodePath("../GluttCell1Bgrd")
 
 [node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("4_mtmda")]
 position = Vector2(460, 292)

@@ -25,11 +25,11 @@ func Exit() -> void:
 
 
 func _play() -> void:
-	var frames := player.anim.sprite_frames
+	var frames: SpriteFrames = player.anim.sprite_frames
 	if frames == null:
 		return
 	# try the facing-specific one first, then a plain one
-	var candidates := [
+	var candidates: Array = [
 		anim_prefix + "_" + player.AnimDirection(),
 		anim_prefix + "_down",
 		anim_prefix,

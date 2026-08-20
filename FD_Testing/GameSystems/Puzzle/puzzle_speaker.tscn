@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://biwhkjmvfb37a"]
+[gd_scene load_steps=3 format=3 uid="uid://puzspeaker0001"]
 
-[ext_resource type="Script" uid="uid://dhehynsfqwkjg" path="res://FD_Testing/GameSystems/Puzzle/puzzle_speaker.gd" id="1_spk"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Puzzle/puzzle_speaker.gd" id="1_spk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spk"]
 radius = 26.0

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://ytmhg35qf2s4"]
+
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_83cxl"]
+[ext_resource type="PackedScene" uid="uid://w3c76cjvjohj" path="res://scenario_1/Scene_1.tscn" id="1_s1swa"]
+
+[resource]
+script = ExtResource("1_83cxl")
+number = 4
+title = "initial_dialouge_done"
+state_name = "obj1"
+set_flags = Array[String](["door_unlocked", "initial_dialouge_done"])
+scene = ExtResource("1_s1swa")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

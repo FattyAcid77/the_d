@@ -128,7 +128,10 @@ func toggle() -> void:
 		open()
 
 
-func open() -> void:
+## `animate` OFF makes it appear instantly with no slide. The Board uses that
+## when you switch TO the logbook tab, because the board is already up — only
+## opening the board itself should slide.
+func open(animate: bool = true) -> void:
 	if is_open or DialogManager.is_active or Cutscene.is_playing:
 		return
 	is_open = true
@@ -138,24 +141,36 @@ func open() -> void:
 	_refresh()
 	_layer.visible = true
 	_blur.visible = true
+
+	if _tween and _tween.is_running():
+		_tween.kill()
+
+	if not animate:
+		_root.position.y = 0.0
+		return
+
 	# start below the screen and glide up
 	var h := get_viewport().get_visible_rect().size.y
 	_root.position.y = h
-	if _tween and _tween.is_running():
-		_tween.kill()
 	_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	_tween.tween_property(_root, "position:y", 0.0, slide_seconds)
 
 
-func close() -> void:
+func close(animate: bool = true) -> void:
 	if not is_open:
 		return
 	is_open = false
 	_active_deduction = ""
 	_fact_panel.visible = false
-	var h := get_viewport().get_visible_rect().size.y
 	if _tween and _tween.is_running():
 		_tween.kill()
+
+	if not animate:
+		_layer.visible = false
+		get_tree().paused = _was_paused
+		return
+
+	var h := get_viewport().get_visible_rect().size.y
 	_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	_tween.tween_property(_root, "position:y", h, slide_seconds * 0.8)
 	_tween.tween_callback(func() -> void:
@@ -192,7 +207,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not is_open:
 		return
-	if event.is_action_pressed("ui_cancel"):
+	if InputAccess.event_pressed(event, "ui_cancel"):
 		if _fact_panel.visible:
 			_fact_panel.visible = false
 		else:
@@ -311,7 +326,7 @@ func _card_clicked(id: String) -> void:
 	if c.has("deduction"):
 		var d: LogDeduction = c.deduction
 		if d.is_solved():
-			_show_text(d.result_title, d.result_text)
+			_show_text(tr(d.result_title), tr(d.result_text))
 		else:
 			_active_deduction = "" if _active_deduction == d.id else d.id
 			_refresh_card_visuals()
@@ -322,8 +337,8 @@ func _card_clicked(id: String) -> void:
 		var e: LogEntry = c.entry
 		var lines: Array[String] = []
 		for f in e.known_facts():
-			lines.append("•  " + f.text)
-		_show_text(e.title, "\n\n".join(lines))
+			lines.append("•  " + tr(f.text))
+		_show_text(tr(e.title), "\n\n".join(lines))
 
 
 func _toggle_connection(ded_id: String, entry_id: String) -> void:
@@ -470,7 +485,7 @@ func _refresh() -> void:
 		_board.add_child(box)
 		_board.move_child(box, 0)
 		var lbl := Label.new()
-		lbl.text = cm.title
+		lbl.text = tr(cm.title)
 		lbl.position = Vector2(6, 2)
 		lbl.modulate = Color(0.2, 0.15, 0.1, 0.8)
 		box.add_child(lbl)
@@ -646,7 +661,7 @@ func _make_card(id: String, home: Vector2, is_mystery: bool, e: LogEntry, d: Log
 			pin2.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			card.add_child(pin2)
 			var t := Label.new()
-			t.text = title_text
+			t.text = tr(title_text)
 			t.clip_text = true
 			t.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			t.set_anchors_preset(Control.PRESET_FULL_RECT)

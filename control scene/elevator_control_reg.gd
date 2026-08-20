@@ -1,7 +1,7 @@
 class_name Elevator_Control_reg extends Area2D
 
 @onready var E_C: Elevator_control_UI = $"../ElevatorControl"
-@onready var sami: Sami = $"../Sami"
+@onready var sami: Player = $"../Sami_Doctor_test"
 
 var player_inside:bool = false
 
@@ -15,13 +15,13 @@ func open_Elevetor_Control_UI() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Sami:
+	if body is Player:
 		player_inside = true
 		SceneManager.player_in_area = true
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if body is Sami:
+	if body is Player:
 		player_inside = true
 		SceneManager.player_in_area = true
 	

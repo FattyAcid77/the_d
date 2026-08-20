@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://dlgv2uimain01"]
+[gd_scene load_steps=3 format=3 uid="uid://dlgv2uimain01"]
 
-[ext_resource type="Script" uid="uid://cs1ifk0eppgy2" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_ui.gd" id="1_dui"]
-[ext_resource type="Texture2D" uid="uid://bk1taec66nu7" path="res://FD_Testing/GameSystems/DialogV2/text_box.png" id="3_tex"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_ui.gd" id="1_dui"]
+[ext_resource type="Texture2D" path="res://FD_Testing/GameSystems/DialogV2/text_box.png" id="3_tex"]
 
 [node name="DialogUI" type="CanvasLayer" node_paths=PackedStringArray("box", "portrait_rect", "name_label", "text_label", "choices_box", "topics_box", "leave_button", "audio", "layout_margin")]
 script = ExtResource("1_dui")

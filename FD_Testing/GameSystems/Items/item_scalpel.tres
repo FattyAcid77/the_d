@@ -6,6 +6,8 @@
 script = ExtResource("1")
 action = 2
 type = "scalpel"
+max_stack = 1
+needs_big_slot = false
 display_name = "Scalpel"
 effect = "Opens a wound"
 quantity = 1

@@ -94,7 +94,7 @@ func _process(delta: float) -> void:
 	_callout_timer -= delta
 	if _callout_timer <= 0.0 and callout_lines.size() > 0:
 		_callout_timer = callout_every
-		var line: String = callout_lines[_callout_i % callout_lines.size()]
+		var line: String = tr(callout_lines[_callout_i % callout_lines.size()])
 		_callout_i += 1
 		callout.emit(line)
 		if lights and lights.has_method("show_callout"):

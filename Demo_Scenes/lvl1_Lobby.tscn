@@ -1,0 +1,454 @@
+[gd_scene format=3 uid="uid://cthrlvtm65fhu"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_kqdqe"]
+[ext_resource type="PackedScene" uid="uid://j0fxoil05ao8" path="res://background_scenes/lvl_1_lobby_bgrd.tscn" id="1_yppu5"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_kqdqe"]
+[ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="3_vrf2x"]
+[ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="4_705w6"]
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="5_akhaw"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="6_qwha2"]
+[ext_resource type="Texture2D" uid="uid://day1d5o1hywm8" path="res://characters scenes/NPC_Assets/om_alsaleel_in_the_office.png" id="6_req1c"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="7_m2ccb"]
+[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="8_705w6"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="8_l2np2"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="9_h4xkc"]
+[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="9_v1uun"]
+[ext_resource type="Texture2D" uid="uid://d2bjirlrulvj6" path="res://characters scenes/NPC_Assets/7mto_cleaning_1.png" id="13_m2ccb"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="15_qwha2"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="16_m2ccb"]
+
+[sub_resource type="Resource" id="Resource_ysp6m"]
+script = ExtResource("6_qwha2")
+text = "كيف حالك"
+speaker_name = "حمتو"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_bx5ip"]
+script = ExtResource("6_qwha2")
+text = "بخير"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_gjdse"]
+script = ExtResource("6_qwha2")
+text = "ترا تلك الفتاة؟"
+speaker_name = "حمتو"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_ee7kw"]
+script = ExtResource("6_qwha2")
+text = "نعم"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_p05tq"]
+script = ExtResource("6_qwha2")
+text = "اذهب لها"
+speaker_name = "حمتو"
+set_flags = Array[String](["Hamato_Introduction_Finished"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_kmvg1"]
+script = ExtResource("5_akhaw")
+id = "Hamato_introduction"
+blocked_by_flags = Array[String](["Hamato_Introduction_Finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_ysp6m"), SubResource("Resource_bx5ip"), SubResource("Resource_gjdse"), SubResource("Resource_ee7kw"), SubResource("Resource_p05tq")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_qwha2"]
+script = ExtResource("6_qwha2")
+text = "اذهب لتلك الفتاة"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_m2ccb"]
+script = ExtResource("5_akhaw")
+id = "entry"
+blocked_by_flags = Array[String](["S3alel_introduction_finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_qwha2")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_onlx7"]
+script = ExtResource("9_h4xkc")
+branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_kmvg1"), SubResource("Resource_m2ccb")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2np2"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(0, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4xkc"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(56, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysp6m"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(112, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx5ip"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(168, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjdse"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(224, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee7kw"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(280, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p05tq"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(336, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmvg1"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(392, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onlx7"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(0, 101, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h25gc"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(56, 101, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t170u"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(112, 101, 56, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yu4vy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2np2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4xkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysp6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx5ip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjdse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee7kw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p05tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmvg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onlx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h25gc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t170u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_akhaw"]
+script = ExtResource("4_705w6")
+sprite_frames = SubResource("SpriteFrames_yu4vy")
+dialog = SubResource("Resource_onlx7")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_fx16m"]
+script = ExtResource("6_qwha2")
+text = "اهلا  سامي  كيف حالك؟ لا تقلق كل شئ كما تحب على موعدك"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_w6aar"]
+script = ExtResource("6_qwha2")
+text = "حسن"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_hgaiw"]
+script = ExtResource("6_qwha2")
+text = "خذ…. هذا اللوح للطبيب و  جهاز راديو  للاستمتاع به اثناء الانتظار"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_h25gc"]
+script = ExtResource("6_qwha2")
+text = "راديو؟"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_t170u"]
+script = ExtResource("6_qwha2")
+text = "لا تقلق ليس ملك احد، لقد وجدته داخل غرفة مهجورة حتى حمتو لا يعلم به"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_bo3rv"]
+script = ExtResource("6_qwha2")
+text = "حمتو!... كنية لمن؟"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_mitlc"]
+script = ExtResource("6_qwha2")
+text = " ليست  كنية بل اسم الحارس"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_l2np2"]
+script = ExtResource("6_qwha2")
+text = "...."
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_h4xkc"]
+script = ExtResource("6_qwha2")
+text = "......"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_vvib2"]
+script = ExtResource("6_qwha2")
+text = " ههههههههههههههههههههههه"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_kxdwo"]
+script = ExtResource("6_qwha2")
+text = "ماذا؟"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_2b71s"]
+script = ExtResource("6_qwha2")
+text = "هههههههههههه من هههههههههه يسمي ابنه حمتو؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_gsa1i"]
+script = ExtResource("6_qwha2")
+text = "و اين المشكلة؟؟ اسمي ام السعاليل"
+speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_2cfxy"]
+script = ExtResource("6_qwha2")
+text = "كم ابن لديك ؟	"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_mfi34"]
+script = ExtResource("6_qwha2")
+text = " لست متزوجة!"
+speaker_name = "ام السعاليل"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_wnqka"]
+script = ExtResource("6_qwha2")
+text = " اوه"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_modo6"]
+script = ExtResource("6_qwha2")
+text = "على العموم يبدو لي انك جدا منمق و ستحسن التعامل مع الاشخاص بالمشفى…اذهب"
+speaker_name = "ام السعاليل"
+set_flags = Array[String](["S3alel_introduction_finished"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_rdr5u"]
+script = ExtResource("5_akhaw")
+id = "S3alel_Welcome"
+require_flags = Array[String](["Hamato_Introduction_Finished"])
+blocked_by_flags = Array[String](["S3alel_introduction_finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_fx16m"), SubResource("Resource_w6aar"), SubResource("Resource_hgaiw"), SubResource("Resource_h25gc"), SubResource("Resource_t170u"), SubResource("Resource_bo3rv"), SubResource("Resource_mitlc"), SubResource("Resource_l2np2"), SubResource("Resource_h4xkc"), SubResource("Resource_vvib2"), SubResource("Resource_kxdwo"), SubResource("Resource_2b71s"), SubResource("Resource_gsa1i"), SubResource("Resource_2cfxy"), SubResource("Resource_mfi34"), SubResource("Resource_wnqka"), SubResource("Resource_modo6")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_y5lbl"]
+script = ExtResource("6_qwha2")
+text = "على العموم يبدو لي انك جدا منمق و ستحسن التعامل مع الاشخاص بالمشفى…اذهب"
+speaker_name = "ام السعاليل"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_ks6ox"]
+script = ExtResource("5_akhaw")
+id = "entry"
+require_flags = Array[String](["S3alel_introduction_finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_y5lbl")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_w52gr"]
+script = ExtResource("9_h4xkc")
+branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_rdr5u"), SubResource("Resource_ks6ox")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_r7mmy"]
+script = ExtResource("4_705w6")
+dialog = SubResource("Resource_w52gr")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqdqe"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 0, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrf2x"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 67, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_705w6"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 134, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1uun"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 201, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_req1c"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 268, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu4vy"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 335, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akhaw"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 402, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx16m"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 469, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7mmy"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 536, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6aar"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 603, 32, 67)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgaiw"]
+atlas = ExtResource("6_req1c")
+region = Rect2(0, 670, 32, 67)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h25gc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqdqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrf2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_705w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1uun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_req1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu4vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akhaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fx16m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7mmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6aar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgaiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Lvl1Lobby" type="Node2D" unique_id=1878639043 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_kqdqe")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("door_reg_type2")]
+
+[node name="GameStateMachine" type="Node" parent="." unique_id=1016827954]
+script = ExtResource("8_705w6")
+
+[node name="Start" type="Node" parent="GameStateMachine" unique_id=605420411]
+script = ExtResource("9_v1uun")
+show_groups = Array[String](["HamatoIntroduction"])
+hide_groups = Array[String](["S3alel", "MeetMazSad"])
+auto_advance_when_flag = "Hamato_Introduction_Finished"
+next_state = "S3alelIntroduction"
+
+[node name="S3alelIntroduction" type="Node" parent="GameStateMachine" unique_id=1119814051]
+script = ExtResource("9_v1uun")
+show_groups = Array[String](["S3alel"])
+hide_groups = Array[String](["MeetMazSad"])
+auto_advance_when_flag = "S3alel_introduction_finished"
+next_state = "MeetMazSad"
+
+[node name="MeetMazSad" type="Node" parent="GameStateMachine" unique_id=371876774]
+script = ExtResource("9_v1uun")
+show_groups = Array[String](["MeetMazSad"])
+
+[node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yppu5")]
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_kqdqe")]
+position = Vector2(701, 324)
+camera_adj = NodePath("../Lvl_1_Hall_BGRD")
+
+[node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction"] instance=ExtResource("3_vrf2x")]
+position = Vector2(592, 263)
+npc_resource = SubResource("Resource_akhaw")
+
+[node name="S3alel" parent="." unique_id=2048434997 groups=["S3alel"] instance=ExtResource("3_vrf2x")]
+position = Vector2(291, 237)
+npc_resource = SubResource("Resource_r7mmy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488488204]
+position = Vector2(260, 231)
+sprite_frames = SubResource("SpriteFrames_h25gc")
+autoplay = "default"
+frame = 8
+frame_progress = 0.65414715
+
+[node name="door_reg_type2" parent="." unique_id=1646241525 groups=["Doors", "MeetMazSad"] instance=ExtResource("15_qwha2")]
+position = Vector2(404, 171)
+entery_direction = 2
+push_distance = 30
+new_scene_path = "res://Demo_Scenes/Maz_Sad_hall.tscn"
+target_door_name = "Maz_Sad_Hall_South"
+this_door_name = "lvl1_lobby_north"
+
+[node name="CollisionShape2D" parent="door_reg_type2" index="0" unique_id=1184659297]
+position = Vector2(2.5, 0)
+
+[node name="Door_lights" type="Node2D" parent="." unique_id=1659306155 groups=["MeetMazSad"]]
+
+[node name="PointLight2D" type="PointLight2D" parent="Door_lights" unique_id=136865905]
+position = Vector2(380.00003, 100)
+scale = Vector2(0.046875082, 0.13281249)
+texture = ExtResource("16_m2ccb")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Door_lights" unique_id=2045221794]
+position = Vector2(430, 101)
+scale = Vector2(0.046875082, 0.13281249)
+texture = ExtResource("16_m2ccb")
+
+[editable path="door_reg_type2"]

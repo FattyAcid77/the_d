@@ -16,15 +16,16 @@
 [ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="14_qme8w"]
 [ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="15_iq4ux"]
 [ext_resource type="Script" uid="uid://eqkod3vr65xj" path="res://FD_Testing/GameSystems/Cutscene/cutscene_trigger.gd" id="16_iq4ux"]
-[ext_resource type="Resource" uid="uid://dfxa4bpehxlxs" path="res://FD_Testing/GameSystems/Cutscene/example_comic.tres" id="17_idite"]
+[ext_resource type="Resource" uid="uid://c7drqucrjd6da" path="res://FD_Testing/GameSystems/Cutscene/example_comic.tres" id="17_idite"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="18_4k670"]
 [ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="18_v8wcs"]
 [ext_resource type="Texture2D" uid="uid://cjlgcx68s0dyt" path="res://3MK-File/TEST-ANIM/Player-down.tres" id="20_rtr1t"]
 [ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="21_oth73"]
 [ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
 [ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
-[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
+[ext_resource type="Resource" uid="uid://r0psm55ad7rr" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
 [ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
+[ext_resource type="Script" uid="uid://dtkr5os4od5m7" path="res://FD_Testing/GameSystems/Windows/window_blocker.gd" id="26_ldlnt"]
 
 [sub_resource type="Resource" id="Resource_h0mp1"]
 script = ExtResource("8_gmla1")
@@ -368,9 +369,29 @@ metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkopv"]
 
-[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player")]
+[sub_resource type="GDScript" id="GDScript_h0mp1"]
+resource_name = "Window_Test"
+script/source = "extends Area2D
+
+
+
+func _on_area_entered(_area: Area2D) -> void:
+	open_windwos()
+
+
+func open_windwos() -> void:
+	PopupWindows.open_id(\"Window_Try\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldlnt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0mp1"]
+size = Vector2(237, 143.5)
+
+[node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_sailq")
 player = NodePath("Sami_Doctor")
+doors = [NodePath("Door_reg")]
 
 [node name="GameStateMachine" type="Node" parent="." unique_id=686998481]
 script = ExtResource("14_qme8w")
@@ -391,7 +412,7 @@ next_state = "Nothing_Matter"
 script = ExtResource("3_k5edk")
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_k5edk")]
-position = Vector2(371, 406)
+position = Vector2(356, 426)
 camera_adj = NodePath("../Lvl3LobbyBgrd")
 
 [node name="StatuePuzzle" parent="." unique_id=1258403952 groups=["statue_area"] instance=ExtResource("5_sailq")]
@@ -399,7 +420,7 @@ position = Vector2(720, 463.00003)
 scale = Vector2(0.31, 0.31)
 
 [node name="NPC" parent="." unique_id=1496377515 groups=["Nothing"] instance=ExtResource("6_83ett")]
-position = Vector2(603, 366)
+position = Vector2(592.965, 366)
 npc_resource = SubResource("Resource_qlnu4")
 
 [node name="NPC2" parent="." unique_id=697453048 groups=["Nothing"] instance=ExtResource("6_83ett")]
@@ -423,7 +444,7 @@ npc_resource = SubResource("Resource_h8623")
 position = Vector2(536, 260)
 entery_direction = 0
 new_scene_path = "res://FD_Testing/Temp_Stuff/Bipolar_Hall_Fd_Test.tscn"
-target_door_name = "Bipolar_Hall_north"
+target_door_name = "Bipolar_Hall_South"
 this_door_name = "lvl_3_lobby_FD"
 
 [node name="Yazed" parent="." unique_id=569669017 groups=["Nothing"] instance=ExtResource("6_83ett")]
@@ -465,3 +486,20 @@ position = Vector2(482, 368)
 script = ExtResource("23_bkopv")
 cell_size = Vector2(46, 46)
 wanted = Array[String](["stage1", "", "", "", "", "", "", "", ""])
+
+[node name="Window_Area" type="Area2D" parent="." unique_id=1330501366]
+position = Vector2(518, 455)
+script = SubResource("GDScript_h0mp1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Window_Area" unique_id=1834720544]
+shape = SubResource("RectangleShape2D_ldlnt")
+
+[node name="Window_Blocker" type="Area2D" parent="." unique_id=126195773]
+position = Vector2(847, 336)
+script = ExtResource("26_ldlnt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Window_Blocker" unique_id=1076438204]
+position = Vector2(-58.5, -34.25)
+shape = SubResource("RectangleShape2D_h0mp1")
+
+[connection signal="area_entered" from="Window_Area" to="Window_Area" method="_on_area_entered"]

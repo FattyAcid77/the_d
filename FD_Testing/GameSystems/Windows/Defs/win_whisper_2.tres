@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PopupWindowDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/popup_window_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "whisper_2"
+kind = 0
+size = Vector2i(520, 110)
+title = "?????"
+borderless = true
+show_title_inside = true
+unfocusable = false
+show_in_taskbar = true
+always_on_top = true
+depth = 0
+placement = 4
+close_mode = 0
+lifetime = 9.0
+text = "he remembers what you did"
+text_motion = 1
+text_speed = 60.0
+shake_pixels = 1.5

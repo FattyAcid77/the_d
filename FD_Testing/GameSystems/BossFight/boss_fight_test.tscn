@@ -1,38 +1,22 @@
-[gd_scene format=3 uid="uid://g7vkec88g4gi"]
+[gd_scene load_steps=11 format=3 uid="uid://bossfighttest01"]
 
-[ext_resource type="Script" uid="uid://0si7w814hlae" path="res://FD_Testing/GameSystems/BossFight/boss_fight.gd" id="1_fight"]
-[ext_resource type="Script" uid="uid://bp4smbblhefpt" path="res://FD_Testing/GameSystems/BossFight/yazzed_boss.gd" id="2_boss"]
-[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="3_kauo0"]
-[ext_resource type="Script" uid="uid://bjldqgienlrn8" path="res://FD_Testing/GameSystems/BossFight/boss_tv.gd" id="3_tv"]
-[ext_resource type="Script" uid="uid://djbtt85ixkyv6" path="res://FD_Testing/GameSystems/BossFight/boss_object.gd" id="4_obj"]
-[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="4_yt2ck"]
-[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="5_beg81"]
-[ext_resource type="Script" uid="uid://ctdkrpv2tgyck" path="res://FD_Testing/GameSystems/BossFight/boss_juice.gd" id="5_juice"]
-[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="6_2loj6"]
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="6_icon"]
-[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="7_uyvgq"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_fight.gd" id="1_fight"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/yazzed_boss.gd" id="2_boss"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_tv.gd" id="3_tv"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_object.gd" id="4_obj"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_juice.gd" id="5_juice"]
 
-[sub_resource type="Resource" id="Resource_6skju"]
-script = ExtResource("4_yt2ck")
-text = "FUCK YOU"
-metadata/_custom_type_script = "uid://c8gnwlh24codr"
-
-[sub_resource type="Resource" id="Resource_hyhbw"]
-script = ExtResource("3_kauo0")
-id = "entry"
-lines = Array[ExtResource("4_yt2ck")]([SubResource("Resource_6skju")])
-metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
-
-[sub_resource type="Resource" id="Resource_kdy28"]
-script = ExtResource("7_uyvgq")
-branches = Array[ExtResource("3_kauo0")]([SubResource("Resource_hyhbw")])
-metadata/_custom_type_script = "uid://vlj7pu3occ4q"
-
-[sub_resource type="RectangleShape2D" id="Rect_tv"]
-size = Vector2(120, 90)
+[sub_resource type="GradientTexture2D" id="Tex_placeholder"]
+width = 96
+height = 96
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
 
 [sub_resource type="CircleShape2D" id="Circle_boss"]
 radius = 34.0
+
+[sub_resource type="RectangleShape2D" id="Rect_tv"]
+size = Vector2(120, 90)
 
 [sub_resource type="CircleShape2D" id="Circle_obj"]
 radius = 22.0
@@ -40,34 +24,34 @@ radius = 22.0
 [sub_resource type="RectangleShape2D" id="Rect_trigger"]
 size = Vector2(240, 160)
 
-[node name="YazzedFight" type="Node2D" unique_id=764493119]
+[node name="YazzedFight" type="Node2D"]
 
-[node name="Juice" type="Node" parent="." unique_id=771851247]
+[node name="Juice" type="Node" parent="."]
 script = ExtResource("5_juice")
 
-[node name="Fight" type="Node" parent="." unique_id=1659125309 node_paths=PackedStringArray("boss", "tv", "objects", "juice", "trigger_area")]
+[node name="Fight" type="Node" parent="." node_paths=PackedStringArray("boss", "tv", "objects", "juice", "trigger_area")]
 script = ExtResource("1_fight")
 boss = NodePath("../Yazzed")
 tv = NodePath("../TV")
 objects = [NodePath("../Trap1"), NodePath("../Trap2"), NodePath("../Throwable1")]
 juice = NodePath("../Juice")
 trigger_area = NodePath("../StartTrigger")
-intro_dialog = SubResource("Resource_kdy28")
+stage3_hp = 50.0
 
-[node name="TV" type="StaticBody2D" parent="." unique_id=2003445029]
+[node name="TV" type="StaticBody2D" parent="."]
 position = Vector2(0, -280)
 script = ExtResource("3_tv")
 sprite = NodePath("Sprite")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TV" unique_id=2067397405]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TV"]
 shape = SubResource("Rect_tv")
 
-[node name="Art" type="Sprite2D" parent="TV" unique_id=233031316]
-modulate = Color(0.6, 0.8, 1, 1)
+[node name="Art" type="Sprite2D" parent="TV"]
 scale = Vector2(0.9, 0.7)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.6, 0.8, 1, 1)
 
-[node name="Label" type="Label" parent="TV" unique_id=168282905]
+[node name="Label" type="Label" parent="TV"]
 offset_left = -20.0
 offset_top = -12.0
 offset_right = 20.0
@@ -75,66 +59,71 @@ offset_bottom = 12.0
 text = "TV"
 horizontal_alignment = 1
 
-[node name="Sprite" type="AnimatedSprite2D" parent="TV" unique_id=1100436177]
+[node name="Sprite" type="AnimatedSprite2D" parent="TV"]
 
-[node name="Yazzed" type="CharacterBody2D" parent="." unique_id=1547464034]
+[node name="Yazzed" type="CharacterBody2D" parent="."]
 position = Vector2(0, 40)
 script = ExtResource("2_boss")
+sprite = NodePath("Sprite")
+max_hp = 100.0
+stage3_hp_threshold = 50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Yazzed" unique_id=1129818726]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Yazzed"]
 shape = SubResource("Circle_boss")
 
-[node name="Art" type="Sprite2D" parent="Yazzed" unique_id=1326104429]
-modulate = Color(1, 0.5, 0.4, 1)
+[node name="Art" type="Sprite2D" parent="Yazzed"]
 scale = Vector2(0.55, 0.55)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.5, 0.4, 1)
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Yazzed" unique_id=647782551]
+[node name="Sprite" type="AnimatedSprite2D" parent="Yazzed"]
 
-[node name="Trap1" type="Area2D" parent="." unique_id=939981026]
+[node name="Trap1" type="Area2D" parent="."]
 position = Vector2(-260, 120)
 script = ExtResource("4_obj")
+kind = 0
 boss_damage = 15.0
 sprite = NodePath("Art")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap1" unique_id=79102127]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap1"]
 shape = SubResource("Circle_obj")
 
-[node name="Art" type="Sprite2D" parent="Trap1" unique_id=801518899]
-modulate = Color(0.5, 1, 0.6, 1)
+[node name="Art" type="Sprite2D" parent="Trap1"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.5, 1, 0.6, 1)
 
-[node name="Trap2" type="Area2D" parent="." unique_id=915015682]
+[node name="Trap2" type="Area2D" parent="."]
 position = Vector2(260, 120)
 script = ExtResource("4_obj")
+kind = 0
 boss_damage = 15.0
 sprite = NodePath("Art")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap2" unique_id=1749702594]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap2"]
 shape = SubResource("Circle_obj")
 
-[node name="Art" type="Sprite2D" parent="Trap2" unique_id=1648161815]
-modulate = Color(0.5, 1, 0.6, 1)
+[node name="Art" type="Sprite2D" parent="Trap2"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.5, 1, 0.6, 1)
 
-[node name="Throwable1" type="Area2D" parent="." unique_id=901754917]
+[node name="Throwable1" type="Area2D" parent="."]
 position = Vector2(0, 200)
 script = ExtResource("4_obj")
 kind = 1
 boss_damage = 20.0
 sprite = NodePath("Art")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Throwable1" unique_id=203230854]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Throwable1"]
 shape = SubResource("Circle_obj")
 
-[node name="Art" type="Sprite2D" parent="Throwable1" unique_id=99276109]
-modulate = Color(1, 0.9, 0.4, 1)
+[node name="Art" type="Sprite2D" parent="Throwable1"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.9, 0.4, 1)
 
-[node name="Hazard1" type="Area2D" parent="." unique_id=282706621]
+[node name="Hazard1" type="Area2D" parent="."]
 position = Vector2(-120, 260)
 script = ExtResource("4_obj")
 kind = 2
@@ -143,21 +132,21 @@ player_damage = 1.0
 debuff_seconds = 2.0
 sprite = NodePath("Art")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1" unique_id=1491755968]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
 shape = SubResource("Circle_obj")
 
-[node name="Art" type="Sprite2D" parent="Hazard1" unique_id=1772120285]
-modulate = Color(1, 0.4, 0.9, 1)
+[node name="Art" type="Sprite2D" parent="Hazard1"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("6_icon")
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.4, 0.9, 1)
 
-[node name="StartTrigger" type="Area2D" parent="." unique_id=884536412]
+[node name="StartTrigger" type="Area2D" parent="."]
 position = Vector2(0, 340)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartTrigger" unique_id=638173115]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartTrigger"]
 shape = SubResource("Rect_trigger")
 
-[node name="Label" type="Label" parent="StartTrigger" unique_id=115632782]
+[node name="Label" type="Label" parent="StartTrigger"]
 offset_left = -60.0
 offset_top = -12.0
 offset_right = 60.0

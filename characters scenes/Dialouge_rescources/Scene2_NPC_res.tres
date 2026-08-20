@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="Dialog" format=3 uid="uid://cf6ln8nwwc88g"]
+
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="1_6ub74"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="2_osa8j"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="3_sg126"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="4_mwv53"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="5_8o75h"]
+
+[sub_resource type="Resource" id="Resource_6ub74"]
+script = ExtResource("4_mwv53")
+word = "الغرض"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_osa8j"]
+script = ExtResource("2_osa8j")
+text = "شوف الغرض على الأرض رواح خذه"
+keywords = Array[ExtResource("4_mwv53")]([SubResource("Resource_6ub74")])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_sg126"]
+script = ExtResource("1_6ub74")
+id = "entry"
+require_flags = Array[String](["Scene2_obj1_item_unlocked"])
+lines = Array[ExtResource("2_osa8j")]([SubResource("Resource_osa8j")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_5l7xq"]
+script = ExtResource("2_osa8j")
+text = "....حياك"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_71ytc"]
+script = ExtResource("4_mwv53")
+word = "غرض"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_cghpy"]
+script = ExtResource("2_osa8j")
+text = "جيت عشان تاخذ الغرض صح؟"
+set_flags = Array[String](["Scene2_obj1_item_unlocked"])
+keywords = Array[ExtResource("4_mwv53")]([SubResource("Resource_71ytc")])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_yy7gc"]
+script = ExtResource("2_osa8j")
+text = "شوفه هناك على الأرض"
+action_name = "checkpoint"
+action_args = [5]
+wait_for_action = true
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_pxw05"]
+script = ExtResource("1_6ub74")
+id = "Scene2_obj1_b1"
+require_flags = Array[String](["initial_dialouge_done"])
+unlock_flag = "scene2_obj1_d1"
+lines = Array[ExtResource("2_osa8j")]([SubResource("Resource_5l7xq"), SubResource("Resource_cghpy"), SubResource("Resource_yy7gc")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[resource]
+script = ExtResource("5_8o75h")
+branches = Array[ExtResource("1_6ub74")]([SubResource("Resource_sg126"), SubResource("Resource_pxw05")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MedicalItem" format=3 uid="uid://de88m1b8q3k46"]
+
+[ext_resource type="Script" uid="uid://dlv2mr6up1u1i" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://qhp5yonxt5ce" path="res://3MK-File/mirror.png" id="2_ok3l2"]
+
+[resource]
+script = ExtResource("1")
+type = "Quest_item"
+display_name = "Important_item"
+effect = "Required by NPC1"
+texture = ExtResource("2_ok3l2")
+heal_amount = 0.0
+use_flag = "used_scalpel"

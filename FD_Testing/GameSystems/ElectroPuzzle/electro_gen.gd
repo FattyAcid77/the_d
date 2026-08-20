@@ -58,7 +58,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not _player_in or is_blown or DialogManager.is_active:
 		return
-	if Input.is_action_just_pressed("interact"):
+	if InputAccess.just_pressed():
 		flip()
 
 
@@ -93,10 +93,9 @@ func blow() -> void:
 func radio_ok() -> bool:
 	if required_hz <= 0:
 		return true
-	var rg := get_node_or_null("/root/RadioGlobal")
-	if rg == null:
+	if not RadioLink.available():
 		return false
-	return absi(int(rg.radio) - required_hz) <= hz_tolerance
+	return RadioLink.is_tuned_to(required_hz, hz_tolerance)
 
 
 func _refresh() -> void:

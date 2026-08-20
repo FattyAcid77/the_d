@@ -1,14 +1,11 @@
-[gd_resource type="Resource" script_class="MedicalItem" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="MedicalItem" format=3 uid="uid://r0psm55ad7rr"]
 
-[ext_resource type="Script" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
+[ext_resource type="Script" uid="uid://dlv2mr6up1u1i" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 action = 1
-type = "bandage"
-display_name = "Bandage"
-effect = "Stops bleeding"
-quantity = 1
+quantity = 5
+max_stack = 10
 heal_amount = 0.0
-cut_cause = "bleeding"
 use_flag = "used_bandage"
