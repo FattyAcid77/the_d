@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RadioMaker_v1Puzzle" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://3MK-File/RadioMaker/radio_puzzle.gd" id="1_pz"]
+
+[resource]
+script = ExtResource("1_pz")
+entries = [{
+"frequency": 630,
+"id": "beam_puzzle",
+"order": 0,
+"puzzle_id": "",
+"radius": 400.0,
+"reward": 3,
+"reward_value": "radio_beam_found",
+"type": 1
+}]

@@ -9,38 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="9_31cma"]
 [ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="9_hkdn2"]
 [ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
-[ext_resource type="PackedScene" uid="uid://dyofycx2e6uoo" path="res://Cutscenes/Test_dialogue.tscn" id="10_hkdn2"]
-[ext_resource type="Script" uid="uid://241k33imt8d1" path="res://Cutscenes/cine_step.gd" id="11_31cma"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_31cma"]
-radius = 48.30114
-
-[sub_resource type="Resource" id="Resource_j8yc2"]
-script = ExtResource("11_31cma")
-text = "واو..."
-metadata/_custom_type_script = "uid://241k33imt8d1"
-
-[sub_resource type="Resource" id="Resource_ogs6s"]
-script = ExtResource("11_31cma")
-text = "أنتبه!!!"
-metadata/_custom_type_script = "uid://241k33imt8d1"
-
-[sub_resource type="Resource" id="Resource_31cma"]
-script = ExtResource("11_31cma")
-kind = 1
-to_position = Vector2(414, 130)
-metadata/_custom_type_script = "uid://241k33imt8d1"
-
-[sub_resource type="Resource" id="Resource_scast"]
-script = ExtResource("11_31cma")
-at_time = 1.1
-kind = 3
-metadata/_custom_type_script = "uid://241k33imt8d1"
-
-[sub_resource type="Resource" id="Resource_b0a5j"]
-script = ExtResource("11_31cma")
-kind = 6
-metadata/_custom_type_script = "uid://241k33imt8d1"
 
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152 node_paths=PackedStringArray("doors")]
 script = ExtResource("1_hkdn2")
@@ -87,19 +55,5 @@ position = Vector2(902, 576)
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("9_31cma")]
 position = Vector2(454, 301)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
-
-[node name="Test_dialogue" type="Area2D" parent="." unique_id=1316643797]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Test_dialogue" unique_id=1947825742]
-position = Vector2(175, 387)
-shape = SubResource("CircleShape2D_31cma")
-
-[node name="CinePlayer" parent="." unique_id=313728890 node_paths=PackedStringArray("trigger_area") instance=ExtResource("10_hkdn2")]
-visible = false
-steps = Array[ExtResource("11_31cma")]([SubResource("Resource_j8yc2"), SubResource("Resource_ogs6s"), SubResource("Resource_31cma"), SubResource("Resource_scast"), SubResource("Resource_b0a5j")])
-trigger_area = NodePath("../Test_dialogue")
-
-[node name="Marker2D" type="Marker2D" parent="." unique_id=887576393]
-position = Vector2(414, 130)
 
 [editable path="Knife_Item"]

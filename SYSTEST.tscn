@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dxdimww2wr8dm"]
+
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_u6wmx"]
+[ext_resource type="PackedScene" uid="uid://ws5n8eh8o56g" path="res://Cutscenes/cine_player.tscn" id="2_u6wmx"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="3_1l1js"]
+[ext_resource type="Script" uid="uid://241k33imt8d1" path="res://Cutscenes/cine_step.gd" id="3_symaa"]
+[ext_resource type="PackedScene" uid="uid://beeg8oo70gdrn" path="res://background_scenes/OCD_Hall_bgrd.tscn" id="5_symaa"]
+
+[sub_resource type="Resource" id="Resource_1l1js"]
+script = ExtResource("3_symaa")
+kind = 2
+target = NodePath("Sami_Doctor_test")
+to_position = Vector2(-20, 270)
+
+[node name="Sys" type="Node2D" unique_id=463601270]
+script = ExtResource("1_u6wmx")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=131174756]
+position = Vector2(25, 0)
+zoom = Vector2(0.335, 0.335)
+
+[node name="Marker2D" type="Marker2D" parent="Camera2D" unique_id=1396403701]
+position = Vector2(-20, 270)
+
+[node name="CinePlayer" parent="." unique_id=1310995861 instance=ExtResource("2_u6wmx")]
+steps = Array[ExtResource("3_symaa")]([SubResource("Resource_1l1js")])
+autoplay = true
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_1l1js")]
+position = Vector2(21, 72)
+camera_adj = NodePath("../OcdHallBgrd")
+
+[node name="OcdHallBgrd" parent="." unique_id=1142824721 instance=ExtResource("5_symaa")]
+position = Vector2(-324, -221)
+script = ExtResource("1_u6wmx")

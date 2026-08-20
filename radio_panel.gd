@@ -1,5 +1,8 @@
 extends Panel
-var sami_radio: bool = true   # true = radio is closed
+# NOTE: this flag reads backwards — true means the radio is CLOSED. Do not
+# rename it: FD_Testing/GameSystems/StatuePuzzle/radio_link.gd looks it up by
+# this exact name to tell whether the radio is on screen.
+var sami_radio: bool = true
 @export var Radio_Sami: PackedScene = preload("res://3MK-File/Scene/radio_ui.tscn")
 var instance
 
