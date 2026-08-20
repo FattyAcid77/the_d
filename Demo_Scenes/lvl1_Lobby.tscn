@@ -29,10 +29,16 @@ text = "بخير"
 speaker_name = "سامي"
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
+[sub_resource type="Resource" id="Resource_h67td"]
+script = ExtResource("8_l2np2")
+word = "الفتاة"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
 [sub_resource type="Resource" id="Resource_gjdse"]
 script = ExtResource("6_qwha2")
 text = "ترا تلك الفتاة؟"
 speaker_name = "حمتو"
+keywords = Array[ExtResource("8_l2np2")]([SubResource("Resource_h67td")])
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_ee7kw"]
@@ -55,9 +61,16 @@ blocked_by_flags = Array[String](["Hamato_Introduction_Finished"])
 lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_ysp6m"), SubResource("Resource_bx5ip"), SubResource("Resource_gjdse"), SubResource("Resource_ee7kw"), SubResource("Resource_p05tq")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
+[sub_resource type="Resource" id="Resource_64vj3"]
+script = ExtResource("8_l2np2")
+word = "الفتاة"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
 [sub_resource type="Resource" id="Resource_qwha2"]
 script = ExtResource("6_qwha2")
 text = "اذهب لتلك الفتاة"
+speaker_name = "حمتو"
+keywords = Array[ExtResource("8_l2np2")]([SubResource("Resource_64vj3")])
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_m2ccb"]
@@ -407,17 +420,20 @@ next_state = "MeetMazSad"
 script = ExtResource("9_v1uun")
 show_groups = Array[String](["MeetMazSad"])
 
+[node name="Node" type="Node" parent="GameStateMachine" unique_id=245092392]
+script = ExtResource("9_v1uun")
+
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yppu5")]
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_kqdqe")]
 position = Vector2(701, 324)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
-[node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction"] instance=ExtResource("3_vrf2x")]
+[node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction", "NPC"] instance=ExtResource("3_vrf2x")]
 position = Vector2(592, 263)
 npc_resource = SubResource("Resource_akhaw")
 
-[node name="S3alel" parent="." unique_id=2048434997 groups=["S3alel"] instance=ExtResource("3_vrf2x")]
+[node name="S3alel" parent="." unique_id=2048434997 groups=["NPC", "S3alel"] instance=ExtResource("3_vrf2x")]
 position = Vector2(291, 237)
 npc_resource = SubResource("Resource_r7mmy")
 

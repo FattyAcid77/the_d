@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dbfswqraglcc1" path="res://3MK-File/TEST-ANIM/Up-Sami.tres" id="4_ny335"]
 [ext_resource type="Texture2D" uid="uid://b8tc7y6ljtxpk" path="res://3MK-File/myshit/sami pull down.png" id="5_p75en"]
 [ext_resource type="Texture2D" uid="uid://bhire3x0rk731" path="res://3MK-File/myshit/sami pull left.png" id="6_10rwc"]
+[ext_resource type="Texture2D" uid="uid://cxfqyk1qf2jbk" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0087.png" id="6_ef2nf"]
 [ext_resource type="Texture2D" uid="uid://dgv86ko2niebr" path="res://3MK-File/myshit/sami pull right.png" id="7_2ieb1"]
+[ext_resource type="Texture2D" uid="uid://dkmojililhgy4" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0009.png" id="7_6vrky"]
 [ext_resource type="Texture2D" uid="uid://bmig2fbyly6fu" path="res://3MK-File/myshit/sami pull up.png" id="8_3rkym"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="9_ag5su"]
 [ext_resource type="Texture2D" uid="uid://6q05yfdx341s" path="res://3MK-File/myshit/sami push left (1).png" id="10_xeifs"]
@@ -33,6 +35,20 @@
 script = ExtResource("23_indicconfig")
 target_group = &"Item"
 icon = ExtResource("24_tile0011")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_18gna"]
+script = ExtResource("23_indicconfig")
+target_group = &"Doors"
+icon = ExtResource("6_ef2nf")
+icon_gamepad = ExtResource("7_6vrky")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_ef2nf"]
+script = ExtResource("23_indicconfig")
+target_group = &"NPC"
+icon = ExtResource("6_ef2nf")
+icon_gamepad = ExtResource("7_6vrky")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hg3f6"]
@@ -727,9 +743,12 @@ motion_mode = 1
 script = ExtResource("1_wvwk7")
 stats = ExtResource("29_healthstats")
 
-[node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
-position = Vector2(1, 2)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
+[node name="AreaIndicator" parent="." unique_id=1016601047 groups=["Doors", "NPC"] instance=ExtResource("22_areaind")]
+position = Vector2(2, 30)
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg"), SubResource("Resource_18gna"), SubResource("Resource_ef2nf")])
+
+[node name="Sprite2D2" parent="AreaIndicator" index="1" unique_id=1092672576]
+position = Vector2(-2, -87)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
 position = Vector2(1, 0)
@@ -767,8 +786,6 @@ limit_smoothed = true
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
-layout_mode = 1
-anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
@@ -813,3 +830,5 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=542696879 instance=ExtResource("28_healthui")]
+
+[editable path="AreaIndicator"]

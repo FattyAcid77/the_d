@@ -15,4 +15,4 @@ script = ExtResource("1_npc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1033713849]
 shape = SubResource("CapsuleShape2D_npc")
 
-[node name="DialogTrigger" parent="." unique_id=335880919 instance=ExtResource("2_trg")]
+[node name="DialogTrigger" parent="." unique_id=335880919 groups=["NPC"] instance=ExtResource("2_trg")]
