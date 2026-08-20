@@ -49,7 +49,7 @@ func _process(_delta: float) -> void:
 		return
 	if DialogManager.is_active:
 		return
-	if Input.is_action_just_pressed("interact"):
+	if InputAccess.just_pressed():
 		value = (value % max_value) + 1
 		_refresh()
 		value_changed.emit(self)

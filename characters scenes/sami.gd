@@ -29,7 +29,7 @@ var ray_length: float = 50.0
 @onready var ani: AnimatedSprite2D = $Sprite2D
 @onready var pp_logic: Area2D = $"Push-pull-Logic"
 @onready var camera = $Camera2D
-@export var camera_adj = bgrd_node
+@export var camera_adj: bgrd_node
 
 # --- Animation system ---
 
@@ -259,7 +259,14 @@ func apply_item() -> void:
 	pass
 
 func camera_limit_adj() -> void:
-	var top_limit = null
-	var right_limit = null
-	var bot_limit = null
-	var left_limit = null
+	if camera_adj == null:
+		push_warning("camera_adj not assigned on %s — camera limits left at default" % name)
+		return
+	var top_limit = camera_adj.top_limits
+	var right_limit = camera_adj.right_limits
+	var bot_limit = camera_adj.bottom_limits
+	var left_limit = camera_adj.left_limits
+	camera.limit_top = top_limit
+	camera.limit_right = right_limit
+	camera.limit_bottom = bot_limit
+	camera.limit_left = left_limit

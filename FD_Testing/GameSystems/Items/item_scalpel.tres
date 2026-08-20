@@ -1,9 +1,16 @@
-[gd_resource type="Resource" script_class="MedicalItem" format=3 uid="uid://1qlxg1lccy0k"]
+[gd_resource type="Resource" script_class="MedicalItem" load_steps=2 format=3]
 
-[ext_resource type="Script" uid="uid://dlv2mr6up1u1i" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 action = 2
+type = "scalpel"
+max_stack = 1
+needs_big_slot = false
+display_name = "Scalpel"
+effect = "Opens a wound"
+quantity = 1
 heal_amount = 0.0
+cut_cause = "bleeding"
 use_flag = "used_scalpel"

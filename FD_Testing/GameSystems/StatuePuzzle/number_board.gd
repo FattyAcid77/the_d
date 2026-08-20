@@ -67,7 +67,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_open or not _player_in or DialogManager.is_active:
 		return
-	if Input.is_action_just_pressed("interact"):
+	if InputAccess.just_pressed():
 		# writing a pending number takes priority over opening the board
 		if pending.size() > 0:
 			_write_next()
@@ -123,7 +123,7 @@ func close() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_open:
 		return
-	if event.is_action_pressed("ui_cancel"):
+	if InputAccess.event_pressed(event, "ui_cancel"):
 		close()
 		get_viewport().set_input_as_handled()
 
@@ -150,7 +150,7 @@ func _build_ui() -> void:
 	_panel.add_child(vb)
 
 	var title := Label.new()
-	title.text = board_title
+	title.text = tr(board_title)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 24)
 	vb.add_child(title)
@@ -166,7 +166,7 @@ func _build_ui() -> void:
 	vb.add_child(_msg)
 
 	var hint := Label.new()
-	hint.text = "drag the tiles to reorder    —    Esc to close"
+	hint.text = tr("drag the tiles to reorder    —    Esc to close")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	hint.modulate = Color(1, 1, 1, 0.55)
 	vb.add_child(hint)
@@ -248,7 +248,7 @@ func _check() -> void:
 			return
 	is_solved = true
 	Flags.set_flag(solved_flag)
-	_msg.text = "SOLVED"
+	_msg.text = tr("SOLVED")
 	solved.emit()
 	print("NUMBER BOARD SOLVED — flag '%s' raised." % solved_flag)
 

@@ -183,6 +183,13 @@ func _set_inventory(on: bool) -> void:
 	inventory.process_mode = Node.PROCESS_MODE_INHERIT if on else Node.PROCESS_MODE_DISABLED
 
 func camera_limit_set() -> void:
+	# TEMP: lv_l_puzzle.tscn doesn't assign camera_adj on the Sami_Doctor instance,
+	# so this used to crash on _ready(). Skip the limits instead of dying — the
+	# camera just runs unbounded on that level. Assign camera_adj in the scene to
+	# get the real bounds back.
+	if camera_adj == null:
+		push_warning("camera_adj not assigned on %s — camera limits left at default" % name)
+		return
 	sami_camera.limit_top = camera_adj.top_limits
 	sami_camera.limit_right = camera_adj.right_limits
 	sami_camera.limit_bottom = camera_adj.bottom_limits

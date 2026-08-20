@@ -5,15 +5,15 @@ add animations.
 
 Scene shape in the test file:
 
-	YazzedFight (Node2D)
-	├── Juice          BossJuice     screen shake / hit-stop / flash
-	├── Fight          BossFight     the brain — stages, HP, win/reset
-	├── TV             BossTV        drops in, takes the 2 key hits
-	├── Yazzed         YazzedBoss    the charging body
-	├── Trap1 / Trap2  BossObject    hurt him when he charges through
-	├── Throwable1     BossObject    Sami picks up and throws
-	├── Hazard1        BossObject    hurts Sami
-	└── StartTrigger   Area2D        walk in to begin
+    YazzedFight (Node2D)
+    ├── Juice          BossJuice     screen shake / hit-stop / flash
+    ├── Fight          BossFight     the brain — stages, HP, win/reset
+    ├── TV             BossTV        drops in, takes the 2 key hits
+    ├── Yazzed         YazzedBoss    the charging body
+    ├── Trap1 / Trap2  BossObject    hurt him when he charges through
+    ├── Throwable1     BossObject    Sami picks up and throws
+    ├── Hazard1        BossObject    hurts Sami
+    └── StartTrigger   Area2D        walk in to begin
 
 To change any of these: click the node, edit in the **Inspector** on the right.
 
@@ -201,10 +201,10 @@ Add this to your own script (or ask me to build it in):
 ```gdscript
 # when the stage changes, swap to the stage-3 animation names
 func _on_stage_changed(stage: int) -> void:
-	if stage == 3:
-		$Yazzed.anim_idle = "idle_angry"
-		$Yazzed.anim_telegraph = "telegraph_angry"
-		$Yazzed.anim_charge = "charge_angry"
+    if stage == 3:
+        $Yazzed.anim_idle = "idle_angry"
+        $Yazzed.anim_telegraph = "telegraph_angry"
+        $Yazzed.anim_charge = "charge_angry"
 ```
 
 Connect `Fight`'s `stage_changed(stage)` signal to that function. Now stage 3

@@ -5,14 +5,14 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npc"]
 
-[node name="NPC" type="CharacterBody2D" unique_id=1293972803]
+[node name="NPC" type="CharacterBody2D" unique_id=1041634814]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_npc")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1247219245]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1192312158]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874200481]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1033713849]
 shape = SubResource("CapsuleShape2D_npc")
 
-[node name="DialogTrigger" parent="." unique_id=1396179693 instance=ExtResource("2_trg")]
+[node name="DialogTrigger" parent="." unique_id=335880919 instance=ExtResource("2_trg")]

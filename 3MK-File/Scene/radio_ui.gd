@@ -16,6 +16,7 @@ const COARSE_STEP: int = 100  # Amp_U  / Amp_D
 @export var max_visual_wavelength: float = 80.0
 @export var min_visual_wavelength: float = 10.0
 @export var visual_amplitude: float = 80.0
+@export var idle_wave_scale: float = 0.3   # wave size with no quest signal around
 
 var phase_offset: float = 0.0
 
@@ -49,11 +50,13 @@ func _process(delta: float) -> void:
 		RadioGlobal.RADIO_MIN, RadioGlobal.RADIO_MAX,
 		max_visual_wavelength, min_visual_wavelength)
 	WaveCanvas20.wavelength = wl
-	WaveCanvas20.amplitude  = visual_amplitude
+	# quest signal strength grows the wave as the player gets closer
+	WaveCanvas20.amplitude  = visual_amplitude * lerpf(idle_wave_scale, 1.0, RadioSignals.display_strength)
 
-	# Label
+	# Label. goes green while the dial sits on a side quest signal
 	if frequancy_label != null:
 		frequancy_label.text = "%d Hz" % RadioGlobal.radio
+		frequancy_label.modulate = Color(0.4, 1.0, 0.5) if RadioSignals.side_locked else Color.WHITE
 
 	phase_offset += delta * scroll_speed
 	queue_redraw()

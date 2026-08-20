@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bd2tp4t42je1u"]
+[gd_scene load_steps=3 format=3 uid="uid://dlgv2trigger01"]
 
-[ext_resource type="Script" uid="uid://cpg8eghbhgtry" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_trigger.gd" id="1_trg"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_trigger.gd" id="1_trg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_trg"]
 radius = 34.0

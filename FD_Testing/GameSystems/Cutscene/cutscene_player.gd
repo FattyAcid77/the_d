@@ -224,11 +224,11 @@ func _process(delta: float) -> void:
 			if _panel_timer <= 0.0:
 				_next_panel()
 				return
-		if Input.is_action_just_pressed("interact"):
+		if InputAccess.just_pressed():
 			if _panel_ended or not advance_only_after_end:
 				_next_panel()
 	else:
-		if skippable and Input.is_action_just_pressed("interact"):
+		if skippable and InputAccess.just_pressed():
 			_video.stop()
 			_end()
 
@@ -247,7 +247,7 @@ func _begin() -> void:
 
 
 func _show_next_prompt() -> void:
-	_next_label.text = next_text
+	_next_label.text = tr(next_text)
 	_next_label.visible = true
 
 

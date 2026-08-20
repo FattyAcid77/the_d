@@ -2,6 +2,10 @@ extends RigidBody2D
 class_name BeamMirror
 
 enum RotationSystem { SNAP, HOLD_AND_ROTATE }
+enum MirrorState { LOCKED, HIDDEN, ACTIVE }
+
+# preload instead of the class_name — same class-cache reason as radio_signal_manager
+const QSig := preload("res://3MK-File/script/quest_signal.gd")
 
 # ── Inspector ──────────────────────────────────────────────────────────────
 @export_group("Rotation Control")
@@ -25,6 +29,10 @@ enum RotationSystem { SNAP, HOLD_AND_ROTATE }
 ## Force applied while holding F.
 @export var push_force: float = 6000.0
 
+@export_group("Radio Unlock")
+## Radio frequency that procs this mirror into existence. 0 = always there.
+@export_range(0, 1700) var unlock_frequency: int = 0
+
 # Local offsets of the 4 snap squares relative to BeamMirror center
 # (InteractZone pos (1,0) + each shape's local pos)
 const _SNAP_ZONE_LOCAL_POS: Dictionary = {
@@ -45,6 +53,9 @@ var _active_snap_zones: Dictionary = {}   # shape_index → true (player is phys
 var _player_locked: bool = false           # player is snapped & frozen at a zone
 var _lock_world_pos: Vector2 = Vector2.ZERO
 var _locked_zone_idx: int = -1
+
+var _state: MirrorState = MirrorState.ACTIVE
+var _beacon: Node2D = null
 
 # ── Lifecycle ──────────────────────────────────────────────────────────────
 func _ready() -> void:
@@ -67,6 +78,93 @@ func _ready() -> void:
 		_snap_angle     = rotation
 		_target_angle   = rotation
 	queue_redraw()
+	if unlock_frequency > 0:
+		visible = false   # no first-frame flash, real state lands below
+		_apply_state.call_deferred(_pick_state())
+
+# ── Radio unlock ───────────────────────────────────────────────────────────
+# LOCKED = never caught, mirror isn't there. HIDDEN = caught but dial elsewhere:
+# invisible + walk-through, beam still bounces. ACTIVE = dial on its frequency.
+func _process(_delta: float) -> void:
+	if unlock_frequency <= 0 or _state == MirrorState.LOCKED:
+		return
+	var next := _pick_state()
+	if next != _state:
+		_apply_state(next)
+
+func _pick_state() -> MirrorState:
+	if not RadioSignals.is_caught(unlock_frequency):
+		return MirrorState.LOCKED
+	if absf(RadioGlobal.radio - unlock_frequency) <= RadioSignals.BAND_FULL:
+		return MirrorState.ACTIVE
+	return MirrorState.HIDDEN
+
+func _apply_state(next: MirrorState) -> void:
+	_state = next
+	var player := get_tree().get_first_node_in_group("Player")
+	match next:
+		MirrorState.LOCKED:
+			visible = false
+			$CollisionShape2D.set_deferred("disabled", true)
+			_set_zone(false)
+			_spawn_beacon()
+		MirrorState.HIDDEN:
+			visible = false
+			$CollisionShape2D.set_deferred("disabled", false)
+			_set_zone(false)
+			_release_player()
+			_let_player_through(player, true)
+		MirrorState.ACTIVE:
+			visible = true
+			$CollisionShape2D.set_deferred("disabled", false)
+			_set_zone(true)
+			_let_player_through(player, false)
+
+func _set_zone(on: bool) -> void:
+	$InteractZone.set_deferred("monitoring", on)
+	$InteractZone.set_deferred("monitorable", on)
+
+func _let_player_through(player: Node, on: bool) -> void:
+	if not player is PhysicsBody2D:
+		return
+	if on:
+		add_collision_exception_with(player)
+		player.add_collision_exception_with(self)
+	else:
+		remove_collision_exception_with(player)
+		player.remove_collision_exception_with(self)
+
+# going invisible while the player is mid-interaction: let go of everything
+func _release_player() -> void:
+	if _player_body != null and _player_body.dragged_object == self:
+		_player_body.dragged_object = null
+	_unlock_player()
+	_player_nearby = false
+	_player_body = null
+	_grabbed = false
+	_active_snap_zones.clear()
+
+func _spawn_beacon() -> void:
+	if _beacon != null:
+		return
+	_beacon = QSig.new()
+	_beacon.quest_type = QSig.Type.SIDE
+	_beacon.frequency = unlock_frequency
+	add_child(_beacon)
+	if not RadioSignals.side_signal_caught.is_connected(_on_signal_caught):
+		RadioSignals.side_signal_caught.connect(_on_signal_caught)
+
+func _on_signal_caught(freq: int) -> void:
+	if freq != unlock_frequency:
+		return
+	RadioSignals.side_signal_caught.disconnect(_on_signal_caught)
+	if _beacon != null:
+		_beacon.queue_free()
+		_beacon = null
+	# catching means the dial is already sitting on us, so we come in ACTIVE
+	_apply_state(MirrorState.ACTIVE)
+	modulate.a = 0.0
+	create_tween().tween_property(self, "modulate:a", 1.0, 0.4)
 
 # ── Rotation input (E) ─────────────────────────────────────────────────────
 func _input(event: InputEvent) -> void:

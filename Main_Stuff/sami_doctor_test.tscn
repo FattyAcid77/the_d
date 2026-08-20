@@ -763,11 +763,7 @@ limit_smoothed = true
 
 [node name="UI" type="Node" parent="." unique_id=766651730]
 
-[node name="Tools" type="Control" parent="UI" unique_id=2052687184]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Tools" type="CanvasLayer" parent="UI" unique_id=2052687184]
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
@@ -776,10 +772,10 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -41.0
-offset_right = -288.0
-offset_bottom = -41.0
+offset_left = 8.0
+offset_top = -152.0
+offset_right = 8.0
+offset_bottom = -152.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oevct")
 metadata/_edit_use_anchors_ = true

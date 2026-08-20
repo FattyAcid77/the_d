@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://audio/audio.gd" id="1_audio"]
+[ext_resource type="AudioStream" path="res://audio/ui_audio/ui_bloop_audio.wav" id="2_focus"]
+[ext_resource type="AudioStream" path="res://audio/ui_audio/ui_select_audio.wav" id="3_select"]
+[ext_resource type="AudioStream" path="res://audio/ui_audio/ui_woosh.wav" id="4_cancel"]
+[ext_resource type="AudioStream" path="res://audio/ui_audio/ui_success_audio.wav" id="5_success"]
+[ext_resource type="AudioStream" path="res://audio/ui_audio/ui_error_audio.wav" id="6_error"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ui"]
+polyphony = 16
+
+[node name="Audio" type="Node"]
+process_mode = 3
+script = ExtResource("1_audio")
+ui_focus_audio = ExtResource("2_focus")
+ui_select_audio = ExtResource("3_select")
+ui_cancel_audio = ExtResource("4_cancel")
+ui_success_audio = ExtResource("5_success")
+ui_error_audio = ExtResource("6_error")
+
+[node name="Music1" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="Music2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="UI" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamPolyphonic_ui")
+bus = &"UI"

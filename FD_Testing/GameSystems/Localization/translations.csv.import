@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://daer1cld8gxhs"
+
+[deps]
+
+files=["res://FD_Testing/GameSystems/Localization/translations.en.translation", "res://FD_Testing/GameSystems/Localization/translations.en.translation"]
+
+source_file="res://FD_Testing/GameSystems/Localization/translations.csv"
+dest_files=["res://FD_Testing/GameSystems/Localization/translations.en.translation", "res://FD_Testing/GameSystems/Localization/translations.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

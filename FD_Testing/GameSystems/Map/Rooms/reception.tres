@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapRoomDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Map/map_room_def.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://FD_Testing/GameSystems/Map/Rooms/Art/RECIPTION_ROOM.png" id="2_art"]
+
+[resource]
+script = ExtResource("1_script")
+id = "reception"
+display_name = "Reception"
+art = ExtResource("2_art")
+map_rect = Rect2(0, 0, 0, 0)
+known_from_start = true
+require_flag = ""

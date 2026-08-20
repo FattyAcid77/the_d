@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cvjan8gly0d6p"]
+
+[ext_resource type="Script" uid="uid://b8kp1r1jrmokd" path="res://FD_Testing/GameSystems/Windows/radio_reactor.gd" id="1_tkj2g"]
+[ext_resource type="Script" uid="uid://bd7mwn3u722oc" path="res://FD_Testing/GameSystems/Windows/radio_band.gd" id="2_28i1o"]
+[ext_resource type="Texture2D" uid="uid://v0ypk64h6ho8" path="res://background_scenes/assets/Lights/Gemini_Generated_Image_2hi9sn2hi9sn2hi9.png" id="3_28i1o"]
+
+[sub_resource type="Resource" id="Resource_hm44o"]
+script = ExtResource("2_28i1o")
+id = "Test_FD"
+frequency = 640
+tolerance = 0
+metadata/_custom_type_script = "uid://bd7mwn3u722oc"
+
+[node name="RadioTry" type="Node2D" unique_id=1343057902]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=928907959]
+script = ExtResource("1_tkj2g")
+bands = Array[ExtResource("2_28i1o")]([SubResource("Resource_hm44o")])
+debug_log = true
+
+[node name="GeminiGeneratedImage2Hi9Sn2Hi9Sn2Hi9" type="Sprite2D" parent="." unique_id=2091332681]
+position = Vector2(-36, 44)
+texture = ExtResource("3_28i1o")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1910554742]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://n02bxy01iyyy"]
 
 [ext_resource type="Script" uid="uid://cjm5unj2phy1g" path="res://puzzle_door.gd" id="1_xhq47"]
+[ext_resource type="AudioStream" uid="uid://bwhgpqtk2wg73" path="res://3MK-File/Sound/riser+headexplosion.mp3" id="2_opensnd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fwdgn"]
 size = Vector2(121, 96)
@@ -9,8 +10,12 @@ size = Vector2(121, 96)
 editor_description = "It was used as a Demo to check if the completion of the task works or not where the light hits"
 script = ExtResource("1_xhq47")
 scene = "uid://dxofprk7jlwg1"
+open_sound = ExtResource("2_opensnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1907872813]
 shape = SubResource("RectangleShape2D_fwdgn")
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+bus = &"PuzzleSFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

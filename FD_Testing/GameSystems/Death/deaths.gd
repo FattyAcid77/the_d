@@ -255,15 +255,15 @@ func _first_frame() -> Texture2D:
 
 func _prepare_texts() -> void:
 	var c := get_cause(last_cause_id)
-	_header.text = header_text
-	_time_label.text = time_label_text
-	_cause_label.text = cause_label_text
+	_header.text = tr(header_text)
+	_time_label.text = tr(time_label_text)
+	_cause_label.text = tr(cause_label_text)
 	# with digit IMAGES the font label must stay EMPTY, or it prints the
 	# time a second time behind the drawn digits
 	_time_value.text = "" if using_digits() else _clock_text()
-	_cause_value.text = c.label if c else ""
-	_retry.text = retry_text
-	_quit.text = quit_text
+	_cause_value.text = tr(c.label) if c else ""
+	_retry.text = tr(retry_text)
+	_quit.text = tr(quit_text)
 	# anything with no text stays out of the way entirely
 	for l in [_header, _time_label, _cause_label, _cause_value]:
 		l.visible = l.text != ""
@@ -296,7 +296,7 @@ func _on_retry() -> void:
 		get_tree().reload_current_scene()
 		if _has_fallback:
 			await get_tree().process_frame
-			var p := get_tree().get_first_node_in_group("Player")
+			var p := get_tree().get_first_node_in_group("Player") as Node2D
 			if p:
 				p.global_position = _fallback_respawn
 	var p2 := get_tree().get_first_node_in_group("Player")
