@@ -68,4 +68,4 @@ func restart() -> void:
 	# If the player hit Escape on the game-over screen the tree is paused, and
 	# reload_current_scene() on a paused tree leaves you stuck staring at it.
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	SceneManager.reload_current_scene()

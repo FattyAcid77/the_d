@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxfaa175lu216"
-path="res://.godot/imported/BIPOLARPATH.png-5d46dc1fb64deb8642a1bf13cff46083.ctex"
+uid="uid://bkjv4w2y7ksa0"
+path="res://.godot/imported/LOADING_SCREENx1000v5.png-0f5e965715dfd605920d640dc23c515f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background_scenes/assets/BIPOLARPATH.png"
-dest_files=["res://.godot/imported/BIPOLARPATH.png-5d46dc1fb64deb8642a1bf13cff46083.ctex"]
+source_file="res://Loading_Screen/Loading_bgrd/LOADING_SCREENx1000v5.png"
+dest_files=["res://.godot/imported/LOADING_SCREENx1000v5.png-0f5e965715dfd605920d640dc23c515f.ctex"]
 
 [params]
 
@@ -36,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=8192
+process/size_limit=0
 detect_3d/compress_to=1

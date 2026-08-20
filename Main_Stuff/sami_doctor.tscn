@@ -476,7 +476,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hg3f6")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle_Side",
 "speed": 5.0
 }, {
@@ -484,7 +484,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_20pqq")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle_down",
 "speed": 5.0
 }, {
@@ -492,7 +492,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0wwpp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Idle_up",
 "speed": 5.0
 }, {
@@ -521,7 +521,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opt0g")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PL_DOWN",
 "speed": 5.0
 }, {
@@ -544,7 +544,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xctoa")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PL_LEFT",
 "speed": 5.0
 }, {
@@ -567,7 +567,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vvii8")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PL_RIGHT",
 "speed": 5.0
 }, {
@@ -596,7 +596,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p84sg")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PL_UP",
 "speed": 5.0
 }, {
@@ -625,7 +625,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mxom2")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PS_DOWN",
 "speed": 5.0
 }, {
@@ -654,7 +654,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wl6vt")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PS_LEFT",
 "speed": 5.0
 }, {
@@ -683,7 +683,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iewps")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PS_RIGHT",
 "speed": 5.0
 }, {
@@ -712,7 +712,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7vvtw")
 }],
-"loop": 1,
+"loop": true,
 "name": &"PS_UP",
 "speed": 5.0
 }, {
@@ -741,7 +741,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57axd")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Walk_Side",
 "speed": 7.0
 }, {
@@ -770,7 +770,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ggfrc")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Walk_down",
 "speed": 8.0
 }, {
@@ -799,7 +799,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4fwrh")
 }],
-"loop": 1,
+"loop": true,
 "name": &"Walk_up",
 "speed": 7.0
 }]
@@ -811,6 +811,10 @@ size = Vector2(13, 75)
 script = ExtResource("23_indicconfig")
 target_group = &"Item"
 icon = ExtResource("24_tile0011")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_1f6mo"]
+script = ExtResource("23_indicconfig")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
@@ -832,7 +836,7 @@ shape = SubResource("RectangleShape2D_jgi43")
 
 [node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
 position = Vector2(1, 0)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg"), SubResource("Resource_1f6mo")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
 
@@ -861,7 +865,6 @@ script = ExtResource("24_eu0h5")
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
-anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0

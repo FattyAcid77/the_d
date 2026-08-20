@@ -23,7 +23,7 @@ func _ready():
 		Direction.LEFT: target_degrees = 180.0
 		Direction.UP: target_degrees = -90.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_locked or target_statue == null:
 		return
 

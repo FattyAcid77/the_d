@@ -34,10 +34,10 @@ func _play() -> void:
 		anim_prefix + "_down",
 		anim_prefix,
 	]
-	for name in candidates:
-		if frames.has_animation(name):
-			if player.anim.animation != name:
-				player.anim.play(name)
+	for candidate in candidates:
+		if frames.has_animation(candidate):
+			if player.anim.animation != candidate:
+				player.anim.play(candidate)
 			return
 	# no death art yet — leave the last frame up rather than erroring
 

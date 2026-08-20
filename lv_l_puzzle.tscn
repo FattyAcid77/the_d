@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="10_f58pg"]
 [ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="11_1aqcx"]
 [ext_resource type="PackedScene" uid="uid://kx7ryt12er25" path="res://3MK-File/Scene/quest_signal.tscn" id="11_qsig"]
+[ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="11_xed3l"]
+[ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="12_4kp27"]
+[ext_resource type="Texture2D" uid="uid://bg130y66vc3bj" path="res://audio/icons/music_trigger.svg" id="13_l5k8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f58pg"]
 atlas = ExtResource("10_1aqcx")
@@ -301,10 +304,22 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6d6rx")
 }],
-"loop": 0,
+"loop": false,
 "name": &"default",
 "speed": 6.0
 }]
+
+[sub_resource type="Resource" id="Resource_areaindcfg"]
+script = ExtResource("11_xed3l")
+target_group = &"Item"
+icon = ExtResource("12_4kp27")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_jy2uo"]
+script = ExtResource("11_xed3l")
+target_group = &"test"
+icon = ExtResource("13_l5k8v")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
 [node name="LvL_Puzzle" type="Node2D" unique_id=624265698]
 editor_description = "the animation is 6.8 seconds
@@ -333,7 +348,7 @@ animation_delay = 11.2
 position = Vector2(-8, 66)
 sprite_frames = SubResource("SpriteFrames_en7sv")
 
-[node name="Task_Puzzel_Area" parent="." unique_id=1926237397 instance=ExtResource("7_qjl3q")]
+[node name="Task_Puzzel_Area" parent="." unique_id=1926237397 groups=["test"] instance=ExtResource("7_qjl3q")]
 position = Vector2(304, 363)
 puzzle_id = "beam_puzzle_1"
 puzzle_name = "Beam Puzzle"
@@ -353,3 +368,11 @@ signal_radius = 100.0
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 instance=ExtResource("11_1aqcx")]
 position = Vector2(466, 376)
+
+[node name="AreaIndicator" parent="Sami_Doctor" index="2" unique_id=1016601047]
+configurations = Array[ExtResource("11_xed3l")]([SubResource("Resource_areaindcfg"), SubResource("Resource_jy2uo")])
+
+[node name="Radio-Panel" parent="Sami_Doctor/UI/Tools" parent_id_path=PackedInt32Array(2001215541, 2052687184) index="0" unique_id=232762158]
+anchors_preset = -1
+
+[editable path="Sami_Doctor"]

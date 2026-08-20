@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2go3mrleoun6"
-path="res://.godot/imported/BIPOLAR1.png-bab746f5b860dc3d8f227c5fd047706d.ctex"
+uid="uid://bop1v4tgt5cf"
+path="res://.godot/imported/BAR8.png-eaa1e94ece050789cac9f27658988474.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://background_scenes/assets/BIPOLAR1.png"
-dest_files=["res://.godot/imported/BIPOLAR1.png-bab746f5b860dc3d8f227c5fd047706d.ctex"]
+source_file="res://Loading_Screen/Loading_Bar/BAR8.png"
+dest_files=["res://.godot/imported/BAR8.png-eaa1e94ece050789cac9f27658988474.ctex"]
 
 [params]
 
@@ -36,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=8192
+process/size_limit=640
 detect_3d/compress_to=1

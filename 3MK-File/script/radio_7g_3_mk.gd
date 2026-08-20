@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	label.text =str(RadioGlobal.radio) +  "  Hz"  
 	if b.is_pressed():
 		RadioGlobal.radio += int(hold * 1 )

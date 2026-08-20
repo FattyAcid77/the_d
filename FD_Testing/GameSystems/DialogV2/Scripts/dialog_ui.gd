@@ -149,11 +149,11 @@ func _request_close() -> void:
 # --- main loop -------------------------------------------------------------
 
 func _run() -> void:
-	var start := _pick_branch()
-	if start == "":
+	var start_branch := _pick_branch()
+	if start_branch == "":
 		push_warning("DialogUI: no playable branch in this dialog.")
 		return
-	await _play_branch(start)
+	await _play_branch(start_branch)
 	if _end_all:
 		return
 	while true:
@@ -287,11 +287,11 @@ func _move_camera(target: Vector2, time: float) -> void:
 	if time <= 0.0:
 		cam.global_position = target
 		return
-	var start := cam.global_position
+	var start_pos := cam.global_position
 	var elapsed := 0.0
 	while elapsed < time and not _end_all:
 		elapsed += get_process_delta_time()
-		cam.global_position = start.lerp(target, clampf(elapsed / time, 0.0, 1.0))
+		cam.global_position = start_pos.lerp(target, clampf(elapsed / time, 0.0, 1.0))
 		await get_tree().process_frame
 	cam.global_position = target
 

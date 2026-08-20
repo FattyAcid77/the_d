@@ -293,7 +293,9 @@ func _on_retry() -> void:
 	if n >= 0 and Prescription.get_checkpoint(n) != null:
 		Prescription.apply(n)                     # back to the last checkpoint
 	else:
-		get_tree().reload_current_scene()
+		# awaited so the fallback below runs against the reloaded scene, not the
+		# old one that is still alive behind the transition
+		await SceneManager.reload_current_scene()
 		if _has_fallback:
 			await get_tree().process_frame
 			var p := get_tree().get_first_node_in_group("Player") as Node2D
@@ -309,7 +311,7 @@ func _on_quit() -> void:
 	get_tree().paused = false
 	is_dead = false
 	if main_menu_scene != "":
-		get_tree().change_scene_to_file.call_deferred(main_menu_scene)
+		SceneManager.load_new_scene(main_menu_scene)
 	else:
 		push_warning("Deaths: main_menu_scene is empty — set it on the autoload.")
 

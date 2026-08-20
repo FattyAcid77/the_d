@@ -9,7 +9,7 @@ extends Node2D
 
 var Reward: bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Reward == false:
 		zone_check()
 

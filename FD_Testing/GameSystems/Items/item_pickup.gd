@@ -101,15 +101,15 @@ func refresh_look() -> void:
 
 
 func _refresh_visible() -> void:
-	var show := true
+	var should_show := true
 	if require_flag != "" and not Flags.is_set(require_flag):
-		show = false
+		should_show = false
 	if hide_flag != "" and Flags.is_set(hide_flag):
-		show = false
+		should_show = false
 	if taken_flag != "" and Flags.is_set(taken_flag):
-		show = false
-	visible = show
-	set_deferred("monitoring", show)
+		should_show = false
+	visible = should_show
+	set_deferred("monitoring", should_show)
 
 
 func _take() -> void:

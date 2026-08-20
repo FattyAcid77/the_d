@@ -1,7 +1,5 @@
 extends Control
 @onready var grid_container: GridContainer = $GridContainer
-signal drag_start(slot)
-signal drag_end()
 
 var dragged_slot = null
 
@@ -12,7 +10,7 @@ func _ready() -> void:
 	Inventory_updates()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 
