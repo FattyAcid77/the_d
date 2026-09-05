@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RadioBand" format=3 uid="uid://d1k8dyk3medvi"]
+
+[ext_resource type="Script" uid="uid://bd7mwn3u722oc" path="res://FD_Testing/GameSystems/Windows/radio_band.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "LVL2_BUTTON"
+frequency = 630
+action = 4
+target = NodePath("../BUTTON")
+value_position = Vector2(437, 192)
+move_time = 0.6
+set_flag_on_enter = "LVL2_DOOR_OPEN"
+latch = true
+hold_seconds = 1.0

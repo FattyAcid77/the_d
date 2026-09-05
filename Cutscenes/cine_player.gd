@@ -32,7 +32,7 @@ const BAR_HEIGHT: float = 36.0
 enum ArtFit { FILL, FIT, NONE }
 
 @export_group("Picture")
-## The sprite sheet. Must be a vertical strip of equal frames.
+## The sprite sheet. A vertical strip by default; set `columns` for a grid.
 @export var sheet: Texture2D:
 	set(value):
 		sheet = value
@@ -42,6 +42,21 @@ enum ArtFit { FILL, FIT, NONE }
 @export var frame_count: int = 1:
 	set(value):
 		frame_count = maxi(1, value)
+		_apply_sheet()
+		update_configuration_warnings()
+## Columns in the sheet. 1 is a plain vertical strip. Use more when the strip
+## would be too tall to load and the frames wrap into columns instead. Frames
+## are read left to right, row by row.
+@export var columns: int = 1:
+	set(value):
+		columns = maxi(1, value)
+		_apply_sheet()
+		update_configuration_warnings()
+## Rows in the sheet. 0 works it out from `frame_count`, which is right unless
+## the sheet is padded out with whole blank rows.
+@export var rows: int = 0:
+	set(value):
+		rows = maxi(0, value)
 		_apply_sheet()
 		update_configuration_warnings()
 ## Frames per second the strip plays at.
@@ -129,6 +144,9 @@ var _preview_homes: Dictionary = {}   # moved node -> its untouched position
 ## than because the cutscene reached its end. Changing scene in that case
 ## would fight whatever is already tearing the tree down.
 var _exiting: bool = false
+var _walker: Node = null           # character a MOVE step is walking right now
+var _walker_sprite: Node = null
+var _walk_tween: Tween = null
 
 
 func _ready() -> void:
@@ -154,6 +172,9 @@ func _ready() -> void:
 	# A scene change mid-cutscene must not leave the game paused and the
 	# player frozen. This is the safety net for every path we didn't think of.
 	tree_exiting.connect(_on_tree_exiting)
+
+	get_viewport().size_changed.connect(_fit_art)
+	_fit_art()
 
 	if trigger_area != null:
 		trigger_area.body_entered.connect(_on_body_entered)
@@ -289,6 +310,7 @@ func _finish() -> void:
 
 	if is_inside_tree():
 		get_tree().paused = _was_paused  # put it back, don't assume it was false
+	_stand()
 	_freeze_player(false)
 	if _cam != null and is_instance_valid(_cam):
 		_cam.position = _cam_home
@@ -409,7 +431,52 @@ func _move(step: CutSceneMaker_v1Step) -> void:
 	if not (node is Node2D or node is Control):
 		push_warning("%s: MOVE skipped — '%s' is a %s, which has no position." % [name, step.target, node.get_class()])
 		return
+	_walk(node, step.to_position, step.duration)
 	_slide(node, "global_position", step.to_position, step.duration)
+
+
+## A MOVE on someone who can walk turns them the right way and runs their walk
+## animation. Their sprite is let through the pause, or it would slide frozen.
+func _walk(node: Node, to: Vector2, seconds: float) -> void:
+	if not ("direction" in node and node.has_method("SetDirection") and node.has_method("UpdateAnimation")):
+		return
+	var dir: Vector2 = to - node.global_position
+	if dir == Vector2.ZERO:
+		return
+	# An earlier walk must not stand him up in the middle of this one.
+	if _walk_tween != null and _walk_tween.is_valid():
+		_walk_tween.kill()
+	_stand()
+
+	_walker = node
+	_walker_sprite = node.get("anim")
+	if _walker_sprite != null:
+		_walker_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
+
+	node.direction = Vector2(signf(dir.x), 0.0) if absf(dir.x) >= absf(dir.y) else Vector2(0.0, signf(dir.y))
+	node.SetDirection()
+	node.UpdateAnimation("Walk")
+	# UpdateAnimation ignores a name that is already showing, even when it is
+	# sitting stopped on one frame, so start it again by hand.
+	if _walker_sprite != null:
+		_walker_sprite.play()
+
+	if seconds <= 0.0:
+		_stand()
+		return
+	_walk_tween = create_tween()
+	_walk_tween.tween_interval(seconds)
+	_walk_tween.tween_callback(_stand)
+
+
+## Back to standing, and the sprite goes back to obeying the pause.
+func _stand() -> void:
+	if _walker != null and is_instance_valid(_walker):
+		_walker.UpdateAnimation("Idle")
+	if _walker_sprite != null and is_instance_valid(_walker_sprite):
+		_walker_sprite.process_mode = Node.PROCESS_MODE_INHERIT
+	_walker = null
+	_walker_sprite = null
 
 
 ## Tweens are created by this node, and this node is PROCESS_MODE_ALWAYS, so
@@ -641,9 +708,17 @@ func _apply_sheet() -> void:
 	if art == null or not is_instance_valid(art):
 		return
 	art.texture = sheet
-	art.vframes = maxi(1, frame_count)
+	art.hframes = maxi(1, columns)
+	art.vframes = _sheet_rows()
 	art.frame = 0
 	_fit_art()
+
+
+## How many rows the sheet is cut into.
+func _sheet_rows() -> int:
+	if rows > 0:
+		return rows
+	return maxi(1, ceili(float(frame_count) / float(maxi(1, columns))))
 
 
 ## Scales the picture to the screen so a sheet does not have to be authored at
@@ -651,25 +726,50 @@ func _apply_sheet() -> void:
 ## hand for every new sheet, which is the one sum this system was meant to
 ## spare you.
 func _fit_art() -> void:
+	if art == null or not is_instance_valid(art):
+		return
 	if art_fit == ArtFit.NONE or sheet == null or frame_count < 1:
 		return
-	var frame_w: float = float(sheet.get_width())
-	var frame_h: float = float(sheet.get_height()) / float(frame_count)
+	var frame_w: float = float(sheet.get_width()) / float(maxi(1, columns))
+	var frame_h: float = float(sheet.get_height()) / float(_sheet_rows())
 	if frame_w <= 0.0 or frame_h <= 0.0:
 		return
 
-	# Measured against the DESIGN size, not the window: the stretch setting
-	# scales the whole canvas afterwards, so working in window pixels would
-	# double-apply it.
-	var view := Vector2(
-		float(ProjectSettings.get_setting("display/window/size/viewport_width", 640)),
-		float(ProjectSettings.get_setting("display/window/size/viewport_height", 360)))
-
+	var view: Vector2 = _view_size()
 	var sx: float = view.x / frame_w
 	var sy: float = view.y / frame_h
 	var factor: float = maxf(sx, sy) if art_fit == ArtFit.FILL else minf(sx, sy)
 	art.scale = Vector2(factor, factor)
 	art.position = view * 0.5
+
+
+## The area the picture actually has to cover.
+##
+## NOT the design size. The project stretches with aspect "expand", so on any
+## window that is not 16:9 the visible area grows sideways past 640x360 — and a
+## picture fitted to the design size leaves a bar down the edge.
+##
+## In the editor there is no game window to measure, so the design size is the
+## only sane answer there.
+func _view_size() -> Vector2:
+	var design := Vector2(
+		float(ProjectSettings.get_setting("display/window/size/viewport_width", 640)),
+		float(ProjectSettings.get_setting("display/window/size/viewport_height", 360)))
+	if Engine.is_editor_hint() or not is_inside_tree():
+		return design
+	var win: Window = get_window()
+	if win == null or design.x <= 0.0 or design.y <= 0.0:
+		return design
+	var px := Vector2(win.size)
+	if px.x <= 1.0 or px.y <= 1.0:
+		return design
+	# A CanvasLayer has no get_viewport_rect(), and the window is in real
+	# pixels, so convert: the canvas is scaled by the SMALLER of the two
+	# ratios, and dividing back out gives the visible area in design units.
+	var factor: float = minf(px.x / design.x, px.y / design.y)
+	if factor <= 0.0:
+		return design
+	return px / factor
 
 
 func _update_frame() -> void:

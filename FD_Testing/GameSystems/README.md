@@ -9,8 +9,8 @@ push/pull, and inventory are never touched.
 ## 1. ONE-TIME SETUP (do these first, ~2 minutes)
 ================================================================
 A) Autoloads — Project > Project Settings > Globals (Autoload):
-     Flags          ->  res://FD_Testing/GameSystems/DialogV2/flags.gd
-     DialogManager  ->  res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_manager.gd
+	 Flags          ->  res://FD_Testing/GameSystems/DialogV2/flags.gd
+	 DialogManager  ->  res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_manager.gd
    (Names must match exactly.)
 
 B) Input Map — add an action named `interact`, bind a key (E is typical;
@@ -18,7 +18,7 @@ B) Input Map — add an action named `interact`, bind a key (E is typical;
 
 C) Optional typewriter sound — the old mp3 was deleted with FD_Testing.
    Drop any SHORT blip sound at:
-     res://FD_Testing/GameSystems/DialogV2/dialogue_noise.mp3
+	 res://FD_Testing/GameSystems/DialogV2/dialogue_noise.mp3
    and it's picked up automatically. (Or drag any sound into the DialogUI
    root's `Type Sound` slot.) No sound file = silent typewriter, no errors.
 
@@ -28,14 +28,14 @@ C) Optional typewriter sound — the old mp3 was deleted with FD_Testing.
 1. Instance  res://FD_Testing/GameSystems/NPC/npc.tscn  into your level.
 2. Make its identity: FileSystem dock -> right-click -> New Resource ->
    NPCResource. Save as e.g.  NPC/Resources/java.tres.  Fill in:
-     - npc_name       "Java"
-     - sprite_frames  the character's SpriteFrames (Idle_down, Walk_Side...)
+	 - npc_name       "Java"
+	 - sprite_frames  the character's SpriteFrames (Idle_down, Walk_Side...)
      - portrait       optional face image
      - dialog         (see step 3)
 3. Make its dialog: New Resource -> Dialog. Save as  java_dialog.tres.
      - On `branches` add a DialogBranch, set id = "entry"
-     - Add DialogLines to its `lines` — that's what they say
-     - Drop java_dialog.tres into the NPCResource's `dialog` slot
+	 - Add DialogLines to its `lines` — that's what they say
+	 - Drop java_dialog.tres into the NPCResource's `dialog` slot
 4. Drop java.tres onto the NPC instance's `npc_resource` slot.
 5. Run. Walk up (a "!" shows), press interact.
 
@@ -55,13 +55,13 @@ Movement (optional — no behavior = standing NPC):
 Dialog (one per NPC)
  └─ branches: [DialogBranch]           "entry" plays first; others are topics
      └─ lines: [DialogLine]
-         ├─ text            what's said (BBCode ok; EMPTY = action-only step)
-         ├─ show_if_flag    skip line unless this flag is set
-         ├─ set_flags       flags set when the line shows
-         ├─ keywords        clickable words -> topics (see below)
-         ├─ choices         player buttons: set_flag / goto_branch / ends_dialog
-         ├─ Camera group    move_camera + target + time (cutscene pan)
-         └─ Action group    action_name/args (+ wait_for_action)
+		 ├─ text            what's said (BBCode ok; EMPTY = action-only step)
+		 ├─ show_if_flag    skip line unless this flag is set
+		 ├─ set_flags       flags set when the line shows
+		 ├─ keywords        clickable words -> topics (see below)
+		 ├─ choices         player buttons: set_flag / goto_branch / ends_dialog
+		 ├─ Camera group    move_camera + target + time (cutscene pan)
+		 └─ Action group    action_name/args (+ wait_for_action)
 
 FLAGS = the game's memory. From ANY script:
     Flags.set_flag("apple_eaten")
@@ -95,9 +95,9 @@ ACTIONS — dialog asks the game to do something:
 - Name and text have FIXED regions — nothing jumps between lines; text
   wraps inside the box; long names clip.
 - The box uses text_box.png (NinePatchRect). Tuning knobs:
-    where text sits   -> Box/Margin margins   (L50 T40 R50 B26)
-    how frame borders stretch -> Box/BG patch margins (L35 T74 R24 B20)
-    box height        -> Box offset_top (-260)
+	where text sits   -> Box/Margin margins   (L50 T40 R50 B26)
+	how frame borders stretch -> Box/BG patch margins (L35 T74 R24 B20)
+	box height        -> Box offset_top (-260)
 - Empty UI slots print a clear error naming the slot (no silent failure).
 - NPCs stop during dialog (tree pause) and FACE the player when talked to.
 - The "!" prompt is a plain Label — replace the Prompt node's child with
@@ -149,9 +149,9 @@ THE THREE WAYS TO TRIGGER IT (your three cases):
 
 3) "When this word appears" — from DIALOG:
    On a DialogLine (usually inside a keyword's topic branch), Action group:
-     action_name     = "cutscene"
-     action_args     = ["res://FD_Testing/GameSystems/Cutscene/test_anime.ogv"]
-     wait_for_action = ON
+	 action_name     = "cutscene"
+	 action_args     = ["res://FD_Testing/GameSystems/Cutscene/test_anime.ogv"]
+	 wait_for_action = ON
    The conversation pauses, the video plays, the dialog continues itself.
    So: keyword "apple" -> topic branch "apple" -> first line empty text with
    the action = clicking the word plays the cutscene.
@@ -206,10 +206,10 @@ HOW IT WORKS
   ("game_state") so it saves/loads with everything else.
 - Each LEVEL gets a ProgressStateMachine node with ProgressState children — the
   child's NODE NAME is the state name (your empty-node-per-state idea):
-            ProgressStateMachine
-      ├── Start
-      ├── Met_Java
-      └── Act2
+			ProgressStateMachine
+	  ├── Start
+	  ├── Met_Java
+	  └── Act2
   On level load, the machine enters the child matching the current state.
   A level only needs children for states that matter to it.
 
@@ -313,14 +313,14 @@ checked IN ORDER and the FIRST one whose conditions pass is played.
 Each branch has (group "When this branch plays"):
   require_flags     ALL of these must be set     (empty = no requirement)
   blocked_by_flags  if ANY is set, branch hidden (this is how a branch
-                    disappears when the story moves on)
+					disappears when the story moves on)
   play_once         play it a single time, ever
 
 EXAMPLE — FD reacting to the apple story:
   branches (in this order!):
    1. "azoz_did_it"  require_flags=["azoz_eaten_apple"]
    2. "apple"        require_flags=["apple_eaten"]
-                     blocked_by_flags=["azoz_eaten_apple"]
+					 blocked_by_flags=["azoz_eaten_apple"]
    3. "entry"        (no conditions — the fallback greeting)
 
   No flags        -> talks: entry
@@ -394,17 +394,17 @@ his SpriteFrames — the state picks whichever exists. No art yet = he
 simply freezes, no errors.
 
 KILL THE PLAYER:
-    Deaths.kill("bleeding")            # id of a DeathCause
-    Deaths.kill("bleeding", 1.5)       # longer animation beat
-    dialog line: action_name = "kill", action_args = ["bleeding"]
+	Deaths.kill("bleeding")            # id of a DeathCause
+	Deaths.kill("bleeding", 1.5)       # longer animation beat
+	dialog line: action_name = "kill", action_args = ["bleeding"]
 
 WHAT HAPPENS (in order):
   1. input off, Sami's Death state plays his death animation
   2. the clipboard SLIDES UP from the bottom
   3. the board ANIMATION plays: BoardAnim/death_board_00..19.png
-     (your GIF, converted to 20 PNG frames — Godot can't play .gif)
+	 (your GIF, converted to 20 PNG frames — Godot can't play .gif)
   4. the writing appears: REAL-WORLD time of death, the cause, and the
-     CheckMark.png next to it
+	 CheckMark.png next to it
   5. RETRY / QUIT become clickable (disabled until then)
 Timing knobs: default_anim_seconds, slide_seconds, frame_seconds,
 write_delay. Placement knobs: header_pos, time_label_pos, time_value_pos,
@@ -463,10 +463,10 @@ A) THE MECHANIC — add Breath/breath_component.gd as a child of Sami,
    - While holding, he CANNOT suffocate.
    - `stage_animations`: e.g. ["Hold_1","Hold_2","Hold_3","Hold_4"] — add
      those to his SpriteFrames when the art is ready. Until then each
-     stage tints him a colder blue (stage_tints), so it's already readable.
+	 stage tints him a colder blue (stage_tints), so it's already readable.
    - `recover_seconds`: breathing time needed before holding again.
    - Signals: breath_started / stage_changed(stage) / breath_released /
-     breath_failed / blood_spilled — hook UI, sound, camera shake to these.
+	 breath_failed / blood_spilled — hook UI, sound, camera shake to these.
 
 B) BLEEDING — set `is_bleeding = true` on the Breath node when Sami is cut
    (from your damage code). Then each stage spills the BloodType in
@@ -486,7 +486,7 @@ D) THE FLOOR PUZZLE — add a Node2D with Breath/blood_grid.gd where the
    ITSELF IN THE EDITOR so you can line it up with your tiles.
    - `columns`, `rows`, `cell_size` — any shape you want.
    - `wanted`: one blood-type id per cell, left-to-right/top-to-bottom;
-     "" = that cell doesn't matter. Wanted cells are highlighted in-editor
+	 "" = that cell doesn't matter. Wanted cells are highlighted in-editor
      with their id written on them.
    - Bleed the right type on the right cell -> `solved_flag` is raised.
    - `lock_cells` stops a correct cell from being ruined; without it the
@@ -582,10 +582,10 @@ D) COMBOS — when BOTH combo speakers hold a frequency, a button appears
 
 E) BOARD — Area2D + StatuePuzzle/number_board.gd.
    - While the statue is sad, walk to the board and press interact to
-     WRITE that number down. The FIRST one writes itself (auto_write_first)
-     so the player learns what the board is for.
+	 WRITE that number down. The FIRST one writes itself (auto_write_first)
+	 so the player learns what the board is for.
    - Press interact again (nothing pending) to OPEN the board and drag
-     tiles to reorder. Matching `solution` raises `solved_flag`.
+	 tiles to reorder. Matching `solution` raises `solved_flag`.
    - `starting_numbers` puts jumbled numbers on it from the start.
 
 FREQUENCIES: the radio is an int, 530..1700, moving in steps of 10 (L1/R1
@@ -601,16 +601,16 @@ placeholder rectangles.
 
 THE FLOW
  1. SEQUENCE — flip the three gens in order (order_index 0,1,2). Wrong
-    order = buzz, everything resets. Right order = they blow.
+	order = buzz, everything resets. Right order = they blow.
  2. SAMI'S LINE — `after_switches_dialog` plays once ("We need to go to the
     main Gen"). It pauses; the timer waits for it.
  3. THE RUN — countdown starts, lights flicker, chase music plays, Haji
     shouts `callout_lines` every `callout_every` seconds WITHOUT pausing.
  4. MAIN GEN — reach it and flip it. If its `required_hz` is set, the RADIO
-    must be tuned there too (multiple of 10, 530..1700) — that's your
-    "explode it with the radio" ending.
+	must be tuned there too (multiple of 10, 530..1700) — that's your
+	"explode it with the radio" ending.
  5. FAIL — timer hits 0. `on_fail`: RESET_ONLY / KILL_PLAYER /
-    RELOAD_CHECKPOINT.
+	RELOAD_CHECKPOINT.
 
 PIECES
 - electro_gen.gd (Area2D): order_index, is_main, floor_number, required_hz,
@@ -663,9 +663,9 @@ HOW THEIR RADIO ACTUALLY WORKS
   and frees it when closed.
 
 >>> IMPORTANT: tuning only works while the radio UI is OPEN, because
-    radio_ui.gd is the node reading those keys. It doesn't exist when the
+	radio_ui.gd is the node reading those keys. It doesn't exist when the
     radio is shut. So the player: opens the radio, tunes, and the speaker
-    they're standing in follows along live. <<<
+	they're standing in follows along live. <<<
 
 RadioLink gives our systems a safe front door — it never writes to their
 code and degrades quietly if the radio isn't in the project:
@@ -699,14 +699,14 @@ walk into the trigger. Everything uses Godot's icon as a placeholder.
 
 THE THREE STAGES
  1. The TV DROPS. Yazzed charges with a readable 1s wind-up and slams into
-    it himself. One TV hit -> stage 2.
+	it himself. One TV hit -> stage 2.
  2. The TV LIFTS AWAY. Chip his HP with traps and throwables until it hits
-    `stage3_hp` (50 by default) -> the TV comes back down.
+	`stage3_hp` (50 by default) -> the TV comes back down.
  3. He's FAST (0.5s wind-up) and BOUNCY. The first charge and the bounce
     right after hunt Sami; sometimes he charges a WALL on purpose to come
     back from a strange angle (`wall_feint_chance`). Later bounces are
     random and NEVER toward the TV. Dodge late so he overshoots into it.
-    Second TV hit = dead -> `victory_comic` plays (Nada's panels).
+	Second TV hit = dead -> `victory_comic` plays (Nada's panels).
  Sami dying: call BossFight.reset_fight() — Yazzed goes back to full.
 
 PIECES (every number below is an export)
@@ -767,13 +767,13 @@ per-window:
   open_flag, closed_flag, once_only
   fade_seconds, grow_in, shake_pixels
   TEXT:   text, text_motion (TYPEWRITER / SCROLL / STATIC), text_speed,
-          font_size, text_color, text_align_center, text_loop
+		  font_size, text_color, text_align_center, text_loop
   PORTAL: portal_same_world ON  = a camera elsewhere in THIS level
-                            OFF = portal_scene, its own little world
-          portal_camera_position, portal_zoom
+							OFF = portal_scene, its own little world
+		  portal_camera_position, portal_zoom
   IMAGE:  image, image_fills_window
   SOUND:  sound, sound_loops, sound_volume_db, sound_fade (any kind can
-          have sound; a SOUND window just has nothing to show)
+		  have sound; a SOUND window just has nothing to show)
 
 FOUR EXAMPLES INCLUDED: whisper_1 (typewriter, random spot, 7s),
 whisper_2 (scrolling along a screen edge, jittering), stuck_note (user
@@ -784,7 +784,7 @@ until its flag is set).
     always_on_bottom. BELOW_GAME works by raising the GAME window so the
     popup falls behind it. It looks right, but if the player alt-tabs the
     OS may reorder them. Fully reliable "always behind" needs OS calls
-    Godot doesn't expose. <<<
+	Godot doesn't expose. <<<
 
 NOTE: the popups are for the USER, not for Sami — nothing in the game
 world reacts to them yet. That's deliberate, per the design.
@@ -799,7 +799,7 @@ Nothing you've already authored had to change.
 
 --- SETUP (5 steps) ---
 1. AUTOLOAD, and put it FIRST in the list (above Flags):
-     Loc -> res://FD_Testing/GameSystems/Localization/loc.gd
+	 Loc -> res://FD_Testing/GameSystems/Localization/loc.gd
 2. Import the CSV: click translations.csv in the FileSystem dock ->
    Import tab -> Import As: "Translation" -> Reimport.
    Godot creates translations.en.translation and translations.ar.translation.
@@ -912,8 +912,8 @@ Sami walks in, the box opens. No interact key, no choice.
 WHERE THE WORDS COME FROM — pick one:
   * `dialog`  — drag a Dialog .tres straight in.
   * `speaker` — point at an NPC node in the level; the zone borrows that
-                NPC's dialog, name and portrait. Use it for an NPC shouting
-                from across the room without Sami talking to them.
+				NPC's dialog, name and portrait. Use it for an NPC shouting
+				from across the room without Sami talking to them.
 
 The zone only decides WHEN. Which branch plays is still the NPC's decision,
 driven by world flags, exactly as everywhere else.
@@ -946,9 +946,9 @@ On any PopupWindowDef, the "Changing into another window" group:
   change_to        the id of the window this one turns into
   change_after     seconds before it happens
   change_morph     ON  = SAME OS window, new contents (no blink, no move,
-                         keeps its taskbar entry — it just becomes something
-                         else while you watch)
-                   OFF = properly close this one and open a new one
+						 keeps its taskbar entry — it just becomes something
+						 else while you watch)
+				   OFF = properly close this one and open a new one
   change_keep_position / change_keep_size    morph only
   change_fade      crossfade seconds, 0 = instant cut
   change_max_steps safety limit so an A->B->A chain can't loop forever
@@ -1043,7 +1043,7 @@ them — you never wire it per pickup node.
 Also, ItemPickup raises "item:<type>" automatically (e.g. "item:bandage")
 unless you turn off `auto_type_flag`. So dialog can check for any item
 without you naming a flag first:
-    DialogBranch.require_flags = ["item:scalpel"]
+	DialogBranch.require_flags = ["item:scalpel"]
 
 The pickup node's own `taken_flag` still works as before, for when one
 specific pickup in one specific level matters.
@@ -1055,8 +1055,8 @@ READ THIS FIRST — what the operating system will and won't allow:
 
   * Godot CANNOT restyle a real OS title bar.
   * Godot CANNOT give each window its own taskbar icon. The only call that
-    exists, DisplayServer.set_icon(image), takes NO window argument — it
-    changes the icon for the WHOLE PROGRAM at once.
+	exists, DisplayServer.set_icon(image), takes NO window argument — it
+	changes the icon for the WHOLE PROGRAM at once.
 
 So a per-window look and a per-window logo have to be DRAWN BY US, inside a
 borderless window. That's what WindowSkin does, and it's exactly what your
@@ -1096,7 +1096,7 @@ different `icon` values and the logo changes as the window morphs — same
 window, same spot on the desktop, new logo.
 
 --- THE WHOLE PROGRAM'S ICON ---
-    PopupWindows.set_app_icon(load("res://art/icon_wrong.png"))
+	PopupWindows.set_app_icon(load("res://art/icon_wrong.png"))
 Changes the taskbar/alt-tab icon for everything at once. Not per window —
 the OS won't allow that — but a good story beat on its own.
 
@@ -1112,24 +1112,24 @@ if it already has one (turn off portal_make_camera to keep hands off).
 On the PopupWindowDef:
 
   portal_follow = FIXED     the view never moves however far you drag.
-                            Right for a fixed security-camera feel.
+							Right for a fixed security-camera feel.
 
   portal_follow = DESKTOP   the window becomes a HOLE sliding over the other
-                            world. Drag right, see further right. The world
-                            appears pinned to the monitor while the window
-                            moves across it. This is the one that feels like
-                            a real window, and almost certainly what you want.
+							world. Drag right, see further right. The world
+							appears pinned to the monitor while the window
+							moves across it. This is the one that feels like
+							a real window, and almost certainly what you want.
 
   portal_follow = WORLD     portal_same_world only. The window shows THIS
-                            level at whatever spot it physically covers on
-                            screen — a piece of glass laid over the game.
+							level at whatever spot it physically covers on
+							screen — a piece of glass laid over the game.
 
   portal_follow_scale   how far the view moves per pixel of window movement
-                        1.0 = world pinned to the monitor, most convincing
-                        0.5 = view drifts slower than the window, dreamy
-                        2.0 = view races ahead, exaggerated
+						1.0 = world pinned to the monitor, most convincing
+						0.5 = view drifts slower than the window, dreamy
+						2.0 = view races ahead, exaggerated
   portal_follow_invert  view moves WITH the window instead of the window
-                        moving over the world — deliberately wrong-feeling
+						moving over the world — deliberately wrong-feeling
   portal_follow_smooth  seconds to catch up. 0 = exact. 0.15 = heavy and laggy
 
 Works however the window moved — player drag, skin title bar, or code.
@@ -1137,7 +1137,7 @@ Works however the window moved — player drag, skin title bar, or code.
 From code:
   w.portal_camera            the Camera2D, move it yourself whenever
   w.reset_portal_anchor()    make the current spot the new starting point,
-                             so moving the window in code doesn't jump the view
+							 so moving the window in code doesn't jump the view
 
 ================================================================
 ## 37. portal_same_world — LEAVE IT OFF
@@ -1178,16 +1178,16 @@ itself.
     Bag.add(item, 2)      -> how many actually went in (0 = full)
     Bag.has("bandage")    Bag.count_of("bandage")
     Bag.use_slot(4)       runs the item through MedicalItems.use()
-    Bag.drop_slot(4)      spawns a real ItemPickup at Sami's feet
-    Bag.unique_items()    one of each KIND, sorted by avatar_order
+	Bag.drop_slot(4)      spawns a real ItemPickup at Sami's feet
+	Bag.unique_items()    one of each KIND, sorted by avatar_order
 
 Bag raises pickup_flag, first_pickup_flag and "item:<type>" itself.
 
 NEW FIELDS ON MedicalItem:
-    avatar_layer   the overlay drawn on Sami (640x360 canvas, pre-positioned)
-    avatar_order   stacking: -10 behind him, 5 on his front, 10 in front
-    max_stack      1 = never stacks
-    description    the hover tooltip line (falls back to `effect`)
+	avatar_layer   the overlay drawn on Sami (640x360 canvas, pre-positioned)
+	avatar_order   stacking: -10 behind him, 5 on his front, 10 in front
+	max_stack      1 = never stacks
+	description    the hover tooltip line (falls back to `effect`)
 
 ================================================================
 ## 39. THE MAP
@@ -1202,7 +1202,7 @@ in, marks it discovered (saved as the flag "map:<id>"), and hands over the
 room's world bounds so the little Sami tracks his REAL position inside it.
 
 Then one MapRoomDef .tres per room in Map/Rooms/:
-    id           must match the MapRoom's room_id
+	id           must match the MapRoom's room_id
     display_name shown on the map, translated
     art          THAT ROOM drawn on the 640x360 map canvas, rest transparent
 
@@ -1212,10 +1212,10 @@ on the map is read out of the art's own opaque pixels
 (MapRoomDef.rect_on_map()), so the marker maths needs nothing from you.
 Only fill in `map_rect` by hand if decoration throws the reading off.
 
-    MapRooms.discover("morgue")     reveal a room he hasn't entered
-    MapRooms.reveal_all = true      show everything, for testing
-    MapRooms.forget_all()           wipe the map again
-    known_from_start on a def       on the map before he's been there
+	MapRooms.discover("morgue")     reveal a room he hasn't entered
+	MapRooms.reveal_all = true      show everything, for testing
+	MapRooms.forget_all()           wipe the map again
+	known_from_start on a def       on the map before he's been there
 
 ================================================================
 ## 40. THE BOARD — the pause menu
@@ -1251,9 +1251,9 @@ slot pops the name and description next to the mouse. USE and DROP act on
 the selected slot.
 
   >> Tick `show_layout` on BoardInventory to outline every slot and both
-     buttons on top of your art. The defaults were measured off your PNG
-     (grid at 322,131, slots 17px, 2px gaps) but nudge them until they sit
-     exactly right, then untick it.
+	 buttons on top of your art. The defaults were measured off your PNG
+	 (grid at 322,131, slots 17px, 2px gaps) but nudge them until they sit
+	 exactly right, then untick it.
 
 MAP TAB (BoardMap): background = the empty map board, marker = the little
 Sami. `show_rects` outlines what it read from each room's art.
@@ -1282,7 +1282,7 @@ match, and give it a CollisionShape2D over the floor.
 
 TWO FILES I GENERATED FROM Full_Map.png (both in Map/Rooms/Art/):
   MAP_BOARD.png    the board with rooms AND their outlines erased, worn
-                   corners kept -> BoardMap.background
+				   corners kept -> BoardMap.background
   MAP_MARKER.png   the little Sami cut out, 9x17 -> BoardMap.marker
 
 Full_Map.png itself CANNOT be the background: its rooms are baked into it, so
@@ -1326,14 +1326,14 @@ Board can bring it in without a second, competing slide.
 
 WHAT YOU CAN DRAG NOW
   MAP        drag to pan, wheel to zoom (towards the mouse), double-click
-             to snap back. can_pan / can_zoom / zoom_min / zoom_max /
-             pan_padding on BoardMap.
+			 to snap back. can_pan / can_zoom / zoom_min / zoom_max /
+			 pan_padding on BoardMap.
   INVENTORY  drag items between slots. Empty slot = move. Same item = the
-             stacks merge. Different item = the two swap. The icon follows
-             the mouse and the target slot outlines. can_drag_items on
-             BoardInventory.
+			 stacks merge. Different item = the two swap. The icon follows
+			 the mouse and the target slot outlines. can_drag_items on
+			 BoardInventory.
   LOGBOOK    its own cards, pan and zoom, exactly as before — the Board no
-             longer blocks them.
+			 longer blocks them.
 
 ================================================================
 ## 43. THE BOARD IS SCALED AND CENTRED, LIKE THE LOGBOOK

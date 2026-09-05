@@ -22,8 +22,8 @@ and a CollisionShape2D over the walkable floor. Nothing else.
 
 TWO EXTRA FILES I MADE FOR YOU (Art/)
   MAP_BOARD.png   the green board with the rooms and their outlines erased,
-                  worn corners kept. This is the map BACKGROUND — rooms are
-                  drawn on top as he finds them. Full_Map.png can't be the
+				  worn corners kept. This is the map BACKGROUND — rooms are
+				  drawn on top as he finds them. Full_Map.png can't be the
                   background: its rooms are baked in, so everything would be
                   revealed from the start.
   MAP_MARKER.png  the little Sami, cut out of Full_Map.png (9x17).

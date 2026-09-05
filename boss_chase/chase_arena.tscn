@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c2wmm6et0gmxy" path="res://health_point_data.gd" id="4_pyarj"]
 [ext_resource type="PackedScene" path="res://boss_chase/chase_gameover.tscn" id="5_gameover"]
 [ext_resource type="Script" uid="uid://04qfsfxjg4it" path="res://boss_chase/chase_hud.gd" id="6_hud"]
+[ext_resource type="Texture2D" uid="uid://dfcweiuy3bafh" path="res://boss_chase/Assets/MAP.png" id="7_map"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_side"]
 size = Vector2(16, 2112)
@@ -17,16 +18,19 @@ size = Vector2(208, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deadend"]
 size = Vector2(176, 16)
 
-[sub_resource type="Resource" id="Resource_pyarj"]
+[sub_resource type="Resource" id="Resource_d0jm1"]
 resource_local_to_scene = true
 script = ExtResource("4_pyarj")
+max_health = 6
+current_health = 6
 
-[sub_resource type="Resource" id="Resource_d0jm1"]
+[sub_resource type="Resource" id="Resource_n7mwr"]
 resource_local_to_scene = true
 script = ExtResource("4_pyarj")
 
 [node name="ChaseArena" type="Node2D" unique_id=461978267 node_paths=PackedStringArray("world", "runner", "boss", "dead_end", "overlay")]
 script = ExtResource("1_arena")
+can_scene = ExtResource("4_crate")
 world = NodePath("World")
 runner = NodePath("World/Runner")
 boss = NodePath("World/Boss")
@@ -39,6 +43,16 @@ overlay = NodePath("GameOver")
 z_index = -3
 color = Color(0.13, 0.13, 0.16, 1)
 polygon = PackedVector2Array(0, 0, 176, 0, 176, 2048, 0, 2048)
+
+[node name="Walls" type="Sprite2D" parent="World" unique_id=298100941]
+z_index = -2
+texture_repeat = 2
+position = Vector2(-14.7, -8)
+scale = Vector2(0.458333, 0.458333)
+texture = ExtResource("7_map")
+centered = false
+region_enabled = true
+region_rect = Rect2(96, 16, 448, 4470)
 
 [node name="Bounds" type="Node2D" parent="World" unique_id=1049740276]
 
@@ -89,68 +103,14 @@ polygon = PackedVector2Array(-88, -8, 88, -8, 88, 8, -88, 8)
 
 [node name="Obstacles" type="Node2D" parent="World" unique_id=399796687]
 
-[node name="Crate1" parent="World/Obstacles" unique_id=848844812 instance=ExtResource("4_crate")]
-position = Vector2(88, 280)
-
-[node name="Crate2" parent="World/Obstacles" unique_id=1814690545 instance=ExtResource("4_crate")]
-position = Vector2(60, 375)
-
-[node name="Crate3" parent="World/Obstacles" unique_id=1752209756 instance=ExtResource("4_crate")]
-position = Vector2(118, 470)
-
-[node name="Crate4" parent="World/Obstacles" unique_id=169055582 instance=ExtResource("4_crate")]
-position = Vector2(40, 565)
-
-[node name="Crate5" parent="World/Obstacles" unique_id=250340047 instance=ExtResource("4_crate")]
-position = Vector2(95, 660)
-
-[node name="Crate6" parent="World/Obstacles" unique_id=217858918 instance=ExtResource("4_crate")]
-position = Vector2(140, 755)
-
-[node name="Crate7" parent="World/Obstacles" unique_id=1303564456 instance=ExtResource("4_crate")]
-position = Vector2(70, 850)
-
-[node name="Crate8" parent="World/Obstacles" unique_id=1875253461 instance=ExtResource("4_crate")]
-position = Vector2(110, 945)
-
-[node name="Crate9" parent="World/Obstacles" unique_id=4328521 instance=ExtResource("4_crate")]
-position = Vector2(30, 1040)
-
-[node name="Crate10" parent="World/Obstacles" unique_id=1736342396 instance=ExtResource("4_crate")]
-position = Vector2(88, 1135)
-
-[node name="Crate11" parent="World/Obstacles" unique_id=633547561 instance=ExtResource("4_crate")]
-position = Vector2(150, 1230)
-
-[node name="Crate12" parent="World/Obstacles" unique_id=2103222560 instance=ExtResource("4_crate")]
-position = Vector2(55, 1325)
-
-[node name="Crate13" parent="World/Obstacles" unique_id=830516284 instance=ExtResource("4_crate")]
-position = Vector2(125, 1420)
-
-[node name="Crate14" parent="World/Obstacles" unique_id=1105563264 instance=ExtResource("4_crate")]
-position = Vector2(80, 1515)
-
-[node name="Crate15" parent="World/Obstacles" unique_id=1255198008 instance=ExtResource("4_crate")]
-position = Vector2(45, 1610)
-
-[node name="Crate16" parent="World/Obstacles" unique_id=1134933130 instance=ExtResource("4_crate")]
-position = Vector2(135, 1705)
-
-[node name="Crate17" parent="World/Obstacles" unique_id=747297466 instance=ExtResource("4_crate")]
-position = Vector2(100, 1800)
-
-[node name="Crate18" parent="World/Obstacles" unique_id=1192679078 instance=ExtResource("4_crate")]
-position = Vector2(65, 1895)
-
 [node name="Boss" parent="World" unique_id=1008954834 node_paths=PackedStringArray("runner") instance=ExtResource("3_boss")]
 position = Vector2(88, 28)
-stats = SubResource("Resource_pyarj")
+stats = SubResource("Resource_d0jm1")
 runner = NodePath("../Runner")
 
 [node name="Runner" parent="World" unique_id=1670695800 node_paths=PackedStringArray("boss") instance=ExtResource("2_runner")]
 position = Vector2(88, 148)
-stats = SubResource("Resource_d0jm1")
+stats = SubResource("Resource_n7mwr")
 boss = NodePath("../Boss")
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=609040814 node_paths=PackedStringArray("runner", "boss")]

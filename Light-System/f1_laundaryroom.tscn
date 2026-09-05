@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Light-System/light_room.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://do2u3kd6jpd0a" path="res://Light-System/f1-laundaryroom.png" id="2_base"]
+[ext_resource type="Material" path="res://Light-System/f1_laundaryroom_light.tres" id="3_mat"]
+[ext_resource type="Texture2D" uid="uid://du5yvny1of0eq" path="res://Light-System/f1-laundaryroom-fur.png" id="4_fur"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="5_sami"]
+
+[node name="F1LaundaryRoom" type="Node2D"]
+script = ExtResource("1_script")
+tracked = NodePath("Actors/Sami")
+tracked_offset = Vector2(0, 29)
+
+[node name="Back" type="Sprite2D" parent="."]
+material = ExtResource("3_mat")
+centered = false
+texture = ExtResource("2_base")
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Sami" parent="Actors" instance=ExtResource("5_sami")]
+position = Vector2(252, 211)
+z_index = 0
+
+[node name="Sprite2D" parent="Actors/Sami" index="0"]
+material = ExtResource("3_mat")
+
+[node name="PointLight2D" parent="Actors/Sami" index="7"]
+visible = false
+
+[node name="Fur" type="Sprite2D" parent="."]
+material = ExtResource("3_mat")
+centered = false
+texture = ExtResource("4_fur")

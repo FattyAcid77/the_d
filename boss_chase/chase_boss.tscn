@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://boss_chase/chase_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="2_icon"]
+[ext_resource type="SpriteFrames" path="res://boss_chase/cat_frames.tres" id="2_cat"]
 [ext_resource type="Resource" path="res://boss_chase/resources/chase_boss_health.tres" id="3_health"]
 [ext_resource type="PackedScene" path="res://boss_chase/chase_slow_wave.tscn" id="4_wave"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
-radius = 14.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_touch"]
-radius = 18.0
+radius = 28.0
 
 [node name="ChaseBoss" type="CharacterBody2D" groups=["chase_boss"]]
 z_index = 2
@@ -20,9 +20,12 @@ script = ExtResource("1_boss")
 stats = ExtResource("3_health")
 wave_scene = ExtResource("4_wave")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.35, 0.35)
-texture = ExtResource("2_icon")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.458333, 0.458333)
+offset = Vector2(-16.5, -17)
+sprite_frames = ExtResource("2_cat")
+animation = &"Notice"
+autoplay = "Notice"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_boss")

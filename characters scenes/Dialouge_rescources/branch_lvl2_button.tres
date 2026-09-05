@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="DialogBranch" format=3 uid="uid://duihvgyvpmvxn"]
+
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="1"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="2"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="2_l2iy6"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="3_hcddc"]
+
+[sub_resource type="Resource" id="b1"]
+script = ExtResource("2")
+text = "Back already? That was quick. Did they behave?"
+hide_if_flag = "LVL2_KNOWS_WIRING"
+
+[sub_resource type="Resource" id="b2"]
+script = ExtResource("2")
+text = "The emergency button on the second floor. Shouldn't all of them work?"
+speaker_name = "Sami"
+hide_if_flag = "LVL2_KNOWS_WIRING"
+
+[sub_resource type="Resource" id="b3"]
+script = ExtResource("2")
+text = "Of course they should."
+hide_if_flag = "LVL2_KNOWS_WIRING"
+
+[sub_resource type="Resource" id="b4"]
+script = ExtResource("2")
+text = "But the owner wanted to save money. Only the ground floor is wired."
+hide_if_flag = "LVL2_KNOWS_WIRING"
+
+[sub_resource type="Resource" id="b5"]
+script = ExtResource("2")
+text = "...The ground floor."
+speaker_name = "Sami"
+hide_if_flag = "LVL2_KNOWS_WIRING"
+
+[sub_resource type="Resource" id="b6"]
+script = ExtResource("2")
+text = "Don't look at me like that, doctor. I only answer the phone."
+hide_if_flag = "LVL2_KNOWS_WIRING"
+set_flags = Array[String](["LVL2_KNOWS_WIRING"])
+action_name = "open_window"
+action_args = ["NOW_DO_IT"]
+
+[sub_resource type="Resource" id="b7"]
+script = ExtResource("2")
+text = "Still dark up there, isn't it."
+show_if_flag = "LVL2_KNOWS_WIRING"
+
+[resource]
+script = ExtResource("1")
+id = "LVL2_BUTTON"
+is_topic = true
+topic_label = "THE SECOND FLOOR"
+unlock_flag = "LVL2_TRIED_BUTTON"
+lines = Array[ExtResource("2")]([SubResource("b1"), SubResource("b2"), SubResource("b3"), SubResource("b4"), SubResource("b5"), SubResource("b6"), SubResource("b7")])

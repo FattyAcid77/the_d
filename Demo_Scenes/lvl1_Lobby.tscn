@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="9_h4xkc"]
 [ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="9_v1uun"]
 [ext_resource type="Texture2D" uid="uid://d2bjirlrulvj6" path="res://characters scenes/NPC_Assets/7mto_cleaning_1.png" id="13_m2ccb"]
+[ext_resource type="Resource" uid="uid://duihvgyvpmvxn" path="res://characters scenes/Dialouge_rescources/branch_lvl2_button.tres" id="14_l2np2"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="15_qwha2"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="16_m2ccb"]
 
@@ -288,7 +289,7 @@ metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_w52gr"]
 script = ExtResource("9_h4xkc")
-branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_rdr5u"), SubResource("Resource_ks6ox")])
+branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_rdr5u"), SubResource("Resource_ks6ox"), ExtResource("14_l2np2")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
 [sub_resource type="Resource" id="Resource_r7mmy"]

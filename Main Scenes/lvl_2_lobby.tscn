@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://ctbx86vm8lsvv" path="res://background_scenes/lvl_2_lobby_bgrdv2.tscn" id="2_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_rx0ui"]
+[ext_resource type="PackedScene" uid="uid://kx7ryt12er25" path="res://3MK-File/Scene/quest_signal.tscn" id="5_6eri3"]
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="5_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="6_6eri3"]
+[ext_resource type="PackedScene" path="res://LVL2/LVL2_BUTTON_ROOM.tscn" id="7_wtcen"]
+[ext_resource type="Script" uid="uid://2h5xmfcvbado" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_zone.gd" id="8_6u2yr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4pgy"]
 
 [node name="Lvl2Lobby" type="Node2D" unique_id=651412082 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
@@ -27,6 +32,10 @@ new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
 target_door_name = "OCD_Hall_South"
 this_door_name = "lvl_2_lobby_North"
 
+[node name="QuestSignal" parent="door_reg_type2" unique_id=2085552719 instance=ExtResource("5_6eri3")]
+puzzle_id = "SAMI_SIGNAL"
+signal_radius = 50.0
+
 [node name="Door_reg2" parent="." unique_id=199103109 instance=ExtResource("3_rx0ui")]
 position = Vector2(146, 423)
 entery_direction = 1
@@ -44,3 +53,15 @@ this_door_name = "Lvl2_lobby_south"
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_rx0ui")]
 position = Vector2(530, 398)
 camera_adj = NodePath("../lvl2_Lobby_bgrd")
+
+[node name="LVL2_BUTTON_ROOM" parent="." unique_id=726477125 instance=ExtResource("7_wtcen")]
+visible = false
+position = Vector2(438, 193)
+
+[node name="DialogueZone" type="Area2D" parent="." unique_id=1413466467]
+position = Vector2(-1, 1)
+script = ExtResource("8_6u2yr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueZone" unique_id=376136113]
+position = Vector2(453, 180)
+shape = SubResource("RectangleShape2D_u4pgy")

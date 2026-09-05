@@ -14,6 +14,13 @@ signal died
 const RUN_SPEED: float = 90.0
 const DODGE_SPEED: float = 120.0
 
+# Animation names, exactly as they are spelled in rat_frames.tres.
+const ANIM_NOTICE := "Notice"
+const ANIM_RUN := "run"
+const ANIM_RUN_LEFT := "Run-Left"
+const ANIM_RUN_RIGHT := "Run-right"
+const ANIM_HURT := "hurt"
+
 const PARRY_BUFFER: float = 0.15    # press this early and it still lands
 const PARRY_LOCKOUT: float = 0.40   # whiffing on empty air costs you this
 
@@ -27,7 +34,7 @@ const FLASH_TIME: float = 0.25
 @export var boss: Node2D
 
 @onready var slow: ChaseSlowEffect = $Slow
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 var input_enabled: bool = true
 
@@ -55,11 +62,24 @@ func _physics_process(delta: float) -> void:
 	_handle_parry(delta)
 
 	# Forward is automatic and unstoppable — that's the whole premise.
-	# We run DOWN the corridor (+y) with the boss above us, which is what makes
-	# its shove throw crates *upward* into us. See RUN_DIR on ChaseBoss.
+	# We run DOWN the corridor (+y) with the cat above us, which is why the bins
+	# it sends come rolling down onto us from behind.
 	velocity.y = RUN_SPEED * slow.speed_multiplier()
-	velocity.x = Input.get_axis("left", "right") * DODGE_SPEED
+	var lean: float = Input.get_axis("left", "right")
+	velocity.x = lean * DODGE_SPEED
+	_run_anim(lean)
 	move_and_slide()
+
+
+# Leaning into the turn. Same run, three poses.
+func _run_anim(lean: float) -> void:
+	var want: String = ANIM_RUN
+	if lean < 0.0:
+		want = ANIM_RUN_LEFT
+	elif lean > 0.0:
+		want = ANIM_RUN_RIGHT
+	if sprite.animation != want:
+		sprite.play(want)
 
 
 func _tick_timers(delta: float) -> void:
@@ -91,11 +111,12 @@ func _handle_parry(delta: float) -> void:
 		_parry_lockout = PARRY_LOCKOUT   # buffer ran out with nothing to hit
 
 
-# Only crates AHEAD of us — you can't parry something you already ran past.
-# We run down the corridor, so "ahead" means a bigger y.
+# Anything rolling within reach, in front or behind. Bins come down the
+# corridor from behind now, so the old "must be ahead of us" rule would rule out
+# every single one of them.
 func _crate_in_reach() -> Node2D:
 	for c in get_tree().get_nodes_in_group("chase_obstacle"):
-		if not c.is_live() or c.global_position.y < global_position.y:
+		if not c.is_live():
 			continue
 		if c.global_position.distance_to(global_position) <= c.PARRY_REACH:
 			return c
@@ -129,6 +150,7 @@ func take_damage(amount: int) -> void:
 	_flash = FLASH_TIME
 	health_changed.emit(stats.current_health)
 	if stats.current_health <= 0:
+		sprite.play("hurt")
 		died.emit()
 
 
@@ -136,3 +158,35 @@ func stop() -> void:
 	input_enabled = false
 	velocity = Vector2.ZERO
 	slow.clear()
+
+
+#region /// the opening beat, driven by ChaseArena
+
+## Frozen, waiting for the opening to play out.
+func hold() -> void:
+	input_enabled = false
+	velocity = Vector2.ZERO
+
+
+## Looks back, sees the cat. Await it — it returns when the look is over.
+func notice() -> void:
+	sprite.play(ANIM_NOTICE)
+	await get_tree().create_timer(_anim_time(ANIM_NOTICE)).timeout
+
+
+## Go. From here the corridor is the clock.
+func go() -> void:
+	sprite.play(ANIM_RUN)
+	input_enabled = true
+
+
+## How long one pass of an animation takes. Read from the frames themselves, so
+## it stays right when you re-cut them, and it does not care whether the
+## animation is set to loop.
+func _anim_time(anim: String) -> float:
+	var frames: SpriteFrames = sprite.sprite_frames
+	if frames == null or not frames.has_animation(anim):
+		return 0.0
+	return frames.get_frame_count(anim) / maxf(frames.get_animation_speed(anim), 0.001)
+
+#endregion

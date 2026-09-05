@@ -41,6 +41,26 @@ func _ready() -> void:
 	pass
 
 
+# >>> DEBUG SLOW LOAD - delete along with control scene/debug_slow_load.gd
+# live knob, so the delay can be changed without restarting the game.
+# F9 off | F10 400ms | F11 2000ms | F12 reload this scene with that setting
+func _input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
+	if not (event is InputEventKey) or not event.pressed or event.echo:
+		return
+	match event.keycode:
+		KEY_F9:
+			DebugSlowLoad.set_hold_ms(0)
+		KEY_F10:
+			DebugSlowLoad.set_hold_ms(400)
+		KEY_F11:
+			DebugSlowLoad.set_hold_ms(2000)
+		KEY_F12:
+			reload_current_scene()
+# <<< DEBUG SLOW LOAD
+
+
 # ---------------------------------------------------------------- entry points
 
 # force_loading_screen makes the art show even if the scene loads instantly.
@@ -182,10 +202,23 @@ func _start_load(content_path: String) -> bool:
 	_load_progress_timer.timeout.connect(_monitor_load_status)
 	get_tree().root.add_child(_load_progress_timer)
 	_load_progress_timer.start()
+	# >>> DEBUG SLOW LOAD - delete along with control scene/debug_slow_load.gd
+	DebugSlowLoad.begin()
+	# <<< DEBUG SLOW LOAD
 	return true
 
 
 func _monitor_load_status() -> void:
+	# >>> DEBUG SLOW LOAD - delete along with control scene/debug_slow_load.gd
+	# sit on the real result for a while, so the load looks slow to everything
+	# downstream: grace window, loading art, progress bar, min_display_time
+	if DebugSlowLoad.is_holding():
+		_last_progress = DebugSlowLoad.fake_progress()
+		if loading_screen != null:
+			loading_screen.set_progress(_last_progress)
+		return
+	# <<< DEBUG SLOW LOAD
+
 	var load_progress = []
 	var load_status = ResourceLoader.load_threaded_get_status(_content_path, load_progress)
 

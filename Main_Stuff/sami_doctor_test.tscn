@@ -764,7 +764,6 @@ script = ExtResource("19_rot0")
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
-anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
@@ -809,3 +808,5 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=542696879 instance=ExtResource("28_healthui")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=537694687]

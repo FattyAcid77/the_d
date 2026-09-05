@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://boss_chase/chase_obstacle.gd" id="1_crate"]
+[ext_resource type="SpriteFrames" path="res://boss_chase/trash_frames.tres" id="2_trash"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(14, 14)
+size = Vector2(9, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hit"]
-size = Vector2(16, 16)
+size = Vector2(11, 14)
 
 [node name="ChaseObstacle" type="CharacterBody2D" groups=["chase_obstacle"]]
 z_index = 1
@@ -15,14 +16,12 @@ collision_layer = 128
 collision_mask = 16
 script = ExtResource("1_crate")
 
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.72, 0.51, 0.28, 1)
-polygon = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7)
-
-[node name="Edge" type="Line2D" parent="."]
-points = PackedVector2Array(-7, -7, 7, -7, 7, 7, -7, 7, -7, -7)
-width = 1.0
-default_color = Color(0.35, 0.22, 0.1, 1)
+[node name="Body" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+offset = Vector2(3, 3)
+sprite_frames = ExtResource("2_trash")
+animation = &"still"
+autoplay = "still"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_body")

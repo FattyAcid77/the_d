@@ -20,6 +20,7 @@ extends Node
 ##     var sami := get_node("/root/ControllingSamiCutscene")
 ##     sami.freeze()
 ##     sami.place_at($SpawnMarker)
+##     await sami.walk_to($DoorMarker)
 ##     sami.face(Vector2.LEFT)
 ##     sami.play_anim("Idle")
 ##     sami.unfreeze()
@@ -146,18 +147,73 @@ func place_at(where: Variant) -> void:
 	var p: Node = player
 	if p == null:
 		return
-	var pos: Vector2
-	if where is Node2D:
-		pos = (where as Node2D).global_position
-	elif where is Vector2:
-		pos = where
-	else:
-		push_warning("place_at expects a Node2D or a Vector2, got %s" % typeof(where))
+	var found: Variant = _to_pos(where)
+	if found == null:
 		return
+	var pos: Vector2 = found
 	p.global_position = pos
 	if p is CharacterBody2D:
 		p.velocity = Vector2.ZERO
 	_log("placed at %s" % str(pos))
+
+
+## Walks Sami over to a spot on his own legs, playing his Walk animation the
+## whole way. Takes a Node2D or a Vector2, same as place_at(). Await it — it
+## comes back when he arrives:
+##
+##     await sami.walk_to($DoorMarker)
+##
+## He is frozen for the walk so nothing can steer him, and stays frozen after
+## it, standing Idle. Call unfreeze() when the cutscene is done with him.
+func walk_to(where: Variant, speed: float = 0.0) -> void:
+	var p: Node = player
+	if p == null or not (p is CharacterBody2D) or not p.has_method("SetDirection"):
+		return
+	var found: Variant = _to_pos(where)
+	if found == null:
+		return
+	var target: Vector2 = found
+
+	freeze()
+	if speed <= 0.0:
+		speed = p.move_speed if "move_speed" in p else 100.0
+
+	# It is his own _physics_process that does the move_and_slide, so he has to
+	# keep ticking even while a cutscene has the tree paused.
+	var mode_before: int = p.process_mode
+	p.process_mode = Node.PROCESS_MODE_ALWAYS
+
+	var stuck: int = 0
+	while true:
+		var to_target: Vector2 = target - p.global_position
+		var stepped: float = speed * get_physics_process_delta_time()
+		if to_target.length() <= stepped:
+			p.global_position = target
+			break
+
+		# Face it the way his walk state does — one axis at a time, and it is
+		# SetDirection() that mirrors the Side frames when he heads left.
+		p.direction = Vector2(signf(to_target.x), 0.0) if absf(to_target.x) >= absf(to_target.y) else Vector2(0.0, signf(to_target.y))
+		p.SetDirection()
+		p.UpdateAnimation("Walk")
+		p.velocity = to_target.normalized() * speed
+
+		var was_at: Vector2 = p.global_position
+		await get_tree().physics_frame
+
+		# Walked into a wall: stop instead of hanging the cutscene forever.
+		if p.global_position.distance_to(was_at) < stepped * 0.25:
+			stuck += 1
+			if stuck > 30:
+				_log("walk_to: blocked, stopping short of %s" % str(target))
+				break
+		else:
+			stuck = 0
+
+	p.velocity = Vector2.ZERO
+	p.process_mode = mode_before
+	p.UpdateAnimation("Idle")
+	_log("walked to %s" % str(p.global_position))
 
 
 ## Turns Sami to face a DIRECTION — Vector2.LEFT, RIGHT, UP, DOWN.
@@ -187,6 +243,16 @@ func play_anim(anim_state: String) -> void:
 
 
 #region /// helpers
+
+## A Node2D or a plain Vector2 -> a world position. null when it is neither.
+func _to_pos(where: Variant) -> Variant:
+	if where is Node2D:
+		return (where as Node2D).global_position
+	if where is Vector2:
+		return where
+	push_warning("expected a Node2D or a Vector2, got %s" % typeof(where))
+	return null
+
 
 func _state_machine(p: Node) -> Node:
 	if p == null:

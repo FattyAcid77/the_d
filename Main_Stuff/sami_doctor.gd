@@ -1,4 +1,26 @@
 class_name Player extends CharacterBody2D
+
+# One normal map per sprite sheet, so a light reads his shape whichever way he
+# is facing. Anything not listed here lights flat.
+const NORMAL_MAPS := {
+	"Idle_down": "res://lighting/normals/down w dr_n.png",
+	"Walk_down": "res://lighting/normals/down w dr_n.png",
+	"Idle_up": "res://lighting/normals/up w dr_n.png",
+	"Walk_up": "res://lighting/normals/up w dr_n.png",
+	"Idle_Side": "res://lighting/normals/right w dr_n.png",
+	"Walk_Side": "res://lighting/normals/right w dr_n.png",
+	"Death": "res://lighting/normals/sami pull down_n.png",
+	"Hold_1": "res://lighting/normals/sami pull up_n.png",
+	"PL_DOWN": "res://lighting/normals/sami pull down_n.png",
+	"PL_LEFT": "res://lighting/normals/sami pull left_n.png",
+	"PL_RIGHT": "res://lighting/normals/sami pull right_n.png",
+	"PL_UP": "res://lighting/normals/sami pull up_n.png",
+	"PS_DOWN": "res://lighting/normals/sami push down (1)_n.png",
+	"PS_LEFT": "res://lighting/normals/sami push left (1)_n.png",
+	"PS_RIGHT": "res://lighting/normals/sami push right (1)_n.png",
+	"PS_UP": "res://lighting/normals/sami push up (1)_n.png",
+}
+
 # 3-point health, shared live with Health_UI through this same resource.
 @export var stats: HealthData
 
@@ -37,6 +59,9 @@ func _ready():
 	var inv := get_node_or_null("/root/inventory")
 	if inv != null:
 		inv.player_ref(self)
+
+	anim.animation_changed.connect(_sync_normal)
+	_sync_normal()
 
 
 # Every frame we ONLY read the input into 'direction'.
@@ -84,7 +109,21 @@ func SetDirection() -> bool:
 
 	cardinal_direction = new_dir
 	anim.scale.x = -1 if cardinal_direction == Vector2.LEFT else 1
+	_sync_normal()
 	return true
+
+
+## Hands the shader the normal map for whatever sheet is on screen, and tells it
+## when the sprite is mirrored. Called on every animation and facing change.
+func _sync_normal() -> void:
+	var mat: ShaderMaterial = anim.material as ShaderMaterial
+	if mat == null:
+		return
+	var path: String = NORMAL_MAPS.get(String(anim.animation), "")
+	mat.set_shader_parameter("use_normal", path != "")
+	if path != "":
+		mat.set_shader_parameter("normal_tex", load(path))
+	mat.set_shader_parameter("flip_x", anim.scale.x < 0.0)
 
 
 func UpdateAnimation( anim_state : String ) -> void:
@@ -116,6 +155,7 @@ func face_toward(vec: Vector2) -> void:
 	else:
 		cardinal_direction = Vector2.DOWN if vec.y >= 0 else Vector2.UP
 	anim.scale.x = 1   # push/pull have their own left/right frames, never flipped
+	_sync_normal()
 
 
 # play a PS_ or PL_ frame for a direction

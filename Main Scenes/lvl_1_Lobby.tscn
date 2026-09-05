@@ -7,13 +7,38 @@
 [ext_resource type="PackedScene" uid="uid://dj1fugbu6pove" path="res://3MK-File/Scene/movable_object.tscn" id="8_yi5rg"]
 [ext_resource type="PackedScene" uid="uid://nlc54nt4rc85" path="res://cube_item.tscn" id="9_0d2n7"]
 [ext_resource type="PackedScene" uid="uid://ws5n8eh8o56g" path="res://Cutscenes/cine_player.tscn" id="9_31cma"]
-[ext_resource type="PackedScene" path="res://3MK-File/myshit/grab_mirror.tscn" id="9_hkdn2"]
 [ext_resource type="PackedScene" uid="uid://b5wft3jlru0gq" path="res://3MK-File/items/knife_item.tscn" id="9_ogs6s"]
+[ext_resource type="Script" uid="uid://241k33imt8d1" path="res://Cutscenes/cine_step.gd" id="10_31cma"]
 [ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="10_j8yc2"]
+
+[sub_resource type="Resource" id="Resource_31cma"]
+script = ExtResource("10_31cma")
+kind = 2
+target = NodePath("Sami_Doctor")
+to_position = Vector2(401, 387)
+duration = 0.7000000000000001
+
+[sub_resource type="Resource" id="Resource_j8yc2"]
+script = ExtResource("10_31cma")
+at_time = 0.7000000000000001
+kind = 2
+target = NodePath("Sami_Doctor")
+to_position = Vector2(401, 241)
+duration = 2.1
+
+[sub_resource type="Resource" id="Resource_ogs6s"]
+script = ExtResource("10_31cma")
+at_time = 2.8000000000000003
+kind = 2
+target = NodePath("Sami_Doctor")
+to_position = Vector2(337, 241)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogs6s"]
+size = Vector2(92, 55)
 
 [node name="Lvl1Lobby" type="Node2D" unique_id=509175152 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_hkdn2")
-player = NodePath("")
+player = NodePath("Sami_Doctor")
 doors = [NodePath("door_reg_type2"), NodePath("door_reg_type3"), NodePath("Door_reg")]
 
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("2_0d2n7")]
@@ -54,11 +79,21 @@ position = Vector2(832, 454)
 [node name="Movable-Object" parent="." unique_id=647352341 instance=ExtResource("8_yi5rg")]
 position = Vector2(682, 463)
 
-[node name="Grab_Mirror" parent="." unique_id=900130970 instance=ExtResource("9_hkdn2")]
-position = Vector2(902, 576)
-
-[node name="CinePlayer" parent="." unique_id=1310995861 instance=ExtResource("9_31cma")]
+[node name="CinePlayer" parent="." unique_id=1310995861 node_paths=PackedStringArray("trigger_area") instance=ExtResource("9_31cma")]
+steps = Array[ExtResource("10_31cma")]([SubResource("Resource_31cma"), SubResource("Resource_j8yc2"), SubResource("Resource_ogs6s")])
+trigger_area = NodePath("../Area2D")
+autoplay = true
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("10_j8yc2")]
-position = Vector2(403, 327)
+position = Vector2(389, 393)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1656844349]
+position = Vector2(152, 382)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2009366228]
+position = Vector2(15, 5)
+shape = SubResource("RectangleShape2D_ogs6s")
+
+[node name="Marker2D" type="Marker2D" parent="Area2D" unique_id=854571501]
+position = Vector2(185, -141)

@@ -89,6 +89,17 @@ func set_target(cine: CutSceneMaker_v1Player) -> void:
 	_refresh()
 
 
+## Something else got selected — a marker, a door. The timeline stays up, or
+## you could never point a clip at the thing you just clicked. It only lets go
+## when the cutscene belongs to a scene you are no longer editing.
+func selection_left() -> void:
+	if _cine == null:
+		return
+	var root: Node = EditorInterface.get_edited_scene_root() if Engine.is_editor_hint() else null
+	if root == null or not is_instance_valid(_cine) or not (_cine == root or root.is_ancestor_of(_cine)):
+		set_target(null)
+
+
 func _refresh() -> void:
 	var has: bool = _cine != null
 	_hint.visible = not has
@@ -160,6 +171,7 @@ func _build() -> void:
 	bar.add_child(_button(">|", func() -> void: _set_time(_duration()), "Go to end"))
 	bar.add_child(_button("Delete", _delete_selected, "Delete the selected clip (or press Delete)"))
 	bar.add_child(_button("Tidy rows", _tidy_rows, "Auto-arrange every row so no clips overlap. Only runs when you click it."))
+	bar.add_child(_button("Set spot", _set_spot, "Select a node in the 2D view and a Move or Camera clip here, then click: that node's position becomes the clip's destination."))
 
 	var hold := CheckButton.new()
 	hold.text = "Hold preview"
@@ -820,6 +832,81 @@ func _delete_selected() -> void:
 	_selected = null
 	_mark_dirty()
 	_refresh()
+
+
+## Copies the position of whatever is picked in the 2D view into the selected
+## clip. The position is copied, not linked, so one marker can be dragged around
+## and re-used for every clip instead of littering the scene with markers.
+func _set_spot() -> void:
+	if _cine == null or _selected == null:
+		_say("Click a clip in the timeline first.")
+		return
+	if _selected.kind != CutSceneMaker_v1Step.Kind.MOVE and _selected.kind != CutSceneMaker_v1Step.Kind.CAMERA:
+		_say("Only Move and Camera clips have a spot.")
+		return
+	var picked: Node2D = _picked_node()
+	if picked == null:
+		_say("Select something in the 2D view first — a marker, a door, anything.")
+		return
+
+	var was_pos: Vector2 = _selected.to_position
+	var now_pos: Vector2 = picked.global_position
+	var was_target: NodePath = _selected.target
+	var now_target: NodePath = was_target
+	# First spot on a fresh Move clip: assume the player, so the Inspector is
+	# never needed for the common case.
+	if _selected.kind == CutSceneMaker_v1Step.Kind.MOVE and String(was_target).is_empty():
+		now_target = _player_path()
+
+	if undo != null:
+		undo.create_action("Set cutscene spot")
+		undo.add_do_property(_selected, "to_position", now_pos)
+		undo.add_do_property(_selected, "target", now_target)
+		undo.add_undo_property(_selected, "to_position", was_pos)
+		undo.add_undo_property(_selected, "target", was_target)
+		undo.commit_action()
+	else:
+		_selected.to_position = now_pos
+		_selected.target = now_target
+
+	_mark_dirty()
+	_refresh()
+	_say("Spot set to %s%s" % [str(now_pos), "" if String(now_target).is_empty() else "  (%s)" % now_target])
+
+
+## What the spot is read from: whatever is selected in the 2D view, or failing
+## that the level's Marker2D, so one marker can be moved around and re-used.
+func _picked_node() -> Node2D:
+	if not Engine.is_editor_hint():
+		return null
+	for node in EditorInterface.get_selection().get_selected_nodes():
+		if node is Node2D:
+			return node as Node2D
+	var root: Node = EditorInterface.get_edited_scene_root()
+	if root != null:
+		for node in root.find_children("*", "Marker2D", true, false):
+			return node as Node2D
+	return null
+
+
+## Path to the node in the "Player" group, written the way a step's target is:
+## from the level around the cutscene.
+func _player_path() -> NodePath:
+	if not Engine.is_editor_hint() or _cine == null or _cine.get_parent() == null:
+		return NodePath()
+	var root: Node = EditorInterface.get_edited_scene_root()
+	if root == null:
+		return NodePath()
+	for node in root.find_children("*", "", true, false):
+		if node.is_in_group("Player"):
+			return _cine.get_parent().get_path_to(node)
+	return NodePath()
+
+
+## A one-line answer in the readout, so a click never fails in silence.
+func _say(msg: String) -> void:
+	if _readout != null:
+		_readout.text = "  " + msg
 
 
 ## One undo entry per drag, registered on release using the values captured

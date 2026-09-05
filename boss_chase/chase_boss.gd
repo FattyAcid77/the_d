@@ -8,16 +8,16 @@ signal defeated
 
 enum Move { CHASE, RECOVER }
 
-# preload rather than the class_name, because autoloads and freshly-added
-# scripts can parse before the editor rebuilds the global class cache — the
-# same workaround radio_signal_manager.gd:10-12 and grab_mirror.gd:14-15 use.
-const RunnerScript := preload("res://boss_chase/chase_runner.gd")
-const ObstacleScript := preload("res://boss_chase/chase_obstacle.gd")
-
 # The corridor runs DOWNWARD and the boss chases from above. That's what makes
 # a shove throw the crate *upward* into the player — the crate sits ahead of
 # them (further down) and gets yanked back up the corridor into their face.
 const RUN_DIR := Vector2.DOWN
+
+# Animation names, exactly as they are spelled in cat_frames.tres.
+const ANIM_NOTICE := "Notice"
+const ANIM_WAIT := "Notice-2"
+const ANIM_ATTACK := "attack"
+const ANIM_CHASE := "chase"
 
 const RUN_SPEED: float = 90.0        # same as the runner — a steady gap by design
 const RECOVER_SPEED: float = 40.0    # staggered after a parry, you gain ground
@@ -28,11 +28,9 @@ const LANE_SPEED: float = 70.0       # how fast it drifts to line up under you
 # open it literally cannot reach far enough ahead of you to shove anything.
 const TELEKINESIS_RANGE: float = 270.0
 
-# Where a shoved crate has to land relative to you: far enough ahead to be
-# dodgeable, close enough to still threaten. 0.9s-1.4s of reaction time.
-const LEAD_MIN: float = 80.0
-const LEAD_MAX: float = 130.0
-const LANE_TOLERANCE: float = 20.0   # crate half-width + your radius, roughly
+# How far behind you a bin has to be before the cat sends it. Any closer and it
+# lands on top of you with no time to move.
+const ROLL_LEAD_MIN: float = 150.0
 
 const SHOVE_COOLDOWN: float = 2.2
 const WAVE_COOLDOWN: float = 4.0
@@ -50,8 +48,12 @@ const TOUCH_DAMAGE_COOLDOWN: float = 1.0
 @export var runner: Node2D
 @export var wave_scene: PackedScene
 
+## Seconds into the lunge when the paw actually hits the floor. The shockwave
+## leaves on that beat, so nudge it up if the wave still runs ahead of the slam.
+@export var wave_delay: float = 0.45
+
 @onready var touch_box: Area2D = $TouchBox
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 var active: bool = true
 
@@ -122,57 +124,69 @@ func _pick_move() -> void:
 	if _shove_cd <= 0.0:
 		var crate: Node2D = _find_crate()
 		if crate != null:
-			crate.set_aim(_aim_point())
-			crate.begin_windup()
+			crate.roll_down()
+			_lunge()
 			_shove_cd = SHOVE_COOLDOWN
 			_gap = MOVE_GAP
 			return
 
 	# Otherwise close the gap the only way it can — slow them down.
 	if _wave_cd <= 0.0 and global_position.distance_to(runner.global_position) <= WAVE_RANGE:
-		_cast_wave()
+		_lunge_then_wave()
 		_wave_cd = WAVE_COOLDOWN
 		_gap = MOVE_GAP
 
 
-# Where the runner will be once the crate lands, not where they are now.
-func _aim_point() -> Vector2:
-	return runner.global_position \
-		+ RUN_DIR * RunnerScript.RUN_SPEED * ObstacleScript.SHOVE_TIME
-
-
-# Two gates, not one:
-#   - the crate has to be something WE can reach (TELEKINESIS_RANGE)
-#   - after the shove it has to land in the runner's path, in the LEAD window
-# Testing only boss->runner distance is the classic mistake: the boss is in
-# range, but the crate it grabbed is way off to one side and the shove
-# accomplishes nothing except burning the cooldown.
+# The bin has to be three things: ours to reach, still standing, and BEHIND the
+# runner — a bin rolls straight down the corridor, so only one above them can
+# ever catch up with them.
+#
+# Of those, take the one closest to the runner's own lane. A bin rolling down
+# an empty lane is a free pass, and burning the cooldown on one is the classic
+# way for the cat to look busy while doing nothing.
 func _find_crate() -> Node2D:
-	var aim: Vector2 = _aim_point()
 	var best: Node2D = null
-	var best_lead: float = 1e9
+	var best_lane_gap: float = 1e9
 
 	for c in get_tree().get_nodes_in_group("chase_obstacle"):
+		if not c.rolls:
+			continue                      # scenery, it just sits there
 		if c.is_spent() or not c.is_idle():
 			continue
 		if global_position.distance_to(c.global_position) > TELEKINESIS_RANGE:
 			continue
 
-		# simulate the shove and judge where it ends up
-		var landed: Vector2 = c.global_position \
-			+ c.global_position.direction_to(aim) * c.SHOVE_TRAVEL
-		# we run downward, so "ahead of the runner" is a bigger y
-		var lead: float = landed.y - runner.global_position.y
-		if lead < LEAD_MIN or lead > LEAD_MAX:
-			continue
-		if absf(landed.x - runner.global_position.x) > LANE_TOLERANCE:
+		var lead: float = runner.global_position.y - c.global_position.y
+		if lead < ROLL_LEAD_MIN:
 			continue
 
-		if lead < best_lead:
-			best_lead = lead
+		var lane_gap: float = absf(c.global_position.x - runner.global_position.x)
+		if lane_gap < best_lane_gap:
+			best_lane_gap = lane_gap
 			best = c
 
 	return best
+
+
+## The lunge, then back to chasing. Nothing waits on it — it is only the pose.
+func _lunge() -> void:
+	sprite.play(ANIM_ATTACK)
+	await get_tree().create_timer(_anim_time(ANIM_ATTACK)).timeout
+	if active and sprite.animation == ANIM_ATTACK:
+		sprite.play(ANIM_CHASE)
+
+
+## The shockwave leaves the cat on the slam - `wave_delay` into the lunge - and
+## the rest of the lunge plays out after it.
+func _lunge_then_wave() -> void:
+	sprite.play(ANIM_ATTACK)
+	await get_tree().create_timer(maxf(wave_delay, 0.0)).timeout
+	if not active:
+		return
+	_cast_wave()
+	await get_tree().create_timer(maxf(_anim_time(ANIM_ATTACK) - wave_delay, 0.0)).timeout
+	if active and sprite.animation == ANIM_ATTACK:
+		sprite.play(ANIM_CHASE)
 
 
 func _cast_wave() -> void:
@@ -212,6 +226,38 @@ func take_parry_hit() -> void:
 
 	if stats.current_health <= 0:
 		defeated.emit()
+
+
+#region /// the opening beat, driven by ChaseArena
+
+## Not yet a threat.
+func hold() -> void:
+	active = false
+	velocity = Vector2.ZERO
+
+
+## Gets up, then waits in place until the chase is started.
+func notice() -> void:
+	sprite.play(ANIM_NOTICE)
+	await get_tree().create_timer(_anim_time(ANIM_NOTICE)).timeout
+	if not active:
+		sprite.play(ANIM_WAIT)
+
+
+## The chase is on.
+func go() -> void:
+	sprite.play(ANIM_CHASE)
+	active = true
+
+
+## One pass of an animation, in seconds. See the twin in chase_runner.gd.
+func _anim_time(anim: String) -> float:
+	var frames: SpriteFrames = sprite.sprite_frames
+	if frames == null or not frames.has_animation(anim):
+		return 0.0
+	return frames.get_frame_count(anim) / maxf(frames.get_animation_speed(anim), 0.001)
+
+#endregion
 
 
 func stop() -> void:

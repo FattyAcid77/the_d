@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://eslb72c0y0by"]
+
+[ext_resource type="Texture2D" uid="uid://duawufguqht1g" path="res://boss_chase/Assets/Trash-rolling-animation.png" id="1_roll"]
+[ext_resource type="Texture2D" uid="uid://bt5j8gfi37lh7" path="res://boss_chase/Assets/Trash.png" id="2_still"]
+
+[sub_resource type="AtlasTexture" id="roll_0"]
+atlas = ExtResource("1_roll")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="roll_1"]
+atlas = ExtResource("1_roll")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="roll_2"]
+atlas = ExtResource("1_roll")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="roll_3"]
+atlas = ExtResource("1_roll")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="roll_4"]
+atlas = ExtResource("1_roll")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="roll_5"]
+atlas = ExtResource("1_roll")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="still_0"]
+atlas = ExtResource("2_still")
+region = Rect2(0, 0, 32, 48)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("roll_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("roll_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("roll_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("roll_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("roll_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("roll_5")
+}],
+"loop": true,
+"name": &"roll",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("still_0")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]

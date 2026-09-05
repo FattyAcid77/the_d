@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="(D.) 2.0"
+run/main_scene="uid://dxofprk7jlwg1"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://3MK-File/myshit/icon.svg"
 
@@ -24,6 +25,7 @@ buses/default_bus_layout="uid://bk2t0kh1o201u"
 
 [autoload]
 
+Loc="*res://FD_Testing/GameSystems/Localization/loc.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 SceneManager="*res://control scene/SceneManager.gd"
 PauseMenu="*res://control scene/Pause_Menu.tscn"
@@ -43,16 +45,21 @@ BloodWorld="*uid://kl7jkxuygf1h"
 MedicalItems="*uid://11p0y6srcukh"
 PopupWindows="*res://FD_Testing/GameSystems/Windows/popup_windows.gd"
 RadioLink="*uid://kjonwbueabvc"
+MapRooms="*res://FD_Testing/GameSystems/Map/map_rooms.gd"
+Board="*res://FD_Testing/GameSystems/Board/board.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/initial_position_type=0
+window/size/borderless=true
 window/size/window_width_override=640
 window/size/window_height_override=360
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
 
 [dotnet]
 

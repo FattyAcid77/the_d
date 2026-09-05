@@ -1,8 +1,8 @@
-[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://cjlgcx68s0dyt"]
+[gd_resource type="CanvasTexture" format=3 uid="uid://cjlgcx68s0dyt"]
 
-[ext_resource type="Texture2D" uid="uid://d3vg3i04cpcd0" path="res://3MK-File/TEST-ANIM/down w dr.png" id="1_e2wem"]
-[ext_resource type="Texture2D" uid="uid://bq01la020mx52" path="res://3MK-File/TEST-ANIM/down w drdown w dr normal.png" id="2_0y8fn"]
+[ext_resource type="Texture2D" uid="uid://dy7qrnkoj58py" path="res://Main_Stuff/sami_sheets/down w dr.png" id="1_e2wem"]
+[ext_resource type="Texture2D" uid="uid://c73gex3xrltvk" path="res://Yazeed and me testing light/Photo_40-aa72.png" id="2_e2wem"]
 
 [resource]
 diffuse_texture = ExtResource("1_e2wem")
-normal_texture = ExtResource("2_0y8fn")
+normal_texture = ExtResource("2_e2wem")
