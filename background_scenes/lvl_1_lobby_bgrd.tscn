@@ -102,6 +102,7 @@ texture = ExtResource("3_bgsse")
 position = Vector2(401, 347)
 scale = Vector2(1.4960938, 0.65625)
 shadow_enabled = true
+shadow_item_cull_mask = 2
 texture = ExtResource("4_fnweu")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D" unique_id=1241679153]
@@ -114,4 +115,7 @@ occluder = SubResource("OccluderPolygon2D_rgbc4")
 
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="Node2D" unique_id=1582660580]
 modulate = Color(1, 1, 1, 0)
+light_mask = 0
+visibility_layer = 0
 occluder = SubResource("OccluderPolygon2D_rvc3x")
+occluder_light_mask = 2

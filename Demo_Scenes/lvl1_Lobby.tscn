@@ -3,16 +3,15 @@
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_kqdqe"]
 [ext_resource type="PackedScene" uid="uid://j0fxoil05ao8" path="res://background_scenes/lvl_1_lobby_bgrd.tscn" id="1_yppu5"]
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_kqdqe"]
+[ext_resource type="PackedScene" uid="uid://clxud3eb7snhy" path="res://Demo_Scenes/GameStateMachine.tscn" id="2_qwha2"]
 [ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="3_vrf2x"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="4_705w6"]
 [ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="5_akhaw"]
 [ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="6_qwha2"]
 [ext_resource type="Texture2D" uid="uid://day1d5o1hywm8" path="res://characters scenes/NPC_Assets/om_alsaleel_in_the_office.png" id="6_req1c"]
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="7_m2ccb"]
-[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="8_705w6"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="8_l2np2"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="9_h4xkc"]
-[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="9_v1uun"]
 [ext_resource type="Texture2D" uid="uid://d2bjirlrulvj6" path="res://characters scenes/NPC_Assets/7mto_cleaning_1.png" id="13_m2ccb"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="15_qwha2"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="16_m2ccb"]
@@ -52,6 +51,8 @@ script = ExtResource("6_qwha2")
 text = "اذهب لها"
 speaker_name = "حمتو"
 set_flags = Array[String](["Hamato_Introduction_Finished"])
+action_name = "checkpoint"
+action_args = [6]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_kmvg1"]
@@ -276,6 +277,8 @@ script = ExtResource("6_qwha2")
 text = "على العموم يبدو لي انك جدا منمق و ستحسن التعامل مع الاشخاص بالمشفى…اذهب"
 speaker_name = "ام السعاليل"
 set_flags = Array[String](["S3alel_introduction_finished"])
+action_name = "checkpoint"
+action_args = [7]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_rdr5u"]
@@ -306,7 +309,121 @@ metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
 [sub_resource type="Resource" id="Resource_r7mmy"]
 script = ExtResource("4_705w6")
+npc_name = "umS3alel"
 dialog = SubResource("Resource_w52gr")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_barhx"]
+script = ExtResource("6_qwha2")
+text = "WTF?"
+action_name = "prescription_entry"
+wait_for_action = true
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_dtn4l"]
+script = ExtResource("5_akhaw")
+id = "entry"
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_barhx")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_0n8tc"]
+script = ExtResource("9_h4xkc")
+branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_dtn4l")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_b1f6b"]
+script = ExtResource("4_705w6")
+dialog = SubResource("Resource_0n8tc")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwha2"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(0, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2ccb"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(56, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo3rv"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(112, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mitlc"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(168, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdr5u"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(224, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w52gr"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(280, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvib2"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(336, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxdwo"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(392, 0, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b71s"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(0, 101, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsa1i"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(56, 101, 56, 101)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cfxy"]
+atlas = ExtResource("13_m2ccb")
+region = Rect2(112, 101, 56, 101)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfi34"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwha2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2ccb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo3rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mitlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdr5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w52gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvib2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxdwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b71s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsa1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cfxy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_ei6i7"]
+script = ExtResource("4_705w6")
+sprite_frames = SubResource("SpriteFrames_mfi34")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqdqe"]
@@ -399,29 +516,7 @@ script = ExtResource("1_kqdqe")
 player = NodePath("Sami_Doctor_test")
 doors = [NodePath("door_reg_type2")]
 
-[node name="GameStateMachine" type="Node" parent="." unique_id=1016827954]
-script = ExtResource("8_705w6")
-
-[node name="Start" type="Node" parent="GameStateMachine" unique_id=605420411]
-script = ExtResource("9_v1uun")
-show_groups = Array[String](["HamatoIntroduction"])
-hide_groups = Array[String](["S3alel", "MeetMazSad"])
-auto_advance_when_flag = "Hamato_Introduction_Finished"
-next_state = "S3alelIntroduction"
-
-[node name="S3alelIntroduction" type="Node" parent="GameStateMachine" unique_id=1119814051]
-script = ExtResource("9_v1uun")
-show_groups = Array[String](["S3alel"])
-hide_groups = Array[String](["MeetMazSad"])
-auto_advance_when_flag = "S3alel_introduction_finished"
-next_state = "MeetMazSad"
-
-[node name="MeetMazSad" type="Node" parent="GameStateMachine" unique_id=371876774]
-script = ExtResource("9_v1uun")
-show_groups = Array[String](["MeetMazSad"])
-
-[node name="Node" type="Node" parent="GameStateMachine" unique_id=245092392]
-script = ExtResource("9_v1uun")
+[node name="GameStateMachine" parent="." unique_id=922868313 instance=ExtResource("2_qwha2")]
 
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("1_yppu5")]
 
@@ -430,12 +525,20 @@ position = Vector2(701, 324)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
 [node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction", "NPC"] instance=ExtResource("3_vrf2x")]
-position = Vector2(592, 263)
+position = Vector2(591, 263)
 npc_resource = SubResource("Resource_akhaw")
 
 [node name="S3alel" parent="." unique_id=2048434997 groups=["NPC", "S3alel"] instance=ExtResource("3_vrf2x")]
 position = Vector2(291, 237)
 npc_resource = SubResource("Resource_r7mmy")
+
+[node name="NPC3" parent="." unique_id=1041634814 instance=ExtResource("3_vrf2x")]
+position = Vector2(709, 461)
+npc_resource = SubResource("Resource_b1f6b")
+
+[node name="Hamato_elevator_pt1" parent="." unique_id=116049341 groups=["Elevator_pt1"] instance=ExtResource("3_vrf2x")]
+position = Vector2(492, 233)
+npc_resource = SubResource("Resource_ei6i7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=488488204]
 position = Vector2(260, 231)

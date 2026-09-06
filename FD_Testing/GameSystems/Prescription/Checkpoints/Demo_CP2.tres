@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://deblun2kq80qo"]
+
+[ext_resource type="PackedScene" uid="uid://cthrlvtm65fhu" path="res://Demo_Scenes/lvl1_Lobby.tscn" id="1_c0qhw"]
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_njix7"]
+
+[resource]
+script = ExtResource("1_njix7")
+number = 7
+title = "UmS3alel_met"
+state_name = "MeetMazSad"
+set_flags = Array[String](["S3alel_introduction_finished", "Hamato_Introduction_Finished"])
+scene = ExtResource("1_c0qhw")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

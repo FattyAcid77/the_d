@@ -2,19 +2,18 @@
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_k5157"]
 [ext_resource type="PackedScene" uid="uid://cp4xvi28a82r0" path="res://background_scenes/Maz_Sad_Room_bgrd.tscn" id="2_ba1em"]
-[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="2_q71ke"]
-[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="3_hii55"]
+[ext_resource type="PackedScene" uid="uid://clxud3eb7snhy" path="res://Demo_Scenes/GameStateMachine.tscn" id="2_dlgea"]
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="3_q71ke"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_hii55"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="6_iavfr"]
 [ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="7_ayjjp"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="8_iej28"]
 [ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="8_vqpyy"]
 [ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="9_fymg5"]
-[ext_resource type="Texture2D" uid="uid://r4swomx6el5n" path="res://characters scenes/NPC_Assets/Qassor idle.png" id="9_wdsf5"]
-[ext_resource type="Texture2D" uid="uid://cuxbdehgnydpf" path="res://characters scenes/NPC_Assets/natheef.png" id="10_iej28"]
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="10_w0syh"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="11_cmgme"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="12_w23mw"]
+[ext_resource type="Texture2D" uid="uid://u2mx55p85ycy" path="res://characters scenes/NPC_Assets/qassor_and_natheef_.png" id="14_iavfr"]
 
 [sub_resource type="Resource" id="Resource_8rqgk"]
 script = ExtResource("9_fymg5")
@@ -195,9 +194,17 @@ metadata/_custom_type_script = "uid://c8gnwlh24codr"
 [sub_resource type="Resource" id="Resource_x7o82"]
 script = ExtResource("9_fymg5")
 text = " لا أُحب أن أبدأ بكلمة \"مرض\". بل لنقل: نمط... تشكّل من تجارب. ويمكن فهمه، تفكيكه… وتغييره.
-سامي:  شكرا على الحوار، و اعتذر منكم انتهى وقتي معكم"
+"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_ubiwe"]
+script = ExtResource("9_fymg5")
+text = " شكرا على الحوار، و اعتذر منكم انتهى وقتي معكم"
 speaker_name = "سامي"
 set_flags = Array[String](["Maz_Sad_meeting1_finished"])
+action_name = "checkpoint"
+action_args = [8]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_qusje"]
@@ -205,45 +212,66 @@ script = ExtResource("8_vqpyy")
 id = "Maz_Sad_Session"
 require_flags = Array[String](["S3alel_introduction_finished"])
 blocked_by_flags = Array[String](["Maz_Sad_meeting1_finished"])
-lines = Array[ExtResource("9_fymg5")]([SubResource("Resource_8rqgk"), SubResource("Resource_nasf7"), SubResource("Resource_fymg5"), SubResource("Resource_w0syh"), SubResource("Resource_cmgme"), SubResource("Resource_w23mw"), SubResource("Resource_pf347"), SubResource("Resource_l5fbl"), SubResource("Resource_uhqlb"), SubResource("Resource_xihhx"), SubResource("Resource_mo03g"), SubResource("Resource_6mwk8"), SubResource("Resource_kaov2"), SubResource("Resource_drw8c"), SubResource("Resource_wau1j"), SubResource("Resource_82rpt"), SubResource("Resource_rlfkm"), SubResource("Resource_y0evb"), SubResource("Resource_yg5dh"), SubResource("Resource_h7qyw"), SubResource("Resource_j0wmg"), SubResource("Resource_8x8xc"), SubResource("Resource_nlex2"), SubResource("Resource_y0bb6"), SubResource("Resource_gjygd"), SubResource("Resource_s733x"), SubResource("Resource_db7cv"), SubResource("Resource_stx34"), SubResource("Resource_pawq7"), SubResource("Resource_x7o82")])
+lines = Array[ExtResource("9_fymg5")]([SubResource("Resource_8rqgk"), SubResource("Resource_nasf7"), SubResource("Resource_fymg5"), SubResource("Resource_w0syh"), SubResource("Resource_cmgme"), SubResource("Resource_w23mw"), SubResource("Resource_pf347"), SubResource("Resource_l5fbl"), SubResource("Resource_uhqlb"), SubResource("Resource_xihhx"), SubResource("Resource_mo03g"), SubResource("Resource_6mwk8"), SubResource("Resource_kaov2"), SubResource("Resource_drw8c"), SubResource("Resource_wau1j"), SubResource("Resource_82rpt"), SubResource("Resource_rlfkm"), SubResource("Resource_y0evb"), SubResource("Resource_yg5dh"), SubResource("Resource_h7qyw"), SubResource("Resource_j0wmg"), SubResource("Resource_8x8xc"), SubResource("Resource_nlex2"), SubResource("Resource_y0bb6"), SubResource("Resource_gjygd"), SubResource("Resource_s733x"), SubResource("Resource_db7cv"), SubResource("Resource_stx34"), SubResource("Resource_pawq7"), SubResource("Resource_x7o82"), SubResource("Resource_ubiwe")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_ad6m1"]
+script = ExtResource("9_fymg5")
+text = " شكرا على الحوار، و اعتذر منكم انتهى وقتي معكم"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_vqpyy"]
+script = ExtResource("8_vqpyy")
+id = "entry"
+require_flags = Array[String](["Maz_Sad_meeting1_finished"])
+blocked_by_flags = Array[String](["S3alel_introduction_finished"])
+lines = Array[ExtResource("9_fymg5")]([SubResource("Resource_ad6m1")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_ydqwy"]
 script = ExtResource("12_w23mw")
-branches = Array[ExtResource("8_vqpyy")]([SubResource("Resource_qusje")])
+branches = Array[ExtResource("8_vqpyy")]([SubResource("Resource_qusje"), SubResource("Resource_vqpyy")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pf347"]
-atlas = ExtResource("10_iej28")
-region = Rect2(0, 0, 31, 95)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_dlgea"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pf347")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Resource" id="Resource_iavfr"]
 script = ExtResource("8_iej28")
-npc_name = "نذيف"
+npc_name = "نذيف وقسور"
 sprite_frames = SubResource("SpriteFrames_dlgea")
 dialog = SubResource("Resource_ydqwy")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqpyy"]
-atlas = ExtResource("9_wdsf5")
-region = Rect2(0, 0, 33, 93)
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 0, 61, 135)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fymg5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fymg5"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 135, 61, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0syh"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 270, 61, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmgme"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 405, 61, 135)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w23mw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vqpyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fymg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0syh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmgme")
 }],
 "loop": true,
 "name": &"default",
@@ -255,26 +283,7 @@ script = ExtResource("1_k5157")
 player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg")]
 
-[node name="GameStateMachine" type="Node" parent="." unique_id=1854682590]
-script = ExtResource("2_q71ke")
-
-[node name="Start" type="Node" parent="GameStateMachine" unique_id=174053380]
-script = ExtResource("3_hii55")
-show_groups = Array[String](["HamatoIntroduction"])
-hide_groups = Array[String](["S3alel", "MeetMazSad"])
-auto_advance_when_flag = "Hamato_Introduction_Finished"
-next_state = "S3alelIntroduction"
-
-[node name="S3alelIntroduction" type="Node" parent="GameStateMachine" unique_id=205488660]
-script = ExtResource("3_hii55")
-show_groups = Array[String](["S3alel"])
-hide_groups = Array[String](["MeetMazSad"])
-auto_advance_when_flag = "S3alel_introduction_finished"
-next_state = "MeetMazSad"
-
-[node name="MeetMazSad" type="Node" parent="GameStateMachine" unique_id=383445417]
-script = ExtResource("3_hii55")
-show_groups = Array[String](["MeetMazSad"])
+[node name="GameStateMachine" parent="." unique_id=922868313 instance=ExtResource("2_dlgea")]
 
 [node name="MazSadRoomBgrd" parent="." unique_id=508454425 instance=ExtResource("2_ba1em")]
 
@@ -282,7 +291,7 @@ show_groups = Array[String](["MeetMazSad"])
 position = Vector2(487, 507)
 camera_adj = NodePath("../MazSadRoomBgrd")
 
-[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("4_hii55")]
+[node name="Door_reg" parent="." unique_id=1549867704 groups=["Doors", "MazSad_Door"] instance=ExtResource("4_hii55")]
 position = Vector2(469, 619)
 entery_direction = 0
 push_distance = 30
@@ -290,10 +299,16 @@ new_scene_path = "res://Demo_Scenes/Maz_Sad_hall.tscn"
 target_door_name = "Maz_Sad_Hall_North"
 this_door_name = "Maz_Sad_Room"
 
-[node name="Maz_Sad_Introduction" parent="." unique_id=1293972803 instance=ExtResource("7_ayjjp")]
-position = Vector2(682, 514)
+[node name="PointLight2D" type="PointLight2D" parent="Door_reg" unique_id=2046331885]
+position = Vector2(-0.49997902, -15.499983)
+scale = Vector2(0.12304678, 0.07226562)
+texture = ExtResource("6_iavfr")
+
+[node name="Maz_Sad_Introduction" parent="." unique_id=1293972803 groups=["NPC"] instance=ExtResource("7_ayjjp")]
+position = Vector2(677, 535)
 npc_resource = SubResource("Resource_iavfr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=297244444]
-position = Vector2(747, 528)
-sprite_frames = SubResource("SpriteFrames_fymg5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=888211834]
+position = Vector2(721, 498)
+sprite_frames = SubResource("SpriteFrames_w23mw")
+autoplay = "default"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ceomsmbkp7ymg"]
 
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_drg7g"]
-[ext_resource type="Texture2D" uid="uid://drgxfiiiv8dnq" path="res://background_scenes/assets/f2-cctv.png" id="1_hd4bp"]
+[ext_resource type="Texture2D" uid="uid://wlsske70an5o" path="res://background_scenes/assets/f2-cctv_v2.png" id="2_bm65t"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="2_drg7g"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bm65t"]
@@ -12,7 +12,7 @@ script = ExtResource("1_drg7g")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1761748500]
 position = Vector2(293, 172)
-texture = ExtResource("1_hd4bp")
+texture = ExtResource("2_bm65t")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=542418261]
 

@@ -45,7 +45,7 @@ doors = [NodePath("Door_reg")]
 [node name="MazSadRoomBgrd" parent="." unique_id=508454425 instance=ExtResource("1_ir6i7")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=492710079 groups=["Scene2_obj1"]]
-position = Vector2(1097, 780)
+position = Vector2(597, 418)
 script = ExtResource("3_rs6b3")
 item = ExtResource("4_u5a6v")
 auto_pickup = false
@@ -54,18 +54,18 @@ auto_pickup = false
 shape = SubResource("CircleShape2D_nrika")
 
 [node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("3_75e2c")]
-position = Vector2(994, 967)
+position = Vector2(484, 619)
 entery_direction = 0
 new_scene_path = "res://scenario_1/Hall_scene.tscn"
 target_door_name = "hall_2"
 this_door_name = "scene2_door"
 
 [node name="NPC" parent="." unique_id=1293972803 instance=ExtResource("5_dsowm")]
-position = Vector2(1154, 863)
+position = Vector2(654, 501)
 npc_resource = SubResource("Resource_vypjq")
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_mhadn")]
-position = Vector2(1020, 833)
+position = Vector2(520, 471)
 camera_adj = NodePath("../MazSadRoomBgrd")
 
 [node name="GameStateMachine" type="Node" parent="." unique_id=79900171]

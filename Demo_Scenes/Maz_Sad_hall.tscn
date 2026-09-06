@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_v0hkv"]
 [ext_resource type="PackedScene" uid="uid://duxtjrjnpvlrf" path="res://background_scenes/maz_Sad_Hall_bgrd.tscn" id="1_v25wu"]
-[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="2_01g5o"]
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_doqg3"]
-[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="3_2o0xn"]
+[ext_resource type="PackedScene" uid="uid://clxud3eb7snhy" path="res://Demo_Scenes/GameStateMachine.tscn" id="2_wvp8m"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_wvp8m"]
 
 [node name="MazSadHall" type="Node2D" unique_id=1629010676 node_paths=PackedStringArray("player", "doors")]
@@ -12,26 +11,7 @@ script = ExtResource("1_v0hkv")
 player = NodePath("Sami_Doctor_test")
 doors = [NodePath("Door_reg"), NodePath("Door_reg2")]
 
-[node name="GameStateMachine" type="Node" parent="." unique_id=2002210821]
-script = ExtResource("2_01g5o")
-
-[node name="Start" type="Node" parent="GameStateMachine" unique_id=196056741]
-script = ExtResource("3_2o0xn")
-show_groups = Array[String](["HamatoIntroduction"])
-hide_groups = Array[String](["S3alel", "MeetMazSad"])
-auto_advance_when_flag = "Hamato_Introduction_Finished"
-next_state = "S3alelIntroduction"
-
-[node name="S3alelIntroduction" type="Node" parent="GameStateMachine" unique_id=807067731]
-script = ExtResource("3_2o0xn")
-show_groups = Array[String](["S3alel"])
-hide_groups = Array[String](["MeetMazSad"])
-auto_advance_when_flag = "S3alel_introduction_finished"
-next_state = "MeetMazSad"
-
-[node name="MeetMazSad" type="Node" parent="GameStateMachine" unique_id=258648212]
-script = ExtResource("3_2o0xn")
-show_groups = Array[String](["MeetMazSad"])
+[node name="GameStateMachine" parent="." unique_id=922868313 instance=ExtResource("2_wvp8m")]
 
 [node name="MazSadHallBgrd" parent="." unique_id=541756911 instance=ExtResource("1_v25wu")]
 
@@ -39,7 +19,7 @@ show_groups = Array[String](["MeetMazSad"])
 position = Vector2(158, 464)
 camera_adj = NodePath("../MazSadHallBgrd")
 
-[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("4_wvp8m")]
+[node name="Door_reg" parent="." unique_id=1549867704 groups=["Doors"] instance=ExtResource("4_wvp8m")]
 position = Vector2(155, 621)
 entery_direction = 0
 push_distance = 30
@@ -47,7 +27,7 @@ new_scene_path = "res://Demo_Scenes/lvl1_Lobby.tscn"
 target_door_name = "lvl1_lobby_north"
 this_door_name = "Maz_Sad_Hall_South"
 
-[node name="Door_reg2" parent="." unique_id=1668711455 instance=ExtResource("4_wvp8m")]
+[node name="Door_reg2" parent="." unique_id=1668711455 groups=["Doors"] instance=ExtResource("4_wvp8m")]
 position = Vector2(161, 202)
 entery_direction = 2
 push_distance = 40

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://clxud3eb7snhy"]
+
+[ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="1_51408"]
+[ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="2_eofw3"]
+
+[node name="GameStateMachine" type="Node" unique_id=922868313]
+script = ExtResource("1_51408")
+
+[node name="Start" type="Node" parent="." unique_id=356475787]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["HamatoIntroduction"])
+hide_groups = Array[String](["S3alel", "MeetMazSad", "Elevator_pt1"])
+auto_advance_when_flag = "Hamato_Introduction_Finished"
+next_state = "S3alelIntroduction"
+
+[node name="S3alelIntroduction" type="Node" parent="." unique_id=1064333524]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["S3alel"])
+hide_groups = Array[String](["MeetMazSad", "Elevator_pt1"])
+auto_advance_when_flag = "S3alel_introduction_finished"
+next_state = "MeetMazSad"
+
+[node name="MeetMazSad" type="Node" parent="." unique_id=250345838]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["MeetMazSad"])
+hide_groups = Array[String](["MazSad_Door", "Elevator_pt1"])
+auto_advance_when_flag = "Maz_Sad_meeting1_finished"
+next_state = "Elevator_pt1"
+
+[node name="MazSadMet" type="Node" parent="." unique_id=692376320]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["MazSad_Door"])
+set_flags = Array[String](["Maz_Sad_door_open"])
+auto_advance_when_flag = "Maz_Sad_door_open"
+next_state = "Elevator_pt1"
+
+[node name="Elevator_pt1" type="Node" parent="." unique_id=649055273]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["MazSad_Door"])
+hide_groups = Array[String](["HamatoIntroduction"])
