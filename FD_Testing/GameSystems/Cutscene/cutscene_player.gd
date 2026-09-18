@@ -1,23 +1,7 @@
 extends Node
-## Cutscene — add as an Autoload named "Cutscene".
-## Two modes:
-##
-## 1) SINGLE VIDEO (.ogv):
-##      await Cutscene.play("res://.../video.ogv")
-##    Skippable with "interact" (see `skippable`).
-##
-## 2) COMIC — a sequence of panels (video or image), the player presses
-##    "interact" to go to the next panel; each panel can play a sound and
-##    set flags the moment it appears:
-##      await Cutscene.play_comic(preload("res://.../my_comic.tres"))
-##
-## From DIALOG lines:
-##    action_name "cutscene", args ["res://...ogv"]        -> single video
-##    action_name "comic",    args ["res://...tres"]       -> comic
-##    (tick wait_for_action to hold the conversation until it ends)
-##
-## Godot can NOT play .gif or .mp4 — convert to .ogv:
-##    ffmpeg -i input.gif -c:v libtheora -q:v 8 output.ogv
+## Cutscene - add as an Autoload named "Cutscene". Two modes: 1) single video
+## (.ogv): await Cutscene.play("res://.../video.ogv") Skippable with
+## "interact" (see `skippable`).
 
 signal started
 signal finished
@@ -26,11 +10,9 @@ signal finished
 @export var skippable: bool = true
 
 ## Comic mode: the corner prompt shown when a panel has finished.
-## Arabic works fine here (e.g. "...التالي").
 @export var next_text: String = "Next..."
 
-## Comic mode: if ON, the player can only advance AFTER the panel finished
-## (video ended / image delay passed). If OFF, they can advance any time.
+## Comic mode: if on, the player can only advance after the panel finished
 @export var advance_only_after_end: bool = false
 
 var is_playing: bool = false
@@ -50,7 +32,7 @@ var _panel_timer: float = 0.0
 var _advance_lock: float = 0.0
 var _panel_ended: bool = false
 var _image_end_delay: float = 0.0
-const IMAGE_PANEL_END_DELAY := 0.8   # image panels count as "ended" after this
+const IMAGE_PANEL_END_DELAY := 0.8  # image panels count as "ended" after this
 
 
 func _ready() -> void:
@@ -89,6 +71,9 @@ func _build_ui() -> void:
 	_layer.add_child(_image)
 
 	_sfx = AudioStreamPlayer.new()
+	# panel sounds count as effects; the video's own audio counts as the story's voice
+	BusRoute.use(_sfx, "SFX")
+	BusRoute.use(_video, "Dialog")
 	_layer.add_child(_sfx)
 
 	_next_label = Label.new()
@@ -104,9 +89,7 @@ func _build_ui() -> void:
 	_image.visible = false
 
 
-# ==========================================================================
-# MODE 1 — single video
-# ==========================================================================
+# ========================================================================== mode 1
 
 func play(video_path: String) -> void:
 	if is_playing:
@@ -122,7 +105,7 @@ func play(video_path: String) -> void:
 	await play_stream(stream)
 
 
-## Play a VideoStream you already have (e.g. dragged into an inspector slot).
+## Play a VideoStream you already have (e.g.
 func play_stream(stream: VideoStream) -> void:
 	if is_playing:
 		push_warning("Cutscene already playing; ignoring play_stream.")
@@ -149,15 +132,13 @@ func _on_video_finished() -> void:
 	if not is_playing:
 		return
 	if _comic != null:
-		_panel_ended = true          # panel plays ONCE, holds on its last frame
+		_panel_ended = true  # panel plays once, holds on its last frame
 		_show_next_prompt()
 		return
 	_end()
 
 
-# ==========================================================================
-# MODE 2 — comic
-# ==========================================================================
+# ========================================================================== mode 2
 
 func play_comic(comic: Comic) -> void:
 	if is_playing:
@@ -233,9 +214,7 @@ func _process(delta: float) -> void:
 			_end()
 
 
-# ==========================================================================
-# shared begin/end + dialog integration
-# ==========================================================================
+# ========================================================================== shared
 
 func _begin() -> void:
 	is_playing = true

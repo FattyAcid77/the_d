@@ -1,67 +1,42 @@
 class_name DialogZone extends Area2D
-## A patch of floor that FORCES a dialog to start when Sami walks into it.
-## No interact key, no choice — he steps in, the box opens.
-##
-## This is deliberately SEPARATE from the NPC. Use it for:
-##   * an ambush line the moment he enters a room
-##   * a voice from nowhere ("don't go in there")
-##   * an NPC across the room shouting at him without him talking to them
-##   * scripted story beats tied to a place, not a person
-##
-## SCENE SHAPE
-##   DialogZone (Area2D, this script)
-##   └── CollisionShape2D        <- draw the patch of floor here
-##
-## WHERE THE WORDS COME FROM — pick ONE:
-##   1. `dialog`   — drag a Dialog .tres straight in. Simplest.
-##   2. `speaker`  — point at an NPC node in the level. The zone borrows that
-##                   NPC's dialog, name and portrait, so the line looks like
-##                   it came from them even though they're across the room.
-##
-## Branch choice still works exactly as everywhere else: the NPC decides which
-## branch plays based on world flags. The zone only decides WHEN.
+## A patch of floor that forces a dialog to start when Sami walks into it. No
+## interact key, no choice - he steps in, the box opens.
 
 signal triggered
 signal dialog_ended
 
 @export_group("What it says")
-## A Dialog .tres. Used when `speaker` is empty.
+## A Dialog .tres.
 @export var dialog: Dialog
 ## Optional NPC in this level to borrow the dialog/name/portrait from.
-## When set, this WINS over the `dialog` above.
 @export var speaker: NodePath
-## Overrides the name in the box. Empty = the NPC's name, or nothing.
+## Overrides the name in the box.
 @export var speaker_name: String = ""
-## Overrides the portrait. Empty = the NPC's portrait, or none.
+## Overrides the portrait.
 @export var portrait: Texture2D
 
 @export_group("When it fires")
-## ON  = fires once ever, then the zone is done for good (saved via flag).
-## OFF = fires every time he walks in (see `cooldown`).
+## on = fires once ever, then the zone is done for good (saved via flag).
 @export var once_only: bool = true
-## Seconds before it can fire again. Ignored when once_only is ON.
+## Seconds before it can fire again.
 @export var cooldown: float = 0.0
-## Don't fire while another dialog is already running (almost always ON).
+## Don't fire while another dialog is already running (almost always on).
 @export var skip_if_dialog_active: bool = true
-## Wait this long after he enters before the box opens. Good for letting him
-## walk a step or two into the room first.
+## Wait this long after he enters before the box opens.
 @export var delay: float = 0.0
 
 @export_group("Flags")
-## The zone only exists once this flag is set. Empty = always armed.
+## The zone only exists once this flag is set.
 @export var require_flag: String = ""
 ## The zone is dead once this flag is set.
 @export var hide_flag: String = ""
-## Flag set the moment it fires. With once_only ON this is also what
-## remembers it across saves — leave it empty and one is made from the
-## node's name automatically.
+## Flag set the moment it fires.
 @export var set_flag: String = ""
 ## Flag set when the dialog it started finishes.
 @export var finished_flag: String = ""
 
 @export_group("The player")
-## Freeze Sami while the dialog runs. Works by setting his `frozen` /
-## `can_move` property if he has one — harmless if he doesn't.
+## Freeze Sami while the dialog runs.
 @export var freeze_player: bool = true
 ## Which group counts as the player.
 @export var player_group: String = "Player"
@@ -78,6 +53,7 @@ var _auto_flag: String = ""
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	_auto_flag = set_flag if set_flag != "" else "dialogzone_" + str(name)
 	body_entered.connect(_on_entered)
 	monitoring = true
@@ -167,7 +143,8 @@ func _fire() -> void:
 		print("DialogZone '%s': forcing dialog." % name)
 
 	triggered.emit()
-	dm.start_dialog(d, _resolve_name(), _resolve_portrait())
+	# If the zone borrows an NPC's dialog, that NPC is the speaker
+	dm.start_dialog(d, _resolve_name(), _resolve_portrait(), _npc())
 
 	# one-shot listener, so we don't stack connections on repeat zones
 	if not dm.dialog_finished.is_connected(_on_dialog_finished):
@@ -269,8 +246,7 @@ func _is_player(body: Node2D) -> bool:
 	return body is Player
 
 
-## Tries the usual "stop moving" property names. Silent if he has none —
-## the dialog box already eats input in most setups.
+## Tries the usual "stop moving" property names.
 func _set_player_frozen(on: bool) -> void:
 	if _player == null or not is_instance_valid(_player):
 		return

@@ -1,34 +1,20 @@
 class_name ElectroGen extends Area2D
 ## One electro generator. Walk up, press interact, flip the switch.
-##
-## The first three (order 0, 1, 2) must be flipped in the RIGHT ORDER. Get
-## it wrong and the whole sequence resets with a buzz. Get all three and the
-## countdown to the MAIN generator begins.
-##
-## Scene shape:
-##   ElectroGen (Area2D, this script)
-##   ├── CollisionShape2D
-##   ├── Sprite (AnimatedSprite2D)   optional — anim_off / anim_on / anim_blown
-##   ├── Light (Node2D)              optional — shown while it's on
-##   └── Prompt (Node2D)             optional — shown when the player is near
 
 signal flipped(gen: ElectroGen)
 signal blown(gen: ElectroGen)
 
 ## Where this sits in the sequence: 0, 1, 2 for the three switches.
-## Set `is_main` instead for the final generator.
 @export var order_index: int = 0
 
-## The MAIN generator — the one at the end of the timed run. It ignores
-## order_index and can only be used once the run has started.
+## The main generator - the one at the end of the timed run.
 @export var is_main: bool = false
 
-## Which floor it's on (1, 2, 3). Only for your own bookkeeping / UI.
+## Which floor it's on (1, 2, 3).
 @export var floor_number: int = 1
 
 @export_group("Main generator only")
-## If > 0, the main gen needs the RADIO tuned to this frequency to blow.
-## 0 = just press interact. (Must be a multiple of 10, 530..1700.)
+## If > 0, the main gen needs the radio tuned to this frequency to blow.
 @export_range(0, 1700, 10) var required_hz: int = 0
 ## How close the radio has to be.
 @export var hz_tolerance: int = 0
@@ -48,6 +34,7 @@ var _player_in: bool = false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	body_entered.connect(_on_entered)
 	body_exited.connect(_on_exited)
 	if prompt:
@@ -62,7 +49,7 @@ func _process(_delta: float) -> void:
 		flip()
 
 
-## Flip the switch. The puzzle manager decides whether it counted.
+## Flip the switch.
 func flip() -> void:
 	if is_blown:
 		return

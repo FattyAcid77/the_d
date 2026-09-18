@@ -1,8 +1,7 @@
 class_name PowerLights extends CanvasLayer
-## The room going dark and the lights stuttering during the run — plus the
-## countdown bar and Haji's shouts (which do NOT pause the game).
-##
-## Drop this in the level and hand it to the ElectroPuzzle's `lights` slot.
+## The room going dark and the lights stuttering during the run - plus the
+## countdown bar and Haji's shouts (which do not pause the game). Drop this in
+## the level and hand it to the ElectroPuzzle's `lights` slot.
 
 @export_group("Flicker")
 ## How dark the room gets when the power is failing (1 = normal, 0 = black).
@@ -120,7 +119,7 @@ func on_run_tick(time_left: float) -> void:
 	_time_label.modulate = Color(1, 0.35, 0.3) if warn else Color(1, 1, 1)
 
 
-## Haji shouting — appears over the game without pausing it.
+## Haji shouting - appears over the game without pausing it.
 func show_callout(text: String, seconds: float = 3.0) -> void:
 	_callout.text = text
 	_callout.visible = true

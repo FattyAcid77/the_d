@@ -1,49 +1,40 @@
 class_name BoardInventory extends Control
-## The INVENTORY tab: Sami on the left with everything he's carrying drawn
-## on him, the grid on the right, and USE / DROP underneath.
-##
-## THE AVATAR
-## Every item's `avatar_layer` is authored on the same 640x360 canvas as the
-## base Sami, so this just draws them all at (0,0) in `avatar_order` and they
-## land exactly where you drew them. The axe goes on his back because that's
-## where you painted it. Carrying three bandages draws one bandage.
-##
-## THE TOOLTIP
-## Hovering a slot pops the item's name and description next to the mouse.
+## The inventory tab: Sami on the left with everything he's carrying drawn on
+## him, the grid on the right, and use / drop underneath. the avatar Every
+## item's `avatar_layer` is authored on the same 640x360 canvas as the base
+## Sami, so this just draws them all at (0,0) in `avatar_order` and they land
+## exactly where you drew them.
 
-## The panel art loads itself, for the same reason the board's does: this is
-## built in code by the Board autoload, so there's no Inspector to drag a
-## texture into.
 const PANEL_PATH := "res://FD_Testing/GameSystems/Board/Art/inventory.png"
 
-## Sami's base body, the empty grid, USE and DROP. Loaded automatically.
+## Sami's base body, the empty grid, use and drop.
 var panel_art: Texture2D
 
 @export_group("The small slots (4 across, 3 down)")
-## Top-left corner of the FIRST small slot, in canvas pixels.
-@export var grid_origin: Vector2 = Vector2(326, 131)
+## Top-left corner of the first small slot, in canvas pixels.
+@export var grid_origin: Vector2 = Vector2(326, 139)
 @export var slot_size: Vector2 = Vector2(17, 16)
-@export var slot_gap: Vector2 = Vector2(1, 3)
+@export var slot_gap: Vector2 = Vector2(3, 3)
 ## How big an item's icon is drawn inside a small slot.
 @export var icon_size: float = 13.0
 
 @export_group("The two big slots")
-## Top-left of the FIRST big slot.
-@export var big_origin: Vector2 = Vector2(326, 190)
-@export var big_size: Vector2 = Vector2(35, 35)
-@export var big_gap: float = 1.5
+## Top-left of the first big slot.
+@export var big_origin: Vector2 = Vector2(326, 197)
+@export var big_size: Vector2 = Vector2(37, 37)
+@export var big_gap: float = 3.0
 ## Icons in the big slots are drawn larger.
 @export var big_icon_size: float = 28.0
 
 @export_group("The stack number")
-## The little count in the bottom-right of a slot, e.g. a "5" on five bandages.
+## The little count in the bottom-right of a slot, e.g.
 @export var show_counts: bool = true
 @export var count_font_size: int = 8
 @export var count_color: Color = Color(0.97, 0.95, 0.88)
 ## A dark plate behind the number so it reads on any icon.
 @export var count_plate: Color = Color(0.12, 0.10, 0.08, 0.85)
 @export var count_plate_pad: Vector2 = Vector2(2, 1)
-## Hide the number when there is only one. OFF shows "1" on everything.
+## Hide the number when there is only one.
 @export var hide_count_when_one: bool = true
 
 @export_group("Selection")
@@ -51,7 +42,7 @@ var panel_art: Texture2D
 @export var hover_color: Color = Color(1, 1, 1, 0.18)
 
 @export_group("The buttons")
-## Clickable areas for USE and DROP, in canvas pixels, matching your art.
+## Clickable areas for use and drop, in canvas pixels, matching your art.
 @export var use_rect: Rect2 = Rect2(324, 245, 35, 14)
 @export var drop_rect: Rect2 = Rect2(365, 245, 35, 14)
 @export var button_press_tint: Color = Color(1, 1, 1, 0.25)
@@ -67,8 +58,7 @@ var panel_art: Texture2D
 @export var tooltip_font: Font
 
 @export_group("Dragging")
-## Drag items from slot to slot to rearrange them. Dropping onto a full slot
-## swaps the two; dropping onto the same kind merges the stacks.
+## Drag items from slot to slot to rearrange them.
 @export var can_drag_items: bool = true
 ## How far the mouse must move before it counts as a drag and not a click.
 @export var drag_threshold: float = 3.0
@@ -84,16 +74,14 @@ var selected: int = -1
 var _hover: int = -1
 var _mouse := Vector2.ZERO
 var _pressed := ""
-var _drag_from: int = -1        ## slot being dragged out of
+var _drag_from: int = -1  # slot being dragged out of
 var _drag_item: MedicalItem
 var _drag_count: int = 0
 var _dragging := false
 
 
 func _ready() -> void:
-	# Sized to the 640x360 art canvas, NOT the viewport. The Board scales and
-	# centres the canvas, so drawing and mouse coordinates are both in plain
-	# art pixels — which is what makes the slots clickable at any resolution.
+	# Sized to the 640x360 art canvas, not the viewport.
 	position = Vector2.ZERO
 	size = Vector2(640, 360)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -116,8 +104,7 @@ func refresh() -> void:
 
 # --- where the slots are ---------------------------------------------------
 
-## Where slot `i` sits, in art coordinates. The first columns*rows are the
-## small ones; anything after that is one of the big slots along the bottom.
+## Where slot `i` sits, in art coordinates.
 func slot_rect(i: int) -> Rect2:
 	var bag := get_node_or_null("/root/Bag")
 	var cols: int = int(bag.columns) if bag else 4
@@ -162,7 +149,7 @@ func _gui_input(event: InputEvent) -> void:
 				and event.velocity.length() > 0.0 \
 				and slot_rect(_drag_from).grow(drag_threshold).has_point(_mouse) == false:
 			_dragging = true
-		queue_redraw()              # the tooltip follows the mouse
+		queue_redraw()  # the tooltip follows the mouse
 		return
 
 	if not (event is InputEventMouseButton):
@@ -213,8 +200,7 @@ func _gui_input(event: InputEvent) -> void:
 		accept_event()
 
 
-## Where a dragged item lands. Same slot = nothing. Empty = move.
-## Same kind = merge the stacks. Different = swap the two slots.
+## Where a dragged item lands.
 func _drop_on(to: int, bag: Node) -> void:
 	if to < 0 or _drag_from < 0 or to == _drag_from:
 		return
@@ -255,7 +241,7 @@ func _draw() -> void:
 	if panel_art:
 		draw_texture(panel_art, Vector2.ZERO)
 
-	# THE PAPERDOLL: every kind of item he holds, drawn where you painted it
+	# the paperdoll: every kind of item he holds, drawn where you painted it
 	if bag:
 		for item in bag.unique_items():
 			if item.avatar_layer:
@@ -275,7 +261,7 @@ func _draw() -> void:
 			draw_rect(r, Color(0, 1, 0, 0.8), false, 1.0)
 
 		if _dragging and i == _drag_from:
-			continue                    # it's on the mouse right now
+			continue  # it's on the mouse right now
 		var item: MedicalItem = bag.item_at(i)
 		if item == null or item.texture == null:
 			continue
@@ -309,8 +295,7 @@ func _draw() -> void:
 		_draw_tooltip(bag.item_at(_hover))
 
 
-## The little stack number, tucked into the slot's bottom-right on a dark
-## plate so it stays readable on top of any icon.
+## The little stack number, tucked into the slot's bottom-right on a dark plate so it stays
 func _draw_count(slot: Rect2, n: int) -> void:
 	var f := tooltip_font if tooltip_font else ThemeDB.fallback_font
 	var txt := str(n)
@@ -323,8 +308,7 @@ func _draw_count(slot: Rect2, n: int) -> void:
 			txt, HORIZONTAL_ALIGNMENT_LEFT, -1, count_font_size, count_color)
 
 
-## The hover pop-up: name on top, description under it, next to the mouse
-## and nudged back on screen if it would run off the edge.
+## The hover pop-up: name on top, description
 func _draw_tooltip(item: MedicalItem) -> void:
 	if item == null:
 		return

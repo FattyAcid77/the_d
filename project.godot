@@ -26,7 +26,6 @@ buses/default_bus_layout="uid://bk2t0kh1o201u"
 [autoload]
 
 Loc="*uid://c2ughm86tklee"
-Dialog_Global="*res://Scripts/Global/Dialog_Global.gd"
 WaveCanvas20="*res://3MK-File/myshit/wave_canvas_2_0.gd"
 SceneManager="*res://control scene/SceneManager.gd"
 PauseMenu="*res://control scene/Pause_Menu.tscn"
@@ -34,7 +33,6 @@ inventory="*uid://c8n0i2wxuxhwm"
 GameState="*uid://bigwu0rmjy4mr"
 RadioGlobal="*res://3MK-File/script/radio_global.gd"
 RadioSignals="*res://3MK-File/script/radio_signal_manager.gd"
-PlayerManger="*uid://dvovtcq4mhex7"
 Flags="*uid://gl8q17gkvqy2"
 DialogManager="*uid://c08trmqh1ib25"
 Audio="*res://audio/audio.tscn"
@@ -50,6 +48,7 @@ PopupWindows="*uid://dcrrtepfcmgbc"
 Bag="*uid://b446pwovwr0y8"
 MapRooms="*uid://hw8gsh3jlhni"
 Board="*uid://b7npvxsv204c8"
+Sound="*uid://dbxwj52gejrqo"
 
 [display]
 

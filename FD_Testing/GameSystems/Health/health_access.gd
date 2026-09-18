@@ -1,16 +1,14 @@
 class_name HealthAccess
-## Small helper so every system reads Sami's health the same way, without
-## me knowing your HealthData's exact property names.
-##
-## It looks for the first property that exists out of a list of common
-## names. If your resource uses something unusual, pass the name explicitly.
+## Small helper so every system reads Sami's health the same way, without me
+## knowing your HealthData's exact property names. It looks for the first
+## property that exists out of a list of common names.
 
 const HEALTH_NAMES := ["current_health", "health", "hp", "current_hp",
 		"health_current", "value", "amount"]
 const MAX_NAMES := ["max_health", "health_max", "max_hp", "total_health", "max"]
 
 
-## Find the property holding the CURRENT health. "" if not found.
+## Find the property holding the current health.
 static func find_health(stats: Object) -> String:
 	if stats == null:
 		return ""
@@ -20,7 +18,7 @@ static func find_health(stats: Object) -> String:
 	return ""
 
 
-## Find the property holding MAX health. "" if not found.
+## Find the property holding max health.
 static func find_max(stats: Object) -> String:
 	if stats == null:
 		return ""

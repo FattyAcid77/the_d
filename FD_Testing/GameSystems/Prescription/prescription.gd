@@ -1,26 +1,6 @@
 extends Node
-## Prescription — add as an Autoload named "Prescription".
-## The old-school password save system, themed as medicine prescriptions.
-##
-## HOW IT WORKS
-## - You define checkpoints (PrescriptionCheckpoint .tres in Checkpoints/).
-## - When the player REACHES one, a popup shows their new prescription,
-##   e.g.  "Nazomel 250mg"  — they write it down.
-## - Later (fresh game), they open the pharmacy window, dial in the
-##   medicine, and the game restores that checkpoint. A wrong/made-up
-##   medicine fails the checksum: "This medication does not exist."
-##
-## REACHING a checkpoint (pick any):
-##     Prescription.reach(3)                       # from code
-##     dialog line action:  action_name = "checkpoint", args = [3]
-##
-## SHOWING the current code again:
-##     Prescription.show_current()                 # from code
-##     dialog action:  "prescription_show"         # e.g. a nurse NPC
-##
-## ENTERING a code (hook this to a main-menu button, or a pharmacist):
-##     Prescription.open_entry()
-##     dialog action:  "prescription_entry"
+## Prescription - add as an Autoload named "Prescription". The old-school
+## password save system, themed as medicine prescriptions.
 
 signal checkpoint_reached(number: int)
 signal checkpoint_applied(number: int)
@@ -28,23 +8,20 @@ signal checkpoint_applied(number: int)
 const CHECKPOINTS_DIR := "res://FD_Testing/GameSystems/Prescription/Checkpoints"
 const CURRENT_FLAG := "prescription_current"
 
-## The four syllable/dose tables. 16 entries each — together they encode
-## 16 bits (8-bit checkpoint number + 8-bit checksum).
-## !! NEVER reorder or change these once codes are in players' hands.
+## The four syllable/dose tables.
 const PREFIX := ["Na","Zo","Ka","Ri","Mo","Fa","Du","Le","Sa","Ti","Bu","He","Pa","Vi","Xo","Ga"]
 const MIDDLE := ["zo","ra","mi","lo","ne","da","fu","ke","si","to","va","ce","li","ru","be","no"]
 const SUFFIX := ["mel","dex","rin","zol","pam","tan","vir","lam","ide","ine","ate","oxin","adol","ium","ex","al"]
 const DOSE := [50,100,150,200,250,300,350,400,450,500,600,700,750,800,900,1000]
 
-## Popup texts — change to Arabic if you like.
+## Popup texts - change to Arabic if you like.
 @export var new_prescription_text: String = "NEW PRESCRIPTION:"
 @export var invalid_text: String = "This medication does not exist."
 @export var filled_text: String = "Prescription filled."
 ## Shown under a held popup, telling the player how to dismiss it.
 @export var dismiss_text: String = "(write it down — press to continue)"
 
-## Seconds a short message stays up. The PRESCRIPTION popup ignores this:
-## it waits for a keypress so the player always has time to write it down.
+## Seconds a short message stays up.
 @export var message_seconds: float = 3.0
 
 @export_group("Anti brute-force")
@@ -80,15 +57,14 @@ func _ready() -> void:
 
 func _load_checkpoints() -> void:
 	checkpoints.clear()
-	var dir := DirAccess.open(CHECKPOINTS_DIR)
-	if dir == null:
+	# ResList: works in the editor and in an exported build.
+	if not ResList.dir_exists(CHECKPOINTS_DIR):
 		push_warning("Prescription: no checkpoints folder at %s" % CHECKPOINTS_DIR)
 		return
-	for file in dir.get_files():
-		if file.get_extension() == "tres" or file.get_extension() == "res":
-			var r := load(CHECKPOINTS_DIR + "/" + file)
-			if r is PrescriptionCheckpoint:
-				checkpoints.append(r)
+	for path in ResList.tres_files(CHECKPOINTS_DIR):
+		var r := load(path)
+		if r is PrescriptionCheckpoint:
+			checkpoints.append(r)
 
 
 func get_checkpoint(number: int) -> PrescriptionCheckpoint:
@@ -98,9 +74,7 @@ func get_checkpoint(number: int) -> PrescriptionCheckpoint:
 	return null
 
 
-# ==========================================================================
-# the code itself
-# ==========================================================================
+# ========================================================================== the code
 
 func _checksum(number: int) -> int:
 	return (((number ^ 0xA7) * 13) + 41) & 0xFF
@@ -122,17 +96,15 @@ func _decode(dials: Array) -> int:
 	return number
 
 
-## The human-readable medicine, e.g. "Nazomel 250mg".
+## The human-readable medicine, e.g.
 func code_text(number: int) -> String:
 	var d := _encode(number)
 	return PREFIX[d[0]] + MIDDLE[d[1]] + SUFFIX[d[2]] + " " + str(DOSE[d[3]]) + "mg"
 
 
-# ==========================================================================
-# reaching / applying
-# ==========================================================================
+# ========================================================================== reaching /
 
-## Call when the player passes a save point. Shows the prescription popup.
+## Call when the player passes a save point.
 func reach(number: int) -> void:
 	if get_checkpoint(number) == null:
 		push_error("Prescription: no checkpoint numbered %d." % number)
@@ -167,9 +139,7 @@ func apply(number: int) -> void:
 		get_tree().change_scene_to_packed.call_deferred(c.scene)
 
 
-# ==========================================================================
-# UI
-# ==========================================================================
+# ========================================================================== UI
 
 func _build_ui() -> void:
 	_layer = CanvasLayer.new()
@@ -310,20 +280,18 @@ func _show_popup(text: String) -> void:
 	t.timeout.connect(func() -> void: _popup.visible = false)
 
 
-## The important one: stays on screen, pauses the game, and waits for a
-## keypress — so the player can never miss writing their prescription down.
+## The important one: stays on screen, pauses the game
 func _show_popup_held(text: String) -> void:
 	_popup_label.text = text
 	_popup_hint.text = tr(dismiss_text)
 	_popup.visible = true
 	_holding = true
-	# Only take the pause if nobody else already has it (a dialog or cutscene
-	# may have paused first — then it owns the unpause, not us).
+	# Only take the pause if nobody else already has it
 	var i_paused := false
 	if not get_tree().paused:
 		get_tree().paused = true
 		i_paused = true
-	await get_tree().create_timer(0.35, true, false, true).timeout   # ignore the press that got here
+	await get_tree().create_timer(0.35, true, false, true).timeout  # ignore the press that got here
 	while _holding:
 		await get_tree().process_frame
 		if InputAccess.just_pressed() or InputAccess.just_pressed("ui_accept"):

@@ -1,17 +1,6 @@
 extends Node
-## Deaths — add as an Autoload named "Deaths".
-##
-## THE SEQUENCE when the player dies:
-##   1. Sami's death animation plays (his "Death" state)
-##   2. the clipboard SLIDES UP from the bottom
-##   3. the board ANIMATION plays (BoardAnim/death_board_00..19.png)
-##   4. the writing appears: time of death, cause, and the CHECK MARK
-##   5. RETRY / QUIT become clickable
-##
-## KILL THE PLAYER from anywhere:
-##     Deaths.kill("bleeding")          # id of a DeathCause .tres
-##     Deaths.kill("bleeding", 1.5)     # longer animation beat
-## From a dialog line: action_name = "kill", action_args = ["bleeding"]
+## Deaths - add as an Autoload named "Deaths". the sequence when the player
+## dies: 1.
 
 const CAUSES_DIR := "res://FD_Testing/GameSystems/Death/Causes"
 const FRAMES_RES := "res://FD_Testing/GameSystems/Death/board_frames.tres"
@@ -26,8 +15,7 @@ const ART_SIZE := Vector2(640, 360)
 ## Seconds the player's death animation gets before the board comes up.
 @export var default_anim_seconds: float = 1.1
 @export var slide_seconds: float = 0.5
-## The board animation as a SpriteFrames — edit frames, order and timing
-## in Godot's SpriteFrames panel. Animation name: "death".
+## The board animation as a SpriteFrames - edit frames
 @export var board_frames: SpriteFrames
 @export var board_anim_name: String = "death"
 ## Multiplies the SpriteFrames speed (2.0 = twice as fast).
@@ -36,20 +24,19 @@ const ART_SIZE := Vector2(640, 360)
 @export var write_delay: float = 0.25
 
 @export_group("Placement (measured from the board art)")
-## Where the clock is written, just after the printed "TIME:".
+## Where the clock is written, just after the printed "time:".
 @export var time_value_pos := Vector2(0.505, 0.390)
-## The FIRST printed checkbox, and the gap down to the next one.
+## The first printed checkbox, and the gap down to the next one.
 @export var check_first_pos := Vector2(0.374, 0.550)
 @export var check_row_spacing: float = 0.0645
 ## Optional: where a written cause name would go (only if you use one).
 @export var cause_value_pos := Vector2(0.395, 0.545)
-## Hitboxes over the printed RETRY / QUIT boxes.
+## Hitboxes over the printed retry / quit boxes.
 @export var retry_rect := Rect2(0.4328, 0.8056, 0.1172, 0.0694)
 @export var quit_rect := Rect2(0.4560, 0.8800, 0.0700, 0.0500)
 
 @export_group("Extra text (the board art already draws its own)")
-## These are EMPTY on purpose — the clipboard art has the words printed.
-## Fill one only if your art stops drawing it.
+## These are empty - the clipboard art has the words printed.
 @export var header_text: String = ""
 @export var header_pos := Vector2(0.360, 0.150)
 @export var time_label_text: String = ""
@@ -72,7 +59,7 @@ const ART_SIZE := Vector2(640, 360)
 @export var digit_scale: float = 1.0
 
 @export_group("Flow")
-## Scene loaded by QUIT.
+## Scene loaded by quit.
 @export_file("*.tscn") var main_menu_scene: String = ""
 
 signal player_died(cause_id: String)
@@ -116,14 +103,11 @@ func _ready() -> void:
 
 func _load_causes() -> void:
 	causes.clear()
-	var dir := DirAccess.open(CAUSES_DIR)
-	if dir == null:
-		return
-	for file in dir.get_files():
-		if file.get_extension() == "tres" or file.get_extension() == "res":
-			var r := load(CAUSES_DIR + "/" + file)
-			if r is DeathCause:
-				causes.append(r)
+	# ResList: works in the editor and in an exported build.
+	for path in ResList.tres_files(CAUSES_DIR):
+		var r := load(path)
+		if r is DeathCause:
+			causes.append(r)
 
 
 ## True when the clock is drawn from the number images.
@@ -138,14 +122,14 @@ func _load_digits() -> void:
 		if ResourceLoader.exists(path):
 			_digits.append(load(path))
 	if _digits.size() < 10:
-		_digits.clear()          # incomplete set: fall back to the font
+		_digits.clear()  # incomplete set: fall back to the font
 
 
 func _load_frames() -> void:
 	if board_frames == null and ResourceLoader.exists(FRAMES_RES):
 		board_frames = load(FRAMES_RES)
 	if board_frames == null and ResourceLoader.exists(STATIC_ART):
-		_still = load(STATIC_ART)            # no SpriteFrames? use the still board
+		_still = load(STATIC_ART)  # no SpriteFrames? use the still board
 
 
 func get_cause(id: String) -> DeathCause:
@@ -161,9 +145,7 @@ func set_respawn(world_pos: Vector2) -> void:
 	_has_fallback = true
 
 
-# ==========================================================================
-# dying
-# ==========================================================================
+# ========================================================================== dying
 
 func kill(cause_id: String = "", anim_seconds: float = -1.0) -> void:
 	if is_dead:
@@ -171,7 +153,7 @@ func kill(cause_id: String = "", anim_seconds: float = -1.0) -> void:
 	is_dead = true
 	last_cause_id = cause_id
 	if cause_id != "":
-		Flags.set_flag("died_of:" + cause_id)      # remember every cause seen
+		Flags.set_flag("died_of:" + cause_id)  # remember every cause seen
 	Flags.add_flag("death_count")
 	player_died.emit(cause_id)
 
@@ -211,14 +193,14 @@ func show_screen() -> void:
 	_prepare_texts()
 	_layout()
 	for w in _writing:
-		w.visible = false                    # nothing written yet
+		w.visible = false  # nothing written yet
 	_retry.disabled = true
 	_quit.disabled = true
 	_frame.texture = _first_frame()
 	_layer.visible = true
 	get_tree().paused = true
 
-	# 2. slide up
+	# 2.
 	var h := get_viewport().get_visible_rect().size.y
 	_root.position.y = h
 	var tw := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -237,9 +219,9 @@ func show_screen() -> void:
 	await get_tree().create_timer(write_delay, true, false, true).timeout
 	for w in _writing:
 		if w == _time_value and using_digits():
-			continue                       # the images draw the clock instead
+			continue  # the images draw the clock instead
 		if w is Label and (w as Label).text == "":
-			continue                       # nothing to write there
+			continue  # nothing to write there
 		w.visible = true
 	# 5. now they can choose
 	_retry.disabled = false
@@ -258,8 +240,7 @@ func _prepare_texts() -> void:
 	_header.text = tr(header_text)
 	_time_label.text = tr(time_label_text)
 	_cause_label.text = tr(cause_label_text)
-	# with digit IMAGES the font label must stay EMPTY, or it prints the
-	# time a second time behind the drawn digits
+	# with digit images the font label must stay empty
 	_time_value.text = "" if using_digits() else _clock_text()
 	_cause_value.text = tr(c.label) if c else ""
 	_retry.text = tr(retry_text)
@@ -281,9 +262,7 @@ func _clock_text() -> String:
 	return "%d:%02d %s" % [h, t.minute, "AM" if t.hour < 12 else "PM"]
 
 
-# ==========================================================================
-# retry / quit
-# ==========================================================================
+# ========================================================================== retry / quit
 
 func _on_retry() -> void:
 	_layer.visible = false
@@ -291,7 +270,7 @@ func _on_retry() -> void:
 	is_dead = false
 	var n: int = int(Flags.get_flag("prescription_current", -1))
 	if n >= 0 and Prescription.get_checkpoint(n) != null:
-		Prescription.apply(n)                     # back to the last checkpoint
+		Prescription.apply(n)  # back to the last checkpoint
 	else:
 		get_tree().reload_current_scene()
 		if _has_fallback:
@@ -314,9 +293,7 @@ func _on_quit() -> void:
 		push_warning("Deaths: main_menu_scene is empty — set it on the autoload.")
 
 
-# ==========================================================================
-# UI
-# ==========================================================================
+# ========================================================================== UI
 
 func _build_ui() -> void:
 	_layer = CanvasLayer.new()
@@ -367,15 +344,13 @@ func _build_ui() -> void:
 	_check.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(_check)
 
-	# The board art already draws the RETRY / QUIT boxes, so these are
-	# invisible hitboxes sitting exactly on top of them.
+	# The board art already draws the retry / quit boxes
 	_retry = _make_hitbox()
 	_retry.pressed.connect(_on_retry)
 	_quit = _make_hitbox()
 	_quit.pressed.connect(_on_quit)
 
-	# everything that "gets written" after the animation
-	# what "gets written" once the board animation finishes
+	# everything that "gets written" after the animation what "gets written" once the board
 	_writing = [_header, _time_label, _time_value, _cause_label, _cause_value,
 			_check, _clock_root]
 	_layer.visible = false

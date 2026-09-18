@@ -1,29 +1,28 @@
 class_name PopupWindow extends Window
-## One live popup window, built from a PopupWindowDef.
-## You don't make these yourself — PopupWindows.open() does.
+## One live popup window, built from a PopupWindowDef. You don't make these
+## yourself - PopupWindows.open() does.
 
 signal closed(def: PopupWindowDef)
-## Fires once a PORTAL window's separate scene is alive inside it, handing
-## you the scene's root node so you can talk to it from the main game.
+## Fires once a PORTAL window's separate scene is alive inside
 signal portal_ready(scene_root: Node)
 
 var def: PopupWindowDef
 ## For PORTAL windows showing a separate scene: that scene's root node.
 var portal_root: Node = null
-## The camera looking into a PORTAL window. Move it yourself if you like.
+## The camera looking into a PORTAL window.
 var portal_camera: Camera2D = null
-var _portal_anchor := Vector2i.ZERO      ## window pos when the portal opened
-var _portal_base := Vector2.ZERO         ## camera pos when the portal opened
+var _portal_anchor := Vector2i.ZERO  # window pos when the portal opened
+var _portal_base := Vector2.ZERO  # camera pos when the portal opened
 var _portal_target := Vector2.ZERO
 
 var _root: Control
 var _bg: ColorRect
-var _frame: NinePatchRect          ## the skin's nine-slice art
-var _titlebar: Control             ## the skin's title bar strip
-var _icon_rect: TextureRect        ## the logo in that bar
+var _frame: NinePatchRect  # the skin's nine-slice art
+var _titlebar: Control  # the skin's title bar strip
+var _icon_rect: TextureRect  # the logo in that bar
 var _title_label: Label
 var _close_btn: Control
-var _content: Control              ## everything the window SHOWS goes in here
+var _content: Control  # everything the window shows goes in here
 var _grip: Control
 var _resizing := false
 var _resize_from := Vector2i.ZERO
@@ -42,9 +41,7 @@ var _steps: int = 0
 var _last_free_position := Vector2i.ZERO
 var _blockers_touching: Array = []
 
-## NOTE: this script extends Window, and Window has a BUILT-IN enum called
-## `Flags` (FLAG_BORDERLESS and friends). That native enum shadows our Flags
-## autoload inside this file, so we fetch the autoload by path instead.
+# note: this script extends Window, and Window has a built-in enum called `Flags`
 @onready var _flags: Node = get_node_or_null("/root/Flags")
 
 
@@ -53,19 +50,16 @@ func setup(d: PopupWindowDef) -> void:
 	# --- the window itself ---
 	title = tr(d.title)
 	size = d.size
-	# A skin draws its own frame, so the OS chrome has to go — otherwise you
-	# get your title bar underneath the operating system's one.
+	# A skin draws its own frame, so the OS chrome has to go
 	borderless = d.borderless or d.skin != null
 	unresizable = not d.user_can_resize
 	always_on_top = d.always_on_top and d.depth != PopupWindowDef.Depth.BELOW_GAME
 	transparent = d.transparent
 	transparent_bg = d.transparent
-	# A REAL window: focusable + listed in the taskbar. Making it
-	# unfocusable is what made popups feel "weak" — the OS treats them as
-	# floating decorations rather than programs.
+	# A real window: focusable + listed in the taskbar.
 	unfocusable = d.unfocusable
 	set_flag(Window.FLAG_NO_FOCUS, d.unfocusable)
-	set_flag(Window.FLAG_POPUP, false)          # a popup would auto-close
+	set_flag(Window.FLAG_POPUP, false)  # a popup would auto-close
 	if not d.show_in_taskbar:
 		set_flag(Window.FLAG_NO_FOCUS, true)
 
@@ -98,6 +92,7 @@ func setup(d: PopupWindowDef) -> void:
 		var op := AudioStreamPlayer.new()
 		op.stream = d.open_sound
 		op.volume_db = d.open_sound_volume_db
+		BusRoute.use(op, "SFX")
 		add_child(op)
 		op.play()
 
@@ -106,6 +101,7 @@ func setup(d: PopupWindowDef) -> void:
 		_audio = AudioStreamPlayer.new()
 		_audio.stream = d.sound
 		_audio.volume_db = d.sound_volume_db - (40.0 if d.sound_fade > 0.0 else 0.0)
+		BusRoute.use(_audio, "Ambience")
 		add_child(_audio)
 		_audio.play()
 		if d.sound_loops:
@@ -130,12 +126,9 @@ func setup(d: PopupWindowDef) -> void:
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 
-
 # --- the skin: your own frame, title bar, logo and close button ------------
 
-## Builds everything the SKIN draws, and creates the content area that the
-## window's actual contents live inside. With no skin, the content area is
-## simply the whole window and nothing else is drawn.
+## Builds everything the skin draws, and creates the content area that the window's actual
 func _build_chrome() -> void:
 	var sk: WindowSkin = def.skin
 
@@ -169,13 +162,11 @@ func _build_chrome() -> void:
 	if sk.title_bar_height > 0:
 		_titlebar = Control.new()
 		_titlebar.set_anchors_preset(Control.PRESET_TOP_WIDE)
-		# Anchored left-to-right, so set the BOTTOM OFFSET rather than .size —
-		# assigning size on non-equal opposite anchors is overridden after
-		# _ready() and Godot warns about it.
+		# Anchored left-to-right, so set the bottom offset rather than .size
 		_titlebar.offset_top = 0
 		_titlebar.offset_bottom = sk.title_bar_height
 		_titlebar.custom_minimum_size.y = sk.title_bar_height
-		# STOP so it can catch drags; the frame art still shows through
+		# stop so it can catch drags; the frame art still shows through
 		_titlebar.mouse_filter = Control.MOUSE_FILTER_STOP
 		_root.add_child(_titlebar)
 
@@ -271,7 +262,7 @@ func _make_close_button(sk: WindowSkin) -> Control:
 		b.pressed.connect(_on_skin_close)
 		holder.add_child(b)
 	else:
-		# no art supplied yet — a plain X so the window is still closable
+		# no art supplied yet - a plain X so the window is still closable
 		var b2 := Button.new()
 		b2.text = "X"
 		b2.flat = true
@@ -307,6 +298,7 @@ func _on_skin_close() -> void:
 	if def.skin and def.skin.close_click_sound:
 		var p := AudioStreamPlayer.new()
 		p.stream = def.skin.close_click_sound
+		BusRoute.use(p, "UI")
 		get_tree().root.add_child(p)
 		p.play()
 		p.finished.connect(p.queue_free)
@@ -328,13 +320,7 @@ func _on_grip_input(event: InputEvent) -> void:
 
 # --- the logo --------------------------------------------------------------
 
-## Change this window's logo while it's open. Works mid-sentence, mid-chain,
-## whenever you like:
-##     var w = PopupWindows.open_id("whisper_1")
-##     w.set_icon_texture(load("res://art/logo_bad.png"))
-##
-## Only works on a SKINNED window — the operating system won't let a single
-## program give each of its windows a different taskbar icon.
+## Change this window's logo while it's open.
 func set_icon_texture(tex: Texture2D) -> void:
 	if _icon_rect == null:
 		if def and def.skin == null:
@@ -353,15 +339,12 @@ func set_window_title(t: String) -> void:
 
 # --- contents --------------------------------------------------------------
 
-## Where the window's actual contents go: inside the skin's content area if
-## there is one, otherwise straight onto the root.
+## Where the window's actual contents go: inside the skin's content area if there
 func _content_parent() -> Control:
 	return _content if _content != null else _root
 
 
-## The usable area for contents, in pixels — the window minus the skin's
-## frame and title bar. Text motion uses this so words never sit under
-## your title bar or outside your frame.
+## The usable area for contents, in pixels - the window minus the skin's frame and title bar.
 func _content_size() -> Vector2:
 	if def.skin:
 		var sk: WindowSkin = def.skin
@@ -371,8 +354,7 @@ func _content_size() -> Vector2:
 	return Vector2(def.size)
 
 
-## Builds whatever this window shows, from `def`. Called on setup and again
-## every time the window morphs into a different def.
+## Builds whatever this window shows, from `def`.
 func _build_contents() -> void:
 	match def.kind:
 		PopupWindowDef.Kind.TEXT:
@@ -382,11 +364,10 @@ func _build_contents() -> void:
 		PopupWindowDef.Kind.IMAGE:
 			_build_image()
 		PopupWindowDef.Kind.SOUND:
-			pass                      # nothing to show
+			pass  # nothing to show
 
 
-## THE MORPH. Same OS window, different contents — it doesn't blink, doesn't
-## move, keeps its taskbar entry. It just becomes something else.
+## the morph.
 func morph_to(d: PopupWindowDef) -> void:
 	if _closing or d == null:
 		return
@@ -417,16 +398,14 @@ func morph_to(d: PopupWindowDef) -> void:
 	portal_root = null
 	for c in _root.get_children():
 		c.queue_free()
-	# they're freed at the end of the frame, so detach them now or the new
-	# chrome is built alongside the old one for a frame
+	# they're freed at the end of the frame, so detach them now or the new chrome is built
 	for c2 in _root.get_children():
 		_root.remove_child(c2)
 	if _audio and is_instance_valid(_audio):
 		_audio.queue_free()
 		_audio = null
 
-	# The manager tracks live windows by id, so tell it this one is now a
-	# different def — otherwise close_id() and "already open" checks break.
+	# The manager tracks live windows by id, so tell it this one is now a different def
 	var pw := get_node_or_null("/root/PopupWindows")
 	if pw and pw.has_method("rekey_window"):
 		pw.rekey_window(old_def.id, d.id, self)
@@ -458,12 +437,14 @@ func morph_to(d: PopupWindowDef) -> void:
 		var op := AudioStreamPlayer.new()
 		op.stream = d.open_sound
 		op.volume_db = d.open_sound_volume_db
+		BusRoute.use(op, "SFX")
 		add_child(op)
 		op.play()
 	if d.sound:
 		_audio = AudioStreamPlayer.new()
 		_audio.stream = d.sound
 		_audio.volume_db = d.sound_volume_db
+		BusRoute.use(_audio, "Ambience")
 		add_child(_audio)
 		_audio.play()
 		if d.sound_loops:
@@ -534,19 +515,10 @@ func _build_portal() -> void:
 	svc.add_child(sv)
 
 	if def.portal_same_world and def.portal_scene == null:
-		# NOT SUPPORTED, AND IT CRASHES GODOT — see README 37.
-		# Sharing the level's World2D with a SubViewport that lives inside a
-		# separate OS window makes the renderer recurse and Godot dies with a
-		# hard segfault (signal 11), not a catchable error. Verified on 4.4.1.
-		# It never actually worked: before, an unrelated null-tree bug made
-		# the assignment silently fail, which is the only reason it looked OK.
-		#
-		# To show THIS level from another angle, put a copy of the level in
-		# `portal_scene`. It runs as its own world, which is safe.
 		push_warning("PopupWindow '%s': portal_same_world isn't supported "
 				% def.id
 				+ "(it crashes Godot). Put a copy of the level in portal_scene "
-				+ "instead — see README 37.")
+				+ "instead - see README, Popup windows.")
 		var msg := Label.new()
 		msg.text = "no portal scene"
 		msg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -555,12 +527,6 @@ func _build_portal() -> void:
 		msg.modulate = Color(1, 1, 1, 0.4)
 		_content_parent().add_child(msg)
 	if def.portal_scene:
-		# ITS OWN LITTLE WORLD — a completely separate scene running inside
-		# this window. Sami is not in there and cannot go in there.
-		#
-		# It gets its own World2D, so its physics and lighting are entirely
-		# separate from the main level. Put a RadioReactor inside that scene
-		# and the player can change it with the radio dial while watching.
 		sv.own_world_3d = false
 		sv.world_2d = World2D.new()
 		sv.handle_input_locally = false
@@ -569,9 +535,7 @@ func _build_portal() -> void:
 		sv.add_child(inst)
 		portal_root = inst
 
-		# THE MISSING PIECE: a separate-world portal had no camera at all,
-		# so the view sat at the scene's origin and nothing could ever move
-		# it. Use the scene's own camera if it has one, otherwise make one.
+		# the missing piece: a separate-world portal had no camera
 		var cam2 := _find_camera(inst)
 		if cam2 == null and def.portal_make_camera:
 			cam2 = Camera2D.new()
@@ -598,8 +562,7 @@ func _find_camera(node: Node) -> Camera2D:
 	return null
 
 
-## Remembers where the window and the camera started, so dragging can be
-## measured against it.
+## Remembers where the window and the camera started, so dragging can be measured against it.
 func _arm_follow(cam: Camera2D) -> void:
 	_portal_anchor = position
 	_portal_base = cam.global_position
@@ -607,21 +570,19 @@ func _arm_follow(cam: Camera2D) -> void:
 
 
 ## Moves the portal camera to match how far the window has been dragged.
-## Called every frame, so it works whether the player dragged the window by
-## the title bar, by a skin's custom drag, or code moved it.
 func _update_portal_follow(delta: float) -> void:
 	if portal_camera == null or not is_instance_valid(portal_camera):
 		return
-	if def.portal_follow == 0:                       # Fixed
+	if def.portal_follow == 0:  # Fixed
 		return
 
-	if def.portal_follow == 1:                       # Desktop
+	if def.portal_follow == 1:  # Desktop
 		# how far this window has been dragged since it opened
 		var moved := Vector2(position - _portal_anchor)
 		var dir := -1.0 if def.portal_follow_invert else 1.0
 		_portal_target = _portal_base + moved * def.portal_follow_scale * dir
-	else:                                            # World
-		# where the window physically sits over THIS level right now
+	else:  # World
+		# where the window physically sits over this level right now
 		var tree := get_tree()
 		if tree == null:
 			return
@@ -635,9 +596,7 @@ func _update_portal_follow(delta: float) -> void:
 		portal_camera.global_position = _portal_target
 
 
-## Re-anchors the follow to wherever the window is NOW, so the current view
-## becomes the new starting point. Call it if you move the window in code
-## and don't want the view to jump.
+## Re-anchors the follow to wherever the window is now
 func reset_portal_anchor() -> void:
 	if portal_camera:
 		_arm_follow(portal_camera)
@@ -695,7 +654,7 @@ func _process(delta: float) -> void:
 	# a portal view slides as the window is dragged
 	_update_portal_follow(delta)
 
-	# the change timer — turn into another window
+	# the change timer - turn into another window
 	if _change_left >= 0.0:
 		_change_left -= delta
 		if _change_left <= 0.0:
@@ -715,8 +674,6 @@ func _process(delta: float) -> void:
 
 
 ## Compares this window's rectangle against every WindowBlocker in the level.
-## Runs whether the window was dragged by the player, by the OS title bar, or
-## moved by code — so nothing can sneak past.
 func _check_blockers() -> void:
 	var tree := get_tree()
 	if tree == null:
@@ -752,7 +709,7 @@ func _check_blockers() -> void:
 	_blockers_touching = hit
 
 	if must_stop:
-		# shove it back where it was still free — this is the "wall"
+		# shove it back where it was still free - this is the "wall"
 		position = _last_free_position
 		_base_position = _last_free_position
 	else:
@@ -781,16 +738,14 @@ func remember_position() -> void:
 	_last_free_position = position
 
 
-# --- reading / writing the body text ---------------------------------------
-# WindowBlocker uses these to change what a window says when it bumps
-# into something in the level.
+# --- reading / writing the body text --------------------------------------- WindowBlocker
 
 ## The words currently shown in the window ("" for non-TEXT windows).
 func get_body_text() -> String:
 	return _label.text if _label else ""
 
 
-## Change the words shown, mid-life. Restarts the typewriter.
+## Change the words shown, mid-life.
 func set_body_text(t: String) -> void:
 	if _label == null:
 		return
@@ -825,7 +780,8 @@ func close_window() -> void:
 		var cp := AudioStreamPlayer.new()
 		cp.stream = def.close_sound
 		cp.volume_db = def.close_sound_volume_db
-		get_tree().root.add_child(cp)       # outlives this window
+		BusRoute.use(cp, "SFX")
+		get_tree().root.add_child(cp)  # outlives this window
 		cp.play()
 		cp.finished.connect(cp.queue_free)
 	if _audio and def.sound_fade > 0.0:

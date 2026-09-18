@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://b34ba4i1pfeqq"]
+[gd_scene load_steps=4 format=3 uid="uid://npcv2base0001"]
 
-[ext_resource type="Script" uid="uid://bp4il55ijplfm" path="res://FD_Testing/GameSystems/NPC/Scripts/npc.gd" id="1_npc"]
-[ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/NPC/Scripts/npc.gd" id="1_npc"]
+[ext_resource type="PackedScene" uid="uid://dlgv2trigger01" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npc"]
+radius = 10.0
+height = 30.0
 
-[node name="NPC" type="CharacterBody2D" unique_id=1041634814]
-collision_layer = 0
-collision_mask = 0
+[node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_npc")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1192312158]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1033713849]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_npc")
 
-[node name="DialogTrigger" parent="." unique_id=335880919 instance=ExtResource("2_trg")]
+[node name="DialogTrigger" parent="." instance=ExtResource("2_trg")]

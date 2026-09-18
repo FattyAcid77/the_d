@@ -1,24 +1,7 @@
 class_name RadioReactor extends Node
-## Put this INSIDE the scene that a PORTAL window shows, and the radio dial
-## in the main game starts changing that room, live, while the player watches
-## through the window.
-##
-## THE IDEA
-## Sami can't go in there. He can't reach it, and he never will. But the
-## PLAYER can — by turning a dial. The only thing crossing between the two
-## worlds is a radio frequency.
-##
-## HOW TO SET IT UP
-##   1. Build the other room as its own scene, e.g. OtherRoom.tscn.
-##   2. Add a Node to it, attach this script.
-##   3. Fill its `bands` array with RadioBand .tres files —
-##      "at 1120, show the door", "at 640, play the flicker animation".
-##   4. Make a PopupWindowDef with kind = PORTAL, portal_same_world = OFF,
-##      and portal_scene = OtherRoom.tscn.
-##   5. Open that window. Turn the dial. Watch the room change.
-##
-## It reads the radio through RadioLink, so the other developer's radio code
-## is never touched.
+## Put this inside the scene that a PORTAL window shows, and the radio dial in
+## the main game starts changing that room, live, while the player watches
+## through the window. the idea Sami can't go in there.
 
 signal band_entered(id: String)
 signal band_exited(id: String)
@@ -26,24 +9,23 @@ signal band_exited(id: String)
 ## The frequencies this room listens to, and what each one does.
 @export var bands: Array[RadioBand] = []
 
-## How often to check the dial, in seconds. 0 = every frame.
-## A small value like 0.1 is plenty and costs nothing.
+## How often to check the dial, in seconds.
 @export var poll_interval: float = 0.05
 
-## Print what it's doing. Very useful while tuning the numbers.
+## Print what it's doing.
 @export var debug_log: bool = false
 
 var _radio: Node
-var _active: Dictionary = {}        ## band -> true
-var _latched: Dictionary = {}       ## band -> true, never undone
-var _holding: Dictionary = {}       ## band -> seconds held so far
-var _sounds: Dictionary = {}        ## band -> AudioStreamPlayer
+var _active: Dictionary = {}  # band -> true
+var _latched: Dictionary = {}  # band -> true, never undone
+var _holding: Dictionary = {}  # band -> seconds held so far
+var _sounds: Dictionary = {}  # band -> AudioStreamPlayer
 var _clock: float = 0.0
 
 
 func _ready() -> void:
-	# The portal scene runs inside a SubViewport, so it can't reach the main
-	# tree by relative path — always go through /root.
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
+	# The portal scene runs inside a SubViewport
 	_radio = get_node_or_null("/root/RadioLink")
 	if _radio == null:
 		push_warning("RadioReactor: no RadioLink autoload — this room won't react.")
@@ -162,7 +144,7 @@ func _do(band: RadioBand, entering: bool) -> void:
 					and node.has_method(band.value_name):
 				node.callv(band.value_name, band.value_args)
 		RadioBand.Do.SET_FLAG, RadioBand.Do.NOTHING:
-			pass                   # the flag work already happened above
+			pass  # the flag work already happened above
 
 
 # --- sound -----------------------------------------------------------------
@@ -173,6 +155,7 @@ func _start_sound(band: RadioBand) -> void:
 	var p := AudioStreamPlayer.new()
 	p.stream = band.sound
 	p.volume_db = band.sound_volume_db
+	BusRoute.use(p, "Ambience")
 	add_child(p)
 	p.play()
 	_sounds[band] = p

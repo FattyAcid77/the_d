@@ -1,15 +1,10 @@
 class_name ToxicArea extends Area2D
 ## Air that kills unless you hold your breath. Add a CollisionShape2D and
 ## place it over the bad room.
-##
-## While the player is inside WITHOUT holding their breath, a countdown runs
-## (`grace_seconds`) and then they die. Holding their breath pauses it —
-## and because breath only lasts 16 seconds, big toxic rooms become a real
-## crossing problem.
 
 signal player_entered
 signal player_exited
-signal warning(time_left: float)     ## fires each frame while the timer runs
+signal warning(time_left: float)  # fires each frame while the timer runs
 
 ## Which DeathCause is used when the air gets them.
 @export var death_cause: String = "unknown"
@@ -20,18 +15,24 @@ signal warning(time_left: float)     ## fires each frame while the timer runs
 ## Does the timer reset when they leave, or stay where it was?
 @export var reset_on_exit: bool = true
 
-## Optional: only dangerous once this flag is set (a gas leak that starts
-## later in the story). Empty = always dangerous.
+## Optional: only dangerous once this flag is set (a gas leak that starts later in the story).
 @export var active_flag: String = ""
 
 ## Optional: harmless once this flag is set (the vents got fixed).
 @export var disabled_flag: String = ""
+
+@export_group("Sound")
+## Loops the whole time Sami is inside - the gas hiss, the hum.
+@export var inside_sound_id: String = ""
+## Seconds to fade the loop in / out.
+@export var inside_sound_fade: float = 0.5
 
 var _player: Node2D = null
 var _timer: float = 0.0
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	body_entered.connect(_on_entered)
 	body_exited.connect(_on_exited)
 	_timer = grace_seconds
@@ -41,7 +42,7 @@ func _process(delta: float) -> void:
 	if _player == null or not is_active() or Deaths.is_dead:
 		return
 	if _is_protected():
-		return                       # holding their breath: safe
+		return  # holding their breath: safe
 	_timer -= delta
 	warning.emit(maxf(0.0, _timer))
 	if _timer <= 0.0:
@@ -72,6 +73,10 @@ func _on_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") or body is Player:
 		_player = body
 		player_entered.emit()
+		if inside_sound_id != "":
+			var snd := get_node_or_null("/root/Sound")
+			if snd and snd.has_method("start_loop"):
+				snd.start_loop("toxic:" + str(get_instance_id()), inside_sound_id, inside_sound_fade)
 
 
 func _on_exited(body: Node2D) -> void:
@@ -80,3 +85,14 @@ func _on_exited(body: Node2D) -> void:
 		if reset_on_exit:
 			_timer = grace_seconds
 		player_exited.emit()
+		_stop_hum()
+
+
+func _stop_hum() -> void:
+	var snd := get_node_or_null("/root/Sound")
+	if snd and snd.has_method("stop_loop"):
+		snd.stop_loop("toxic:" + str(get_instance_id()), inside_sound_fade)
+
+
+func _exit_tree() -> void:
+	_stop_hum()

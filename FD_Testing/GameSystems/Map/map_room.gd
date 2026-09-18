@@ -1,29 +1,18 @@
 class_name MapRoom extends Node2D
-## Drop ONE of these into each room scene and the map does the rest.
-##
-## The moment the scene loads, this tells MapRooms which room Sami is in,
-## marks it discovered (saved as a flag), and hands over the room's bounds so
-## the little Sami on the map can track his real position inside it.
-##
-## SCENE SHAPE — either works:
-##   MapRoom (Node2D, this script)
-##   └── CollisionShape2D     <- a rectangle covering the walkable floor
-## or just set `bounds` in the Inspector and skip the shape.
-##
-## THAT IS THE WHOLE SETUP. One node per room scene, and `room_id` filled in.
+## Drop one of these into each room scene and the map does the rest. The
+## moment the scene loads, this tells MapRooms which room Sami is in, marks it
+## discovered (saved as a flag), and hands over the room's bounds so the
+## little Sami on the map can track his real position inside it.
 
 @export_group("Which room")
 ## Must match the `id` on this room's MapRoomDef .tres.
 @export var room_id: String = ""
 
-## The room's area in WORLD coordinates, used to work out where Sami is
-## inside it. Leave at zero and it's read from a CollisionShape2D child.
+## The room's area in world coordinates, used to work out where Sami is inside it.
 @export var bounds: Rect2 = Rect2()
 
 @export_group("Behaviour")
-## Mark this room discovered as soon as the scene loads. Off means it stays
-## hidden until something calls MapRooms.discover("id") — for a room he can
-## see into but hasn't earned yet.
+## Mark this room discovered as soon as the scene loads.
 @export var discover_on_enter: bool = true
 
 ## Draw the bounds in-game while you're lining them up.
@@ -81,4 +70,4 @@ func _draw() -> void:
 	draw_rect(Rect2(b.position - global_position, b.size),
 			Color(0.2, 1.0, 0.4, 0.25), true)
 	draw_rect(Rect2(b.position - global_position, b.size),
-			Color(0.8, 0, 1.0, 0.9), false, 1.0)
+			Color(0.2, 1.0, 0.4, 0.9), false, 1.0)

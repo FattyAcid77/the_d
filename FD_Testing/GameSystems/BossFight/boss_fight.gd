@@ -1,14 +1,5 @@
 class_name BossFight extends Node
-## The Yazzed fight, start to finish.
-##
-##   STAGE 1  the TV is DOWN. He charges dumbly and slams into it.
-##            One TV hit -> stage 2.
-##   STAGE 2  the TV LIFTS AWAY. Chip his HP with traps and throwables
-##            until it reaches `stage3_hp`. Then the TV comes back down.
-##   STAGE 3  he's fast, aggressive and BOUNCY, and never aims at the TV.
-##            Dodge late so he overshoots into it -> he dies.
-##
-## Sami dying resets the whole fight (Yazzed back to full).
+## The Yazzed fight, start to finish. stage 1 the TV is down.
 
 signal fight_started
 signal stage_changed(stage: int)
@@ -19,23 +10,20 @@ signal fight_reset
 @export_group("Pieces")
 @export var boss: YazzedBoss
 @export var tv: BossTV
-## Traps/throwables in the room — they're reset with the fight.
+## Traps/throwables in the room - they're reset with the fight.
 @export var objects: Array[Node] = []
 ## Optional juice node (screen shake, hit stop, flashes).
 @export var juice: Node
 
 @export_group("Start")
-## Start when the player walks into this Area2D. Leave empty to call
-## start_fight() yourself (from a cutscene or a dialog action).
+## Start when the player walks into this Area2D.
 @export var trigger_area: Area2D
 ## Dialog played before the fight begins (optional).
 @export var intro_dialog: Dialog
 @export var boss_name: String = "Yazzed"
 
 @export_group("Stages")
-## TESTING: which stage the fight begins at (1, 2 or 3). Set it to 3 to jump
-## straight to the bouncy phase instead of playing through. Leave at 1 for
-## the real game. Starting at 2 or 3 also sets Yazzed's HP to match.
+## testing: which stage the fight begins at (1, 2 or 3).
 @export_range(1, 3) var start_stage: int = 1
 ## HP Yazzed has when you start at stage 2 (defaults to his max).
 @export var start_stage2_hp: float = -1.0
@@ -43,7 +31,7 @@ signal fight_reset
 @export var stage3_hp: float = 50.0
 ## Pause between stages, so transitions breathe.
 @export var stage_pause: float = 1.2
-## Time the TV stays down in stage 1 before... nothing. It just waits.
+## Time the TV stays down in stage 1 before...
 @export var tv_lift_delay: float = 1.0
 
 @export_group("Ending")
@@ -68,6 +56,7 @@ var _stage_label: Label
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	if boss:
 		boss.tv_hit.connect(_on_tv_hit)
 		boss.damaged.connect(_on_boss_damaged)
@@ -164,7 +153,7 @@ func _on_tv_hit() -> void:
 		tv.take_hit()
 
 
-## The TV reports being struck — this is what moves the fight along.
+## The TV reports being struck - this is what moves the fight along.
 func _on_tv_struck() -> void:
 	if juice and juice.has_method("shake"):
 		juice.shake(12.0)
@@ -190,7 +179,7 @@ func _win() -> void:
 		await Cutscene.play_stream(victory_video)
 
 
-## Sami died — put everything back and start over.
+## Sami died - put everything back and start over.
 func reset_fight() -> void:
 	running = false
 	stage = 0

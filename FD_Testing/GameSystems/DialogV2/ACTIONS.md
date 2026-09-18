@@ -1,4 +1,9 @@
-# Everything a dialog line can DO
+# Dialog actions
+
+`action_name` is a dropdown; the bracket in each entry is the args it takes.
+Old files that store the plain verb (`set_flag`) still work. `custom` + `custom_action`
+emits your own name. `more_actions` holds extra `DialogActionStep`s that run in order.
+
 
 On any **DialogLine**, open the **Action** group in the Inspector and fill in:
 

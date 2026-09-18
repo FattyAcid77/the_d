@@ -1,12 +1,5 @@
 extends Node
-## MapRooms — the map's memory. Add as an Autoload named "MapRooms".
-##
-## Keeps track of which rooms Sami has found, which one he's standing in,
-## and where he is inside it. Discovery is stored as flags ("map:ward_3"),
-## so it saves and loads with everything else automatically.
-##
-## Rooms are loaded from Map/Rooms/*.tres the same way window definitions
-## are — drop a new .tres in and it exists.
+## MapRooms - the map's memory. Add as an Autoload named "MapRooms".
 
 signal room_discovered(id: String)
 signal room_changed(id: String)
@@ -36,20 +29,15 @@ func _ready() -> void:
 
 func _load_rooms() -> void:
 	rooms.clear()
-	var dir := DirAccess.open(ROOMS_DIR)
-	if dir == null:
+	# ResList: works in the editor and in an exported build.
+	if not ResList.dir_exists(ROOMS_DIR):
 		if debug_log:
 			print("MapRooms: no %s folder yet." % ROOMS_DIR)
 		return
-	dir.list_dir_begin()
-	var f := dir.get_next()
-	while f != "":
-		if not dir.current_is_dir() and f.get_extension() == "tres":
-			var r = load(ROOMS_DIR + "/" + f)
-			if r is MapRoomDef:
-				rooms.append(r)
-		f = dir.get_next()
-	dir.list_dir_end()
+	for path in ResList.tres_files(ROOMS_DIR):
+		var r = load(path)
+		if r is MapRoomDef:
+			rooms.append(r)
 	if debug_log:
 		print("MapRooms: loaded %d rooms." % rooms.size())
 
@@ -92,7 +80,7 @@ func discovered_count() -> int:
 
 # --- discovering -----------------------------------------------------------
 
-## Marks a room found. Safe to call repeatedly.
+## Marks a room found.
 func discover(id: String) -> void:
 	if id == "" or _flag(flag_prefix + id):
 		return
@@ -104,7 +92,7 @@ func discover(id: String) -> void:
 	room_discovered.emit(id)
 
 
-## Called by the MapRoom node when its scene loads. You don't call this.
+## Called by the MapRoom node when its scene loads.
 func set_current_room(id: String, bounds: Rect2, also_discover: bool) -> void:
 	current_bounds = bounds
 	if also_discover:
@@ -122,12 +110,7 @@ func clear_current_room(id: String) -> void:
 
 # --- where Sami is ---------------------------------------------------------
 
-## Sami's position on the 640x360 map canvas, or Vector2(-1,-1) if he can't
-## be placed (no current room, or the room has no bounds).
-##
-## Works by taking how far across the ROOM he is in the world, and putting
-## him the same fraction across that room's rectangle ON THE MAP. So he
-## moves smoothly inside a room instead of snapping to the middle of it.
+## Sami's position on the 640x360 map canvas, or Vector2(-1,-1) if he can't be placed
 func player_map_position(player_world: Vector2) -> Vector2:
 	if current_room == "":
 		return Vector2(-1, -1)
@@ -138,7 +121,7 @@ func player_map_position(player_world: Vector2) -> Vector2:
 	if on_map.size.x <= 0.0 or on_map.size.y <= 0.0:
 		return Vector2(-1, -1)
 	if current_bounds.size.x <= 0.0 or current_bounds.size.y <= 0.0:
-		return on_map.position + on_map.size * 0.5      # centre as a fallback
+		return on_map.position + on_map.size * 0.5  # centre as a fallback
 
 	var f := (player_world - current_bounds.position) / current_bounds.size
 	f.x = clampf(f.x, 0.0, 1.0)

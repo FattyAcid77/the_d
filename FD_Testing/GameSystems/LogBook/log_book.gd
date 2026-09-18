@@ -1,19 +1,14 @@
 extends Node
-## LogBook — add as an Autoload named "LogBook".
-## The knowledge board, drawn as a clipboard: notes pinned on the paper,
-## the world blurred behind it, sliding up from the bottom when opened.
-##
-## OPEN/CLOSE: the OPEN_ACTION input action (M as fallback), or LogBook.toggle()
-## CONTENT: LogEntry / LogDeduction / LogComment .tres files in ENTRIES_DIR.
-## Note art: LogEntry.note_icon (Notes/Note_1.png ...) sizes each card.
+## LogBook - add as an Autoload named "LogBook". The knowledge board, drawn as
+## a clipboard: notes pinned on the paper, the world blurred behind it,
+## sliding up from the bottom when opened.
 
 const ENTRIES_DIR := "res://FD_Testing/GameSystems/LogBook/Entries"
-const OPEN_ACTION := "log"          # <-- your input action name
+const OPEN_ACTION := "log"  # <-- your input action name
 const FRAME_ART := "res://FD_Testing/GameSystems/LogBook/BOARD_UI.png"
 const BLUR_SHADER := "res://FD_Testing/GameSystems/LogBook/blur_background.gdshader"
 
-## The clipboard art is 640x360 and the writable paper sits here inside it
-## (measured from BOARD_UI.png). Fractions of the art.
+## The clipboard art is 640x360 and the writable paper sits here inside
 const ART_SIZE := Vector2(640, 360)
 const PAPER_L := 0.3391
 const PAPER_T := 0.0667
@@ -23,7 +18,6 @@ const PAPER_B := 0.9306
 ## How much of the screen the clipboard fills (1.0 = edge to edge).
 @export var board_scale: float = 0.94
 ## Fine-tune the paper window inside the art: x, y, width, height fractions.
-## Defaults measured from BOARD_UI.png; change if the artist redraws it.
 @export var paper_rect := Rect2(PAPER_L, PAPER_T, PAPER_R - PAPER_L, PAPER_B - PAPER_T)
 
 const ZOOM_MIN := 0.5
@@ -39,26 +33,31 @@ const SPRING_DAMPING := 9.0
 const PAN_PADDING := 60.0
 
 @export var slide_seconds: float = 0.42
-## ON = the board is INFINITE: pan as far as you like in any direction.
-## OFF = panning is limited to the notes plus a margin.
+## on = the board is infinite: pan as far as you like in any direction.
 @export var infinite_board: bool = true
-## ON = the player can drag notes anywhere (positions are remembered).
+## on = the player can drag notes anywhere (positions are remembered).
 @export var player_can_rearrange: bool = false
-## ON = comment boxes marked dev_only are drawn (turn OFF for release).
+## on = comment boxes marked dev_only are drawn (turn off for release).
 @export var show_dev_comments: bool = true
 
 var entries: Array[LogEntry] = []
 var deductions: Array[LogDeduction] = []
 var comments: Array[LogComment] = []
+## Sound moments (SoundMap: LogBook.opened / closed / deduction_solved / deduction_wrong).
+signal opened
+signal closed
+signal deduction_solved(id: String)
+signal deduction_wrong(id: String, wrong_count: int)
+
 var is_open: bool = false
 
 var _layer: CanvasLayer
 var _blur: ColorRect
-var _root: Control          # slides up/down
+var _root: Control  # slides up/down
 var _frame: TextureRect
-var _svc: SubViewportContainer   # clips the paper area
+var _svc: SubViewportContainer  # clips the paper area
 var _sv: SubViewport
-var _board: Node2D          # pans/zooms inside the paper
+var _board: Node2D  # pans/zooms inside the paper
 var _lines: Node2D
 var _fact_panel: PanelContainer
 var _fact_title: Label
@@ -89,14 +88,12 @@ func _load_content() -> void:
 	entries.clear()
 	deductions.clear()
 	comments.clear()
-	var dir := DirAccess.open(ENTRIES_DIR)
-	if dir == null:
+	# ResList: works in the editor and in an exported build.
+	if not ResList.dir_exists(ENTRIES_DIR):
 		push_warning("LogBook: no entries folder at %s" % ENTRIES_DIR)
 		return
-	for file in dir.get_files():
-		if file.get_extension() != "tres" and file.get_extension() != "res":
-			continue
-		var r := load(ENTRIES_DIR + "/" + file)
+	for path in ResList.tres_files(ENTRIES_DIR):
+		var r := load(path)
 		if r is LogEntry:
 			entries.append(r)
 		elif r is LogDeduction:
@@ -128,13 +125,12 @@ func toggle() -> void:
 		open()
 
 
-## `animate` OFF makes it appear instantly with no slide. The Board uses that
-## when you switch TO the logbook tab, because the board is already up — only
-## opening the board itself should slide.
+## `animate` off makes it appear instantly with no slide.
 func open(animate: bool = true) -> void:
 	if is_open or DialogManager.is_active or Cutscene.is_playing:
 		return
 	is_open = true
+	opened.emit()
 	_was_paused = get_tree().paused
 	get_tree().paused = true
 	_layout()
@@ -160,6 +156,7 @@ func close(animate: bool = true) -> void:
 	if not is_open:
 		return
 	is_open = false
+	closed.emit()
 	_active_deduction = ""
 	_fact_panel.visible = false
 	if _tween and _tween.is_running():
@@ -253,11 +250,9 @@ func _zoom_at(factor: float, screen_point: Vector2) -> void:
 
 
 ## Keeps the notes reachable without locking the view in place.
-## The pan range is the content size plus a generous margin, so dragging
-## always moves — even when only one note is pinned.
 func _clamp_pan() -> void:
 	if infinite_board:
-		return          # no walls — pan forever in any direction
+		return  # no walls - pan forever in any direction
 	if _svc == null:
 		return
 	var view: Vector2 = _svc.size
@@ -367,7 +362,9 @@ func _evaluate(d: LogDeduction) -> void:
 		_connections.erase(d.id)
 		_refresh()
 		_show_text(d.result_title, d.result_text)
+		deduction_solved.emit(d.id)
 	else:
+		deduction_wrong.emit(d.id, wrong)
 		var c: Dictionary = _cards.get(d.id, {})
 		if not c.is_empty():
 			c.vel += Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * 800.0
@@ -391,7 +388,7 @@ func _build_ui() -> void:
 		_blur.material = mat
 		_blur.color = Color.WHITE
 	else:
-		_blur.color = Color(0.05, 0.05, 0.07, 0.85)   # fallback: plain dim
+		_blur.color = Color(0.05, 0.05, 0.07, 0.85)  # fallback: plain dim
 	_layer.add_child(_blur)
 
 	_root = Control.new()
@@ -407,8 +404,7 @@ func _build_ui() -> void:
 	_frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(_frame)
 
-	# A SubViewport is what really clips the notes to the paper:
-	# Control.clip_contents does NOT clip Node2D children.
+	# A SubViewport is what really clips the notes to the paper
 	_svc = SubViewportContainer.new()
 	_svc.stretch = true
 	_svc.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -644,7 +640,7 @@ func _make_card(id: String, home: Vector2, is_mystery: bool, e: LogEntry, d: Log
 			scale_mul = e.icon_scale
 			tilt = deg_to_rad(e.icon_tilt)
 		if icon:
-			# the note art decides the card's size — bigger note, bigger card
+			# the note art decides the card's size - bigger note, bigger card
 			card.size = Vector2(icon.get_width(), icon.get_height()) * scale_mul
 			var tex := TextureRect.new()
 			tex.texture = icon

@@ -1,28 +1,25 @@
 class_name BoardSettings extends Control
-## The SETTINGS tab.
-##
-## Language works properly and saves. Everything else is drawn as a visible,
-## clearly-labelled row that says it isn't wired up yet — so you can see the
-## shape of the finished menu while you build it, and nobody is fooled into
-## thinking a dead slider does something.
-##
-## To make a row real: set its `live` to true in `_rows()` and handle it in
-## `_on_row_changed()`. That's the only place you have to touch.
+## Settings tab: language dropdown and the six volume sliders, drawn on the
+## 640x360 art canvas. Fullscreen/controls rows are placeholders.
 
 @export_group("Where it sits on the 640x360 canvas")
 ## The usable area inside the clipboard.
-@export var content_rect: Rect2 = Rect2(248, 100, 150, 180)
-@export var row_height: float = 16.0
-@export var row_gap: float = 5.0
+@export var content_rect: Rect2 = Rect2(248, 96, 150, 190)
+@export var row_height: float = 13.0
+@export var row_gap: float = 4.0
 @export var label_width: float = 62.0
 
 @export_group("Words")
 @export var heading: String = "SETTINGS"
-@export var footer_note: String = "Sound and controls are not wired up yet."
+@export var footer_note: String = "Fullscreen and controls are not wired up yet."
 @export var heading_size: int = 10
 @export var label_size: int = 7
 @export var note_size: int = 6
 @export var font: Font
+
+@export_group("Sound")
+## Preview blip when a volume slider is released
+@export var preview_sound_id: String = "slider_preview"
 
 @export_group("Colours")
 @export var heading_color: Color = Color(0.22, 0.20, 0.15)
@@ -30,6 +27,8 @@ class_name BoardSettings extends Control
 @export var dead_color: Color = Color(0.45, 0.43, 0.36)
 @export var note_color: Color = Color(0.45, 0.43, 0.36)
 @export var rule_color: Color = Color(0.35, 0.33, 0.26, 0.35)
+## The ink the slider tracks and grabbers are drawn
+@export var slider_ink: Color = Color(0.28, 0.26, 0.20)
 
 @export_group("Debug")
 ## Outline the content area and every row while you line them up.
@@ -39,35 +38,42 @@ var _lang: LanguageSetting
 var _controls: Array = []
 
 
-## The menu, top to bottom. `live` = it actually does something.
+## The menu, top to bottom.
 func _rows() -> Array:
 	return [
-		{"key": "language", "label": "Language",    "live": true,  "kind": "dropdown"},
-		{"key": "master",   "label": "Volume",      "live": false, "kind": "slider"},
-		{"key": "music",    "label": "Music",       "live": false, "kind": "slider"},
-		{"key": "sfx",      "label": "Effects",     "live": false, "kind": "slider"},
-		{"key": "fullscr",  "label": "Fullscreen",  "live": false, "kind": "check"},
-		{"key": "controls", "label": "Controls",    "live": false, "kind": "button"},
+		{"key": "language", "label": "Language",   "live": true,  "kind": "dropdown"},
+		{"key": "Master",   "label": "Volume",     "live": true,  "kind": "volume"},
+		{"key": "Music",    "label": "Music",      "live": true,  "kind": "volume"},
+		{"key": "Ambience", "label": "Ambience",   "live": true,  "kind": "volume"},
+		{"key": "SFX",      "label": "Effects",    "live": true,  "kind": "volume"},
+		{"key": "UI",       "label": "Interface",  "live": true,  "kind": "volume"},
+		{"key": "Dialog",   "label": "Dialog",     "live": true,  "kind": "volume"},
+		{"key": "fullscr",  "label": "Fullscreen", "live": false, "kind": "check"},
+		{"key": "controls", "label": "Controls",   "live": false, "kind": "button"},
 	]
 
 
 func _ready() -> void:
-	# Sized to the 640x360 art canvas, NOT the viewport. The Board scales and
-	# centres the canvas, so drawing and mouse coordinates are both in plain
-	# art pixels — which is what makes the slots clickable at any resolution.
+	# Sized to the 640x360 art canvas, not the viewport.
 	position = Vector2.ZERO
 	size = Vector2(640, 360)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_build()
+	# stay honest if something else changes a volume
+	var snd := get_node_or_null("/root/Sound")
+	if snd and snd.has_signal("volume_changed"):
+		snd.volume_changed.connect(_on_external_volume)
 
 
 func _build() -> void:
+	var snd := get_node_or_null("/root/Sound")
 	var y := content_rect.position.y + float(heading_size) + 8.0
 	for row in _rows():
 		var x := content_rect.position.x + label_width
 		var w := content_rect.size.x - label_width
 		var c: Control = null
+		var live: bool = row["live"]
 
 		match row["kind"]:
 			"dropdown":
@@ -75,11 +81,20 @@ func _build() -> void:
 				_lang.label_text = ""
 				_lang.label_min_width = 0.0
 				c = _lang
-			"slider":
+			"volume":
 				var sl := HSlider.new()
 				sl.min_value = 0.0
-				sl.max_value = 100.0
-				sl.value = 80.0
+				sl.max_value = 1.0
+				sl.step = 0.01
+				if snd:
+					sl.value = snd.get_volume(row["key"])
+					sl.value_changed.connect(_on_volume_changed.bind(row["key"]))
+					sl.drag_ended.connect(_on_volume_released.bind(row["key"]))
+				else:
+					# no Sound autoload = the sliders show but are honest about being dead
+					sl.value = 1.0
+					live = false
+				_style_slider(sl)
 				c = sl
 			"check":
 				var cb := CheckBox.new()
@@ -97,20 +112,68 @@ func _build() -> void:
 
 		c.position = Vector2(x, y)
 		c.size = Vector2(w, row_height)
-		c.mouse_filter = Control.MOUSE_FILTER_STOP if row["live"] \
+		c.mouse_filter = Control.MOUSE_FILTER_STOP if live \
 				else Control.MOUSE_FILTER_IGNORE
-		# A dead control is visibly dead: greyed out and unclickable, so it
-		# reads as "coming soon" rather than "broken".
-		c.modulate = Color(1, 1, 1, 1) if row["live"] else Color(1, 1, 1, 0.4)
-		if not row["live"]:
+		# A dead control is visibly dead: greyed out and unclickable
+		c.modulate = Color(1, 1, 1, 1) if live else Color(1, 1, 1, 0.4)
+		if not live:
 			c.set_process_input(false)
 		add_child(c)
-		# LanguageSetting builds its own OptionButton at the default font
-		# size, which is huge next to these small rows. Shrink it to match.
+		# LanguageSetting builds its own OptionButton at the default font size
 		if row["kind"] == "dropdown":
 			_shrink_text(c)
 		_controls.append({"row": row, "node": c, "y": y})
 		y += row_height + row_gap
+
+
+## Ink-on-paper look for the sliders, drawn in code so it works today and swaps for art later
+func _style_slider(sl: HSlider) -> void:
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(slider_ink, 0.35)
+	track.content_margin_top = 2.0
+	track.content_margin_bottom = 2.0
+	var filled := StyleBoxFlat.new()
+	filled.bg_color = slider_ink
+	filled.content_margin_top = 2.0
+	filled.content_margin_bottom = 2.0
+	sl.add_theme_stylebox_override("slider", track)
+	sl.add_theme_stylebox_override("grabber_area", filled)
+	sl.add_theme_stylebox_override("grabber_area_highlight", filled)
+	var grab := GradientTexture2D.new()
+	grab.width = 6
+	grab.height = 10
+	var g := Gradient.new()
+	g.colors = PackedColorArray([slider_ink, slider_ink])
+	grab.gradient = g
+	sl.add_theme_icon_override("grabber", grab)
+	sl.add_theme_icon_override("grabber_highlight", grab)
+	sl.add_theme_icon_override("grabber_disabled", grab)
+
+
+func _on_volume_changed(value: float, category: String) -> void:
+	var snd := get_node_or_null("/root/Sound")
+	if snd:
+		snd.set_volume(category, value)
+
+
+func _on_volume_released(_moved: bool, category: String) -> void:
+	var snd := get_node_or_null("/root/Sound")
+	if snd == null or not snd.has_sound(preview_sound_id):
+		return
+	var d = snd.get_def(preview_sound_id)
+	if category == "Music":
+		snd.ui(preview_sound_id)  # don't stomp the actual music
+	elif d:
+		snd.play_stream(d.stream, category, d.volume_db)
+
+
+func _on_external_volume(category: String, value: float) -> void:
+	for entry in _controls:
+		if entry["row"].get("kind") == "volume" and entry["row"]["key"] == category:
+			var sl: HSlider = entry["node"]
+			if absf(sl.value - value) >= 0.005:
+				sl.set_value_no_signal(value)
+			return
 
 
 ## Makes every Label/Button inside a control use this menu's font size.
@@ -127,8 +190,7 @@ func refresh() -> void:
 	queue_redraw()
 
 
-## Where a real setting would report in. Only `language` reaches here today,
-## and LanguageSetting handles that itself.
+## Where a real setting would report in.
 func _on_row_changed(key: String, value) -> void:
 	match key:
 		_:

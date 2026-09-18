@@ -1,17 +1,7 @@
 @tool
 class_name YazzedBoss extends CharacterBody2D
-## Yazzed. He charges at Sami; what happens when he MISSES is what changes
+## Yazzed. He charges at Sami; what happens when he misses is what changes
 ## between stages.
-##
-##   STAGE 1  readable wind-up, and he's dumb — he overshoots into the TV.
-##   STAGE 2  same charging, but the TV is gone. Objects chip his HP.
-##   STAGE 3  fast, aggressive, and BOUNCY. First charge (and the bounce
-##            right after) aim at Sami; sometimes he charges a WALL on
-##            purpose to come back at Sami from a strange angle. Later
-##            bounces are random — but NEVER at the TV. The player has to
-##            dodge late so he overshoots into it.
-##
-## The BossFight node drives the stages; this script only does the moving.
 
 signal charge_started(target: Vector2)
 signal charge_ended
@@ -22,8 +12,7 @@ signal stunned_started(seconds: float)
 signal damaged(amount: float, hp_left: float)
 signal died
 
-## NOTE: named BossState, not State — the player's state.gd already
-## declares a global class called State and the two would collide.
+## note: named BossState, not State - the player's state.gd already declares a global class
 enum BossState { IDLE, TELEGRAPH, CHARGING, STUNNED, HURT, DEAD }
 
 @export_group("Health")
@@ -46,7 +35,7 @@ enum BossState { IDLE, TELEGRAPH, CHARGING, STUNNED, HURT, DEAD }
 @export var charge_speed_s3: float = 620.0
 ## Max wall bounces before the charge gives up.
 @export var max_bounces: int = 3
-## Chance he aims at a WALL instead of Sami, to bounce in from an angle.
+## Chance he aims at a wall instead of Sami, to bounce in from an angle.
 @export_range(0.0, 1.0) var wall_feint_chance: float = 0.35
 ## Speed kept after each bounce (1.0 = no loss).
 @export_range(0.1, 1.0) var bounce_speed_keep: float = 0.95
@@ -76,7 +65,7 @@ enum BossState { IDLE, TELEGRAPH, CHARGING, STUNNED, HURT, DEAD }
 var hp: float
 var stage: int = 1
 var state: BossState = BossState.IDLE
-var active: bool = false          ## the BossFight node turns this on
+var active: bool = false  # the BossFight node turns this on
 
 var _timer: float = 0.0
 var _dir := Vector2.RIGHT
@@ -90,6 +79,7 @@ var _aiming_at_wall := false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	hp = max_hp
 	if sprite:
 		_base_scale = sprite.scale
@@ -209,7 +199,7 @@ func _on_collision(col: KinematicCollision2D) -> void:
 func _bounce(normal: Vector2) -> void:
 	_bounces += 1
 	var new_dir := _dir.bounce(normal).normalized()
-	# the FIRST bounce hunts Sami; after that it's random, never the TV
+	# the first bounce hunts Sami; after that it's random, never the TV
 	if _bounces == 1 and _player:
 		new_dir = (_player.global_position - global_position).normalized()
 	else:
@@ -248,15 +238,14 @@ func _pick_direction() -> Vector2:
 	var to_player := Vector2.RIGHT
 	if _player:
 		to_player = (_player.global_position - global_position).normalized()
-	# stage 3: sometimes he charges a wall on purpose, to come back at Sami
-	# from an angle they aren't watching
+	# stage 3: sometimes he charges a wall, to come back at Sami from an angle they aren't
 	if stage >= 3 and randf() < wall_feint_chance:
 		_aiming_at_wall = true
 		return to_player.rotated(randf_range(PI * 0.35, PI * 0.75)).normalized()
 	return to_player
 
 
-## A random direction that does NOT point at the TV (stage 3 rule).
+## A random direction that does not point at the TV (stage 3 rule).
 func _random_safe_direction(fallback: Vector2) -> Vector2:
 	var tvs := get_tree().get_nodes_in_group("boss_tv")
 	for i in 12:
@@ -265,7 +254,7 @@ func _random_safe_direction(fallback: Vector2) -> Vector2:
 		for tv in tvs:
 			if tv is Node2D:
 				var to_tv: Vector2 = (tv.global_position - global_position).normalized()
-				if d.dot(to_tv) > 0.65:     # roughly pointing at the TV
+				if d.dot(to_tv) > 0.65:  # roughly pointing at the TV
 					ok = false
 					break
 		if ok:
@@ -281,7 +270,7 @@ func take_damage(amount: float) -> void:
 	hp = maxf(0.0, hp - amount)
 	damaged.emit(amount, hp)
 	if hp <= 0.0:
-		return                      # the BossFight node decides how he dies
+		return  # the BossFight node decides how he dies
 	_play(anim_hurt)
 
 

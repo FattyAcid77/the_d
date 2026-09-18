@@ -1,39 +1,32 @@
 class_name DialogUI extends CanvasLayer
-## The dialog box. DialogManager creates one and calls start(); runs while paused.
-##
-## CUSTOM LOOK: build the box however you like in dialog_ui.tscn, then drag your
-## nodes into the exported slots on the DialogUI root. text_label must be a
-## RichTextLabel with BBCode enabled.
+## The dialog box. DialogManager creates one and calls start(); runs while
+## paused.
 
 signal finished
 
-## Reading direction. AUTO detects per line: Arabic flows right-to-left and
-## right-aligns, English flows left-to-right. Force LTR or RTL to override.
+## Reading direction.
 enum TextDir { AUTO, LTR, RTL }
 
-@export var typewriter_speed: float = 40.0      ## characters per second
-@export var type_sound: AudioStream              ## short blip per character
+@export var typewriter_speed: float = 40.0  # characters per second
+@export var type_sound: AudioStream  # short blip per character
 @export var pitch_min: float = 0.9
 @export var pitch_max: float = 1.1
-@export var keyword_color: String = "#ffd24a"    ## colour of clickable words
+@export var keyword_color: String = "#ffd24a"  # colour of clickable words
 @export var text_direction_mode: TextDir = TextDir.AUTO
 ## Text of the "end conversation" button in the topic hub (Arabic works).
 @export var leave_label: String = "Leave"
 
-@export var box: Control                  ## the whole visual container to show/hide
-@export var portrait_rect: TextureRect    ## optional
+@export var box: Control  # the whole visual container to show/hide
+@export var portrait_rect: TextureRect  # optional
 @export var name_label: Label
 @export var text_label: RichTextLabel
-@export var choices_box: Container         ## where choice buttons are added
-@export var topics_box: Container          ## where topic buttons are added
-@export var leave_button: Button           ## the X — closes the dialog from anywhere
-@export var audio: AudioStreamPlayer       ## optional (typewriter blip)
-@export var layout_margin: MarginContainer ## the container that holds the text rows
+@export var choices_box: Container  # where choice buttons are added
+@export var topics_box: Container  # where topic buttons are added
+@export var leave_button: Button  # the X - closes the dialog from anywhere
+@export var audio: AudioStreamPlayer  # optional (typewriter blip)
+@export var layout_margin: MarginContainer  # the container that holds the text rows
 
-## --- Art-locked layout ---------------------------------------------------
-## The box art is used at its TRUE aspect ratio (no 9-slice, no distortion),
-## and everything is placed as FRACTIONS of the art, so it looks identical
-## at any window size. If you ever swap the art, update these to match it.
+## --- Art-locked layout --------------------------------------------------- The box art is used
 const ART_W: float = 954.0
 const ART_H: float = 258.0
 ## interior writing area of the big frame (fractions of the art)
@@ -41,7 +34,7 @@ const BODY_LEFT := 0.065
 const BODY_TOP := 0.40
 const BODY_RIGHT := 0.035
 const BODY_BOTTOM := 0.10
-## reference font heights in ART pixels (scaled with the box)
+## reference font heights in art pixels (scaled with the box)
 const NAME_FONT_ART := 22.0
 const BODY_FONT_ART := 20.0
 
@@ -49,6 +42,7 @@ const FALLBACK_SOUND := "res://FD_Testing/GameSystems/DialogV2/dialogue_noise.mp
 
 var _dialog: Dialog
 var _speaker_default := ""
+var _current_line: DialogLine = null  # for the per-NPC voice blip
 var _clicked_topic := ""
 var _picked_topic := ""
 var _chosen_choice: DialogChoice
@@ -61,9 +55,11 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	if type_sound == null and ResourceLoader.exists(FALLBACK_SOUND):
 		type_sound = load(FALLBACK_SOUND)
+	# the typewriter blip belongs to the Dialog volume slider
+	BusRoute.use(audio, "Dialog")
 	if text_label:
 		text_label.meta_clicked.connect(_on_meta_clicked)
-		text_label.fit_content = false      # keep a fixed text region (issue 3/4)
+		text_label.fit_content = false  # keep a fixed text region (issue 3/4)
 		text_label.scroll_active = false
 	if name_label:
 		# the name lives in the top-left plate and never moves with the line's language
@@ -81,13 +77,13 @@ func _fit_box() -> void:
 	if box == null:
 		return
 	var vw: float = box.get_parent_area_size().x if box.get_parent_control() else get_viewport().get_visible_rect().size.x
-	var width: float = vw - 16.0                 # 8px breathing room each side
+	var width: float = vw - 16.0  # 8px breathing room each side
 	var height: float = width * (ART_H / ART_W)  # true aspect, no distortion
 	box.offset_left = 8.0
 	box.offset_right = -8.0
 	box.offset_top = -height - 8.0
 	box.offset_bottom = -8.0
-	var s: float = height / ART_H                # art pixel -> screen pixel scale
+	var s: float = height / ART_H  # art pixel -> screen pixel scale
 	if layout_margin:
 		layout_margin.add_theme_constant_override("margin_left", int(width * BODY_LEFT))
 		layout_margin.add_theme_constant_override("margin_top", int(height * BODY_TOP))
@@ -102,7 +98,6 @@ func _fit_box() -> void:
 
 
 ## Ends the dialog early and cleanly, wherever it currently is.
-## Used by DialogManager.stop() and the "end_dialog" action.
 func finish() -> void:
 	_end_all = true
 
@@ -173,9 +168,7 @@ func _run() -> void:
 			return
 
 
-## Chooses what the NPC says when the player talks. Branches are checked
-## IN ORDER — the first one whose flag conditions pass is played.
-## So put the MOST SPECIFIC branch FIRST and the default greeting LAST.
+## Chooses what the NPC says when the player talks.
 func _pick_branch() -> String:
 	for b in _dialog.branches:
 		if b == null or b.is_topic:
@@ -201,6 +194,9 @@ func _play_branch(branch_id: String) -> void:
 		for f in line.set_flags:
 			Flags.set_flag(f)
 
+		# whatever this line wants the NPC (and Sami) to be doing
+		DialogManager.apply_line_animation(line)
+
 		var has_text := line.text.strip_edges() != ""
 		if box:
 			box.visible = has_text or box.visible
@@ -215,11 +211,13 @@ func _play_branch(branch_id: String) -> void:
 			else:
 				await _move_camera(line.camera_target, line.camera_time)
 
-		if line.action_name != "":
-			DialogManager.emit_action(line.action_name, line.action_args, line.wait_for_action)
-			if line.wait_for_action:
+		for a in line.actions():
+			DialogManager.emit_action(a["verb"], a["args"], a["wait"])
+			if a["wait"]:
 				while DialogManager.is_waiting_action() and not _end_all:
 					await get_tree().process_frame
+			if _end_all:
+				break
 		if _end_all:
 			return
 		if not has_text:
@@ -227,6 +225,11 @@ func _play_branch(branch_id: String) -> void:
 
 		_apply_line_direction(line.text)
 		name_label.text = tr(line.speaker_name) if line.speaker_name != "" else tr(_speaker_default)
+		_current_line = line
+		if line.sound_id != "":
+			var snd := get_node_or_null("/root/Sound")
+			if snd and snd.has_method("cue"):
+				snd.cue(line.sound_id, self)
 		await _typewrite(line)
 		if _end_all:
 			return
@@ -297,9 +300,12 @@ func _move_camera(target: Vector2, time: float) -> void:
 
 
 func _typewrite(line: DialogLine) -> void:
-	text_label.text = _build_bbcode(line)
+	# [sfx:...] markers come out of the text and fire when the reveal reaches them
+	var parsed := strip_sfx(tr(line.text))
+	var cues: Array = parsed["cues"]
+	text_label.text = _build_bbcode(line, parsed["text"])
 	text_label.visible_characters = 0
-	_lock_input(0.12)   # the press that advanced into this line must not also skip it
+	_lock_input(0.12)  # the press that advanced into this line must not also skip it
 	var total := text_label.get_total_character_count()
 	var shown := 0.0
 	while text_label.visible_characters < total:
@@ -310,13 +316,44 @@ func _typewrite(line: DialogLine) -> void:
 		if v != text_label.visible_characters:
 			text_label.visible_characters = v
 			_blip()
+			_fire_cues_up_to(cues, v)
 		await get_tree().process_frame
 	text_label.visible_characters = -1
+	_fire_cues_up_to(cues, 1 << 30)  # skipped or finished: the rest still fire
 	_lock_input(0.12)
 
 
-func _build_bbcode(line: DialogLine) -> String:
-	var t := tr(line.text)
+## Pull "[sfx:cue]" markers out of a line. Returns {text, cues:[{at, cue}]}
+## where `at` is the visible-character index the marker sat at.
+static func strip_sfx(text: String) -> Dictionary:
+	var cues: Array = []
+	var out := ""
+	var re := RegEx.create_from_string("\\[sfx:([^\\]]*)\\]")
+	var pos := 0
+	for m in re.search_all(text):
+		out += text.substr(pos, m.get_start() - pos)
+		cues.append({"at": out.length(), "cue": m.get_string(1).strip_edges()})
+		pos = m.get_end()
+	out += text.substr(pos)
+	return {"text": out, "cues": cues}
+
+
+func _fire_cues_up_to(cues: Array, visible: int) -> void:
+	if cues.is_empty():
+		return
+	var snd := get_node_or_null("/root/Sound")
+	var i := 0
+	while i < cues.size():
+		if int(cues[i]["at"]) <= visible:
+			if snd and snd.has_method("cue"):
+				snd.cue(str(cues[i]["cue"]), self)
+			cues.remove_at(i)
+		else:
+			i += 1
+
+
+func _build_bbcode(line: DialogLine, plain: String = "") -> String:
+	var t := plain if plain != "" else tr(line.text)
 	for kw in line.keywords:
 		if kw == null or kw.word == "":
 			continue
@@ -325,7 +362,7 @@ func _build_bbcode(line: DialogLine) -> String:
 			var link := "[url=%s][color=%s][u]%s[/u][/color][/url]" % [kw.topic_branch, keyword_color, kw.word]
 			t = t.replace(kw.word, link)
 	if _line_is_rtl(line.text):
-		t = "[p align=right]" + t + "[/p]"   # push Arabic to the right side (issue 2)
+		t = "[p align=right]" + t + "[/p]"  # push Arabic to the right side (issue 2)
 	return t
 
 
@@ -374,8 +411,7 @@ func _topic_mode(topics: Array) -> void:
 	if topics_box.get_child_count() > 0:
 		topics_box.get_child(0).grab_focus()
 	_lock_input(0.2)
-	# NOTE: interact does NOT close the hub — the player picks a topic or
-	# presses Leave / the X. (Pressing E by habit shouldn't end the talk.)
+	# note: interact does not close the hub - the player picks a topic or presses Leave / the X.
 	while _picked_topic == "" and not _leave_pressed and not _end_all and _clicked_topic == "":
 		await get_tree().process_frame
 	if _clicked_topic != "":
@@ -457,11 +493,40 @@ func _on_meta_clicked(meta: Variant) -> void:
 
 
 func _blip() -> void:
-	if type_sound == null or audio == null:
+	if audio == null:
 		return
-	audio.stream = type_sound
-	audio.pitch_scale = randf_range(pitch_min, pitch_max)
+	# The speaking NPC's own voice wins over the default blip
+	var stream := type_sound
+	var lo := pitch_min
+	var hi := pitch_max
+	var res = _speaking_npc_resource()  # untyped: may be any Resource
+	if res and res.voice_blip:
+		stream = res.voice_blip
+		lo = res.voice_pitch_min
+		hi = res.voice_pitch_max
+	if stream == null:
+		return
+	audio.stream = stream
+	audio.pitch_scale = randf_range(lo, hi)
 	audio.play()
+
+
+## The NPCResource of whoever is speaking the current line, or null.
+func _speaking_npc_resource():
+	var dm := get_node_or_null("/root/DialogManager")
+	if dm == null:
+		return null
+	var node = dm.get("speaker_node")
+	if node == null or not is_instance_valid(node):
+		return null
+	var res = node.get("npc_resource")
+	if res == null:
+		return null
+	if _current_line and _current_line.speaker_name != "" \
+			and "npc_name" in res and res.npc_name != "" \
+			and _current_line.speaker_name != res.npc_name:
+		return null  # someone else is talking
+	return res
 
 
 func _clear(node: Node) -> void:

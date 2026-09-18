@@ -1,13 +1,6 @@
 class_name PuzzleSpeaker extends Area2D
 ## One speaker of the statue puzzle. Walk up, press "interact" to cycle the
-## number 1 -> 2 -> ... -> max_value -> 1. The statue (PuzzleStatue) listens
-## and reacts.
-##
-## Scene children this script uses (all optional except the collision):
-##   CollisionShape2D          player detection
-##   NumberLabel (Label)       shows the current number
-##   Prompt (Node2D)           shown when the player is in range
-##   Hum (AudioStreamPlayer2D) played when this speaker becomes correct
+## number 1 -> 2 -> ...
 
 signal value_changed(speaker: PuzzleSpeaker)
 
@@ -19,12 +12,12 @@ signal value_changed(speaker: PuzzleSpeaker)
 @export var start_value: int = 1
 
 ## Tell settings (the statue turns these on/off through set_correct):
-@export var tell_color: Color = Color(0.55, 1.0, 0.6)   ## number tint when correct
-@export var hum_stream: AudioStream                       ## optional short hum
+@export var tell_color: Color = Color(0.55, 1.0, 0.6)  # number tint when correct
+@export var hum_stream: AudioStream  # optional short hum
 
 var value: int = 1
 var is_correct: bool = false
-var locked: bool = false          ## the statue locks speakers once solved
+var locked: bool = false  # the statue locks speakers once solved
 
 var _player_in: bool = false
 @onready var number_label: Label = get_node_or_null("NumberLabel")
@@ -34,6 +27,8 @@ var _base_color: Color = Color.WHITE
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
+	BusRoute.use(hum, "SFX")  # the hum follows the Effects slider
 	value = clampi(start_value, 1, max_value)
 	if number_label:
 		_base_color = number_label.get_theme_color("font_color")
@@ -56,12 +51,11 @@ func _process(_delta: float) -> void:
 
 
 ## Called by the statue after every evaluation.
-## `show_tell` mirrors the statue's per-speaker-tell setting.
 func set_correct(correct: bool, show_tell: bool) -> void:
 	var was := is_correct
 	is_correct = correct
 	if not show_tell:
-		correct = false   # visuals stay neutral when tells are disabled
+		correct = false  # visuals stay neutral when tells are disabled
 	if number_label:
 		number_label.add_theme_color_override("font_color", tell_color if correct else _base_color)
 	if correct and not was and hum and hum_stream:
