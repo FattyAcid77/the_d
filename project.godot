@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="(D.) 2.0"
 run/main_scene="uid://c6svmmsd10lex"
-config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://3MK-File/myshit/icon.svg"
 
 [audio]
@@ -55,6 +55,7 @@ Board="*uid://b7npvxsv204c8"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/initial_position_type=0
 window/size/borderless=true
 window/size/window_width_override=640

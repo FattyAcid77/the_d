@@ -733,8 +733,19 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ef2nf"]
+load_path = "res://.godot/imported/sami walk down-Sheet1.png-cb7699c1b7d662485c0ce08f39ccf0eb.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_18gna"]
+normal_texture = SubResource("CompressedTexture2D_ef2nf")
+specular_color = Color(0.16253604, 0.16253604, 0.16253604, 1)
+specular_shininess = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6vt2j"]
 radius = 24.020824
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ef2nf"]
+polygon = PackedVector2Array(7.4312897, 60.69716, -9.56871, 60.69716, -9.56871, 57.69716, 7.4312897, 57.69716)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
 
@@ -753,13 +764,19 @@ position = Vector2(-2, -87)
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rwi67")
-animation = &"Walk_Side"
-autoplay = "Idle_down"
-frame_progress = 0.7881053
+animation = &"Walk_down"
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=513518743]
+texture = SubResource("CanvasTexture_18gna")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041668416]
+visible = false
 position = Vector2(2, 30)
 shape = SubResource("CircleShape2D_6vt2j")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=537697524]
+position = Vector2(1.5687103, -14.697159)
+occluder = SubResource("OccluderPolygon2D_ef2nf")
 
 [node name="Statemachine" type="Node" parent="." unique_id=1492896408]
 script = ExtResource("15_7dkr7")
@@ -778,6 +795,7 @@ script = ExtResource("18_drag0")
 script = ExtResource("19_rot0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
+zoom = Vector2(1.275, 1.275)
 limit_smoothed = true
 
 [node name="UI" type="Node" parent="." unique_id=766651730]

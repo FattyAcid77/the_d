@@ -430,7 +430,7 @@ position = Vector2(701, 324)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
 [node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction", "NPC"] instance=ExtResource("3_vrf2x")]
-position = Vector2(592, 263)
+position = Vector2(591, 263)
 npc_resource = SubResource("Resource_akhaw")
 
 [node name="S3alel" parent="." unique_id=2048434997 groups=["NPC", "S3alel"] instance=ExtResource("3_vrf2x")]

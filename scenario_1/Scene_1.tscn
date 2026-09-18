@@ -141,8 +141,8 @@ doors = [NodePath("door_reg_type2")]
 
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("2_7iwvo")]
 
-[node name="door_reg_type2" parent="." unique_id=1646241525 groups=["Scene1_obj1"] instance=ExtResource("4_ic8ic")]
-position = Vector2(405, 177)
+[node name="door_reg_type2" parent="." unique_id=1646241525 groups=["Doors", "Scene1_obj1"] instance=ExtResource("4_ic8ic")]
+position = Vector2(406, 178)
 entery_direction = 2
 new_scene_path = "res://scenario_1/Hall_scene.tscn"
 target_door_name = "hall_1"
