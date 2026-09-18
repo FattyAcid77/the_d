@@ -2,13 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://bmyopqsltfohj" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom.png" id="1_hqns4"]
 [ext_resource type="Texture2D" uid="uid://c6l5qjwfkj4dl" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-wall.png" id="1_x0ka3"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="3_kdubu"]
 [ext_resource type="Texture2D" uid="uid://rp4u44k2ogav" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-fur.png" id="4_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="5_hqns4"]
 [ext_resource type="Texture2D" uid="uid://64a6xfd1isbe" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-sami.png" id="5_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://l077rmvaiw2p" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (80).png" id="6_hqns4"]
 [ext_resource type="Texture2D" uid="uid://bncaxoyudfkem" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/288x288/288x288 textures (59).png" id="7_hqns4"]
-[ext_resource type="Shader" uid="uid://ddkbwk6hykf34" path="res://node_2d.gdshader" id="7_rj586"]
+[ext_resource type="Shader" uid="uid://ddkbwk6hykf34" path="res://BGRD_Lights/node_2d.gdshader" id="7_rj586"]
 [ext_resource type="Texture2D" uid="uid://b1vkbupx37u0s" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/288x288/288x288 textures (61).png" id="8_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://5a0qgqjlj16w" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (15).png" id="10_x0ka3"]
 [ext_resource type="Texture2D" uid="uid://elhmecbtu0sv" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-furlight.png" id="12_x0ka3"]
@@ -45,7 +44,6 @@ polygon = PackedVector2Array(-31.740814, 7.8628693, 388.2592, 7.8628693, 388.259
 blend_mode = 3
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ir8iy"]
-load_path = "res://.godot/imported/f1-laundaryroom-filter.png-6a179fd23abd9950a7834f0e1ba700c5.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ir8iy"]
 shader = ExtResource("7_rj586")
@@ -92,9 +90,6 @@ texture = ExtResource("1_hqns4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1248092240]
 material = SubResource("CanvasItemMaterial_rj586")
-
-[node name="Sami_Doctor_test" parent="Sprite2D" unique_id=2001215541 instance=ExtResource("3_kdubu")]
-position = Vector2(418, 214)
 
 [node name="F1LaundaryroomWall" type="Sprite2D" parent="Sprite2D" unique_id=1097482146]
 position = Vector2(251, 192)

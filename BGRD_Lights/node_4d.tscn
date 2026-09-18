@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://lccu6vnmnix3"]
 
 [ext_resource type="Texture2D" uid="uid://r4h6vha2egiq" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-bathroom.png" id="1_x1snb"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_t8ifv"]
 [ext_resource type="Texture2D" uid="uid://3nbl1fyw3v0q" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-bathroom-fur.png" id="3_s71og"]
 [ext_resource type="Texture2D" uid="uid://ff1atypc7hbv" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-bathroom-filter.png" id="4_hmmcx"]
-[ext_resource type="Shader" uid="uid://glrf31iooaeu" path="res://node_3d.gdshader" id="5_ykh3b"]
+[ext_resource type="Shader" uid="uid://glrf31iooaeu" path="res://BGRD_Lights/node_3d.gdshader" id="5_ykh3b"]
 [ext_resource type="Texture2D" uid="uid://dktnu32ps3ous" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-bathroom-light.png" id="6_jkgf4"]
 [ext_resource type="Texture2D" uid="uid://c0nnw68xpw1ow" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (25).png" id="8_6gk2r"]
 [ext_resource type="Texture2D" uid="uid://c8y2l3qspkoxh" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-maryam.png" id="9_ctvjw"]
@@ -39,9 +38,6 @@ position = Vector2(170.55165, 72.23308)
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=438154427]
 position = Vector2(-173.55165, -87.23308)
 polygon = PackedVector2Array(156, 382, 279, 381, 279, 372, 309, 372, 309, 382, 319, 382, 319, 369, 361, 369, 361, 382, 370, 382, 370, 260, 302, 261, 295, 277, 276, 277, 273, 261, 256, 260, 256, 260, 255, 315, 241, 325, 241, 311, 223, 302, 157, 302, 157, 381, 141, 382, 142, 86, 389, 90, 387, 399, 154, 392)
-
-[node name="Sami_Doctor_test" parent="StaticBody2D" unique_id=2001215541 instance=ExtResource("2_t8ifv")]
-position = Vector2(114.44835, 199.76692)
 
 [node name="BipolaroomFur" type="Sprite2D" parent="StaticBody2D" unique_id=99407429]
 position = Vector2(88.44835, 154.76692)
