@@ -9,32 +9,49 @@ script = ExtResource("1_51408")
 [node name="Start" type="Node" parent="." unique_id=356475787]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["HamatoIntroduction"])
-hide_groups = Array[String](["S3alel", "MeetMazSad", "Elevator_pt1"])
+hide_groups = Array[String](["S3alel", "MeetMazSad", "Elevator_pt1", "Maz_Elevator_Hallway", "Sad_Room_Door"])
 auto_advance_when_flag = "Hamato_Introduction_Finished"
 next_state = "S3alelIntroduction"
 
 [node name="S3alelIntroduction" type="Node" parent="." unique_id=1064333524]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["S3alel"])
-hide_groups = Array[String](["MeetMazSad", "Elevator_pt1"])
+hide_groups = Array[String](["MeetMazSad", "Elevator_pt1", "Maz_Elevator_Hallway", "Sad_Room_Door"])
 auto_advance_when_flag = "S3alel_introduction_finished"
 next_state = "MeetMazSad"
 
 [node name="MeetMazSad" type="Node" parent="." unique_id=250345838]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["MeetMazSad"])
-hide_groups = Array[String](["MazSad_Door", "Elevator_pt1"])
+hide_groups = Array[String](["MazSad_Door", "Elevator_pt1", "Maz_Elevator_Hallway", "Sad_Room_Door"])
 auto_advance_when_flag = "Maz_Sad_meeting1_finished"
 next_state = "Elevator_pt1"
 
 [node name="MazSadMet" type="Node" parent="." unique_id=692376320]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["MazSad_Door"])
-set_flags = Array[String](["Maz_Sad_door_open"])
+set_flags = Array[String](["Maz_Sad_door_open", "Maz_Elevator_Hallway", "Sad_Room_Door"])
 auto_advance_when_flag = "Maz_Sad_door_open"
 next_state = "Elevator_pt1"
 
 [node name="Elevator_pt1" type="Node" parent="." unique_id=649055273]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["MazSad_Door"])
-hide_groups = Array[String](["HamatoIntroduction"])
+hide_groups = Array[String](["HamatoIntroduction", "Maz_Elevator_Hallway", "Sad_Room_Door"])
+auto_advance_when_flag = "Hamato_Elevator_d1_Finished"
+next_state = "Elevator_pt2"
+
+[node name="Elevator_pt2" type="Node" parent="." unique_id=1830836194]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["Maz_Elevator_Hallway"])
+hide_groups = Array[String](["S3alel", "Sad_Room_Door", "Maz_Sad_Room_Door"])
+set_flags = Array[String](["Hamato_Elevator_d1_Finished", "Maz_Sad_door_open"])
+auto_advance_when_flag = "Maz_Elevator_Quest_init"
+next_state = "Elevator_pt3"
+
+[node name="Elevator_pt3" type="Node" parent="." unique_id=286964987]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["Sad_Room_Door"])
+
+[node name="Qaswar_Choice" type="Node" parent="." unique_id=1702953036]
+script = ExtResource("2_eofw3")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dxlo735cnrde1"]
+
+[ext_resource type="PackedScene" uid="uid://bq0wmvhuq0hbt" path="res://background_scenes/Maz_room_bgrd.tscn" id="1_5rtqq"]
+
+[node name="MazRoom" type="Node2D" unique_id=392680899]
+
+[node name="MazRoomBgrd" parent="." unique_id=1365894292 instance=ExtResource("1_5rtqq")]

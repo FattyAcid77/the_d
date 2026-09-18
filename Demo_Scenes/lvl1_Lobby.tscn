@@ -336,6 +336,63 @@ script = ExtResource("4_705w6")
 dialog = SubResource("Resource_0n8tc")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
+[sub_resource type="Resource" id="Resource_w3i80"]
+script = ExtResource("6_qwha2")
+text = " الان دوري، ما رأيك ان تذهب للدور التالي"
+speaker_name = "حمتو"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_6wiej"]
+script = ExtResource("6_qwha2")
+text = "صحيح يجب علي اكمال باقي المرضى"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_bvqwx"]
+script = ExtResource("8_l2np2")
+word = "المصعد"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_rdns6"]
+script = ExtResource("6_qwha2")
+text = "اهههخخخخ، لقد بدأ صبري ينفذ منك، على العموم قم بأصلاح المصعد كعادتك "
+speaker_name = "حمتو"
+set_flags = Array[String](["Hamato_Elevator_d1_Finished"])
+keywords = Array[ExtResource("8_l2np2")]([SubResource("Resource_bvqwx")])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_shwhp"]
+script = ExtResource("5_akhaw")
+id = "elevator_initiate"
+require_flags = Array[String](["Maz_Sad_meeting1_finished"])
+blocked_by_flags = Array[String](["Hamato_Elevator_d1_Finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_w3i80"), SubResource("Resource_6wiej"), SubResource("Resource_rdns6")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_b33cg"]
+script = ExtResource("8_l2np2")
+word = "المصعد"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_tuh2c"]
+script = ExtResource("6_qwha2")
+text = "على العموم قم بأصلاح المصعد كعادتك"
+speaker_name = "حمتو"
+keywords = Array[ExtResource("8_l2np2")]([SubResource("Resource_b33cg")])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_24oh7"]
+script = ExtResource("5_akhaw")
+id = "entry"
+require_flags = Array[String](["Hamato_Elevator_d1_Finished"])
+lines = Array[ExtResource("6_qwha2")]([SubResource("Resource_tuh2c")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_8ndvn"]
+script = ExtResource("9_h4xkc")
+branches = Array[ExtResource("5_akhaw")]([SubResource("Resource_shwhp"), SubResource("Resource_24oh7")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwha2"]
 atlas = ExtResource("13_m2ccb")
 region = Rect2(0, 0, 56, 101)
@@ -423,7 +480,9 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_ei6i7"]
 script = ExtResource("4_705w6")
+npc_name = "Hamato_Elevator_Quest"
 sprite_frames = SubResource("SpriteFrames_mfi34")
+dialog = SubResource("Resource_8ndvn")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqdqe"]

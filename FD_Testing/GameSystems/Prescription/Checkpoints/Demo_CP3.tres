@@ -8,6 +8,6 @@ script = ExtResource("1_km8an")
 number = 8
 title = "After_meeting_maz_sad"
 state_name = "MeetMazSad"
-set_flags = Array[String](["S3alel_introduction_finished", "Hamato_Introduction_Finished", "Maz_Sad_meeting1_finished"])
+set_flags = Array[String](["S3alel_introduction_finished", "Hamato_Introduction_Finished", "Maz_Sad_meeting1_finished", "Maz_Sad_door_open"])
 scene = ExtResource("1_yjqdi")
 metadata/_custom_type_script = "uid://cwxis2l0po8r2"

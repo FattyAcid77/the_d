@@ -102,6 +102,9 @@ Doors=""
 MazSad_Door=""
 Elevator_Quest=""
 Elevator_pt1=""
+Maz_Elevator_Hallway=""
+Sad_Room_Door=""
+Maz_Sad_Room_Door=""
 
 [input]
 
