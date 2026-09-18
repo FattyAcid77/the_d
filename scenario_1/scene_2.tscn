@@ -65,7 +65,7 @@ position = Vector2(654, 501)
 npc_resource = SubResource("Resource_vypjq")
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_mhadn")]
-position = Vector2(520, 471)
+position = Vector2(440, 347)
 camera_adj = NodePath("../MazSadRoomBgrd")
 
 [node name="GameStateMachine" type="Node" parent="." unique_id=79900171]

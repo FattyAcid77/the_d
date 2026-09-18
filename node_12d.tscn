@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://ce2mh140inwin"]
+
+[ext_resource type="Texture2D" uid="uid://36dcsp30mst4" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath.png" id="1_2ohvw"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_wc6c6"]
+[ext_resource type="Texture2D" uid="uid://fwsp0ytsncha" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-wall.png" id="3_4soya"]
+[ext_resource type="Texture2D" uid="uid://dkbalb46truxg" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-fur.png" id="4_gvynq"]
+[ext_resource type="Texture2D" uid="uid://dobngwxlr62m4" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-walls.png" id="4_wc6c6"]
+[ext_resource type="Texture2D" uid="uid://2h4uwmbdovmt" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (22).png" id="6_7o88h"]
+[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="7_n1163"]
+[ext_resource type="Texture2D" uid="uid://ceqphve7getlw" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (14).png" id="8_2v46g"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4shok"]
+cull_mode = 2
+polygon = PackedVector2Array(484.00003, 76.999985, 441.01605, 123.949554, 483.17822, 123.949554, 483.17822, 252.28671, 445.23227, 252.28671, 445.23227, 252.28671, 496, 289, 526, 265, 528, 192, 528, 192)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nbvj1"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wjpli"]
+polygon = PackedVector2Array(-37.95729, 1.7059326, 127.04271, 1.7059326, 127.04271, -21.294067, 127.04271, -29.294067, 136.04271, -29.294067, 136.04271, 9.705933, -46.95729, 9.705933, -46.95729, -31.294067, -37.95729, -31.294067)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jvklg"]
+blend_mode = 1
+
+[node name="Node2D" type="Node2D" unique_id=135313574]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=717296775]
+position = Vector2(217, 82)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1504286231]
+polygon = PackedVector2Array(-201, 628, -24, 629, -24, 608, -16, 608, -16, 514, 5, 514, 5, 442, -38, 442, -38, 378, -26, 378, -26, 289, -16, 289, -16, 240, 4, 240, 4, 166, -23, 166, -23, 189, -32, 189, -43, 196, -48, 196, -58, 159, -58, 127, -17, 127, -17, 83, -36, 83, -36, 73, -190, 73, -190, 83, -207, 83, -207, 153, -196, 153, -196, 193, -199, 193, -199, 185, -228, 185, -228, 240, -208, 240, -208, 336, -186, 336, -186, 395, -208, 395, -208, 449, -231, 449, -231, 513, -212, 513, -212, 521, -184, 521, -184, 556, -196, 556, -196, 600, -201, 609, -201, 623, -223, 630, -250, 631, -249, -112, 37, -112, 37, 650, -250, 650, -250, 636, -222, 635)
+
+[node name="F2Abovepath" type="Sprite2D" parent="." unique_id=495148061]
+position = Vector2(105, 358)
+texture = ExtResource("1_2ohvw")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_wc6c6")]
+position = Vector2(103, 645)
+
+[node name="F2AbovepathWall" type="Sprite2D" parent="." unique_id=1830607563]
+position = Vector2(105, 358)
+texture = ExtResource("3_4soya")
+
+[node name="F2AbovepathWalls" type="Sprite2D" parent="." unique_id=1877811841]
+position = Vector2(105, 358)
+texture = ExtResource("4_wc6c6")
+
+[node name="F2AbovepathFur" type="Sprite2D" parent="." unique_id=676680396]
+position = Vector2(105, 358)
+texture = ExtResource("4_gvynq")
+
+[node name="light" type="Node2D" parent="." unique_id=5881887]
+position = Vector2(373.65286, 861.822)
+
+[node name="PointLight2D3" type="PointLight2D" parent="light" unique_id=333776461]
+position = Vector2(-268.83035, -291.77295)
+scale = Vector2(0.45703122, 0.38085943)
+color = Color(0.58456355, 0.58456355, 0.58456355, 1)
+energy = 0.32
+texture = ExtResource("6_7o88h")
+
+[node name="PointLight2D4" type="PointLight2D" parent="light" unique_id=385624030]
+position = Vector2(-268.83035, -546.822)
+scale = Vector2(0.45703122, 0.47265625)
+color = Color(0.58456355, 0.58456355, 0.58456355, 1)
+energy = 0.32
+texture = ExtResource("6_7o88h")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="light" unique_id=103449857]
+position = Vector2(-730.65295, -503.82202)
+scale = Vector2(1.1858981, 0.91166127)
+occluder = SubResource("OccluderPolygon2D_4shok")
+sdf_collision = false
+
+[node name="right door" type="PointLight2D" parent="light/LightOccluder2D" unique_id=361412499]
+visible = false
+material = SubResource("CanvasItemMaterial_nbvj1")
+position = Vector2(481.49167, 234.73633)
+scale = Vector2(0.08217844, 0.39021847)
+color = Color(0.45262197, 0.45262197, 0.45262197, 1)
+energy = 0.97
+shadow_enabled = true
+texture = ExtResource("7_n1163")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="light" unique_id=37288199]
+position = Vector2(194.34715, -163.82202)
+rotation = 3.137165
+scale = Vector2(1.1858929, 0.9116669)
+skew = -0.0019381046
+occluder = SubResource("OccluderPolygon2D_4shok")
+sdf_collision = false
+
+[node name="left door" type="PointLight2D" parent="light/LightOccluder2D2" unique_id=1422106836]
+visible = false
+material = SubResource("CanvasItemMaterial_nbvj1")
+position = Vector2(481.6462, 142.09795)
+scale = Vector2(0.063868195, 0.34745067)
+color = Color(0.45262197, 0.45262197, 0.45262197, 1)
+energy = 1.37
+shadow_enabled = true
+texture = ExtResource("7_n1163")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="light" unique_id=1301149427]
+position = Vector2(-313.87305, -155.97891)
+occluder = SubResource("OccluderPolygon2D_wjpli")
+
+[node name="PointLight2D6" type="PointLight2D" parent="light/LightOccluder2D3" unique_id=1063625380]
+material = SubResource("CanvasItemMaterial_jvklg")
+position = Vector2(40.042694, 0.7058716)
+rotation = 1.5752369
+scale = Vector2(0.07840033, 0.2678916)
+color = Color(0.25173613, 0.4276592, 0.5346394, 0.8)
+energy = 1.97
+shadow_enabled = true
+texture = ExtResource("8_2v46g")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=747785513]
+position = Vector2(-357.097, 84.957)
+scale = Vector2(1.1858981, 0.91166127)
+occluder = SubResource("OccluderPolygon2D_4shok")
+sdf_collision = false
+
+[node name="right door" type="PointLight2D" parent="LightOccluder2D" unique_id=1461565318]
+visible = false
+material = SubResource("CanvasItemMaterial_nbvj1")
+position = Vector2(481.49167, 234.73633)
+scale = Vector2(0.08217844, 0.39021847)
+color = Color(0.45262197, 0.45262197, 0.45262197, 1)
+energy = 0.97
+shadow_enabled = true
+texture = ExtResource("7_n1163")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=2040436166]
+position = Vector2(567.623, 425.557)
+rotation = 3.137165
+scale = Vector2(1.1858929, 0.9116669)
+skew = -0.0019381046
+occluder = SubResource("OccluderPolygon2D_4shok")
+sdf_collision = false
+
+[node name="left door" type="PointLight2D" parent="LightOccluder2D2" unique_id=294014907]
+visible = false
+material = SubResource("CanvasItemMaterial_nbvj1")
+position = Vector2(481.6462, 142.09795)
+scale = Vector2(0.063868195, 0.34745067)
+color = Color(0.45262197, 0.45262197, 0.45262197, 1)
+energy = 1.37
+shadow_enabled = true
+texture = ExtResource("7_n1163")
+texture_scale = 1.9
+height = 74.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=666571264]
+position = Vector2(468.00003, 392)
+scale = Vector2(0.99999994, 0.99999994)
+color = Color(0.78431374, 0.81960785, 0.9137255, 1)
