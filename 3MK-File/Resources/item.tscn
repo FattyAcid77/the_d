@@ -17,7 +17,6 @@ item_config = SubResource("Resource_2qp0d")
 shape = SubResource("CircleShape2D_2qp0d")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=812661779]
-scale = Vector2(0.02, 0.02)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dxofprk7jlwg1"]
+[gd_scene format=3]
 
 [ext_resource type="PackedScene" uid="uid://dbp12leqpgush" path="res://3MK-File/Scene/lvl_1_lobby_bgrd_retired.tscn" id="1_yi5rg"]
 [ext_resource type="Script" uid="uid://t3upyfjrqiib" path="res://mapBounds.gd" id="2_0d2n7"]

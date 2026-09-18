@@ -21,7 +21,7 @@ func _on_body_entered(body: Node2D) -> void:
 		#SceneManager.load_new_scene(new_scene_path)
 		#queue_free()
 #هذي الفنكشن في البروسيس بمعنى إنها تشتغل مع كل فريم
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player_inside and Input.is_action_just_pressed("action"):
 		player_entered_door.emit(self)
 		SceneManager.load_new_scene(new_scene_path)
@@ -52,6 +52,6 @@ func get_move_dir() -> Vector2:
 	
 	
 
-func _on_body_exited(body: Node2D) -> void:
+func _on_body_exited(_body: Node2D) -> void:
 	player_inside = false
 	SceneManager.player_in_area = false

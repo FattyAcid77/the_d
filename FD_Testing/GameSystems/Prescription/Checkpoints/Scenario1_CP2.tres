@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://cn6jhpxd08v67"]
+
+[ext_resource type="PackedScene" uid="uid://bfb6aikyhenrt" path="res://scenario_1/scene_2.tscn" id="1_2n0bg"]
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_rbkgi"]
+
+[resource]
+script = ExtResource("1_rbkgi")
+number = 5
+title = "talked to second NPC"
+state_name = "obj_progression"
+set_flags = Array[String](["Scene2_obj1_item_unlocked"])
+scene = ExtResource("1_2n0bg")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

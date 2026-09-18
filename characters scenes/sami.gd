@@ -71,7 +71,7 @@ func _ready() -> void:
 	camera_limit_adj()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if can_move and input_enabled:
 		_handle_movement_and_animation()
 
@@ -218,7 +218,7 @@ func _play_anim(state: int, vec: Vector2) -> void:
 
 # --- Other ---
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if SceneManager.player_in_area:
 		pass
 	else:
@@ -226,7 +226,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event) -> void:
-	if Input.is_action_just_pressed("I"):
+	if Input.is_action_just_pressed("I") and not SceneManager.is_transitioning:
 		inventory_ui.visible = !inventory_ui.visible
 		get_tree().paused = !get_tree().paused
 
@@ -242,7 +242,7 @@ func _input(event) -> void:
 				target.start_interact()
 
 
-func orient(dir: Vector2) -> void:
+func orient(_dir: Vector2) -> void:
 	pass
 
 

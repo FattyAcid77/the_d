@@ -95,4 +95,4 @@ func go_to_next_world() -> void:
 	var scene_path := get_tree().current_scene.scene_file_path
 	for mirror in get_tree().get_nodes_in_group("beam_mirror"):
 		GameState.save_mirror(scene_path, mirror.name, mirror.global_position, mirror.rotation)
-	get_tree().change_scene_to_file(next_world_path)
+	SceneManager.load_new_scene(next_world_path)

@@ -42,4 +42,5 @@ target_door_name = "Sad_Room_Main"
 this_door_name = "Maz_Sad_Hall_East"
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_jyi38")]
+position = Vector2(148, 271)
 camera_adj = NodePath("../MazSadHallBgrd")

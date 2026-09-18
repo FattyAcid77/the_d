@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://cr7p12foh1alg"]
+
+[ext_resource type="Texture2D" uid="uid://d1qa4tqdfmv42" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom.png" id="1_noarx"]
+[ext_resource type="Texture2D" uid="uid://cafkd7bdxl8qq" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-fur.png" id="3_a0tk4"]
+[ext_resource type="Texture2D" uid="uid://c8y2l3qspkoxh" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-maryam.png" id="4_6iypd"]
+[ext_resource type="Texture2D" uid="uid://ceqphve7getlw" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (14).png" id="4_r3fl7"]
+[ext_resource type="Texture2D" uid="uid://cybtq8apuf0ow" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (31).PNG" id="5_wc5p8"]
+[ext_resource type="Shader" uid="uid://glrf31iooaeu" path="res://BGRD_Lights/node_3d.gdshader" id="6_wc5p8"]
+[ext_resource type="Texture2D" uid="uid://v3u660s60i7u" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-light.png" id="7_jsk3o"]
+[ext_resource type="Texture2D" uid="uid://cfebpiwa323jo" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (5).png" id="8_4arys"]
+[ext_resource type="Texture2D" uid="uid://clpq7m8v8aloh" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (30).PNG" id="8_6iypd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i5arm"]
+blend_mode = 3
+light_mode = 2
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wc5p8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4arys"]
+shader = ExtResource("6_wc5p8")
+shader_parameter/strength = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jka67"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4arys"]
+polygon = PackedVector2Array(145.22461, -57.202026, 145.22461, -57.202026, 84.22461, -75.20203, 128.22461, -35.202026, 128.22461, 72.79797, 96.22461, 148.79797, 146.22461, 149.79797, 145.22461, 72.79797, 145.22461, -34.202026)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r3fl7"]
+cull_mode = 2
+polygon = PackedVector2Array(-22.841705, -313.63843, 448.21857, 197.91754, 478, 212, 484, 212, 484, 212, 485.52905, 251.58691, 479.5304, 251.69159, 443, 267, 15.390732, 1184.1001, -1372.4508, 284.14734, -1379.8652, 284.27673, 15.390732, 1184.1001, 273.70026, 551.5193, 526, 265, 528, 192, 528, 192, 487, 171, 453, 184, -30.854492, -627.5359, -1138.5854, -724.8518, -23.070648, -322.60693, -1.6390686, 807.55286)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i5arm"]
+cull_mode = 2
+polygon = PackedVector2Array(444, 196, 448.21857, 197.91754, 478, 212, 484, 212, 484, 212, 485.52905, 251.58691, 479.5304, 251.69159, 443, 267, 449, 274, 496, 289, 526, 265, 528, 192, 528, 192, 487, 171, 453, 184, 444, 196)
+
+[node name="bipolar" type="Node2D" unique_id=133500902]
+
+[node name="Bipolaroom" type="Sprite2D" parent="." unique_id=1144897885]
+position = Vector2(259, 227)
+texture = ExtResource("1_noarx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=551047944]
+position = Vector2(170.55165, 72.23308)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=210391973]
+position = Vector2(-173.55165, -87.23308)
+polygon = PackedVector2Array(13, 360, 13, 200, 31, 199, 31, 186, 63, 186, 64, 289, 172, 290, 172, 185, 197, 185, 198, 192, 227, 192, 227, 170, 432, 170, 447, 192, 470, 192, 484, 192, 484, 198, 516, 203, 522, 200, 546, 201, 545, 114, -11, 111, -11, 200, -7, 383, 211, 386, 217, 478, 230, 478, 514, 475, 537, 214, 507, 202, 507, 268, 483, 269, 482, 396, 508, 396, 508, 464, 478, 465, 477, 460, 395, 459, 394, 465, 232, 465, 232, 360)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=597954883]
+position = Vector2(257.63406, 241.7669)
+scale = Vector2(0.94642854, 1)
+polygon = PackedVector2Array(-10.762299, 7, -3.3660583, 11, 1.9169617, 8, 1.9169617, -12, -4.4226685, -17, -10.762299, -12)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=382349421]
+position = Vector2(181.31721, 257.75287)
+polygon = PackedVector2Array(-24.868866, 53.01407, 17.131134, 53.01407, 16.131134, -54.98593, -22.868866, -54.98593)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1571548152]
+position = Vector2(262.44836, 371.7669)
+scale = Vector2(4.25, 1)
+
+[node name="CollectiblesMaryam" type="Sprite2D" parent="StaticBody2D" unique_id=1979909852]
+position = Vector2(-127.55165, 98.76692)
+scale = Vector2(0.37500006, 0.3750001)
+texture = ExtResource("4_6iypd")
+
+[node name="BipolaroomFur" type="Sprite2D" parent="StaticBody2D" unique_id=1225982141]
+position = Vector2(88.44835, 154.76692)
+texture = ExtResource("3_a0tk4")
+
+[node name="F1LaundaryroomFilter" type="Sprite2D" parent="StaticBody2D" unique_id=1536817793]
+modulate = Color(0.29101568, 0.5266332, 0.9999986, 0.023529412)
+material = SubResource("CanvasItemMaterial_i5arm")
+position = Vector2(107.44835, 164.26694)
+scale = Vector2(1.229508, 1.4504023)
+texture = SubResource("CompressedTexture2D_wc5p8")
+
+[node name="BipolaroomLight" type="Sprite2D" parent="StaticBody2D" unique_id=1006277270]
+material = SubResource("ShaderMaterial_4arys")
+position = Vector2(88.44835, 154.76692)
+texture = ExtResource("7_jsk3o")
+
+[node name="PointLight2D5" type="PointLight2D" parent="StaticBody2D/BipolaroomLight" unique_id=1945108881]
+material = SubResource("CanvasItemMaterial_jka67")
+position = Vector2(-238, -60)
+scale = Vector2(1.071592, 1.1109595)
+color = Color(0.5058824, 0.58431375, 0.8117647, 0.47058824)
+energy = 0.54
+shadow_enabled = true
+texture = ExtResource("5_wc5p8")
+texture_scale = 1.9
+height = 74.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="StaticBody2D/BipolaroomLight" unique_id=374191586]
+material = SubResource("CanvasItemMaterial_jka67")
+position = Vector2(226.00006, 63)
+scale = Vector2(0.24384427, 0.22214223)
+color = Color(1, 0.79607844, 1, 0.56078434)
+energy = 1.43
+shadow_enabled = true
+texture = ExtResource("8_4arys")
+texture_scale = 1.9
+height = 74.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="StaticBody2D/BipolaroomLight" unique_id=686718751]
+material = SubResource("CanvasItemMaterial_jka67")
+position = Vector2(228.31076, 62.000004)
+scale = Vector2(0.074235305, 0.38815793)
+color = Color(1, 0.79607844, 1, 0.56078434)
+energy = 1.43
+shadow_enabled = true
+texture = ExtResource("8_6iypd")
+texture_scale = 1.9
+height = 74.0
+
+[node name="PointLight2D6" type="PointLight2D" parent="StaticBody2D/BipolaroomLight" unique_id=20854929]
+material = SubResource("CanvasItemMaterial_jka67")
+position = Vector2(-26.999985, 180.00006)
+scale = Vector2(0.13484153, 0.11147661)
+color = Color(1, 0.58431375, 0.20784314, 1)
+energy = 1.43
+shadow_enabled = true
+texture = ExtResource("4_r3fl7")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D/BipolaroomLight" unique_id=1333383504]
+position = Vector2(101.77539, 34.202026)
+occluder = SubResource("OccluderPolygon2D_4arys")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="StaticBody2D/BipolaroomLight" unique_id=1311220353]
+position = Vector2(-244, -9)
+rotation = -3.1271698
+scale = Vector2(0.13482553, 0.11150489)
+skew = 0.016444445
+occluder = SubResource("OccluderPolygon2D_r3fl7")
+sdf_collision = false
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="StaticBody2D/BipolaroomLight" unique_id=1585116743]
+position = Vector2(450.00012, 420)
+rotation = -3.1241474
+scale = Vector2(0.9999295, 1.0001029)
+skew = 0.008076191
+occluder = SubResource("OccluderPolygon2D_i5arm")
+sdf_collision = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2098281644]
+position = Vector2(282.50696, 248.31302)
+color = Color(0.90910685, 0.8210707, 1.1027867, 1)

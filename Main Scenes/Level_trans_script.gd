@@ -17,10 +17,14 @@ func enter_level() -> void:
 	if data != null:
 		print("player location initiated")
 		init_player_location()
-	player.enable()
+	if player != null:
+		player.enable()
 	_connect_to_doors()
 
 func init_player_location() -> void:
+	if player == null:
+		push_warning("Level '%s' has no player assigned in the inspector." % name)
+		return
 	if data != null:
 		print ("you checked that leveldatahandoff is not empty")
 		for door in doors:

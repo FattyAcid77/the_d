@@ -2,7 +2,11 @@ extends CanvasLayer
 
 @onready var Settings_Menu: CanvasLayer = $SettingsMenu
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	# this layer is PROCESS_MODE_ALWAYS, so without the guard the player can
+	# pause/unpause the tree out from under a scene transition mid-load
+	if SceneManager.is_transitioning:
+		return
 	if Input.is_action_just_pressed("Option"):
 		toggle_pause()
 

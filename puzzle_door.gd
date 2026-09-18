@@ -53,4 +53,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if teleporting or not gate_open or scene == "":
 		return
 	teleporting = true
-	get_tree().call_deferred("change_scene_to_file", scene)
+	SceneManager.load_new_scene(scene)

@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var thrust = 500.0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var force_direction = Vector2.ZERO
 	
 	# Check for arrow key / WASD input

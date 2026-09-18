@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3ddty4kt06p8"]
+[gd_scene format=3 uid="uid://c3ddty4kt06p8"]
 
 [ext_resource type="Script" uid="uid://ctywwoqwonpa8" path="res://control scene/elevator_control_reg.gd" id="1_tspkb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkbcw"]
-size = Vector2(57, 20)
+size = Vector2(73.5, 29)
 
-[node name="Elevator_Control_reg" type="Area2D"]
+[node name="Elevator_Control_reg" type="Area2D" unique_id=1977062511]
 script = ExtResource("1_tspkb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1841566301]
 shape = SubResource("RectangleShape2D_bkbcw")

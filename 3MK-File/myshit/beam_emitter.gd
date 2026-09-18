@@ -39,11 +39,11 @@ func _physics_process(_delta: float) -> void:
 	queue_redraw()
 
 func _sync_portal() -> void:
-	var state: Dictionary = GameState.get_beam_portal(source_portal_id)
+	var portal_state: Dictionary = GameState.get_beam_portal(source_portal_id)
 	var was_active := _active
-	_active = state.get("active", false)
+	_active = portal_state.get("active", false)
 	if _active:
-		rotation = state.get("angle", rotation) + angle_offset
+		rotation = portal_state.get("angle", rotation) + angle_offset
 	elif was_active:
 		_points.clear()
 

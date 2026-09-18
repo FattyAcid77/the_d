@@ -1,0 +1,120 @@
+[gd_scene load_steps=18 format=3 uid="uid://c7ggh8ah3v4g3"]
+
+[ext_resource type="Script" uid="uid://6b88cj886b6q" path="res://loading_screen.gd" id="1_mggpi"]
+[ext_resource type="Texture2D" uid="uid://b5bxhltklow1a" path="res://Loading_Screen/Loading_bgrd/LOADING_SCREENx1000v11.png" id="2_bgrd"]
+[ext_resource type="Texture2D" uid="uid://cp31nlybiq3x5" path="res://Loading_Screen/Loading_Bar/BAR1.png" id="3_bar1"]
+[ext_resource type="Texture2D" uid="uid://b276h7ntb83o6" path="res://Loading_Screen/Loading_Bar/BAR2.png" id="4_bar2"]
+[ext_resource type="Texture2D" uid="uid://be8ytghw5c0y3" path="res://Loading_Screen/Loading_Bar/BAR3.png" id="5_bar3"]
+[ext_resource type="Texture2D" uid="uid://cdq1x531vt06m" path="res://Loading_Screen/Loading_Bar/BAR4.png" id="6_bar4"]
+[ext_resource type="Texture2D" uid="uid://c647a5wrdvnmf" path="res://Loading_Screen/Loading_Bar/BAR5.png" id="7_bar5"]
+[ext_resource type="Texture2D" uid="uid://c0utu2jhjywjd" path="res://Loading_Screen/Loading_Bar/BAR6.png" id="8_bar6"]
+[ext_resource type="Texture2D" uid="uid://cxc26qfnfqkdh" path="res://Loading_Screen/Loading_Bar/BAR7.png" id="9_bar7"]
+[ext_resource type="Texture2D" uid="uid://bop1v4tgt5cf" path="res://Loading_Screen/Loading_Bar/BAR8.png" id="10_bar8"]
+[ext_resource type="Texture2D" uid="uid://civuld8te44ab" path="res://Loading_Screen/Loading_Fill/empty.png" id="11_empty"]
+[ext_resource type="Texture2D" uid="uid://c7m80aurjghm1" path="res://Loading_Screen/Loading_Fill/full.png" id="12_full"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bar"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bar1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bar2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bar3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bar4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bar5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bar6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bar7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_bar8")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_empty"]
+atlas = ExtResource("11_empty")
+region = Rect2(246, 323, 141, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_full"]
+atlas = ExtResource("12_full")
+region = Rect2(246, 323, 141, 7)
+
+[sub_resource type="Animation" id="Animation_transition"]
+resource_name = "transition"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_root"]
+_data = {
+&"transition": SubResource("Animation_transition")
+}
+
+[node name="Loading_Screen" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "progress_bar")]
+process_mode = 3
+layer = 100
+script = ExtResource("1_mggpi")
+animation_player = NodePath("AnimationPlayer")
+progress_bar = NodePath("Screen/Fill")
+
+[node name="Screen" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="Sprite2D" parent="Screen"]
+centered = false
+texture = ExtResource("2_bgrd")
+
+[node name="Characters" type="AnimatedSprite2D" parent="Screen"]
+centered = false
+sprite_frames = SubResource("SpriteFrames_bar")
+animation = &"loop"
+autoplay = "loop"
+
+[node name="Fill" type="TextureProgressBar" parent="Screen"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 323.0
+offset_right = 387.0
+offset_bottom = 330.0
+max_value = 1.0
+step = 0.001
+value = 0.0
+texture_under = SubResource("AtlasTexture_empty")
+texture_progress = SubResource("AtlasTexture_full")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_root")
+}

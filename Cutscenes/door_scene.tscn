@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Cutscenes/cine_player.gd" id="1_cine"]
+[ext_resource type="Script" path="res://Cutscenes/cine_step.gd" id="2_step"]
+[ext_resource type="Texture2D" path="res://Cutscenes/scene1-1_door_opening_3.png" id="3_door"]
+
+[sub_resource type="Resource" id="Step_bars"]
+script = ExtResource("2_step")
+at_time = 0.0
+kind = 4
+amount = 1.0
+duration = 0.4
+
+[sub_resource type="Resource" id="Step_line1"]
+script = ExtResource("2_step")
+at_time = 0.2
+kind = 0
+speaker = ""
+text = "الباب..."
+hold = false
+duration = 1.1
+
+[sub_resource type="Resource" id="Step_line2"]
+script = ExtResource("2_step")
+at_time = 1.3
+kind = 0
+speaker = "سامي"
+text = "الباب انفتح."
+hold = true
+
+[sub_resource type="Resource" id="Step_fade"]
+script = ExtResource("2_step")
+at_time = 1.4
+kind = 3
+amount = 1.0
+duration = 0.6
+
+[sub_resource type="Resource" id="Step_flag"]
+script = ExtResource("2_step")
+at_time = 2.0
+kind = 6
+flag_name = "saw_door_cutscene"
+
+[node name="DoorScene" type="CanvasLayer"]
+process_mode = 3
+layer = 90
+script = ExtResource("1_cine")
+sheet = ExtResource("3_door")
+frame_count = 13
+fps = 10.0
+loop = false
+steps = Array[ExtResource("2_step")]([SubResource("Step_bars"), SubResource("Step_line1"), SubResource("Step_line2"), SubResource("Step_fade"), SubResource("Step_flag")])
+extra_time = 0.5
+type_speed = 30.0
+skippable = true
+seen_id = "saw_door_cutscene"
+
+[node name="Art" type="Sprite2D" parent="."]
+texture_filter = 2
+position = Vector2(320, 180)
+texture = ExtResource("3_door")
+vframes = 13
+
+[node name="Fade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="TopBar" type="ColorRect" parent="."]
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Box" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -104.0
+offset_right = 280.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Text" type="Label" parent="Box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6)
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+visible_characters_behavior = 1
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]

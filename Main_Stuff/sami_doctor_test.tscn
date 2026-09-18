@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dbfswqraglcc1" path="res://3MK-File/TEST-ANIM/Up-Sami.tres" id="4_ny335"]
 [ext_resource type="Texture2D" uid="uid://b8tc7y6ljtxpk" path="res://3MK-File/myshit/sami pull down.png" id="5_p75en"]
 [ext_resource type="Texture2D" uid="uid://bhire3x0rk731" path="res://3MK-File/myshit/sami pull left.png" id="6_10rwc"]
+[ext_resource type="Texture2D" uid="uid://cxfqyk1qf2jbk" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0087.png" id="6_ef2nf"]
 [ext_resource type="Texture2D" uid="uid://dgv86ko2niebr" path="res://3MK-File/myshit/sami pull right.png" id="7_2ieb1"]
+[ext_resource type="Texture2D" uid="uid://dkmojililhgy4" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0009.png" id="7_6vrky"]
 [ext_resource type="Texture2D" uid="uid://bmig2fbyly6fu" path="res://3MK-File/myshit/sami pull up.png" id="8_3rkym"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="9_ag5su"]
 [ext_resource type="Texture2D" uid="uid://6q05yfdx341s" path="res://3MK-File/myshit/sami push left (1).png" id="10_xeifs"]
@@ -16,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://b55a7vyqwfkvs" path="res://3MK-File/TEST-ANIM/up w dr.png" id="14_4u6n7"]
 [ext_resource type="Script" uid="uid://csdollpucdl0j" path="res://3MK-File/Sami_statemachine/Sami_statemachine.gd" id="15_7dkr7"]
 [ext_resource type="PackedScene" uid="uid://capbwl3rbls7n" path="res://3MK-File/myshit/radio_panel.tscn" id="15_oevct"]
-[ext_resource type="PackedScene" uid="uid://dpdyays8575ft" path="res://3MK-File/Scene/radio_ui.tscn" id="16_5ek7p"]
 [ext_resource type="Script" uid="uid://tglhmvofnukt" path="res://3MK-File/Sami_statemachine/Idle_state.gd" id="16_yr7xf"]
 [ext_resource type="Script" uid="uid://5l6qdqaxjo6g" path="res://3MK-File/Sami_statemachine/walk_state.gd" id="17_24ppx"]
 [ext_resource type="Script" uid="uid://ldxs6xhdy3jl" path="res://3MK-File/Sami_statemachine/drag_state.gd" id="18_drag0"]
@@ -27,13 +28,27 @@
 [ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="23_indicconfig"]
 [ext_resource type="Texture2D" uid="uid://dmfoxmxwd3i7i" path="res://background_scenes/assets/kenney_1-bit-input-prompts-pixel-16/Tiles (Black)/tile_0011.png" id="24_tile0011"]
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="27_mqpgr"]
-[ext_resource type="PackedScene" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
+[ext_resource type="PackedScene" uid="uid://be3qnkolom80x" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
 [ext_resource type="Resource" path="res://3MK-File/Resources/PlayerHealth_Test.tres" id="29_healthstats"]
 
 [sub_resource type="Resource" id="Resource_areaindcfg"]
 script = ExtResource("23_indicconfig")
 target_group = &"Item"
 icon = ExtResource("24_tile0011")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_18gna"]
+script = ExtResource("23_indicconfig")
+target_group = &"Doors"
+icon = ExtResource("6_ef2nf")
+icon_gamepad = ExtResource("7_6vrky")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
+[sub_resource type="Resource" id="Resource_ef2nf"]
+script = ExtResource("23_indicconfig")
+target_group = &"NPC"
+icon = ExtResource("6_ef2nf")
+icon_gamepad = ExtResource("7_6vrky")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hg3f6"]
@@ -718,8 +733,19 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgi43"]
-size = Vector2(13, 37)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ef2nf"]
+load_path = "res://.godot/imported/sami walk down-Sheet1.png-cb7699c1b7d662485c0ce08f39ccf0eb.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_18gna"]
+normal_texture = SubResource("CompressedTexture2D_ef2nf")
+specular_color = Color(0.16253604, 0.16253604, 0.16253604, 1)
+specular_shininess = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vt2j"]
+radius = 24.020824
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ef2nf"]
+polygon = PackedVector2Array(7.4312897, 60.69716, -9.56871, 60.69716, -9.56871, 57.69716, 7.4312897, 57.69716)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
 
@@ -728,20 +754,29 @@ motion_mode = 1
 script = ExtResource("1_wvwk7")
 stats = ExtResource("29_healthstats")
 
-[node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
-position = Vector2(1, 2)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
+[node name="AreaIndicator" parent="." unique_id=1016601047 groups=["Doors", "NPC"] instance=ExtResource("22_areaind")]
+position = Vector2(2, 30)
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg"), SubResource("Resource_18gna"), SubResource("Resource_ef2nf")])
+
+[node name="Sprite2D2" parent="AreaIndicator" index="1" unique_id=1092672576]
+position = Vector2(-2, -87)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rwi67")
-animation = &"Walk_Side"
-autoplay = "Idle_down"
-frame_progress = 0.7881053
+animation = &"Walk_down"
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=513518743]
+texture = SubResource("CanvasTexture_18gna")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041668416]
-position = Vector2(-2.5, 19.5)
-shape = SubResource("RectangleShape2D_jgi43")
+visible = false
+position = Vector2(2, 30)
+shape = SubResource("CircleShape2D_6vt2j")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=537697524]
+position = Vector2(1.5687103, -14.697159)
+occluder = SubResource("OccluderPolygon2D_ef2nf")
 
 [node name="Statemachine" type="Node" parent="." unique_id=1492896408]
 script = ExtResource("15_7dkr7")
@@ -760,6 +795,7 @@ script = ExtResource("18_drag0")
 script = ExtResource("19_rot0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
+zoom = Vector2(1.275, 1.275)
 limit_smoothed = true
 
 [node name="UI" type="Node" parent="." unique_id=766651730]
@@ -768,8 +804,6 @@ limit_smoothed = true
 
 [node name="Radio-Panel" parent="UI/Tools" unique_id=232762158 instance=ExtResource("15_oevct")]
 z_index = 2
-layout_mode = 1
-anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
 anchor_bottom = 1.0
@@ -779,7 +813,6 @@ offset_right = 8.0
 offset_bottom = -152.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_oevct")
-Radio_Sami = ExtResource("16_5ek7p")
 metadata/_edit_use_anchors_ = true
 
 [node name="Inventory UI" type="CanvasLayer" parent="UI" unique_id=1693625034]
@@ -815,3 +848,5 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=542696879 instance=ExtResource("28_healthui")]
+
+[editable path="AreaIndicator"]

@@ -813,6 +813,10 @@ target_group = &"Item"
 icon = ExtResource("24_tile0011")
 metadata/_custom_type_script = "uid://cikn8qmh4dwel"
 
+[sub_resource type="Resource" id="Resource_1f6mo"]
+script = ExtResource("23_indicconfig")
+metadata/_custom_type_script = "uid://cikn8qmh4dwel"
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
 
 [node name="Sami_Doctor" type="CharacterBody2D" unique_id=2001215541 groups=["Player"]]
@@ -832,7 +836,7 @@ shape = SubResource("RectangleShape2D_jgi43")
 
 [node name="AreaIndicator" parent="." unique_id=1016601047 instance=ExtResource("22_areaind")]
 position = Vector2(1, 0)
-configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg")])
+configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_areaindcfg"), SubResource("Resource_1f6mo")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
 

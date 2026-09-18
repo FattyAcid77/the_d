@@ -54,6 +54,7 @@ Sound="*uid://dbxwj52gejrqo"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=3
 window/size/initial_position_type=0
 window/size/borderless=true
 window/size/window_width_override=640
@@ -91,6 +92,18 @@ Item=""
 ignore_bounds=""
 statue_area="Test"
 Nothing=""
+Scene1_obj1=""
+Scene2_obj1=""
+S3alel=""
+HamatoIntroduction=""
+MeetMazSad=""
+Doors=""
+MazSad_Door=""
+Elevator_Quest=""
+Elevator_pt1=""
+Maz_Elevator_Hallway=""
+Sad_Room_Door=""
+Maz_Sad_Room_Door=""
 
 [input]
 
