@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PopupWindowDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/popup_window_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "whisper_1"
+kind = 0
+size = Vector2i(420, 140)
+title = "message.txt"
+borderless = false
+show_title_inside = false
+unfocusable = false
+show_in_taskbar = true
+always_on_top = true
+depth = 0
+placement = 1
+close_mode = 0
+lifetime = 7.0
+text = "you are not supposed to be here"
+text_motion = 0
+text_speed = 22.0
+shake_pixels = 0.0

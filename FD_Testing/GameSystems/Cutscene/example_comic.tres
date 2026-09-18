@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Comic" format=3 uid="uid://c7drqucrjd6da"]
+
+[ext_resource type="Script" uid="uid://reitkr4qid0b" path="res://FD_Testing/GameSystems/Cutscene/comic.gd" id="1"]
+[ext_resource type="Script" uid="uid://dcfwyebtc01qh" path="res://FD_Testing/GameSystems/Cutscene/comic_panel.gd" id="2"]
+[ext_resource type="VideoStream" uid="uid://duero7aqx7utd" path="res://FD_Testing/GameSystems/Cutscene/Vid_1.ogv" id="3"]
+[ext_resource type="VideoStream" uid="uid://bdp12pk23rxjo" path="res://FD_Testing/GameSystems/Cutscene/Vid_2.ogv" id="4"]
+[ext_resource type="VideoStream" uid="uid://d4kdnmm3o156t" path="res://FD_Testing/GameSystems/Cutscene/Vid_3.ogv" id="5"]
+
+[sub_resource type="Resource" id="panel1"]
+script = ExtResource("2")
+video = ExtResource("3")
+set_flags = Array[String](["comic_started"])
+
+[sub_resource type="Resource" id="panel2"]
+script = ExtResource("2")
+video = ExtResource("4")
+
+[sub_resource type="Resource" id="panel3"]
+script = ExtResource("2")
+video = ExtResource("5")
+set_flags = Array[String](["comic_watched"])
+
+[resource]
+script = ExtResource("1")
+panels = Array[ExtResource("2")]([SubResource("panel1"), SubResource("panel2"), SubResource("panel3")])

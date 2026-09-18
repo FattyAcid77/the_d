@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c0pn8g2eecwku"]
+
+[ext_resource type="Texture2D" uid="uid://cvkl14yir7br2" path="res://3MK-File/Scene/f2-cell3.png" id="1_0tmo3"]
+
+[node name="F2_Cell-Room" type="Sprite2D" unique_id=1977770180]
+texture = ExtResource("1_0tmo3")

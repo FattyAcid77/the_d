@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://npcv2base0001"]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/NPC/Scripts/npc.gd" id="1_npc"]
+[ext_resource type="PackedScene" uid="uid://dlgv2trigger01" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npc"]
+radius = 10.0
+height = 30.0
+
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_npc")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_npc")
+
+[node name="DialogTrigger" parent="." instance=ExtResource("2_trg")]

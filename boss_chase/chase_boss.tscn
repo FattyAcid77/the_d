@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://boss_chase/chase_boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="2_icon"]
+[ext_resource type="Resource" path="res://boss_chase/resources/chase_boss_health.tres" id="3_health"]
+[ext_resource type="PackedScene" path="res://boss_chase/chase_slow_wave.tscn" id="4_wave"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_touch"]
+radius = 18.0
+
+[node name="ChaseBoss" type="CharacterBody2D" groups=["chase_boss"]]
+z_index = 2
+motion_mode = 1
+collision_layer = 64
+collision_mask = 16
+script = ExtResource("1_boss")
+stats = ExtResource("3_health")
+wave_scene = ExtResource("4_wave")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_boss")
+
+[node name="TouchBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchBox"]
+shape = SubResource("CircleShape2D_touch")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kx7ryt12er25"]
+
+[ext_resource type="Script" uid="uid://c1hn2widtxwls" path="res://3MK-File/script/quest_signal.gd" id="1_qsig"]
+
+[node name="QuestSignal" type="Node2D" unique_id=2085552719]
+script = ExtResource("1_qsig")

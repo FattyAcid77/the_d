@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://lbqchageen3l"]
+
+[ext_resource type="Script" uid="uid://pt5qv5qrkf4" path="res://audio/music_auto_trigger.gd" id="1_trigger"]
+[ext_resource type="AudioStream" uid="uid://b21w1dhecotum" path="res://audio/music/main_menu.mp3" id="2_track"]
+
+[node name="MainMenuMusic" type="Node" unique_id=931209682]
+script = ExtResource("1_trigger")
+track = ExtResource("2_track")

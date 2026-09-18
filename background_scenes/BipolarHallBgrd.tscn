@@ -1,45 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1nhhvl0ugdg0"]
+[gd_scene format=3 uid="uid://d1nhhvl0ugdg0"]
 
-[ext_resource type="Texture2D" uid="uid://fkvndxqt85w8" path="res://background_scenes/assets/Gf hall.png" id="1_118v7"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_g5hh0"]
+[ext_resource type="Texture2D" uid="uid://cwpvgyyo8yypm" path="res://background_scenes/assets/Bipolar_hall_v3.png" id="2_g5hh0"]
+[ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="3_eg6ce"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_d4o1x"]
-a = Vector2(-2, -213)
-b = Vector2(-5, 547)
+[node name="BipolarHallBgrd" type="Node2D" unique_id=705043792]
+script = ExtResource("1_g5hh0")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_f2g63"]
-a = Vector2(-6, -13)
-b = Vector2(-5, 766)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=480103447]
+position = Vector2(155, 317)
+texture = ExtResource("2_g5hh0")
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lptyi"]
-a = Vector2(191, 336)
-b = Vector2(762, 334)
+[node name="colliosions" type="StaticBody2D" parent="." unique_id=2042430111]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_7xmaa"]
-a = Vector2(214, 103)
-b = Vector2(973, 106)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="colliosions" unique_id=1790614811]
+position = Vector2(73, 192)
+polygon = PackedVector2Array(0, 1, 1, 12, -7, 12, 1, 26, 1, 63, -8, 64, -7, 79, -13, 79, -13, 119, -7, 119, -7, 146, 2, 146, 2, 181, 3, 229, -7, 229, -7, 259, -13, 259, -13, 298, -7, 298, -7, 393, 1, 393, 1, 409, 58, 409, 58, 415, 109, 415, 109, 407, 167, 407, 167, 392, 173, 392, 173, 375, 164, 375, 164, 337, 173, 337, 173, 297, 180, 297, 180, 258, 173, 258, 173, 183, 163, 183, 163, 143, 170, 143, 170, 133, 122, 133, 122, 31, 150, 30, 150, 16, 165, 16, 165, 1, 4, 2, 2, -58, 230, -56, 209, 460, -40, 452, -30, -28)
 
-[node name="BipolarHallBgrd" type="Node2D"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="colliosions" unique_id=998340921]
+polygon = PackedVector2Array(70, 518, 95, 504, 101, 504, 106, 505, 113, 513, 148, 569, 109, 596)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(611.5, 357)
-scale = Vector2(1.82422, 2.89844)
-texture = ExtResource("1_118v7")
+[node name="Lights" type="Node2D" parent="." unique_id=801161301]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(109, 143)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(382, 54)
-shape = SubResource("SegmentShape2D_d4o1x")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(647, -165)
-shape = SubResource("SegmentShape2D_f2g63")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1, 220)
-shape = SubResource("SegmentShape2D_lptyi")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-18, -235)
-shape = SubResource("SegmentShape2D_7xmaa")
+[node name="PointLight2D" type="PointLight2D" parent="Lights" unique_id=1152405495]
+position = Vector2(154.5, 395.5)
+scale = Vector2(0.3457031, 0.7753907)
+energy = 0.7
+shadow_enabled = true
+texture = ExtResource("3_eg6ce")

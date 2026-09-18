@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dajyys2qo37oo"]
+
+[ext_resource type="PackedScene" uid="uid://7rq06qruen07" path="res://background_scenes/Narc_Room_bgrd.tscn" id="1_rcj80"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_s3gh4"]
+
+[node name="NarcRoom" type="Node2D"]
+
+[node name="NarcRoomBgrd" parent="." instance=ExtResource("1_rcj80")]
+
+[node name="Door_reg" parent="." instance=ExtResource("2_s3gh4")]
+position = Vector2(998, 969)

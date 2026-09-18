@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvxdvv8m30ltg"]
+
+[ext_resource type="PackedScene" uid="uid://cxyj5igra8hge" path="res://background_scenes/Elevator_2_Left_bgrd.tscn" id="1_5v1r7"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_ixtgn"]
+[ext_resource type="PackedScene" uid="uid://bkjad6iqtfo2y" path="res://characters scenes/Sami.tscn" id="2_ehi4b"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="2_ixtgn"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_usdfj"]
+[ext_resource type="PackedScene" uid="uid://c3ddty4kt06p8" path="res://control scene/elevator_control_reg.tscn" id="3_ehi4b"]
+[ext_resource type="PackedScene" uid="uid://c4jkvy4u1n5ug" path="res://control scene/Elevator_control_2.tscn" id="7_3qnwv"]
+
+[node name="Elevator2Left" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_ixtgn")
+player = NodePath("Sami")
+doors = [NodePath("Door_reg")]
+
+[node name="Elevator2LeftBgrd" parent="." instance=ExtResource("1_5v1r7")]
+script = ExtResource("2_ixtgn")
+
+[node name="Door_reg" parent="." instance=ExtResource("2_usdfj")]
+position = Vector2(288, 256)
+scale = Vector2(0.5, 0.5)
+entery_direction = 3
+push_distance = 50
+new_scene_path = "res://Main Scenes/lvl_2_lobby.tscn"
+target_door_name = "lvl_2_lobby_west"
+this_door_name = "Elevator_2_Main"
+
+[node name="Elevator_Control_reg" parent="." instance=ExtResource("3_ehi4b")]
+position = Vector2(246, 216)
+
+[node name="Sami" parent="." node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_ehi4b")]
+position = Vector2(229, 225)
+camera_adj = NodePath("../Elevator2LeftBgrd")
+
+[node name="ElevatorControl" parent="." instance=ExtResource("7_3qnwv")]
+visible = false
+this_scene_path = "res://Main Scenes/Elevator_2_left.tscn"
+path_to_scene_1 = "res://Main Scenes/Elevator_3.tscn"
+path_to_scene_2 = "res://Main Scenes/Elevator_2_left.tscn"
+
+[connection signal="body_entered" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_entered"]
+[connection signal="body_exited" from="Elevator_Control_reg" to="Elevator_Control_reg" method="_on_body_exited"]

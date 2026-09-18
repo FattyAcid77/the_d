@@ -1,0 +1,250 @@
+[gd_scene load_steps=8 format=3 uid="uid://electrotest0001"]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/ElectroPuzzle/electro_puzzle.gd" id="1_pz"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/ElectroPuzzle/electro_gen.gd" id="2_gen"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/ElectroPuzzle/power_lights.gd" id="3_lt"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/ElectroPuzzle/floor_effect.gd" id="4_fl"]
+
+[sub_resource type="CircleShape2D" id="Circle_gen"]
+radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="Rect_ice"]
+size = Vector2(220, 120)
+
+[sub_resource type="RectangleShape2D" id="Rect_water"]
+size = Vector2(220, 120)
+
+[node name="ElectroPuzzleTest" type="Node2D"]
+
+[node name="Lights" type="CanvasLayer" parent="."]
+script = ExtResource("3_lt")
+
+[node name="Puzzle" type="Node" parent="." node_paths=PackedStringArray("gens", "main_gen", "lights")]
+script = ExtResource("1_pz")
+gens = [NodePath("../Gen0"), NodePath("../Gen1"), NodePath("../Gen2")]
+main_gen = NodePath("../MainGen")
+lights = NodePath("../Lights")
+run_seconds = 45.0
+
+[node name="Gen0" type="Area2D" parent="."]
+position = Vector2(-300, -160)
+script = ExtResource("2_gen")
+order_index = 0
+floor_number = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gen0"]
+shape = SubResource("Circle_gen")
+
+[node name="Body" type="ColorRect" parent="Gen0"]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = 28.0
+color = Color(0.25, 0.28, 0.32, 1)
+
+[node name="Tag" type="Label" parent="Gen0"]
+offset_left = -30.0
+offset_top = -54.0
+offset_right = 30.0
+offset_bottom = -32.0
+text = "GEN 1"
+horizontal_alignment = 1
+
+[node name="Light" type="Node2D" parent="Gen0"]
+
+[node name="Glow" type="ColorRect" parent="Gen0/Light"]
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = 8.0
+color = Color(1, 0.85, 0.3, 0.55)
+
+[node name="Prompt" type="Node2D" parent="Gen0"]
+position = Vector2(0, -70)
+
+[node name="Mark" type="Label" parent="Gen0/Prompt"]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+text = "E"
+horizontal_alignment = 1
+
+[node name="Gen1" type="Area2D" parent="."]
+position = Vector2(0, -160)
+script = ExtResource("2_gen")
+order_index = 1
+floor_number = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gen1"]
+shape = SubResource("Circle_gen")
+
+[node name="Body" type="ColorRect" parent="Gen1"]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = 28.0
+color = Color(0.25, 0.28, 0.32, 1)
+
+[node name="Tag" type="Label" parent="Gen1"]
+offset_left = -30.0
+offset_top = -54.0
+offset_right = 30.0
+offset_bottom = -32.0
+text = "GEN 2"
+horizontal_alignment = 1
+
+[node name="Light" type="Node2D" parent="Gen1"]
+
+[node name="Glow" type="ColorRect" parent="Gen1/Light"]
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = 8.0
+color = Color(1, 0.85, 0.3, 0.55)
+
+[node name="Prompt" type="Node2D" parent="Gen1"]
+position = Vector2(0, -70)
+
+[node name="Mark" type="Label" parent="Gen1/Prompt"]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+text = "E"
+horizontal_alignment = 1
+
+[node name="Gen2" type="Area2D" parent="."]
+position = Vector2(300, -160)
+script = ExtResource("2_gen")
+order_index = 2
+floor_number = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gen2"]
+shape = SubResource("Circle_gen")
+
+[node name="Body" type="ColorRect" parent="Gen2"]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = 20.0
+offset_bottom = 28.0
+color = Color(0.25, 0.28, 0.32, 1)
+
+[node name="Tag" type="Label" parent="Gen2"]
+offset_left = -30.0
+offset_top = -54.0
+offset_right = 30.0
+offset_bottom = -32.0
+text = "GEN 3"
+horizontal_alignment = 1
+
+[node name="Light" type="Node2D" parent="Gen2"]
+
+[node name="Glow" type="ColorRect" parent="Gen2/Light"]
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 14.0
+offset_bottom = 8.0
+color = Color(1, 0.85, 0.3, 0.55)
+
+[node name="Prompt" type="Node2D" parent="Gen2"]
+position = Vector2(0, -70)
+
+[node name="Mark" type="Label" parent="Gen2/Prompt"]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+text = "E"
+horizontal_alignment = 1
+
+[node name="MainGen" type="Area2D" parent="."]
+position = Vector2(0, 320)
+script = ExtResource("2_gen")
+is_main = true
+floor_number = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainGen"]
+shape = SubResource("Circle_gen")
+
+[node name="Body" type="ColorRect" parent="MainGen"]
+offset_left = -34.0
+offset_top = -44.0
+offset_right = 34.0
+offset_bottom = 44.0
+color = Color(0.4, 0.18, 0.16, 1)
+
+[node name="Tag" type="Label" parent="MainGen"]
+offset_left = -46.0
+offset_top = -72.0
+offset_right = 46.0
+offset_bottom = -50.0
+text = "MAIN GEN"
+horizontal_alignment = 1
+
+[node name="Light" type="Node2D" parent="MainGen"]
+
+[node name="Glow" type="ColorRect" parent="MainGen/Light"]
+offset_left = -22.0
+offset_top = -30.0
+offset_right = 22.0
+offset_bottom = 14.0
+color = Color(1, 0.4, 0.25, 0.6)
+
+[node name="Prompt" type="Node2D" parent="MainGen"]
+position = Vector2(0, -90)
+
+[node name="Mark" type="Label" parent="MainGen/Prompt"]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+text = "E"
+horizontal_alignment = 1
+
+[node name="IceFloor" type="Area2D" parent="."]
+position = Vector2(-180, 120)
+script = ExtResource("4_fl")
+kind = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IceFloor"]
+shape = SubResource("Rect_ice")
+
+[node name="Art" type="ColorRect" parent="IceFloor"]
+offset_left = -110.0
+offset_top = -60.0
+offset_right = 110.0
+offset_bottom = 60.0
+color = Color(0.55, 0.8, 0.95, 0.35)
+
+[node name="Label" type="Label" parent="IceFloor/Art"]
+offset_left = 80.0
+offset_top = 48.0
+offset_right = 140.0
+offset_bottom = 70.0
+text = "ICE"
+
+[node name="WaterFloor" type="Area2D" parent="."]
+position = Vector2(180, 120)
+script = ExtResource("4_fl")
+kind = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterFloor"]
+shape = SubResource("Rect_water")
+
+[node name="Art" type="ColorRect" parent="WaterFloor"]
+offset_left = -110.0
+offset_top = -60.0
+offset_right = 110.0
+offset_bottom = 60.0
+color = Color(0.2, 0.45, 0.6, 0.4)
+
+[node name="Label" type="Label" parent="WaterFloor/Art"]
+offset_left = 76.0
+offset_top = 48.0
+offset_right = 146.0
+offset_bottom = 70.0
+text = "WATER"
+
+[connection signal="run_started" from="Puzzle" to="Lights" method="on_run_started"]
+[connection signal="run_tick" from="Puzzle" to="Lights" method="on_run_tick"]

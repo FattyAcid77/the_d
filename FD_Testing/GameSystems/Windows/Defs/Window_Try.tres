@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="PopupWindowDef" format=3 uid="uid://cgpp4lfpq0arm"]
+
+[ext_resource type="Script" uid="uid://b3bi6ac44e76o" path="res://FD_Testing/GameSystems/Windows/popup_window_def.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cvjan8gly0d6p" path="res://FD_Testing/Temp_Stuff/Radio_Try.tscn" id="1_eavsa"]
+[ext_resource type="Texture2D" uid="uid://dwlalesehholy" path="res://FD_Testing/Image/WINDOW_UI.png" id="3_3eu0x"]
+[ext_resource type="Script" uid="uid://nbjif8fk5tmy" path="res://FD_Testing/GameSystems/Windows/window_skin.gd" id="4_dmar0"]
+
+[sub_resource type="Resource" id="Resource_hngs6"]
+script = ExtResource("4_dmar0")
+frame = ExtResource("3_3eu0x")
+metadata/_custom_type_script = "uid://nbjif8fk5tmy"
+
+[resource]
+script = ExtResource("1")
+id = "Window_Try"
+kind = 1
+size = Vector2i(640, 360)
+title = "?????"
+show_title_inside = true
+user_can_drag = true
+skin = SubResource("Resource_hngs6")
+placement = 4
+close_mode = 3
+shake_pixels = 1.5
+text = "he remembers what you did"
+text_motion = 1
+text_speed = 60.0
+portal_scene = ExtResource("1_eavsa")
+portal_follow = 1

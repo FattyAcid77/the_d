@@ -1,0 +1,247 @@
+[gd_scene load_steps=16 format=3 uid="uid://radiostatuetest1"]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/StatuePuzzle/radio_statue.gd" id="1_statue"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/StatuePuzzle/radio_speaker.gd" id="2_speaker"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/StatuePuzzle/number_board.gd" id="3_board"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st1_decoy_a.tres" id="r_0"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st1_decoy_b.tres" id="r_1"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st1_decoy_c.tres" id="r_2"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st1_answer.tres" id="r_3"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st2_decoy.tres" id="r_4"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st2_answer.tres" id="r_5"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st3_decoy.tres" id="r_6"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st3_answer.tres" id="r_7"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st4_decoy.tres" id="r_8"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/StatuePuzzle/Responses/resp_st4_answer.tres" id="r_9"]
+
+[sub_resource type="CircleShape2D" id="Circle_speaker"]
+radius = 44.0
+
+[sub_resource type="RectangleShape2D" id="Rect_board"]
+size = Vector2(96, 48)
+
+[node name="RadioStatuePuzzle" type="Node2D"]
+
+[node name="Statue" type="Node2D" parent="." node_paths=PackedStringArray("speakers", "board", "sprite")]
+script = ExtResource("1_statue")
+speakers = [NodePath("../Speaker0"), NodePath("../Speaker1"), NodePath("../Speaker2"), NodePath("../Speaker3")]
+responses = [ExtResource("r_0"), ExtResource("r_1"), ExtResource("r_2"), ExtResource("r_3"), ExtResource("r_4"), ExtResource("r_5"), ExtResource("r_6"), ExtResource("r_7"), ExtResource("r_8"), ExtResource("r_9")]
+board = NodePath("../NumberBoard")
+sprite = NodePath("Sprite")
+bubble_offset = Vector2(0, -110)
+stage_1_speakers = Array[int]([0])
+stage_2_speakers = Array[int]([0, 2])
+stage_3_speakers = Array[int]([1, 3])
+stage_4_speakers = Array[int]([0, 1, 2, 3])
+play_button_offset = Vector2(90, -40)
+
+[node name="Placeholder" type="ColorRect" parent="Statue"]
+offset_left = -32.0
+offset_top = -80.0
+offset_right = 32.0
+offset_bottom = 20.0
+color = Color(0.45, 0.42, 0.38, 1)
+
+[node name="Label" type="Label" parent="Statue/Placeholder"]
+offset_left = 4.0
+offset_top = 40.0
+offset_right = 60.0
+offset_bottom = 62.0
+text = "STATUE"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Statue"]
+
+[node name="Speaker0" type="Area2D" parent="."]
+position = Vector2(-220, -140)
+script = ExtResource("2_speaker")
+speaker_index = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Speaker0"]
+shape = SubResource("Circle_speaker")
+
+[node name="Body" type="ColorRect" parent="Speaker0"]
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 18.0
+offset_bottom = 22.0
+color = Color(0.2, 0.24, 0.3, 1)
+
+[node name="Ring" type="Node2D" parent="Speaker0"]
+
+[node name="Glow" type="ColorRect" parent="Speaker0/Ring"]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = 28.0
+color = Color(0.3, 0.8, 1, 0.25)
+
+[node name="HzLabel" type="Label" parent="Speaker0"]
+offset_left = -40.0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 48.0
+text = "--"
+horizontal_alignment = 1
+
+[node name="Number" type="Label" parent="Speaker0"]
+offset_left = -8.0
+offset_top = -50.0
+offset_right = 8.0
+offset_bottom = -28.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Speaker1" type="Area2D" parent="."]
+position = Vector2(220, -140)
+script = ExtResource("2_speaker")
+speaker_index = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Speaker1"]
+shape = SubResource("Circle_speaker")
+
+[node name="Body" type="ColorRect" parent="Speaker1"]
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 18.0
+offset_bottom = 22.0
+color = Color(0.2, 0.24, 0.3, 1)
+
+[node name="Ring" type="Node2D" parent="Speaker1"]
+
+[node name="Glow" type="ColorRect" parent="Speaker1/Ring"]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = 28.0
+color = Color(0.3, 0.8, 1, 0.25)
+
+[node name="HzLabel" type="Label" parent="Speaker1"]
+offset_left = -40.0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 48.0
+text = "--"
+horizontal_alignment = 1
+
+[node name="Number" type="Label" parent="Speaker1"]
+offset_left = -8.0
+offset_top = -50.0
+offset_right = 8.0
+offset_bottom = -28.0
+text = "1"
+horizontal_alignment = 1
+
+[node name="Speaker2" type="Area2D" parent="."]
+position = Vector2(-220, 140)
+script = ExtResource("2_speaker")
+speaker_index = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Speaker2"]
+shape = SubResource("Circle_speaker")
+
+[node name="Body" type="ColorRect" parent="Speaker2"]
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 18.0
+offset_bottom = 22.0
+color = Color(0.28, 0.2, 0.3, 1)
+
+[node name="Ring" type="Node2D" parent="Speaker2"]
+
+[node name="Glow" type="ColorRect" parent="Speaker2/Ring"]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = 28.0
+color = Color(1, 0.7, 0.3, 0.25)
+
+[node name="HzLabel" type="Label" parent="Speaker2"]
+offset_left = -40.0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 48.0
+text = "--"
+horizontal_alignment = 1
+
+[node name="Number" type="Label" parent="Speaker2"]
+offset_left = -8.0
+offset_top = -50.0
+offset_right = 8.0
+offset_bottom = -28.0
+text = "2"
+horizontal_alignment = 1
+
+[node name="Speaker3" type="Area2D" parent="."]
+position = Vector2(220, 140)
+script = ExtResource("2_speaker")
+speaker_index = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Speaker3"]
+shape = SubResource("Circle_speaker")
+
+[node name="Body" type="ColorRect" parent="Speaker3"]
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 18.0
+offset_bottom = 22.0
+color = Color(0.28, 0.2, 0.3, 1)
+
+[node name="Ring" type="Node2D" parent="Speaker3"]
+
+[node name="Glow" type="ColorRect" parent="Speaker3/Ring"]
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = 28.0
+color = Color(1, 0.7, 0.3, 0.25)
+
+[node name="HzLabel" type="Label" parent="Speaker3"]
+offset_left = -40.0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 48.0
+text = "--"
+horizontal_alignment = 1
+
+[node name="Number" type="Label" parent="Speaker3"]
+offset_left = -8.0
+offset_top = -50.0
+offset_right = 8.0
+offset_bottom = -28.0
+text = "3"
+horizontal_alignment = 1
+
+[node name="NumberBoard" type="Area2D" parent="."]
+position = Vector2(0, 260)
+script = ExtResource("3_board")
+solution = PackedStringArray("20", "45", "17", "88")
+board_title = "THE BOARD"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NumberBoard"]
+shape = SubResource("Rect_board")
+
+[node name="Art" type="ColorRect" parent="NumberBoard"]
+offset_left = -48.0
+offset_top = -24.0
+offset_right = 48.0
+offset_bottom = 24.0
+color = Color(0.32, 0.26, 0.2, 1)
+
+[node name="Label" type="Label" parent="NumberBoard/Art"]
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 88.0
+offset_bottom = 34.0
+text = "BOARD"
+horizontal_alignment = 1
+
+[node name="Prompt" type="Node2D" parent="NumberBoard"]
+position = Vector2(0, -40)
+
+[node name="Mark" type="Label" parent="NumberBoard/Prompt"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+text = "E"
+horizontal_alignment = 1

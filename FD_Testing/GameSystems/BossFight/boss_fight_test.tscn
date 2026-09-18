@@ -1,0 +1,155 @@
+[gd_scene load_steps=11 format=3 uid="uid://bossfighttest01"]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_fight.gd" id="1_fight"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/yazzed_boss.gd" id="2_boss"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_tv.gd" id="3_tv"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_object.gd" id="4_obj"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/BossFight/boss_juice.gd" id="5_juice"]
+
+[sub_resource type="GradientTexture2D" id="Tex_placeholder"]
+width = 96
+height = 96
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="Circle_boss"]
+radius = 34.0
+
+[sub_resource type="RectangleShape2D" id="Rect_tv"]
+size = Vector2(120, 90)
+
+[sub_resource type="CircleShape2D" id="Circle_obj"]
+radius = 22.0
+
+[sub_resource type="RectangleShape2D" id="Rect_trigger"]
+size = Vector2(240, 160)
+
+[node name="YazzedFight" type="Node2D"]
+
+[node name="Juice" type="Node" parent="."]
+script = ExtResource("5_juice")
+
+[node name="Fight" type="Node" parent="." node_paths=PackedStringArray("boss", "tv", "objects", "juice", "trigger_area")]
+script = ExtResource("1_fight")
+boss = NodePath("../Yazzed")
+tv = NodePath("../TV")
+objects = [NodePath("../Trap1"), NodePath("../Trap2"), NodePath("../Throwable1")]
+juice = NodePath("../Juice")
+trigger_area = NodePath("../StartTrigger")
+stage3_hp = 50.0
+
+[node name="TV" type="StaticBody2D" parent="."]
+position = Vector2(0, -280)
+script = ExtResource("3_tv")
+sprite = NodePath("Sprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TV"]
+shape = SubResource("Rect_tv")
+
+[node name="Art" type="Sprite2D" parent="TV"]
+scale = Vector2(0.9, 0.7)
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.6, 0.8, 1, 1)
+
+[node name="Label" type="Label" parent="TV"]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+text = "TV"
+horizontal_alignment = 1
+
+[node name="Sprite" type="AnimatedSprite2D" parent="TV"]
+
+[node name="Yazzed" type="CharacterBody2D" parent="."]
+position = Vector2(0, 40)
+script = ExtResource("2_boss")
+sprite = NodePath("Sprite")
+max_hp = 100.0
+stage3_hp_threshold = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Yazzed"]
+shape = SubResource("Circle_boss")
+
+[node name="Art" type="Sprite2D" parent="Yazzed"]
+scale = Vector2(0.55, 0.55)
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.5, 0.4, 1)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Yazzed"]
+
+[node name="Trap1" type="Area2D" parent="."]
+position = Vector2(-260, 120)
+script = ExtResource("4_obj")
+kind = 0
+boss_damage = 15.0
+sprite = NodePath("Art")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap1"]
+shape = SubResource("Circle_obj")
+
+[node name="Art" type="Sprite2D" parent="Trap1"]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.5, 1, 0.6, 1)
+
+[node name="Trap2" type="Area2D" parent="."]
+position = Vector2(260, 120)
+script = ExtResource("4_obj")
+kind = 0
+boss_damage = 15.0
+sprite = NodePath("Art")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trap2"]
+shape = SubResource("Circle_obj")
+
+[node name="Art" type="Sprite2D" parent="Trap2"]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("Tex_placeholder")
+modulate = Color(0.5, 1, 0.6, 1)
+
+[node name="Throwable1" type="Area2D" parent="."]
+position = Vector2(0, 200)
+script = ExtResource("4_obj")
+kind = 1
+boss_damage = 20.0
+sprite = NodePath("Art")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Throwable1"]
+shape = SubResource("Circle_obj")
+
+[node name="Art" type="Sprite2D" parent="Throwable1"]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.9, 0.4, 1)
+
+[node name="Hazard1" type="Area2D" parent="."]
+position = Vector2(-120, 260)
+script = ExtResource("4_obj")
+kind = 2
+boss_damage = 0.0
+player_damage = 1.0
+debuff_seconds = 2.0
+sprite = NodePath("Art")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard1"]
+shape = SubResource("Circle_obj")
+
+[node name="Art" type="Sprite2D" parent="Hazard1"]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("Tex_placeholder")
+modulate = Color(1, 0.4, 0.9, 1)
+
+[node name="StartTrigger" type="Area2D" parent="."]
+position = Vector2(0, 340)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartTrigger"]
+shape = SubResource("Rect_trigger")
+
+[node name="Label" type="Label" parent="StartTrigger"]
+offset_left = -60.0
+offset_top = -12.0
+offset_right = 60.0
+offset_bottom = 12.0
+text = "walk here to start"
+horizontal_alignment = 1

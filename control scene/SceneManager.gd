@@ -5,7 +5,7 @@ var transition_screen_scene = preload("res://control scene/transition_screen.tsc
 var _transition:String
 var _content_path:String
 var _load_progress_timer: Timer
-
+var player_in_area: bool
 
 
 signal content_finished_loading(content)
@@ -62,7 +62,7 @@ func load_new_scene(contenet_path:String) -> void:
 	transition_screen.start_transition()
 	_load_content(contenet_path)
 	
-func on_content_finished_loading(contenet) -> void:
+func on_content_finished_loading(contenet: Node2D) -> void:
 	var outgoing_scene = get_tree().current_scene
 	
 	var incoming_data:LevelDataHandoff

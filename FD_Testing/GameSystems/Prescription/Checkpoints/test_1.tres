@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://by2uhnrvwhry8"]
+
+[ext_resource type="PackedScene" uid="uid://bl5xmmitfhybt" path="res://FD_Testing/Temp_Stuff/Bipolar_Hall_Fd_Test.tscn" id="1_2vudx"]
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_luowh"]
+
+[resource]
+script = ExtResource("1_luowh")
+number = 2
+title = "Getting to the Apple"
+state_name = "Met_FD"
+set_flags = Array[String](["apple_eaten"])
+scene = ExtResource("1_2vudx")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

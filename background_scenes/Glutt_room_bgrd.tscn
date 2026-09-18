@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://5axv8h6jfqk"]
+
+[ext_resource type="Texture2D" uid="uid://dea6hidfsowvp" path="res://background_scenes/assets/f2-yazeed.png" id="1_8r5au"]
+
+[node name="GluttRoomBgrd" type="Node2D" unique_id=1733879597]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2050860987]
+position = Vector2(313, 181)
+texture = ExtResource("1_8r5au")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1585378715]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=998155599]
+position = Vector2(456, 182)
+polygon = PackedVector2Array(0, 0, -287, 1, -288, 158, 1, 158, 1, 3, 24, 5, 32, 182, -315, 187, -311, -24)

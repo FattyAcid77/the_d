@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4jkvy4u1n5ug"]
+
+[ext_resource type="Script" uid="uid://dkp3pph0ldbo0" path="res://control scene/elevator_control.gd" id="1_uds6h"]
+
+[node name="ElevatorControl" type="CanvasLayer"]
+script = ExtResource("1_uds6h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 648.0
+offset_bottom = 369.0
+color = Color(0, 0, 0, 0.101960786)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 302.0
+offset_top = 151.0
+offset_right = 342.0
+offset_bottom = 191.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -95.0
+offset_right = 100.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -38.0
+offset_right = 22.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "3"
+
+[node name="Button2" type="Button" parent="Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/Panel/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

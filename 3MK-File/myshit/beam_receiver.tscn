@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://q8iajgdh8par"]
+
+[ext_resource type="Script" uid="uid://fymwyfsqtwq" path="res://3MK-File/myshit/beam_receiver.gd" id="1"]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 18.0
+
+[node name="BeamReceiver" type="Area2D" unique_id=870788658]
+editor_description = "It's goal is when the beam hits it it will send a system fire says the beam reached fire ur code"
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=397910773]
+shape = SubResource("2")

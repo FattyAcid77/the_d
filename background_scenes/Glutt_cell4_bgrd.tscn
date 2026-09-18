@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bpeb6xf4j8idf"]
+
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_5o6sh"]
+[ext_resource type="Texture2D" uid="uid://tv3uc8f8g48j" path="res://background_scenes/assets/f2-cell4.png" id="2_5o6sh"]
+
+[node name="GluttCell1Bgrd" type="Node2D" unique_id=2147212927]
+script = ExtResource("1_5o6sh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1291384981]
+position = Vector2(307, 180)
+texture = ExtResource("2_5o6sh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1107794096]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=961828198]
+position = Vector2(283, 241)
+polygon = PackedVector2Array(-120, -58, -120, 0, -120, 98, 168, 99, 169, 64, 110, 64, 111, -58, -2, -59, -119, -58, -7, -80, 111, -80, 211, -36, 192, 117, -151, 118, -142, -64)

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="HealthData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://health_point_data.gd" id="1_health"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_health")
+max_health = 3
+current_health = 3

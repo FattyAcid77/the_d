@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://d1r473tacab4g"]
+
+[ext_resource type="PackedScene" uid="uid://bp6dmypq8yftx" path="res://background_scenes/OCD_Room_bgrd.tscn" id="1_a36eg"]
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_fcp40"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_fcp40"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_qx1n3"]
+
+[node name="OcdRoom" type="Node2D" unique_id=724894805 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_fcp40")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg")]
+
+[node name="OcdRoomBgrd" parent="." unique_id=880677529 instance=ExtResource("1_a36eg")]
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("3_qx1n3")]
+position = Vector2(86, 232)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
+target_door_name = "OCD_to_CCTV"
+this_door_name = "CCTV_room"
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("2_fcp40")]
+position = Vector2(216, 214)
+camera_adj = NodePath("../OcdRoomBgrd")

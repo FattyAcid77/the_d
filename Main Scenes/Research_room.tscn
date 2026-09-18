@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ddhavdvhtly4s"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_jrs0b"]
+[ext_resource type="PackedScene" uid="uid://bml5qsvrw41qh" path="res://background_scenes/research_Room_bgrd.tscn" id="2_ab0xx"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="3_hkuoy"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="4_frdqr"]
+
+[node name="ResearchRoom" type="Node2D" unique_id=1352507800 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_jrs0b")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg")]
+
+[node name="ResearchRoomBgrd" parent="." unique_id=1742286866 instance=ExtResource("2_ab0xx")]
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_hkuoy")]
+camera_adj = NodePath("../ResearchRoomBgrd")
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("4_frdqr")]
+position = Vector2(13, 238)
+entery_direction = 1
+new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
+target_door_name = "Hall_research"
+this_door_name = "Research_door"

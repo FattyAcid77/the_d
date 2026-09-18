@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LogEntry" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+
+[sub_resource type="Resource" id="fact1"]
+script = ExtResource("2")
+flag = "fd_in_bathroom"
+text = "FD was in the bathroom the whole time. He can't be the one."
+
+[resource]
+script = ExtResource("1")
+id = "fd_bathroom"
+title = "FD's Alibi"
+color = Color(0.6, 0.6, 0.6, 1)
+board_position = Vector2(-260, 160)
+facts = [SubResource("fact1")]
+links_to = Array[String]([])

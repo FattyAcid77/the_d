@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://puzstatueex001"]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Puzzle/puzzle_statue.gd" id="1_st"]
+[ext_resource type="PackedScene" uid="uid://puzspeaker0001" path="res://FD_Testing/GameSystems/Puzzle/puzzle_speaker.tscn" id="2_spk"]
+
+[node name="StatuePuzzle" type="Node2D" node_paths=PackedStringArray("right_speaker_a", "right_speaker_b", "left_speaker_a", "left_speaker_b", "sprite")]
+script = ExtResource("1_st")
+right_speaker_a = NodePath("Speaker1")
+right_speaker_b = NodePath("Speaker4")
+left_speaker_a = NodePath("Speaker2")
+left_speaker_b = NodePath("Speaker3")
+sprite = NodePath("StatueSprite")
+right_target_a = 1
+right_target_b = 4
+left_target_a = 2
+left_target_b = 3
+
+[node name="StatueSprite" type="AnimatedSprite2D" parent="."]
+
+[node name="Speaker1" parent="." instance=ExtResource("2_spk")]
+position = Vector2(160, -100)
+speaker_id = 1
+
+[node name="Speaker4" parent="." instance=ExtResource("2_spk")]
+position = Vector2(160, 100)
+speaker_id = 4
+
+[node name="Speaker2" parent="." instance=ExtResource("2_spk")]
+position = Vector2(-160, -100)
+speaker_id = 2
+
+[node name="Speaker3" parent="." instance=ExtResource("2_spk")]
+position = Vector2(-160, 100)
+speaker_id = 3

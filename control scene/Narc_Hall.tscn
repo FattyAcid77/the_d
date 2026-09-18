@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch57f4twa8oxe"]
+
+[ext_resource type="PackedScene" uid="uid://43f84nnmojcj" path="res://background_scenes/Narc_Hall_bgrd.tscn" id="1_d8sfu"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="2_0foh7"]
+[ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="3_vap2t"]
+
+[node name="NarcHall" type="Node2D"]
+
+[node name="NarcHallBgrd" parent="." instance=ExtResource("1_d8sfu")]
+
+[node name="Door_reg" parent="." instance=ExtResource("2_0foh7")]
+position = Vector2(346, 614)
+
+[node name="door_reg_type2" parent="." instance=ExtResource("3_vap2t")]
+position = Vector2(347, 187)

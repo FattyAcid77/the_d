@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://t1xrwi6wa24x"]
+
+[ext_resource type="Script" uid="uid://ba0yv81uyoc24" path="res://audio/audio_settings.gd" id="1_settings"]
+[ext_resource type="AudioStream" uid="uid://b21w1dhecotum" path="res://audio/music/main_menu.mp3" id="2_music"]
+[ext_resource type="AudioStream" uid="uid://b7rulxegfwab" path="res://audio/sfx/hit.wav" id="3_sfx"]
+
+[node name="AudioSettings" type="CanvasLayer" unique_id=1567329854]
+process_mode = 3
+layer = 5
+script = ExtResource("1_settings")
+test_music = ExtResource("2_music")
+test_sfx = ExtResource("3_sfx")
+
+[node name="Control" type="Control" parent="." unique_id=2001567531]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="Control" unique_id=2090743955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.62)
+
+[node name="Center" type="CenterContainer" parent="Control" unique_id=102136680]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Control/Center" unique_id=802984397]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Control/Center/Panel" unique_id=671187737]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="Rows" type="VBoxContainer" parent="Control/Center/Panel/Margin" unique_id=1310763483]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Control/Center/Panel/Margin/Rows" unique_id=1129673675]
+layout_mode = 2
+text = "مستوى الصوت"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Control/Center/Panel/Margin/Rows" unique_id=697531453]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="MasterLabel" type="Label" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=641401671]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "الصوت الكلي"
+
+[node name="MasterSlider" type="HSlider" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1984319036]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MasterTest" type="Button" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=179917496]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+tooltip_text = "Plays a UI sound and an effect together — Master scales both."
+text = "تجربة"
+
+[node name="MusicLabel" type="Label" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1275445549]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "صوت الموسيقى"
+
+[node name="MusicSlider" type="HSlider" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1230715139]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="MusicTest" type="Button" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=312640732]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+tooltip_text = "Starts the demo track, then drag the slider to hear it change."
+text = "تجربة"
+
+[node name="SFXLabel" type="Label" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=202612214]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "مؤثرات صوتية"
+
+[node name="SFXSlider" type="HSlider" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=544832299]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXTest" type="Button" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=153356572]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+tooltip_text = "Plays a positional game sound effect."
+text = "تجربة"
+
+[node name="UILabel" type="Label" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1184182061]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "صوت واجهة المستخدم"
+
+[node name="UISlider" type="HSlider" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1725547887]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="UITest" type="Button" parent="Control/Center/Panel/Margin/Rows/Grid" unique_id=1483783767]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+tooltip_text = "Plays a menu click."
+text = "تجربة"
+
+[node name="BackButton" type="Button" parent="Control/Center/Panel/Margin/Rows" unique_id=828220409]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "عودة"

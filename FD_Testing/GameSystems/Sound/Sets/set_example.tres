@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="MusicSet" format=3 uid="uid://bupcv3vlgp0is"]
+
+[ext_resource type="Script" uid="uid://bdlqsolisebqk" path="res://FD_Testing/GameSystems/Sound/music_set.gd" id="1"]
+[ext_resource type="Script" uid="uid://bn7ie63am8tuf" path="res://FD_Testing/GameSystems/Sound/music_layer.gd" id="2"]
+
+[sub_resource type="Resource" id="l_drums"]
+script = ExtResource("2")
+name = "drums"
+on_by_default = true
+ducks_in_dialog = true
+
+[sub_resource type="Resource" id="l_bass"]
+script = ExtResource("2")
+name = "bass"
+
+[sub_resource type="Resource" id="l_strings"]
+script = ExtResource("2")
+name = "strings"
+
+[sub_resource type="Resource" id="l_choir"]
+script = ExtResource("2")
+name = "choir"
+volume_db = -3.0
+
+[resource]
+script = ExtResource("1")
+id = "example"
+layers = Array[ExtResource("2")]([SubResource("l_drums"), SubResource("l_bass"), SubResource("l_strings"), SubResource("l_choir")])
+flag_layers = Dictionary[String, String]({
+"choir": "found_the_body"
+})
