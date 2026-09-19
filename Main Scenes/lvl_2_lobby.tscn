@@ -29,8 +29,9 @@ target_door_name = "OCD_Hall_South"
 this_door_name = "lvl_2_lobby_North"
 
 [node name="QuestSignal" parent="door_reg_type2" unique_id=2085552719 instance=ExtResource("5_6eri3")]
-puzzle_id = "SAMI_SIGNAL"
-signal_radius = 50.0
+window_id = "PULL_ARM"
+puzzle_id = "PULL_ARM"
+signal_radius = 20.0
 
 [node name="Door_reg2" parent="." unique_id=199103109 instance=ExtResource("3_rx0ui")]
 position = Vector2(146, 423)
@@ -47,5 +48,6 @@ target_door_name = "Glutt_hall_north"
 this_door_name = "Lvl2_lobby_south"
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("5_rx0ui")]
+z_index = 1
 position = Vector2(530, 398)
 camera_adj = NodePath("../lvl2_Lobby_bgrd")

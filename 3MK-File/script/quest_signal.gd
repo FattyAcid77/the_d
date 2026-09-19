@@ -15,6 +15,10 @@ enum Type { MAIN, SIDE }
 ## SIDE stays silent until the dial lands within 30 Hz of `frequency`.
 @export var quest_type: Type = Type.MAIN
 
+## SIDE only. The popup window to open the moment the player tunes in.
+## Must match the `id` of a PopupWindowDef in Windows/Defs/. Empty = none.
+@export var window_id: String = ""
+
 ## A GameState id. Once that puzzle is solved this beacon stops broadcasting.
 ## Leave empty and it broadcasts forever.
 @export var puzzle_id: String = ""
@@ -34,6 +38,28 @@ enum Type { MAIN, SIDE }
 
 func _ready() -> void:
 	add_to_group("quest_signal")
+	if Engine.is_editor_hint():
+		return
+	if window_id == "" or quest_type != Type.SIDE:
+		return
+	var manager: Node = get_node_or_null("/root/RadioSignals")
+	if manager == null:
+		return
+	if manager.is_caught(frequency):
+		_open_window()          # caught before a scene reload
+	else:
+		manager.side_signal_caught.connect(_on_side_caught)
+
+
+func _on_side_caught(freq: int) -> void:
+	if freq == frequency:
+		_open_window()
+
+
+func _open_window() -> void:
+	var windows: Node = get_node_or_null("/root/PopupWindows")
+	if windows != null:
+		windows.open_id(window_id)
 
 
 func strength_at(pos: Vector2) -> float:
