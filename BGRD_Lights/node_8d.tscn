@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://f1tgqseg6a43"]
 
 [ext_resource type="Texture2D" uid="uid://bi5p2xxqfk1nq" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/M/f1-mazo5eroom.png" id="1_qixxc"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_2d5ml"]
 [ext_resource type="Texture2D" uid="uid://d4k1y2h5l7jbg" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/M/f1-mazo5eroom-fur.png" id="3_yfjvd"]
 [ext_resource type="Texture2D" uid="uid://beyyap7iajhuq" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/M/f1-mazo5eroom-wall.png" id="4_5jml6"]
 [ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="5_sqec4"]
@@ -29,29 +28,26 @@ blend_mode = 1
 [node name="Node2D" type="Node2D" unique_id=8911383]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=145797140]
-position = Vector2(217.29913, 84.131256)
+position = Vector2(258.29913, 98.631256)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1939397223]
 position = Vector2(-27.338516, -50.471127)
 polygon = PackedVector2Array(-180.96062, 340.33987, -125.69432, 340.49664, -125.96062, 353.33987, -61.634445, 353.5211, -61.960617, 339.33987, 44.039383, 340.33987, 44.57959, 353.82025, 229.03938, 354.33987, 229.03938, 258.33987, 239.03938, 364.33987, -189.96062, 364.33987, -195.96062, 363.33987, -192.96062, -32.66013, 238.03938, -32.66013, 238.03938, 194.33987, 239.03938, 327.33987, 228.03938, 232.33987, 196.03938, 232.33987, 196.03938, 191.33987, 181.03938, 191.33987, 164.03938, 179.33987, 160.03938, 128.33987, 85.03938, 128.33987, 85.03938, 228.33987, -3.960617, 228.33987, -3.960617, 152.33987, -38.960617, 152.33987, -39.265495, 128.33987, -155.96062, 128.33987, -155.96062, 178.33987, -185.96062, 178.33987, -185.96062, 212.33987, -194.96062, 212.33987, -194.96062, 277.33987, -180.96062, 277.33987)
 
-[node name="F1Mazo5Eroom" type="Sprite2D" parent="." unique_id=724558602]
-position = Vector2(212, 199)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=724558602]
+position = Vector2(253, 213.5)
 texture = ExtResource("1_qixxc")
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_2d5ml")]
-position = Vector2(36, 259)
-
 [node name="F1Mazo5EroomFur" type="Sprite2D" parent="." unique_id=182226239]
-position = Vector2(212, 199)
+position = Vector2(253, 213.5)
 texture = ExtResource("3_yfjvd")
 
 [node name="F1Mazo5EroomWall" type="Sprite2D" parent="." unique_id=2126013017]
-position = Vector2(212, 199)
+position = Vector2(253, 213.5)
 texture = ExtResource("4_5jml6")
 
 [node name="light" type="Node2D" parent="." unique_id=1166156890]
-position = Vector2(373.65286, 861.822)
+position = Vector2(414.65286, 876.322)
 
 [node name="PointLight2D7" type="PointLight2D" parent="light" unique_id=2110850731]
 material = SubResource("CanvasItemMaterial_8vo1v")
@@ -134,5 +130,5 @@ texture_scale = 1.9
 height = 74.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1365434552]
-position = Vector2(468, 392)
+position = Vector2(509, 406.5)
 color = Color(0.35388428, 0.1514329, 0.16123012, 1)

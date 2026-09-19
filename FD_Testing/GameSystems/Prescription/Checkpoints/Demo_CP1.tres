@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://br0eekqn7b711"]
 
 [ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_5t3cu"]
-[ext_resource type="PackedScene" uid="uid://cthrlvtm65fhu" path="res://Demo_Scenes/lvl1_Lobby.tscn" id="1_knj5a"]
+[ext_resource type="PackedScene" uid="uid://n8hi6hv2d6s1" path="res://Demo_Scenes/lvl_1_lobby_migration.tscn" id="1_knj5a"]
 
 [resource]
 script = ExtResource("1_5t3cu")

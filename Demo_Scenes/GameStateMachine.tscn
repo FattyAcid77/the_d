@@ -30,7 +30,7 @@ next_state = "Elevator_pt1"
 [node name="MazSadMet" type="Node" parent="." unique_id=692376320]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["MazSad_Door"])
-set_flags = Array[String](["Maz_Sad_door_open", "Maz_Elevator_Hallway", "Sad_Room_Door"])
+set_flags = Array[String](["Maz_Sad_door_open", "Maz_Elevator_Hallway", "Sad_Room_Door", "Maz_Sad_meeting1_finished"])
 auto_advance_when_flag = "Maz_Sad_door_open"
 next_state = "Elevator_pt1"
 
