@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Cutscenes/controlling_sami_cutscene.gd" id="1_ctrl"]
+
+[node name="controlling SamiCutscene" type="Node"]
+script = ExtResource("1_ctrl")

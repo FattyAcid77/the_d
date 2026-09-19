@@ -1,0 +1,219 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bk1j4vj28bu5s"]
+
+[ext_resource type="Texture2D" uid="uid://c2efew3qcelbj" path="res://boss_chase/Assets/Health-bar-ui-Sheet.png" id="1_bar"]
+
+[sub_resource type="AtlasTexture" id="l0_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(211, 320, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l0_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(633, 320, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l1_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(211, 240, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l1_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(633, 240, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l2_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(211, 160, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l2_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(633, 160, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l3_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(211, 80, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l3_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(633, 80, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l4_full"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 0, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l0_flash_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 320, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l0_flash_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(422, 320, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l1_flash_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 240, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l1_flash_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(422, 240, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l2_flash_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 160, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l2_flash_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(422, 160, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l3_flash_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 80, 211, 80)
+
+[sub_resource type="AtlasTexture" id="l3_flash_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(422, 80, 211, 80)
+
+[sub_resource type="AtlasTexture" id="flash_a"]
+atlas = ExtResource("1_bar")
+region = Rect2(0, 80, 211, 80)
+
+[sub_resource type="AtlasTexture" id="flash_b"]
+atlas = ExtResource("1_bar")
+region = Rect2(422, 80, 211, 80)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l0_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l0_b")
+}],
+"loop": true,
+"name": &"beat_0",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l1_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l1_b")
+}],
+"loop": true,
+"name": &"beat_1",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l2_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l2_b")
+}],
+"loop": true,
+"name": &"beat_2",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l3_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l3_b")
+}],
+"loop": true,
+"name": &"beat_3",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l4_full")
+}],
+"loop": true,
+"name": &"beat_4",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l0_flash_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l0_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l0_flash_b")
+}, {
+"duration": 1.0,
+"texture": SubResource("l0_b")
+}],
+"loop": false,
+"name": &"hit_0",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l1_flash_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l1_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l1_flash_b")
+}, {
+"duration": 1.0,
+"texture": SubResource("l1_b")
+}],
+"loop": false,
+"name": &"hit_1",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l2_flash_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l2_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l2_flash_b")
+}, {
+"duration": 1.0,
+"texture": SubResource("l2_b")
+}],
+"loop": false,
+"name": &"hit_2",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("l3_flash_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l3_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l3_flash_b")
+}, {
+"duration": 1.0,
+"texture": SubResource("l3_b")
+}],
+"loop": false,
+"name": &"hit_3",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("flash_a")
+}, {
+"duration": 1.0,
+"texture": SubResource("l4_full")
+}, {
+"duration": 1.0,
+"texture": SubResource("flash_b")
+}, {
+"duration": 1.0,
+"texture": SubResource("l4_full")
+}],
+"loop": false,
+"name": &"hit_4",
+"speed": 12.0
+}]

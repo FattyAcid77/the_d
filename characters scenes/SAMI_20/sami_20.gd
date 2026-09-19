@@ -51,7 +51,8 @@ const FLIPPED_ANIMS := { "Left": true }
 
 
 func _ready() -> void:
-	Dialog_Global.player = self
+	# Dialog_Global was deleted with the old dialogue system (commit b72a622).
+	# DialogV2's DialogTrigger finds the player itself, so nothing needs this.
 	scale = Vector2.ONE
 
 

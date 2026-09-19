@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dfgwkeb2vsgtn"]
+
+[ext_resource type="Script" uid="uid://v2rkcv1vmto" path="res://statue/statue.gd" id="1_statue"]
+[ext_resource type="Texture2D" uid="uid://dlhodnh2cke2s" path="res://statue/statue_room_lit.tres" id="2_room"]
+[ext_resource type="SpriteFrames" uid="uid://dvxnnj1miv1pf" path="res://statue/statue_shadow_frames.tres" id="3_shadow"]
+[ext_resource type="SpriteFrames" uid="uid://cpmphyx8fpx1g" path="res://statue/statue_body_frames.tres" id="4_body"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="5_bgrd"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="6_sami"]
+[ext_resource type="Texture2D" uid="uid://kc8hwfobsc7s" path="res://FREE Textures Of Light/128x128/128x128 textures (104).PNG" id="7_hkm3e"]
+
+[node name="Statue" type="Node2D" unique_id=224657085]
+script = ExtResource("1_statue")
+
+[node name="Bgrd" type="Node2D" parent="." unique_id=1339755273]
+script = ExtResource("5_bgrd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bgrd" unique_id=372514424]
+position = Vector2(242.5, 208.5)
+texture = ExtResource("2_room")
+
+[node name="Body" type="AnimatedSprite2D" parent="." unique_id=77219887]
+z_index = 1
+position = Vector2(201, 174)
+sprite_frames = ExtResource("4_body")
+animation = &"SHAKING"
+autoplay = "SHAKING"
+frame_progress = 0.38973925
+centered = false
+
+[node name="Sami_Doctor" parent="." unique_id=381460660 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_sami")]
+position = Vector2(148, 248)
+camera_adj = NodePath("../Bgrd")
+
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=1538387387]
+modulate = Color(1, 1, 1, 0.12)
+position = Vector2(182, 189)
+sprite_frames = ExtResource("3_shadow")
+animation = &"SHAKING"
+autoplay = "SHAKING"
+centered = false
+
+[node name="Dark" type="CanvasModulate" parent="." unique_id=863108245]
+color = Color(0.26, 0.3, 0.42, 1)
+
+[node name="Lamp" type="PointLight2D" parent="." unique_id=982357541]
+z_index = -2
+position = Vector2(243.99998, 267)
+scale = Vector2(1.8571715, 1.8571715)
+color = Color(1, 0.72, 0.42, 1)
+energy = 1.4
+shadow_enabled = true
+texture = ExtResource("7_hkm3e")
+texture_scale = 1.56
+height = 55.0

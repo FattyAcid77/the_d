@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="(D.) 2.0"
-run/main_scene="uid://n8hi6hv2d6s1"
+run/main_scene="uid://dxofprk7jlwg1"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://3MK-File/myshit/icon.svg"
 
@@ -43,11 +43,11 @@ Prescription="*uid://cvlogukklxp3a"
 Deaths="*uid://cfax3lx6m7ias"
 BloodWorld="*uid://kl7jkxuygf1h"
 MedicalItems="*uid://11p0y6srcukh"
+PopupWindows="*res://FD_Testing/GameSystems/Windows/popup_windows.gd"
 RadioLink="*uid://kjonwbueabvc"
-PopupWindows="*uid://dcrrtepfcmgbc"
-Bag="*uid://b446pwovwr0y8"
 MapRooms="*uid://hw8gsh3jlhni"
 Board="*uid://b7npvxsv204c8"
+Bag="*uid://b446pwovwr0y8"
 Sound="*uid://dbxwj52gejrqo"
 
 [display]
@@ -73,6 +73,10 @@ project/assembly_name="(D.) 2.0"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/cine_timeline/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -92,6 +96,8 @@ Item=""
 ignore_bounds=""
 statue_area="Test"
 Nothing=""
+test=""
+mc=""
 Scene1_obj1=""
 Scene2_obj1=""
 S3alel=""
@@ -196,10 +202,6 @@ hold_breath={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"location":0,"echo":false,"script":null)
 ]
 }
-
-[internationalization]
-
-locale/translations=PackedStringArray("res://FD_Testing/GameSystems/Localization/translations.en.translation", "res://FD_Testing/GameSystems/Localization/translations.ar.translation")
 
 [rendering]
 

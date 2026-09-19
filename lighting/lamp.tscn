@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://3MK-File/myshit/2D_light.webp" id="1_glow"]
+
+[node name="Lamp" type="PointLight2D"]
+color = Color(1, 0.78, 0.52, 1)
+energy = 1.8
+shadow_enabled = true
+shadow_filter_smooth = 0.0
+texture = ExtResource("1_glow")
+texture_scale = 1.5
+height = 45.0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://background_scenes/lvl_2_lobby_bgrdv2.tscn" id="1_WALL"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/radio_reactor.gd" id="2_REACTOR"]
+[ext_resource type="Resource" path="res://LVL2/BAND_LVL2_BUTTON.tres" id="3_BAND"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/radio_band.gd" id="4_BANDTYPE"]
+
+[node name="LVL2_BUTTON_ROOM" type="Node2D"]
+
+[node name="WALL" parent="." instance=ExtResource("1_WALL")]
+
+[node name="BUTTON" type="Sprite2D" parent="."]
+position = Vector2(536, 270)
+
+[node name="PLACEHOLDER" type="ColorRect" parent="BUTTON"]
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 12.0
+color = Color(0.85, 0.15, 0.15, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(536, 260)
+zoom = Vector2(2, 2)
+
+[node name="RADIO_REACTOR" type="Node" parent="."]
+script = ExtResource("2_REACTOR")
+bands = Array[ExtResource("4_BANDTYPE")]([ExtResource("3_BAND")])
+poll_interval = 0.05
+debug_log = true

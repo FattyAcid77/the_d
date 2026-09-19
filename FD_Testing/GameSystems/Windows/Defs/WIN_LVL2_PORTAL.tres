@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="PopupWindowDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/popup_window_def.gd" id="1"]
+[ext_resource type="PackedScene" path="res://LVL2/LVL2_BUTTON_ROOM.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = "LVL2_PORTAL"
+kind = 1
+size = Vector2i(360, 220)
+title = "CAM_02"
+borderless = false
+show_title_inside = false
+user_can_drag = false
+user_can_resize = false
+unfocusable = false
+show_in_taskbar = true
+always_on_top = true
+depth = 0
+placement = 3
+close_mode = 2
+lifetime = 0.0
+close_flag = "LVL2_DOOR_OPEN"
+open_flag = "LVL2_SAW_PORTAL"
+closed_flag = ""
+once_only = false
+fade_seconds = 0.35
+grow_in = false
+shake_pixels = 0.0
+portal_same_world = false
+portal_scene = ExtResource("2")
+portal_follow = 0
+portal_make_camera = false

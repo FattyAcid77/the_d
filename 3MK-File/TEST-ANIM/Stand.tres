@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" format=3 uid="uid://byt6bvw3xf6jb"]
+
+[ext_resource type="Texture2D" uid="uid://eirs276yjkx7" path="res://Yazeed and me testing light/sami_stand-Sheet.png" id="1_lj4bn"]
+[ext_resource type="Texture2D" uid="uid://pcoldpvf62tm" path="res://Yazeed and me testing light/Stand.png" id="2_7qn2v"]
+
+[resource]
+diffuse_texture = ExtResource("1_lj4bn")
+normal_texture = ExtResource("2_7qn2v")

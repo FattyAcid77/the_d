@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3]
+
+[ext_resource type="Shader" path="res://Light-System/aseprite_light.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://cjdqreqt8uf3h" path="res://Light-System/f1-laundaryroom-light.png" id="2_light"]
+[ext_resource type="Texture2D" uid="uid://c1m7vdvmqb0t1" path="res://Light-System/f1-laundaryroom-filter.png" id="3_filter"]
+
+[resource]
+shader = ExtResource("1_shader")
+shader_parameter/light_tex = ExtResource("2_light")
+shader_parameter/filter_tex = ExtResource("3_filter")
+shader_parameter/room_origin = Vector2(0, 0)
+shader_parameter/room_size = Vector2(488, 373)
+shader_parameter/light_mode = 5
+shader_parameter/filter_mode = 3
+shader_parameter/light_opacity = 1.0
+shader_parameter/filter_opacity = 1.0
+shader_parameter/filter_over_light = true
+shader_parameter/light_energy = 1.0
+shader_parameter/light_tint = Color(1, 1, 1, 1)

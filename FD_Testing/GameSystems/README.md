@@ -147,16 +147,16 @@ Loc.current()              # "en" / "ar"
 ```
 Dialog
  └─ branches: [DialogBranch]          "entry" plays first; others are topics
-     └─ lines: [DialogLine]
-         text            BBCode ok. Empty text = action-only step.
-         speaker_name    overrides the name in the box
-         show_if_flag    skip the line unless set
-         set_flags       set when the line shows
-         action_name / action_args / wait_for_action
-         sound_id        cue when the line appears (see Sound)
-         keywords        [DialogKeyword]  word -> topic branch, optional unlock_flag
-         choices         [DialogChoice]   text, goto branch, show_if_flag
-         npc_animation / player_animation
+	 └─ lines: [DialogLine]
+		 text            BBCode ok. Empty text = action-only step.
+		 speaker_name    overrides the name in the box
+		 show_if_flag    skip the line unless set
+		 set_flags       set when the line shows
+		 action_name / action_args / wait_for_action
+		 sound_id        cue when the line appears (see Sound)
+		 keywords        [DialogKeyword]  word -> topic branch, optional unlock_flag
+		 choices         [DialogChoice]   text, goto branch, show_if_flag
+		 npc_animation / player_animation
 ```
 
 Branch selection: the first branch whose `require_flags` are all set wins, so

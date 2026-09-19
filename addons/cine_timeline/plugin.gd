@@ -39,4 +39,4 @@ func _on_selection_changed() -> void:
 				_panel.set_target(walk)
 				return
 			walk = walk.get_parent()
-	_panel.set_target(null)
+	_panel.selection_left()

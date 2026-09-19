@@ -8,7 +8,7 @@ class_name ChaseHud extends CanvasLayer
 @export var boss: Node2D
 @export var finish_y: float = 2032.0
 
-@onready var runner_label: Label = $Root/Rows/RunnerHp
+@onready var health: ChaseHealthBar = $Health
 @onready var boss_label: Label = $Root/Rows/BossHp
 @onready var corridor_bar: ProgressBar = $Root/Rows/Corridor
 
@@ -19,9 +19,17 @@ func _ready() -> void:
 	if runner != null:
 		_start_y = runner.global_position.y
 		runner.health_changed.connect(_on_runner_health)
-		_on_runner_health(runner.stats.current_health if runner.stats else 0)
 	if boss != null:
 		boss.health_changed.connect(_on_boss_health)
+	refresh()
+
+
+## Re-read both readouts from scratch. ChaseArena calls this once it has pushed
+## its tuning, which happens after every child's _ready has already run.
+func refresh() -> void:
+	if runner != null and runner.stats != null:
+		health.show_health(runner.stats.current_health, runner.stats.max_health, false)
+	if boss != null:
 		_on_boss_health(boss.stats.current_health if boss.stats else 0)
 
 
@@ -34,7 +42,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_runner_health(current: int) -> void:
-	runner_label.text = "YOU   " + "@".repeat(maxi(current, 0))
+	health.show_health(current, runner.stats.max_health, true)
 
 
 func _on_boss_health(current: int) -> void:

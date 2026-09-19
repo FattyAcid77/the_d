@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PopupWindowDef" format=3 uid="uid://gi7gmdurly0j"]
+
+[ext_resource type="PackedScene" uid="uid://cc8fq0trc0i8w" path="res://LVL2/Window_Scene/window.tscn" id="1_j66fk"]
+[ext_resource type="Script" uid="uid://b3bi6ac44e76o" path="res://FD_Testing/GameSystems/Windows/popup_window_def.gd" id="2_es1ju"]
+
+[resource]
+script = ExtResource("2_es1ju")
+id = "PULL_ARM"
+kind = 1
+size = Vector2i(396, 264)
+title = "CAM_01"
+placement = 3
+close_mode = 1
+close_flag = "PULL_ARM"
+once_only = true
+portal_scene = ExtResource("1_j66fk")
+metadata/_custom_type_script = "uid://b3bi6ac44e76o"

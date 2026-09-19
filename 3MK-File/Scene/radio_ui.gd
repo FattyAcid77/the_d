@@ -9,6 +9,10 @@ extends Control
 @export var scroll_speed: float = 50.0
 
 # --- Tuning steps ---
+# NOTE: Amp_U / Amp_D do NOT touch amplitude. They are the COARSE tune — the
+# only difference from Freq_U / Freq_D is the size of the step.
+# NOTE: tuning only works while this node exists, i.e. while the radio is
+# open, because this is the node reading the keys.
 const FINE_STEP:   int = 10   # Freq_U / Freq_D
 const COARSE_STEP: int = 100  # Amp_U  / Amp_D
 

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cc8fq0trc0i8w"]
+
+[ext_resource type="SpriteFrames" uid="uid://qnnch1qwtbd4" path="res://LVL2/Window_Scene/Window_Alarm.tres" id="1_frtuj"]
+
+[node name="Window" type="Node2D" unique_id=192530260]
+position = Vector2(243, 26)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1615984037]
+sprite_frames = ExtResource("1_frtuj")
+animation = &"Window Alarm"
+autoplay = "Window Alarm"
+frame = 33
+frame_progress = 1.0

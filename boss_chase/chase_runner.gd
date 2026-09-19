@@ -11,11 +11,13 @@ class_name ChaseRunner extends CharacterBody2D
 signal health_changed(current: int)
 signal died
 
-const RUN_SPEED: float = 90.0
-const DODGE_SPEED: float = 120.0
-
-const PARRY_BUFFER: float = 0.15    # press this early and it still lands
-const PARRY_LOCKOUT: float = 0.40   # whiffing on empty air costs you this
+# Animation names, exactly as they are spelled in rat_frames.tres.
+const ANIM_NOTICE := "Notice"
+const ANIM_RUN := "run"
+const ANIM_RUN_LEFT := "Run-Left"
+const ANIM_RUN_RIGHT := "Run-right"
+const ANIM_HURT := "hurt"
+const ANIM_PARRY := "parry"
 
 const CRATE_SLOW_STRENGTH: float = 0.85
 const CRATE_SLOW_HOLD: float = 1.5
@@ -23,16 +25,24 @@ const CRATE_SLOW_HOLD: float = 1.5
 const CRATE_PERMANENT_SLOW: float = 0.30
 const FLASH_TIME: float = 0.25
 
+# Tuning. ChaseArena writes these on _ready from its own inspector — edit them
+# there, not here, so the whole chase is tunable from one node.
+var run_speed: float = 90.0
+var dodge_speed: float = 120.0
+var parry_buffer: float = 0.12      # press this early and it still lands
+var parry_lockout: float = 0.40     # whiffing on empty air costs you this
+
 @export var stats: HealthData
 @export var boss: Node2D
 
 @onready var slow: ChaseSlowEffect = $Slow
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 
 var input_enabled: bool = true
 
 var _parry_buffer: float = 0.0
 var _parry_lockout: float = 0.0
+var _parry_anim: float = 0.0
 var _flash: float = 0.0
 
 
@@ -55,18 +65,34 @@ func _physics_process(delta: float) -> void:
 	_handle_parry(delta)
 
 	# Forward is automatic and unstoppable — that's the whole premise.
-	# We run DOWN the corridor (+y) with the boss above us, which is what makes
-	# its shove throw crates *upward* into us. See RUN_DIR on ChaseBoss.
-	velocity.y = RUN_SPEED * slow.speed_multiplier()
-	velocity.x = Input.get_axis("left", "right") * DODGE_SPEED
+	# We run DOWN the corridor (+y) with the cat above us, which is why the bins
+	# it sends come rolling down onto us from behind.
+	velocity.y = run_speed * slow.speed_multiplier()
+	var lean: float = Input.get_axis("left", "right")
+	velocity.x = lean * dodge_speed
+	_run_anim(lean)
 	move_and_slide()
+
+
+# Leaning into the turn. Same run, three poses.
+func _run_anim(lean: float) -> void:
+	if _parry_anim > 0.0:
+		return              # the spin owns the sprite until it plays out
+	var want: String = ANIM_RUN
+	if lean < 0.0:
+		want = ANIM_RUN_LEFT
+	elif lean > 0.0:
+		want = ANIM_RUN_RIGHT
+	if sprite.animation != want:
+		sprite.play(want)
 
 
 func _tick_timers(delta: float) -> void:
 	_parry_lockout = maxf(_parry_lockout - delta, 0.0)
+	_parry_anim = maxf(_parry_anim - delta, 0.0)
 	if _flash > 0.0:
 		_flash = maxf(_flash - delta, 0.0)
-		sprite.modulate = Color(1.0, 0.4, 0.4) if _flash > 0.0 else Color.WHITE
+		sprite.modulate = Color(0.5, 0.5, 0.5) if _flash > 0.0 else Color.WHITE
 
 
 # An input buffer, not an instant check. Pressing slightly early is the most
@@ -75,7 +101,7 @@ func _tick_timers(delta: float) -> void:
 func _handle_parry(delta: float) -> void:
 	if Input.is_action_just_pressed("interact") \
 			and _parry_lockout <= 0.0 and _parry_buffer <= 0.0:
-		_parry_buffer = PARRY_BUFFER
+		_parry_buffer = parry_buffer
 
 	if _parry_buffer <= 0.0:
 		return
@@ -84,20 +110,22 @@ func _handle_parry(delta: float) -> void:
 	if crate != null:
 		crate.reverse_toward(boss)
 		_parry_buffer = 0.0
+		sprite.play(ANIM_PARRY)
+		_parry_anim = _anim_time(ANIM_PARRY)
 		return
 
 	_parry_buffer -= delta
 	if _parry_buffer <= 0.0:
-		_parry_lockout = PARRY_LOCKOUT   # buffer ran out with nothing to hit
+		_parry_lockout = parry_lockout   # buffer ran out with nothing to hit
 
 
-# Only crates AHEAD of us — you can't parry something you already ran past.
-# We run down the corridor, so "ahead" means a bigger y.
+# Anything rolling within reach, in front or behind. The reach is deliberately
+# tight: the bin has to be close enough that you can see it meet the swat.
 func _crate_in_reach() -> Node2D:
 	for c in get_tree().get_nodes_in_group("chase_obstacle"):
-		if not c.is_live() or c.global_position.y < global_position.y:
+		if not c.is_live():
 			continue
-		if c.global_position.distance_to(global_position) <= c.PARRY_REACH:
+		if c.global_position.distance_to(global_position) <= c.parry_reach:
 			return c
 	return null
 
@@ -129,6 +157,7 @@ func take_damage(amount: int) -> void:
 	_flash = FLASH_TIME
 	health_changed.emit(stats.current_health)
 	if stats.current_health <= 0:
+		sprite.play("hurt")
 		died.emit()
 
 
@@ -136,3 +165,35 @@ func stop() -> void:
 	input_enabled = false
 	velocity = Vector2.ZERO
 	slow.clear()
+
+
+#region /// the opening beat, driven by ChaseArena
+
+## Frozen, waiting for the opening to play out.
+func hold() -> void:
+	input_enabled = false
+	velocity = Vector2.ZERO
+
+
+## Looks back, sees the cat. Await it — it returns when the look is over.
+func notice() -> void:
+	sprite.play(ANIM_NOTICE)
+	await get_tree().create_timer(_anim_time(ANIM_NOTICE)).timeout
+
+
+## Go. From here the corridor is the clock.
+func go() -> void:
+	sprite.play(ANIM_RUN)
+	input_enabled = true
+
+
+## How long one pass of an animation takes. Read from the frames themselves, so
+## it stays right when you re-cut them, and it does not care whether the
+## animation is set to loop.
+func _anim_time(anim: String) -> float:
+	var frames: SpriteFrames = sprite.sprite_frames
+	if frames == null or not frames.has_animation(anim):
+		return 0.0
+	return frames.get_frame_count(anim) / maxf(frames.get_animation_speed(anim), 0.001)
+
+#endregion
