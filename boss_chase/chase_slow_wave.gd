@@ -17,15 +17,22 @@ class_name ChaseSlowWave extends Node2D
 
 enum Phase { AIM, FIRE, FADE }
 
-const LANE_WIDTH: float = 56.0    # 3.5 tiles — real threat, but clearly leaveable
 const LENGTH: float = 520.0       # reaches well past the player
-const AIM_TIME: float = 0.6       # your window to move. tune this first if it feels unfair
-const FIRE_TIME: float = 0.25
+const AIM_TIME: float = 0.45      # fallback only — the boss overrides this
 const FADE_TIME: float = 0.25
 
 const SLOW_STRENGTH: float = 0.9
 const SLOW_HOLD: float = 1.2
-const DAMAGE: int = 1
+
+# Stamped by the boss as it casts, from ChaseArena's inspector.
+var lane_width: float = 56.0      # 3.5 tiles — real threat, but clearly leaveable
+var fire_time: float = 0.25
+var damage: int = 1
+
+## How long the lane glows before it fires. The boss sets this to however much
+## of its lunge is left, so the strike goes off on the slam rather than trailing
+## it. Left alone it falls back to AIM_TIME.
+var aim_time: float = AIM_TIME
 
 var _phase: int = Phase.AIM
 var _t: float = 0.0
@@ -42,11 +49,11 @@ func _physics_process(delta: float) -> void:
 	_t += delta
 	match _phase:
 		Phase.AIM:
-			if _t >= AIM_TIME:
+			if _t >= aim_time:
 				_advance(Phase.FIRE)
 		Phase.FIRE:
 			_try_hit()
-			if _t >= FIRE_TIME:
+			if _t >= fire_time:
 				_advance(Phase.FADE)
 		Phase.FADE:
 			if _t >= FADE_TIME:
@@ -68,7 +75,7 @@ func _try_hit() -> void:
 		if not covers(r.global_position):
 			continue
 		if r.has_method("on_wave_hit"):
-			r.on_wave_hit(SLOW_STRENGTH, SLOW_HOLD, DAMAGE)
+			r.on_wave_hit(SLOW_STRENGTH, SLOW_HOLD, damage)
 		_hit_done = true
 		return
 
@@ -76,7 +83,7 @@ func _try_hit() -> void:
 ## Is this world point inside the lane? Public so the boss (or a future
 ## smarter dodge AI) can ask the same question the beam answers.
 func covers(pos: Vector2) -> bool:
-	return absf(pos.x - _lane_x) <= LANE_WIDTH * 0.5 \
+	return absf(pos.x - _lane_x) <= lane_width * 0.5 \
 		and pos.y >= global_position.y \
 		and pos.y <= global_position.y + LENGTH
 
@@ -84,8 +91,8 @@ func covers(pos: Vector2) -> bool:
 # in local space, since we're parked at the boss's cast position
 func _lane_rect() -> Rect2:
 	return Rect2(
-		(_lane_x - global_position.x) - LANE_WIDTH * 0.5, 0.0,
-		LANE_WIDTH, LENGTH)
+		(_lane_x - global_position.x) - lane_width * 0.5, 0.0,
+		lane_width, LENGTH)
 
 
 func _draw() -> void:
@@ -95,17 +102,17 @@ func _draw() -> void:
 		Phase.AIM:
 			# The fill deepens as the timer runs down, so "about to go off" is
 			# something you read at a glance instead of counting in your head.
-			var p: float = clampf(_t / AIM_TIME, 0.0, 1.0)
-			draw_rect(r, Color(1.0, 0.2, 0.2, 0.10 + 0.20 * p), true)
-			draw_rect(r, Color(1.0, 0.4, 0.4, 0.5 + 0.5 * p), false, 2.0)
+			var p: float = clampf(_t / maxf(aim_time, 0.001), 0.0, 1.0)
+			draw_rect(r, Color(1.0, 1.0, 1.0, 0.08 + 0.16 * p), true)
+			draw_rect(r, Color(1.0, 1.0, 1.0, 0.45 + 0.45 * p), false, 2.0)
 			# a line that sweeps the length of the lane and arrives exactly when
 			# it fires — the precise "now" cue
 			var y: float = r.size.y * p
 			draw_line(Vector2(r.position.x, y), Vector2(r.end.x, y),
-				Color(1.0, 0.65, 0.35, 0.95), 2.0)
+				Color(1.0, 1.0, 1.0, 0.95), 2.0)
 		Phase.FIRE:
-			draw_rect(r, Color(1.0, 0.8, 0.45, 0.55), true)
-			draw_rect(r, Color(1.0, 1.0, 0.85, 0.95), false, 3.0)
+			draw_rect(r, Color(1.0, 1.0, 1.0, 0.5), true)
+			draw_rect(r, Color(1.0, 1.0, 1.0, 0.95), false, 3.0)
 		Phase.FADE:
 			var a: float = 1.0 - clampf(_t / FADE_TIME, 0.0, 1.0)
-			draw_rect(r, Color(1.0, 0.7, 0.4, 0.45 * a), true)
+			draw_rect(r, Color(1.0, 1.0, 1.0, 0.4 * a), true)

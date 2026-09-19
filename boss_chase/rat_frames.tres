@@ -1,6 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://0cukpw6yldjo"]
 
 [ext_resource type="Texture2D" uid="uid://dk30ursawgcsw" path="res://boss_chase/Assets/rat_sheet.png" id="1_rat"]
+[ext_resource type="Texture2D" uid="uid://im13wi1ouets" path="res://boss_chase/Assets/Rat-animation.png" id="2_ratfull"]
 
 [sub_resource type="AtlasTexture" id="Idle_0"]
 atlas = ExtResource("1_rat")
@@ -161,6 +162,18 @@ region = Rect2(114, 265, 57, 53)
 [sub_resource type="AtlasTexture" id="hurt_3"]
 atlas = ExtResource("1_rat")
 region = Rect2(171, 265, 57, 53)
+
+[sub_resource type="AtlasTexture" id="parry_0"]
+atlas = ExtResource("2_ratfull")
+region = Rect2(5, 490, 57, 53)
+
+[sub_resource type="AtlasTexture" id="parry_1"]
+atlas = ExtResource("2_ratfull")
+region = Rect2(85, 490, 57, 53)
+
+[sub_resource type="AtlasTexture" id="parry_2"]
+atlas = ExtResource("2_ratfull")
+region = Rect2(165, 490, 57, 53)
 
 [sub_resource type="AtlasTexture" id="run_0"]
 atlas = ExtResource("1_rat")
@@ -340,6 +353,20 @@ animations = [{
 "loop": false,
 "name": &"hurt",
 "speed": 6.667
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("parry_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("parry_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("parry_2")
+}],
+"loop": false,
+"name": &"parry",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,

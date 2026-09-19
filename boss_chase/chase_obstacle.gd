@@ -2,30 +2,39 @@ class_name ChaseObstacle extends CharacterBody2D
 
 # A wheelie bin standing in the corridor. It does nothing on its own.
 #
-# The ones marked `rolls` can be sent by the cat: they come rolling straight
-# down the corridor onto you, with no warning of any kind — the only cue is the
-# bin itself moving. Dodge it, eat it, or swat it back up into the cat.
+# The ones marked `rolls` can be sent by the cat: it grabs one from further
+# down the corridor and rolls it back UP into your face, with no warning of any
+# kind — the only cue is the bin itself moving. You run into it head-on, so you
+# see it coming. Dodge it, eat it, or swat it up into the cat.
 # Every bin hurts on contact, rolling or not.
 
 signal parried
 
 enum Mode { IDLE, FLYING }
 
-## How a rolled bin travels: straight down the corridor, faster than you run,
-## far enough to chase you down rather than stop politely behind you.
-const ROLL_SPEED: float = 220.0
-const ROLL_DISTANCE: float = 700.0
+# Tuning. ChaseArena writes all of these on spawn from its own inspector — edit
+# them there, not here.
+#
+## How a rolled bin travels: straight back up the corridor at you. It only has
+## to cover the ground between you and it — you are running into it, so the two
+## of you close much quicker than this speed alone suggests.
+var roll_speed: float = 140.0
+var roll_distance: float = 260.0
 
-const PARRY_REACH: float = 44.0
-const REVERSE_DISTANCE: float = 320.0  # 48px would never reach the boss
-const REVERSE_TIME: float = 0.56       # ~570 px/s, much faster than the shove
+## Tight on purpose: the bin has to be close enough that you see it meet the
+## swat. The runner's input buffer is what makes that fair rather than fussy.
+var parry_reach: float = 32.0
+var reverse_distance: float = 320.0   # 48px would never reach the boss
+var reverse_time: float = 0.85        # ~375 px/s, clearly faster than the shove
 
 ## Off: scenery, dodge it. On: the boss can grab this one and roll it at you.
 @export var rolls: bool = false
 
 # Every bin looks the same standing still, on purpose: you cannot tell which
 # one the cat is about to send at you until it moves.
-const COLOR_PARRIED := Color(1.0, 0.85, 0.3)
+# Over-bright rather than tinted — the whole fight is black and white, so a
+# parried bin reads by glowing, not by turning a colour.
+const COLOR_PARRIED := Color(1.8, 1.8, 1.8)
 const COLOR_SPENT := Color(0.45, 0.45, 0.45, 0.7)
 
 var fly_direction: Vector2 = Vector2.ZERO
@@ -70,12 +79,12 @@ func is_live() -> bool:
 
 
 ## The cat sends us. No rattle, no tell — the first the player knows about it is
-## the bin coming down the corridor at them.
-func roll_down() -> void:
+## the bin coming back up the corridor at them.
+func roll_up() -> void:
 	if _mode != Mode.IDLE or _spent or not rolls:
 		return
 	_live = true
-	_launch(Vector2.DOWN, ROLL_DISTANCE, ROLL_DISTANCE / ROLL_SPEED, true)
+	_launch(Vector2.UP, roll_distance, roll_distance / maxf(roll_speed, 1.0), true)
 
 
 ## Called by the runner on a successful parry. Sends us back at whoever shoved us.
@@ -84,7 +93,7 @@ func reverse_toward(target: Node2D) -> void:
 		return
 	_reversed = true
 	_set_tint(COLOR_PARRIED)      # it's yours now — readable at a glance
-	_launch(global_position.direction_to(target.global_position), REVERSE_DISTANCE, REVERSE_TIME)
+	_launch(global_position.direction_to(target.global_position), reverse_distance, reverse_time)
 	parried.emit()
 
 

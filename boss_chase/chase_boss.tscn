@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://boss_chase/chase_boss.gd" id="1_boss"]
 [ext_resource type="SpriteFrames" path="res://boss_chase/cat_frames.tres" id="2_cat"]
@@ -7,9 +7,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_boss"]
 radius = 20.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_touch"]
-radius = 28.0
 
 [node name="ChaseBoss" type="CharacterBody2D" groups=["chase_boss"]]
 z_index = 2
@@ -29,10 +26,3 @@ autoplay = "Notice"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_boss")
-
-[node name="TouchBox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchBox"]
-shape = SubResource("CircleShape2D_touch")
