@@ -1,12 +1,6 @@
 class_name BossObject extends Area2D
-## The little things around Yazzed's room. Three flavours, set by `kind`:
-##
-##   TRAP       sits there. If YAZZED charges through it, he takes damage.
-##   THROWABLE  Sami can pick it up and throw it at Yazzed.
-##   HAZARD     hurts SAMI. Yazzed can shove it at him.
-##
-## An object can also DEBUFF Sami (slow him, blur him — whatever you hook
-## onto the `debuffed_player` signal).
+## The little things around Yazzed's room. Three flavours, set by `kind`: trap
+## sits there.
 
 signal hit_boss(damage: float)
 signal hit_player
@@ -20,15 +14,15 @@ enum Kind { TRAP, THROWABLE, HAZARD }
 @export var kind: Kind = Kind.TRAP
 
 @export_group("Damage")
-## Damage dealt to YAZZED (traps and throwables).
+## Damage dealt to yazzed (traps and throwables).
 @export var boss_damage: float = 10.0
-## Damage dealt to SAMI (hazards, or a thrown object that misses).
+## Damage dealt to sami (hazards, or a thrown object that misses).
 @export var player_damage: float = 0.0
 @export var player_cuts: bool = false
 @export var damage_cause: String = "bleeding"
 
 @export_group("Debuff on Sami")
-## How long the debuff lasts. 0 = no debuff.
+## How long the debuff lasts.
 @export var debuff_seconds: float = 0.0
 ## Free text so you can tell debuffs apart in one handler ("slow", "blind").
 @export var debuff_name: String = "slow"
@@ -64,6 +58,7 @@ var _player: Node2D
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	add_to_group("boss_object")
 	_home = global_position
 	body_entered.connect(_on_body_entered)

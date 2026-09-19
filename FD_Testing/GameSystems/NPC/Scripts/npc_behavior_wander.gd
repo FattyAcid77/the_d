@@ -1,7 +1,7 @@
 class_name NPCBehaviorWander extends NPCBehavior
 ## Random short walks around where the NPC started, with pauses in between.
-
 ## How far from the start point the NPC is allowed to roam.
+
 @export var wander_radius: float = 80.0
 ## How long one walk lasts (seconds, random between min/max).
 @export var walk_time_min: float = 0.6
@@ -24,8 +24,7 @@ func setup(owner_npc: NPC) -> void:
 
 func tick(delta: float) -> void:
 	_timer -= delta
-	# bumped into the player or another NPC? stop grinding into them —
-	# pick a fresh direction instead of pushing for the rest of the walk
+	# bumped into the player or another NPC?
 	if _walking and npc.is_blocked:
 		_walk_dir = _pick_direction()
 		_timer = minf(_timer, 0.35)

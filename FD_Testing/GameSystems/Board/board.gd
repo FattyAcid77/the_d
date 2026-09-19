@@ -1,24 +1,5 @@
 extends CanvasLayer
-## Board — the pause menu. Add as an Autoload named "Board".
-##
-## The clipboard with four tabs down its left edge: INVENTORY, LOGBOOK, MAP,
-## SETTINGS. Opens over the game, pauses it, and closes back to where he was.
-##
-## ART, AND WHY THERE ARE NO COORDINATES IN HERE
-## Every PNG is authored on the same 640x360 canvas with everything already
-## in the right place. So each layer is drawn at (0,0) and it lines up. Even
-## the tabs' CLICKABLE AREAS are read out of their own art — the opaque part
-## of Inventory_Button.png IS the button. Move a tab in the art, and the
-## clicking moves with it. Nothing to re-enter here.
-##
-## KEYS
-##   ESC  open / close (comes back to the tab you were last on)
-##   I    inventory      M  map
-##   L    logbook        O  settings
-##
-## FROM CODE
-##   Board.open()      Board.close()      Board.toggle()
-##   Board.show_tab(Board.Tab.MAP)
+## Board - the pause menu. Add as an Autoload named "Board".
 
 signal opened(tab: int)
 signal closed
@@ -26,11 +7,7 @@ signal tab_changed(tab: int)
 
 enum Tab { INVENTORY, LOGBOOK, MAP, SETTINGS }
 
-## WHERE THE ART LIVES. An autoload has NO INSPECTOR — it's built from a
-## script with no scene — so there is nowhere to drag textures in. The art
-## therefore loads ITSELF from this folder, by filename. Drop a replacement
-## PNG in with the same name and it's picked up. Nothing to wire.
-## The size everything is authored at. Scaled up to the screen at runtime.
+## where the art lives.
 const CANVAS := Vector2(640, 360)
 
 const ART_DIR := "res://FD_Testing/GameSystems/Board/Art/"
@@ -42,8 +19,7 @@ const ART_TABS := {
 	Tab.SETTINGS: "Settings.png",
 }
 
-## Loaded from ART_DIR at startup. Set them from code before the first open
-## if you want to override, but you shouldn't need to.
+## Loaded from ART_DIR at startup.
 var board_art: Texture2D
 var tab_inventory: Texture2D
 var tab_logbook: Texture2D
@@ -51,8 +27,7 @@ var tab_map: Texture2D
 var tab_settings: Texture2D
 
 @export_group("Tab feel")
-## The selected tab is drawn again on top at this brightness, so it lifts
-## off the others. 1.0 = no change, 1.35 is a clear but gentle lift.
+## The selected tab is drawn again on top at this brightness, so it lifts off the others.
 @export var selected_brightness: float = 1.35
 ## And nudged sideways by this much, like a real tab being pulled out.
 @export var selected_nudge: float = 2.0
@@ -61,11 +36,7 @@ var tab_settings: Texture2D
 @export var tab_click_sound: AudioStream
 
 @export_group("Size on screen")
-## The art is drawn on a 640x360 canvas, then scaled up to fit the screen and
-## CENTRED — exactly the way the LogBook does it.
-##
-## KEEP THIS THE SAME AS LogBook's `board_scale` (0.94) or the clipboard and
-## the tabs will not sit on top of the LogBook's clipboard.
+## The art is drawn on a 640x360 canvas, then scaled up to fit the screen and centred
 @export var board_scale: float = 0.94
 
 @export_group("Behaviour")
@@ -77,42 +48,32 @@ var tab_settings: Texture2D
 @export var remember_tab: bool = true
 ## Dim the game behind the board.
 @export var dim_color: Color = Color(0, 0, 0, 0.55)
-## Seconds for the board to glide up from the bottom. This is the SAME
-## number and the same easing the LogBook uses, so every tab and the LogBook
-## move as one thing instead of three different animations.
+## Seconds for the board to glide up from the bottom.
 @export var slide_seconds: float = 0.42
 
 @export_group("Keys")
-##   TAB          open / close
-##   SHIFT + I    inventory      SHIFT + M   map
-##   SHIFT + L    logbook        SHIFT + O   settings
-## The letters need SHIFT so they never collide with normal gameplay keys.
-## They work from inside the game too, jumping straight to that tab.
-##
-## Optional Input Map action that also opens/closes. Leave it — TAB works
-## whether or not you've set the action up.
+## TAB open / close shift + I inventory shift + M map shift + L logbook shift + O settings
 @export var open_action: String = "pause"
 @export var use_letter_shortcuts: bool = true
-## The letters need Shift held. Turn off if you'd rather press them bare.
+## The letters need Shift held.
 @export var letters_need_shift: bool = true
 
 @export_group("Debug")
 @export var debug_log: bool = false
-## Outline each tab's clickable area, so you can see what's being read
-## out of the art.
+## Outline each tab's clickable area, so you can see what's being read out of the art.
 @export var show_hit_areas: bool = false
 
 var is_open := false
 var tab: int = Tab.INVENTORY
 
 var _root: Control
-var _canvas: Control        ## the 640x360 art space, scaled and centred
+var _canvas: Control  # the 640x360 art space, scaled and centred
 var _dim: ColorRect
 var _board: TextureRect
 var _tab_layer: Control
 var _pages: Control
 var _page_nodes := {}
-var _hit := {}            ## Tab -> Rect2 read from the art
+var _hit := {}  # Tab -> Rect2 read from the art
 var _hover: int = -1
 var _was_paused := false
 var _tween: Tween
@@ -127,8 +88,7 @@ func _ready() -> void:
 	_build()
 
 
-## Pulls every PNG out of ART_DIR. Missing files are reported loudly rather
-## than silently leaving a blank screen, which is exactly what used to happen.
+## Pulls every PNG out of ART_DIR.
 func _load_art() -> void:
 	board_art = _tex(ART_BOARD)
 	tab_inventory = _tex(ART_TABS[Tab.INVENTORY])
@@ -150,9 +110,7 @@ func _tex(file: String) -> Texture2D:
 func _build() -> void:
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
-	# IGNORE, not STOP. A full-screen STOP control eats every click before
-	# anything else sees it — which is why the tabs did nothing and why the
-	# LogBook's cards underneath could not be dragged.
+	# ignore, not stop.
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
 
@@ -162,11 +120,6 @@ func _build() -> void:
 	_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(_dim)
 
-	# EVERYTHING ART-RELATED LIVES IN HERE, at plain 640x360 coordinates.
-	# The canvas itself is scaled and centred to the screen, so the art lands
-	# in the same place as the LogBook's clipboard at ANY resolution — and,
-	# just as important, mouse clicks convert back into these coordinates so
-	# the inventory slots can actually be hit.
 	_canvas = Control.new()
 	_canvas.size = CANVAS
 	_canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -181,9 +134,7 @@ func _build() -> void:
 	_board.stretch_mode = TextureRect.STRETCH_KEEP
 	_canvas.add_child(_board)
 
-	# The pages go ON TOP of the clipboard art. They used to be underneath,
-	# and since the clipboard's paper is fully opaque it simply covered them
-	# — the board appeared blank no matter what was on the page.
+	# The pages go on top of the clipboard art.
 	_pages = Control.new()
 	_pages.position = Vector2.ZERO
 	_pages.size = CANVAS
@@ -195,9 +146,7 @@ func _build() -> void:
 	_tab_layer.size = CANVAS
 	_tab_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_canvas.add_child(_tab_layer)
-	# Connect right here. Doing it from _notification(NOTIFICATION_READY) was
-	# a race: that notification is what TRIGGERS _ready, so _tab_layer could
-	# still be null when it ran and the tabs would never draw.
+	# Connect right here.
 	_tab_layer.draw.connect(_draw_tabs)
 
 	_read_hit_areas()
@@ -206,9 +155,7 @@ func _build() -> void:
 	get_viewport().size_changed.connect(_layout)
 
 
-## Scales the 640x360 canvas up to fit the screen and centres it, using the
-## SAME formula as LogBook._layout(). This is what makes the two clipboards
-## line up, whatever resolution the game is running at.
+## Scales the 640x360 canvas up to fit the screen and centres
 func _layout() -> void:
 	if _canvas == null:
 		return
@@ -226,7 +173,6 @@ func to_canvas(screen_pos: Vector2) -> Vector2:
 
 
 ## Reads each tab's clickable rectangle out of its own PNG's opaque pixels.
-## This is why there are no hard-coded button positions anywhere.
 func _read_hit_areas() -> void:
 	var arts := {
 		Tab.INVENTORY: tab_inventory,
@@ -265,8 +211,7 @@ func _build_pages() -> void:
 
 	var setts := BoardSettings.new()
 	_page_nodes[Tab.SETTINGS].add_child(setts)
-	# LOGBOOK has no page of its own — it hands over to the existing
-	# LogBook system, which draws its own full-screen clipboard.
+	# logbook has no page of its own - it hands over to the existing LogBook system
 
 
 # --- opening and closing ---------------------------------------------------
@@ -349,8 +294,7 @@ func show_tab(which: int) -> void:
 	if which == tab:
 		return
 
-	# leaving the logbook puts its own screen away — instantly, since the
-	# board stays up and only the page underneath is changing.
+	# leaving the logbook puts its own screen away - instantly
 	if tab == Tab.LOGBOOK:
 		var lb := get_node_or_null("/root/LogBook")
 		if lb and lb.has_method("close"):
@@ -362,14 +306,9 @@ func show_tab(which: int) -> void:
 	tab_changed.emit(which)
 
 
-## `animate` is TRUE only when the board itself is opening (TAB). Switching
-## between tabs is instant — the board is already up, so nothing should slide.
+## `animate` is true only when the board itself is opening (TAB).
 func _show_page(animate: bool = false) -> void:
-	# THE LOGBOOK IS ITS OWN FULL SCREEN. It draws its own clipboard, blur
-	# and cards on CanvasLayer 80 — underneath us. So on that tab we hide
-	# our own clipboard and dimmer and let the real one show through, and
-	# only keep the tabs on top. Before this, our opaque clipboard was drawn
-	# straight over it, which is why the LogBook looked empty.
+	# the logbook is its own full screen.
 	var on_logbook := (tab == Tab.LOGBOOK)
 	if _board:
 		_board.visible = not on_logbook
@@ -383,10 +322,7 @@ func _show_page(animate: bool = false) -> void:
 				if c.has_method("refresh"):
 					c.refresh()
 
-	# The LOGBOOK tab is the existing LogBook system, opened in place. When
-	# the board is opening it slides at the same 0.42s with the same easing,
-	# so the clipboard and the logbook come up as ONE movement. When you're
-	# just switching tabs it appears instantly, like every other tab.
+	# The logbook tab is the existing LogBook system, opened in place.
 	if tab == Tab.LOGBOOK:
 		var lb := get_node_or_null("/root/LogBook")
 		if lb and lb.has_method("open"):
@@ -397,8 +333,7 @@ func _show_page(animate: bool = false) -> void:
 
 # --- input -----------------------------------------------------------------
 
-## Tabs are handled in _input, not _unhandled_input, so a click on a tab is
-## caught BEFORE the page under it (or the LogBook's cards) can take it.
+## Tabs are handled in _input, not _unhandled_input
 func _input(event: InputEvent) -> void:
 	if not is_open:
 		return
@@ -430,14 +365,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				KEY_M: want = Tab.MAP
 				KEY_O: want = Tab.SETTINGS
 			if want >= 0:
-				# show_tab opens the board first if it's shut, so one call
-				# covers both "switch tab" and "jump straight there".
+				# show_tab opens the board first if it's shut
 				show_tab(want)
 				handled = true
 		if handled:
 			get_viewport().set_input_as_handled()
 		return
-
 
 
 func _is_open_key(event: InputEventKey) -> bool:
@@ -446,8 +379,7 @@ func _is_open_key(event: InputEventKey) -> bool:
 	return InputMap.has_action(open_action) and event.is_action_pressed(open_action)
 
 
-## Tabs move with the slide AND with the canvas scaling, so convert the
-## mouse back into art coordinates before testing.
+## Tabs move with the slide and with the canvas scaling
 func _tab_at(pos: Vector2) -> int:
 	var local := to_canvas(pos)
 	for t in _hit:
@@ -461,6 +393,7 @@ func _play_click() -> void:
 		return
 	var p := AudioStreamPlayer.new()
 	p.stream = tab_click_sound
+	BusRoute.use(p, "UI")
 	add_child(p)
 	p.play()
 	p.finished.connect(p.queue_free)
@@ -475,10 +408,7 @@ func _draw_tabs() -> void:
 		Tab.MAP: tab_map,
 		Tab.SETTINGS: tab_settings,
 	}
-	# On the LOGBOOK tab our clipboard is hidden so the real LogBook shows
-	# through — and the clipboard is what normally draws the four tabs. So
-	# when it's hidden we draw all of them ourselves, otherwise the other
-	# three disappear and there's no way to click back out.
+	# On the logbook tab our clipboard is hidden so the real LogBook shows through
 	var must_draw_all: bool = _board != null and not _board.visible
 
 	for t in arts:
@@ -488,7 +418,7 @@ func _draw_tabs() -> void:
 		var selected: bool = (t == tab)
 		var hovered: bool = (t == _hover)
 		if not selected and not hovered and not must_draw_all:
-			continue                      # the board art already shows it
+			continue  # the board art already shows it
 		var b: float = 1.0
 		if selected:
 			b = selected_brightness

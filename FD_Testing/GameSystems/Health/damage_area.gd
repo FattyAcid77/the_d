@@ -1,26 +1,21 @@
 class_name DamageArea extends Area2D
-## A hurty thing: broken glass, a blade, a hot pipe, a trap.
-## Add a CollisionShape2D and drop it in the level.
-##
-## `opens_wound` is the important one for your bleeding mechanic — it's what
-## turns a hazard into a CUT, which makes Sami bleed, which feeds the breath
-## stages and the blood puzzle.
+## A hurty thing: broken glass, a blade, a hot pipe, a trap. Add a
+## CollisionShape2D and drop it in the level.
 
-## How much health it takes. 0 = it only cuts, no damage.
 @export var damage: float = 1.0
 
-## Does it CUT him (start bleeding)?
+## Does it cut him (start bleeding)?
 @export var opens_wound: bool = true
 
 ## Which DeathCause is blamed if this kills him.
 @export var cause_id: String = "bleeding"
 
 @export_group("Behaviour")
-## ON = hurts once on entry. OFF = keeps hurting while he stands in it.
+## on = hurts once on entry.
 @export var once_per_entry: bool = true
 ## For continuous hazards: seconds between hits.
 @export var repeat_seconds: float = 1.0
-## Only dangerous once this flag is set. Empty = always.
+## Only dangerous once this flag is set.
 @export var active_flag: String = ""
 ## Harmless once this flag is set (the glass was swept up).
 @export var disabled_flag: String = ""
@@ -34,6 +29,7 @@ var _timer: float = 0.0
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	body_entered.connect(_on_entered)
 	body_exited.connect(_on_exited)
 

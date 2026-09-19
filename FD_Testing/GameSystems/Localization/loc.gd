@@ -1,26 +1,12 @@
 extends Node
-## Loc — add as an Autoload named "Loc". Put it ABOVE every other autoload,
+## Loc - add as an Autoload named "Loc". Put it above every other autoload,
 ## because the language must be set before anything draws text.
-##
-## HOW THE TRANSLATION WORKS
-## The ENGLISH TEXT IS THE KEY. You keep writing normal English in every
-## .tres and inspector field, and translations.csv maps each English string
-## to Arabic. Adding a language later = adding one column to that CSV.
-## Nothing you've already authored has to change.
-##
-##     Loc.set_language("ar")
-##     Loc.current()                -> "ar"
-##     Loc.is_rtl()                 -> true
-##     Loc.needs_first_prompt()     -> has the player ever chosen?
-##
-## Anything shown to the player goes through tr(). Ids, flag names, branch
-## ids, prescription syllables and puzzle numbers are DATA — never tr()'d.
 
 signal language_changed(code: String)
 
 const SETTINGS_PATH := "user://language.cfg"
 
-## The languages the game offers. Add to this when you add a CSV column.
+## The languages the game offers.
 const LANGUAGES := {
 	"en": "English",
 	"ar": "العربية",
@@ -35,9 +21,7 @@ const RTL_LANGUAGES := ["ar", "he", "fa", "ur"]
 ## Flip the whole UI for RTL languages (portraits, bars, buttons swap sides).
 @export var mirror_ui: bool = true
 
-## GLOBAL OFF SWITCH for the first-launch language chooser. Set this to false
-## while the main menu is unfinished and every LanguagePrompt node in the
-## project deletes itself on _ready without drawing or pausing anything.
+## global off switch for the first-launch language chooser.
 @export var first_launch_prompt: bool = true
 
 ## Prints what it's doing while you set this up.
@@ -56,7 +40,7 @@ func _ready() -> void:
 
 func current() -> String:
 	var l := TranslationServer.get_locale()
-	# locales arrive like "en_US" — we only care about the language part
+	# locales arrive like "en_US" - we only care about the language part
 	return l.split("_")[0]
 
 
@@ -101,16 +85,7 @@ func _apply(code: String, announce: bool) -> void:
 		language_changed.emit(code)
 
 
-## Flips container layouts for RTL languages. Godot mirrors HBox/VBox,
-## anchors and alignment automatically once the layout direction is RTL.
-##
-## WHY THIS DOESN'T JUST SET THE ROOT:
-## get_tree().root is a Window, NOT a Control. Assigning
-## `root.layout_direction = dir` throws
-##   "Invalid assignment of property or key 'layout_direction' ... type 'Window'"
-## on Godot 4.4. So the root goes through the setter METHOD (guarded), and
-## every top-level Control is told EXPLICITLY instead of inheriting from a
-## root that may have refused the change.
+## Flips container layouts for RTL languages.
 func _apply_mirror(rtl: bool) -> void:
 	var root := get_tree().root
 	if root == null:
@@ -127,8 +102,7 @@ func _apply_mirror(rtl: bool) -> void:
 		c.layout_direction = dir
 
 
-## Controls whose parent is NOT a Control — the root of each UI tree.
-## We stop descending once we hit one, because everything under it inherits.
+## Controls whose parent is not a Control - the root of each UI tree.
 func _top_controls(node: Node, out: Array[Control] = []) -> Array[Control]:
 	for child in node.get_children():
 		if child is Control:

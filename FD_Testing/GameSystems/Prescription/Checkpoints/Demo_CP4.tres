@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://bnjm70l8snlun"]
+
+[ext_resource type="PackedScene" uid="uid://bwa3j8b2suknh" path="res://Demo_Scenes/Maz_Sad_hall.tscn" id="1_x733d"]
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="2_hj05h"]
+
+[resource]
+script = ExtResource("2_hj05h")
+number = 9
+title = "Just_talked_to_Natheef_Alone"
+state_name = "Elevator_pt2"
+set_flags = Array[String](["Maz_Elevator_Quest_init", "Hamato_Elevator_d1_Finished", "Maz_Sad_door_open"])
+scene = ExtResource("1_x733d")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

@@ -1,19 +1,16 @@
-[gd_resource type="Resource" script_class="LogEntry" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="LogEntry" format=3 uid="uid://bl6brxbx7iq87"]
 
-[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
-[ext_resource type="Script" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
+[ext_resource type="Script" uid="uid://k4hq8184ugq7" path="res://FD_Testing/GameSystems/LogBook/log_entry.gd" id="1"]
+[ext_resource type="Script" uid="uid://mxsko0p5e6lk" path="res://FD_Testing/GameSystems/LogBook/log_fact.gd" id="2"]
 
 [sub_resource type="Resource" id="fact1"]
 script = ExtResource("2")
-flag = ""
 text = "The hospital. Something is wrong here — I should talk to people and write down what I learn."
 
 [resource]
 script = ExtResource("1")
 id = "hospital"
 title = "The Hospital"
-always_visible = true
 color = Color(0.55, 0.75, 0.55, 1)
-board_position = Vector2(0, 0)
-facts = [SubResource("fact1")]
+facts = Array[ExtResource("2")]([SubResource("fact1")])
 links_to = Array[String](["fd", "statue"])

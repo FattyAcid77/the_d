@@ -1,35 +1,30 @@
 class_name DialogBranch extends Resource
-## A named chunk of conversation. The branch with id "entry" plays first
-## when the player talks. Other branches are "topics" opened by keywords
-## or choices (e.g. id "apple").
+## A named chunk of conversation. The branch with id "entry" plays first when
+## the player talks.
 
-## Unique name within this NPC's dialog. Use "entry" for the opening branch.
 @export var id: String = ""
 
 @export_group("When this branch plays")
-## ALL of these flags must be set for this branch to be available.
-## Empty = no requirement.
+## all of these flags must be set for this branch to be available.
 @export var require_flags: Array[String] = []
 
-## If ANY of these flags is set, this branch is hidden completely.
-## (This is how an old branch disappears once the story moves on.)
+## If any of these flags is set, this branch is hidden completely.
 @export var blocked_by_flags: Array[String] = []
 
 ## Play this branch only once, ever.
 @export var play_once: bool = false
 
 @export_group("Show as a topic")
-## If ON, this branch appears as a topic button in the conversation hub —
-## no keyword needed. This is the easy way to give an NPC many subjects.
+## If on, this branch appears as a topic button in the conversation hub - no keyword needed.
 @export var is_topic: bool = false
 
-## Button text. If empty, the branch id is used.
+## Button text.
 @export var topic_label: String = ""
 
-## The topic only appears once this flag is set. Empty = always available.
+## The topic only appears once this flag is set.
 @export var unlock_flag: String = ""
 
-## If ON, the topic disappears after the player has fully heard it.
+## If on, the topic disappears after the player has fully heard it.
 @export var ask_once: bool = false
 
 ## The lines, played top to bottom (lines whose show_if_flag isn't met are skipped).

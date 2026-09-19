@@ -1,15 +1,8 @@
 class_name death_state extends state
 ## Sami's death state. Add a Node named "Death" under his Statemachine and
-## attach this script — Deaths.kill() finds it by that name and switches to it.
-##
-## It plays the death animation (whatever exists of Death_down / Death_up /
-## Death_Side / Death), freezes Sami, and never returns another state, so he
-## stays down until Retry reloads the checkpoint.
-##
-## When your death art is ready, just add the animations to his SpriteFrames
-## with those names — no code change needed.
+## attach this script - Deaths.kill() finds it by that name and switches to
+## it.
 
-## Base name of the death animations in the SpriteFrames.
 @export var anim_prefix: String = "Death"
 
 
@@ -39,7 +32,7 @@ func _play() -> void:
 			if player.anim.animation != candidate:
 				player.anim.play(candidate)
 			return
-	# no death art yet — leave the last frame up rather than erroring
+	# no death art yet - leave the last frame up rather than erroring
 
 
 ## Dead men take no input and never leave this state.

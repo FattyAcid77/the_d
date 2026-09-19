@@ -52,3 +52,16 @@ he remembers what you did,he remembers what you did,
 message.txt,message.txt,
 unfinished,unfinished,
 you are not supposed to be here,you are not supposed to be here,
+"SETTINGS","SETTINGS","الإعدادات"
+"Language","Language","اللغة"
+"Volume","Volume","مستوى الصوت"
+"Music","Music","الموسيقى"
+"Ambience","Ambience","الأجواء"
+"Effects","Effects","المؤثرات"
+"Interface","Interface","الواجهة"
+"Dialog","Dialog","الحوار"
+"Fullscreen","Fullscreen","ملء الشاشة"
+"Controls","Controls","التحكم"
+"Not yet","Not yet","ليس بعد"
+"Fullscreen and controls are not wired up yet.","Fullscreen and controls are not wired up yet.","ملء الشاشة والتحكم غير مفعّلة بعد."
+"Sound autoload missing","Sound autoload missing","نظام الصوت غير مسجّل"

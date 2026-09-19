@@ -1,29 +1,19 @@
 class_name ElectroPuzzle extends Node
-## The whole generator puzzle.
-##
-## PHASE 1 — SEQUENCE: flip the three switches in the right order. Wrong
-##           order = buzz and everything resets.
-## PHASE 2 — THE RUN: a countdown starts, the lights start flickering, the
-##           chase music kicks in, and Sami has to reach the MAIN generator
-##           while Haji shouts at him.
-## PHASE 3 — THE MAIN GEN: flip it (optionally with the radio tuned to the
-##           right frequency) before the timer runs out.
-##
-## Fail = the timer runs out. What that costs is up to you (`on_fail`).
+## The whole generator puzzle. phase 1 - sequence: flip the three switches in
+## the right order.
 
 signal switch_accepted(index: int, remaining: int)
 signal sequence_wrong
 signal run_started(seconds: float)
 signal run_tick(time_left: float)
-signal callout(text: String)          ## Haji shouting during the run
+signal callout(text: String)  # Haji shouting during the run
 signal run_failed
 signal puzzle_solved
 
 enum FailAction { RESET_ONLY, KILL_PLAYER, RELOAD_CHECKPOINT }
 
 @export_group("Setup")
-## The three sequence switches, in ANY order — their `order_index` decides
-## the correct sequence, not their position in this list.
+## The three sequence switches, in any order - their `order_index` decides the correct sequence
 @export var gens: Array[ElectroGen] = []
 ## The final generator at the end of the run.
 @export var main_gen: ElectroGen
@@ -38,7 +28,7 @@ enum FailAction { RESET_ONLY, KILL_PLAYER, RELOAD_CHECKPOINT }
 @export var music_volume_db: float = -6.0
 
 @export_group("Haji's callouts")
-## Lines shouted during the run. They do NOT pause the game.
+## Lines shouted during the run.
 @export var callout_lines: Array[String] = [
 	"Haji: MOVE! The whole floor is going!",
 	"Haji: don't stop, don't stop —",
@@ -50,8 +40,7 @@ enum FailAction { RESET_ONLY, KILL_PLAYER, RELOAD_CHECKPOINT }
 @export var callout_seconds: float = 3.0
 
 @export_group("Story hooks")
-## Dialog played ONCE when the three switches are done ("We need to go to
-## the main Gen"). This runs BEFORE the timer starts.
+## Dialog played once when the three switches are done ("We need to go to the main Gen").
 @export var after_switches_dialog: Dialog
 @export var sami_name: String = "Sami"
 ## Flags
@@ -65,7 +54,7 @@ enum FailAction { RESET_ONLY, KILL_PLAYER, RELOAD_CHECKPOINT }
 var running: bool = false
 var solved: bool = false
 var time_left: float = 0.0
-var next_index: int = 0                ## which order_index we expect next
+var next_index: int = 0  # which order_index we expect next
 
 var _music: AudioStreamPlayer
 var _callout_timer: float = 0.0
@@ -73,6 +62,7 @@ var _callout_i: int = 0
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	for g in gens:
 		if g:
 			g.flipped.connect(_on_gen_flipped)
@@ -80,6 +70,7 @@ func _ready() -> void:
 		main_gen.flipped.connect(_on_main_flipped)
 	_music = AudioStreamPlayer.new()
 	_music.volume_db = music_volume_db
+	BusRoute.use(_music, "Music")
 	add_child(_music)
 	if Flags.is_set(solved_flag):
 		solved = true
@@ -143,8 +134,8 @@ func _sequence_complete() -> void:
 	Flags.set_flag(switches_done_flag)
 	for g in gens:
 		if g:
-			g.blow()                       # the three pop as the sequence lands
-	# Sami's line first (this pauses), THEN the timer starts
+			g.blow()  # the three pop as the sequence lands
+	# Sami's line first (this pauses), then the timer starts
 	if after_switches_dialog and not Flags.is_set("electro_line_said"):
 		Flags.set_flag("electro_line_said")
 		DialogManager.start_dialog(after_switches_dialog, sami_name, null)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://br0eekqn7b711"]
+
+[ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_5t3cu"]
+[ext_resource type="PackedScene" uid="uid://cthrlvtm65fhu" path="res://Demo_Scenes/lvl1_Lobby.tscn" id="1_knj5a"]
+
+[resource]
+script = ExtResource("1_5t3cu")
+number = 6
+title = "Met_Hamato"
+state_name = "S3alelIntroduction"
+set_flags = Array[String](["Hamato_Introduction_Finished"])
+scene = ExtResource("1_knj5a")
+metadata/_custom_type_script = "uid://cwxis2l0po8r2"

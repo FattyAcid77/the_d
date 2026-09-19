@@ -1,16 +1,12 @@
 class_name NPCBehaviorPatrol extends NPCBehavior
 ## Walks between patrol points in order, waiting at each one, then loops.
-##
-## Setup: add Marker2D nodes as CHILDREN of this Patrol node and move them
-## where you want the stops. Their world positions are read once at start,
-## so they stay put (they don't follow the NPC).
+## Setup: add Marker2D nodes as children of this Patrol node and move them
+## where you want the stops.
 
-## Seconds to stand at each point before moving on.
 @export var wait_at_point: float = 1.5
 ## How close counts as "arrived" (pixels).
 @export var arrive_distance: float = 6.0
-## If something (the player) blocks the way this long, skip to the next
-## point instead of pushing into them forever.
+## If something (the player) blocks the way this long
 @export var give_up_after: float = 1.5
 
 var _points: Array[Vector2] = []

@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://dfjv5rfj7q1q4"]
+
+[ext_resource type="Texture2D" uid="uid://bo35eh3wu11go" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Restroom/f2-restroom.png" id="1_sx17h"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_yw1j7"]
+[ext_resource type="Texture2D" uid="uid://driu1lpo8svc5" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Restroom/f2-restroom-wall.png" id="3_ss5g2"]
+[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (22).png" id="4_jynbe"]
+[ext_resource type="Texture2D" uid="uid://cn7yg2u5kbkie" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/256x256 textures (64).png" id="5_f72e0"]
+[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="6_n1s17"]
+[ext_resource type="Texture2D" uid="uid://c24kydgcif5bg" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (39).png" id="7_6ljpk"]
+[ext_resource type="Texture2D" uid="uid://clpq7m8v8aloh" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (30).PNG" id="8_ocqsm"]
+[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="9_c4v1a"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qw0ho"]
+polygon = PackedVector2Array(-3, 144, 12.317932, -33.08612, 105, -33, 119, 130, 118, 130, 104, -32, 13.317932, -32.08612, -2, 144)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2o0l2"]
+blend_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bjvg5"]
+polygon = PackedVector2Array(-1.4617004, 7.6862755, 3.5382996, 4.6862755, 111.5383, 4.6862755, 115.5383, 8.6862755, 178.9133, 21.81128, 178.9133, -33.18872, -54.0867, -33.18872, -54.0867, -29.817822, -302.0867, -30.188719, -301.0867, 242.81128, 319.9133, 242.81128, 319.9133, 222.81128, 323.9133, 222.81128, 323.9133, 209.81128, 303.9133, 209.81128, 303.9133, 228.81128, -286.0867, 228.81128, -286.0867, -6.188719, -54.0867, -6.836128, -54.0867, 19.81128)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5fakk"]
+cull_mode = 2
+polygon = PackedVector2Array(455.34082, 124.01357, 483.4105, 123.61502, 484.50604, 253.0412, 451.1139, 253.44702, 496, 289, 526, 265, 528, 192, 484.46683, 77.32678)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4bg3k"]
+blend_mode = 1
+
+[node name="Node2D" type="Node2D" unique_id=20678267]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=146697453]
+position = Vector2(217.29913, 84.131256)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1173736572]
+position = Vector2(-136.4182, -5.0616074)
+polygon = PackedVector2Array(-70.880936, 173.93036, -70.880936, 184.93036, 532.1191, 184.93036, 532.1191, 169.93036, 548.1191, 169.93036, 548.1191, 107.93035, 526.1191, 107.93035, 526.1191, 88.93035, 394.11908, 88.93035, 385.7206, 82.93035, 361.11908, 87.93035, 354.92773, 118.40163, 247.11906, 118.93035, 244.11906, 134.93036, 215.11906, 117.93035, 215.11906, 117.93035, 62.119064, 117.93035, 62.119064, 76.93035, 15.119064, 76.93035, 12.119064, 125.93035, -18.880936, 119.93035, -18.880936, 77.93035, -70.880936, 77.93035, -70.880936, 169.93036, -88.880936, 168.93036, -88.880936, 27.930351, 562.1191, 26.930351, 566.1191, 232.93036, -81.880936, 232.93036, -81.880936, 173.93036)
+
+[node name="F2Restroom" type="Sprite2D" parent="." unique_id=826187077]
+position = Vector2(313, 137)
+texture = ExtResource("1_sx17h")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_yw1j7")]
+position = Vector2(578, 200)
+
+[node name="F2RestroomWall" type="Sprite2D" parent="." unique_id=26439445]
+position = Vector2(313, 137)
+texture = ExtResource("3_ss5g2")
+
+[node name="light" type="Node2D" parent="." unique_id=548356975]
+position = Vector2(373.65286, 861.822)
+
+[node name="PointLight2D5" type="PointLight2D" parent="light" unique_id=1720777799]
+position = Vector2(-294.6529, -785.822)
+scale = Vector2(0.47207043, 0.71925485)
+color = Color(0.6492105, 0.581297, 0.44816905, 1)
+energy = 0.75
+shadow_enabled = true
+texture = ExtResource("4_jynbe")
+
+[node name="PointLight2D" type="PointLight2D" parent="light" unique_id=1565395614]
+position = Vector2(-296.6529, -747.8221)
+scale = Vector2(1.3554688, 2.1796877)
+color = Color(0.46832496, 0.47132856, 0.74960274, 1)
+energy = 0.25
+shadow_enabled = true
+texture = ExtResource("5_f72e0")
+
+[node name="PointLight2D2" type="PointLight2D" parent="light" unique_id=485660116]
+position = Vector2(135.34714, -749.8221)
+scale = Vector2(1.3554688, 1.3554688)
+color = Color(0.46832496, 0.47132856, 0.74960274, 1)
+energy = 0.2
+shadow_enabled = true
+texture = ExtResource("6_n1s17")
+
+[node name="PointLight2D3" type="PointLight2D" parent="light" unique_id=1596901699]
+position = Vector2(131.34714, -614.822)
+scale = Vector2(1.1277344, 1.9527344)
+color = Color(0.46832496, 0.47132856, 0.74960274, 1)
+energy = 0.3
+shadow_enabled = true
+texture = ExtResource("6_n1s17")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="light" unique_id=913226197]
+position = Vector2(-353.65286, -772.822)
+occluder = SubResource("OccluderPolygon2D_qw0ho")
+
+[node name="PointLight2D6" type="PointLight2D" parent="light" unique_id=848598325]
+texture_filter = 6
+texture_repeat = 2
+position = Vector2(-15.652863, -822.82196)
+scale = Vector2(0.7011719, 0.5253906)
+color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
+energy = 0.55
+shadow_enabled = true
+shadow_item_cull_mask = 5
+texture = ExtResource("7_6ljpk")
+texture_scale = 0.75
+height = 822.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="light/PointLight2D6" unique_id=705980673]
+material = SubResource("CanvasItemMaterial_2o0l2")
+position = Vector2(-10.088432, 3.7376018)
+rotation = -1.5730057
+scale = Vector2(0.037516855, 0.593888)
+color = Color(1, 0.79607844, 1, 0.56078434)
+energy = 1.83
+shadow_enabled = true
+texture = ExtResource("8_ocqsm")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="light/PointLight2D6" unique_id=110822209]
+position = Vector2(-79.742645, -16.77103)
+scale = Vector2(1.4261838, 1.9033457)
+occluder = SubResource("OccluderPolygon2D_bjvg5")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="light" unique_id=1018093763]
+position = Vector2(-321.65286, -852.8221)
+rotation = -0.00010798313
+scale = Vector2(1.1858981, 0.91166127)
+occluder = SubResource("OccluderPolygon2D_5fakk")
+sdf_collision = false
+
+[node name="doorlight l to r" type="PointLight2D" parent="light/LightOccluder2D5" unique_id=245596416]
+material = SubResource("CanvasItemMaterial_4bg3k")
+position = Vector2(482.7173, 235.90108)
+scale = Vector2(0.06900651, 0.34745067)
+color = Color(0.2509804, 0.42745098, 0.53333336, 0.8)
+energy = 1.37
+shadow_enabled = true
+texture = ExtResource("9_c4v1a")
+texture_scale = 1.9
+height = 74.0
+
+[node name="PointLight2D7" type="PointLight2D" parent="light" unique_id=375179235]
+texture_filter = 6
+texture_repeat = 2
+position = Vector2(-15.652863, -822.82196)
+scale = Vector2(0.7011719, 0.5253906)
+color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
+energy = 0.55
+shadow_enabled = true
+shadow_item_cull_mask = 5
+texture = ExtResource("7_6ljpk")
+texture_scale = 0.75
+height = 822.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="light/PointLight2D7" unique_id=1016587250]
+material = SubResource("CanvasItemMaterial_2o0l2")
+position = Vector2(-10.088432, 3.7376018)
+rotation = -1.5730057
+scale = Vector2(0.037516855, 0.593888)
+color = Color(1, 0.79607844, 1, 0.56078434)
+energy = 1.83
+shadow_enabled = true
+texture = ExtResource("8_ocqsm")
+texture_scale = 1.9
+height = 74.0
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="light/PointLight2D7" unique_id=417480127]
+position = Vector2(-79.742645, -16.77103)
+scale = Vector2(1.4261838, 1.9033457)
+occluder = SubResource("OccluderPolygon2D_bjvg5")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024640842]
+position = Vector2(468, 392)
+color = Color(0.8466757, 0.87451994, 0.9331581, 1)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SoundDef" format=3 uid="uid://cw85m2pkc62u5"]
+
+[ext_resource type="Script" uid="uid://e2ngynhj67b3" path="res://FD_Testing/GameSystems/Sound/sound_def.gd" id="1_v1inm"]
+[ext_resource type="AudioStream" uid="uid://dg8cty0idn6n3" path="res://Sounds/Wave/Music/jazz idea.ogg" id="2_lams1"]
+
+[resource]
+script = ExtResource("1_v1inm")
+id = "paper"
+stream = ExtResource("2_lams1")
+category = "UI"
+metadata/_custom_type_script = "uid://e2ngynhj67b3"

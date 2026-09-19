@@ -1,12 +1,6 @@
 class_name DialogTrigger extends Area2D
 ## Drop this under an NPC (or anything talkable). When the player is inside it
 ## and presses the "interact" action, it starts that thing's dialog.
-## Shows the "Prompt" child while the player is in range.
-##
-## Where the dialog comes from, in priority order:
-##   1. the `dialog` slot on this trigger
-##   2. the parent NPC's NPCResource.dialog
-##   3. the demo apple dialog, if `use_demo_dialog` is ticked
 
 @export var dialog: Dialog
 @export var use_demo_dialog: bool = false
@@ -15,7 +9,7 @@ class_name DialogTrigger extends Area2D
 
 var _player_in: bool = false
 var _player_node: Node2D = null
-var _cooldown_until: int = 0   # blocks reopening right after a dialog closes
+var _cooldown_until: int = 0  # blocks reopening right after a dialog closes
 @onready var prompt: Node2D = get_node_or_null("Prompt")
 
 
@@ -51,10 +45,11 @@ func _start() -> void:
 		if pt == null:
 			pt = npc.npc_resource.portrait
 		if _player_node:
-			npc.face_toward(_player_node.global_position)   # look at who you talk to
+			npc.face_toward(_player_node.global_position)  # look at who you talk to
 	if prompt:
 		prompt.visible = false
-	DialogManager.start_dialog(dialog, nm, pt)
+	# Hand the NPC node over so dialog lines can drive its animations.
+	DialogManager.start_dialog(dialog, nm, pt, npc if npc is NPC else null)
 
 
 func _on_dialog_finished() -> void:

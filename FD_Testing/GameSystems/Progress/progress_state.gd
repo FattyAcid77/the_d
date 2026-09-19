@@ -1,15 +1,12 @@
 class_name ProgressState extends Node
-## One state of the game. The NODE NAME is the state name.
-## Everything it does is set in the inspector — or extend this script for
-## custom code by overriding _enter()/_exit().
+## One state of the game. The node name is the state name.
 
 @export_group("On Enter")
 ## Nodes in these groups become visible + processing when this state starts.
-## (Select any node -> Node dock -> Groups to put it in a group.)
 @export var show_groups: Array[String] = []
 ## Nodes in these groups are hidden + stopped while this state is active.
 @export var hide_groups: Array[String] = []
-## Flags set when the state starts (e.g. ["act2_started"]).
+## Flags set when the state starts (e.g.
 @export var set_flags: Array[String] = []
 
 @export_group("Auto Advance (optional)")

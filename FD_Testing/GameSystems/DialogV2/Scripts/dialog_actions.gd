@@ -1,22 +1,8 @@
 class_name DialogActions
-## The list of things a DialogLine can DO, straight from the Inspector.
-##
-## On a DialogLine, fill in:
-##     action_name  = "give_item"
-##     action_args  = ["bandage", 2]
-##
-## DialogManager runs it. Anything NOT in this list is still emitted as
-## `action_requested`, exactly as before, so your own custom actions keep
-## working — nothing you already wired up breaks.
-##
-## A line with EMPTY text and an action becomes a pure "do something" step:
-## no box appears, it just happens and moves on.
-##
-## Full documented list with examples: DialogV2/ACTIONS.md
-##
-## This is a plain static helper — NOT an autoload, nothing to register.
+## The list of things a DialogLine can do, straight from the Inspector. On a
+## DialogLine, fill in: action_name = "give_item" action_args = ["bandage", 2]
+## DialogManager runs it.
 
-## Every built-in verb. Used by run() and by the docs.
 const VERBS := [
 	"set_flag", "clear_flag", "toggle_flag",
 	"give_item", "take_item",
@@ -25,6 +11,8 @@ const VERBS := [
 	"heal", "hurt", "bleed", "stop_bleeding",
 	"kill",
 	"radio_tune", "radio_open",
+	"play_sound", "play_music", "stop_music",
+	"play_set", "stop_set", "music_layer", "ambience_layer",
 	"progress_stage",
 	"play_cutscene",
 	"wait",
@@ -32,9 +20,9 @@ const VERBS := [
 ]
 
 
-## Returns TRUE if it handled the action itself.
-## Returns FALSE for anything unknown, so the caller emits action_requested.
+## Returns true if it handled the action itself.
 static func run(tree: SceneTree, verb: String, args: Array) -> bool:
+	verb = DialogActionStep.verb_of(verb, "")
 	if verb == "" or not VERBS.has(verb):
 		return false
 
@@ -82,9 +70,7 @@ static func run(tree: SceneTree, verb: String, args: Array) -> bool:
 
 		# --- logbook -------------------------------------------------------
 		"log_entry":
-			# LogBook has no "unlock" call — entries are gated by FLAGS.
-			# So this raises the flag the entry is waiting on, which is the
-			# real way the logbook works.
+			# LogBook has no "unlock" call - entries are gated by flags.
 			var f4 := _node(root, "Flags")
 			if f4 and args.size() > 0:
 				f4.set_flag(str(args[0]))
@@ -122,12 +108,45 @@ static func run(tree: SceneTree, verb: String, args: Array) -> bool:
 			if rl and args.size() > 0 and rl.has_method("set_frequency"):
 				rl.set_frequency(float(args[0]))
 		"radio_open":
-			# RadioLink is a READ-ONLY window onto the other developer's radio
-			# for power/open state — we can tune it, but only their code opens
-			# and closes it. So this raises a flag their side can watch.
+			# RadioLink is a read-only window onto the other developer's radio for power/open state
 			var f5 := _node(root, "Flags")
 			if f5:
 				f5.set_flag("radio_should_open")
+
+		"play_sound":
+			var snd := _node(root, "Sound")
+			if snd and args.size() > 0 and snd.has_method("cue"):
+				snd.cue(str(args[0]))  # full cue syntax: "delay(1) scream, loop drone"
+		"play_music":
+			var snd2 := _node(root, "Sound")
+			if snd2 and args.size() > 0 and snd2.has_method("play_music"):
+				var fade := float(args[1]) if args.size() > 1 else -1.0
+				snd2.play_music(str(args[0]), fade)
+		"stop_music":
+			var snd3 := _node(root, "Sound")
+			if snd3 and snd3.has_method("stop_music"):
+				snd3.stop_music(float(args[0]) if args.size() > 0 else -1.0)
+		"play_set":
+			var snd4 := _node(root, "Sound")
+			if snd4 and args.size() > 0 and snd4.has_method("play_set"):
+				var mix: Array = []
+				if args.size() > 1:
+					for l in str(args[1]).split(",", false):
+						mix.append(l.strip_edges())
+				snd4.play_set(str(args[0]), mix)
+		"stop_set":
+			var snd5 := _node(root, "Sound")
+			if snd5 and snd5.has_method("stop_set"):
+				snd5.stop_set(str(args[0]) if args.size() > 0 else "Music")
+		"music_layer", "ambience_layer":
+			var snd6 := _node(root, "Sound")
+			if snd6 and args.size() > 0 and snd6.has_method("set_layer"):
+				var cat := "Ambience" if verb == "ambience_layer" else "Music"
+				var st = null
+				if args.size() > 1:
+					var w := str(args[1]).to_lower()
+					st = true if w in ["on", "true", "1"] else (false if w in ["off", "false", "0"] else null)
+				snd6.set_layer(cat, str(args[0]), st)
 
 		# --- story ---------------------------------------------------------
 		"progress_stage":
@@ -141,7 +160,7 @@ static func run(tree: SceneTree, verb: String, args: Array) -> bool:
 				if a is Comic and cs.has_method("play_comic"):
 					cs.play_comic(a)
 				elif cs.has_method("play"):
-					cs.play(str(a))            # a res:// path to a video
+					cs.play(str(a))  # a res:// path to a video
 
 		# --- flow ----------------------------------------------------------
 		"wait":
@@ -159,8 +178,7 @@ static func _node(root: Node, autoload_name: String) -> Node:
 	return root.get_node_or_null(autoload_name)
 
 
-## The player's WoundComponent — the thing that actually owns health and
-## bleeding. Found by searching the player, then the whole tree.
+## The player's WoundComponent - the thing that actually owns health and bleeding.
 static func _wound(root: Node) -> Node:
 	var tree := root.get_tree()
 	var player := tree.get_first_node_in_group("Player") as Node2D
@@ -184,8 +202,7 @@ static func _find_type(node: Node, type_name: String) -> Node:
 	return null
 
 
-## Adds an item to the existing inventory, by the same route ItemPickup uses,
-## so both go through the other developer's code the same way.
+## Adds an item to the existing inventory, by the same route ItemPickup uses
 static func _give_item(root: Node, args: Array) -> void:
 	if args.is_empty():
 		return

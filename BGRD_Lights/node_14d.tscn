@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://gq3bqnprqoxw"]
+
+[ext_resource type="Texture2D" uid="uid://blm7nhlo1cwwr" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Elevator/Elevator.png" id="1_geps4"]
+[ext_resource type="Texture2D" uid="uid://b5khuvjwil5u0" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Elevator/Elevator (Broken).png" id="2_mllg1"]
+[ext_resource type="Texture2D" uid="uid://bfdov4dithgla" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Elevator/Elevator (Fixed).png" id="3_uhmu0"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="4_wmolq"]
+[ext_resource type="Texture2D" uid="uid://b33f7ox68gmgp" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Elevator/elevator-wall.png" id="5_uxtyc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_geps4"]
+load_path = "res://.godot/imported/512x512 textures (39).png-01926e93c1344f0275f259e398243545.ctex"
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uhmu0"]
+polygon = PackedVector2Array(5.9132996, 42.81134, 5.9132996, 4.8113422, 99.9133, 4.8113422, 99.9133, 42.81134, 114.9133, 61.81134, 114.9133, -10.188658, -9.0867, -10.188658, -9.0867, 57.81134)
+
+[node name="Node2D" type="Node2D" unique_id=29017701]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=742962730]
+position = Vector2(217.29913, 84.131256)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=96248962]
+position = Vector2(-156.28828, 27.827217)
+polygon = PackedVector2Array(-52.01085, 147.04153, 56.98915, 147.04153, 56.98915, 36.041527, -52.01085, 36.041527, -52.01085, 142.04153, -60.01085, 142.04153, -60.01085, 25.041527, 63.98915, 25.041527, 63.98915, 154.04153, -52.01085, 154.04153)
+
+[node name="Elevator" type="Sprite2D" parent="." unique_id=1661789626]
+position = Vector2(63, 134)
+texture = ExtResource("1_geps4")
+
+[node name="Elevator(broken)" type="Sprite2D" parent="." unique_id=333770251]
+position = Vector2(63, 134)
+texture = ExtResource("2_mllg1")
+
+[node name="Elevator(fixed)" type="Sprite2D" parent="." unique_id=2051145632]
+position = Vector2(63, 134)
+texture = ExtResource("3_uhmu0")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("4_wmolq")]
+position = Vector2(60, 178)
+
+[node name="ElevatorWall" type="Sprite2D" parent="." unique_id=1760559254]
+position = Vector2(63, 134)
+texture = ExtResource("5_uxtyc")
+
+[node name="PointLight2D7" type="PointLight2D" parent="." unique_id=1817950794]
+texture_filter = 6
+texture_repeat = 2
+position = Vector2(66, 16)
+scale = Vector2(0.7011719, 0.5253906)
+color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
+energy = 0.25
+shadow_enabled = true
+shadow_item_cull_mask = 5
+texture = SubResource("CompressedTexture2D_geps4")
+texture_scale = 0.75
+height = 822.0
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="." unique_id=220221105]
+position = Vector2(10.0867, 11.188658)
+occluder = SubResource("OccluderPolygon2D_uhmu0")

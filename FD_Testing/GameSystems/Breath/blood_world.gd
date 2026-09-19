@@ -1,28 +1,20 @@
 extends Node
-## BloodWorld — add as an Autoload named "BloodWorld".
-## Puts blood on the floor and tells any BloodGrid underneath about it.
-##
-##     BloodWorld.spill(blood_type, world_position)
-##
-## Grids register themselves, so a spill anywhere automatically reaches the
-## right puzzle without wiring.
+## BloodWorld - add as an Autoload named "BloodWorld". Puts blood on the floor
+## and tells any BloodGrid underneath about it.
 
 signal spilled(type: BloodType, world_pos: Vector2)
 
-## Stains that land on a puzzle grid stay this long. 0 = forever.
+## Stains that land on a puzzle grid stay this long.
 @export var stain_lifetime: float = 0.0
-## Stains that land ANYWHERE ELSE fade after this many seconds.
-## 0 = they stay forever too.
+## Stains that land anywhere else fade after this many seconds.
 @export var stray_stain_lifetime: float = 8.0
 ## How long the fade-out itself takes.
 @export var fade_seconds: float = 1.2
 ## Drawn size when a BloodType has no texture.
 @export var default_stain_size: float = 10.0
-## Draw order for stains. 0 sits on the floor with everything else; use a
-## POSITIVE number if your TileMap is hiding the blood, negative to tuck it
-## under characters. (-1 hides it behind a z_index 0 floor — a common trap.)
+## Draw order for stains.
 @export var stain_z_index: int = 0
-## Prints every spill to the Output panel — turn on while setting up.
+## Prints every spill to the Output panel - turn on while setting up.
 @export var debug_log: bool = false
 
 var _grids: Array = []
@@ -49,7 +41,7 @@ func spill(type: BloodType, world_pos: Vector2) -> void:
 		return
 	if debug_log:
 		print("BloodWorld: spilling '%s' at %s" % [type.id, world_pos])
-	# ask the grids first — one of them may want to keep this splat
+	# ask the grids first - one of them may want to keep this splat
 	var kept := false
 	for g in _grids:
 		if is_instance_valid(g) and g.has_method("stain_at"):
@@ -88,7 +80,7 @@ func _make_stain(type: BloodType, world_pos: Vector2, permanent: bool) -> void:
 	if type.random_rotation:
 		node.rotation = randf() * TAU
 	_stain_root.add_child(node)
-	node.global_position = world_pos      # must be AFTER add_child, or it lands wrong
+	node.global_position = world_pos  # must be after add_child, or it lands wrong
 
 	# blood on a puzzle grid sticks around; blood on plain floor dries up
 	var life: float = stain_lifetime if permanent else stray_stain_lifetime

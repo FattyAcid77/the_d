@@ -1,24 +1,7 @@
 extends Node
-## MedicalItems — add as an Autoload named "MedicalItems".
-## Turns inventory items into medical effects: bandages stop the bleeding,
-## a scalpel opens a wound so Sami can bleed on purpose for the blood puzzle.
-##
-## ============================================================
-## ONE LINE TO ADD IN THE OTHER DEV'S inventory.gd
-## ============================================================
-## Their `use_item(item)` is what the Use button calls. Add this as the
-## FIRST line of that function:
-##
-##     func use_item(item):
-##         if MedicalItems.use(item): return     # <-- add this line
-##         ...their existing code...
-##
-## That's the only change needed anywhere in their code. `use()` returns
-## true when it recognised and handled the item, false otherwise — so all
-## their own items keep working exactly as before.
-##
-## (If their inventory emits a signal when an item is used, connect that to
-## MedicalItems.use instead and you don't have to touch their file at all.)
+## MedicalItems - add as an Autoload named "MedicalItems". Turns inventory
+## items into medical effects: bandages stop the bleeding, a scalpel opens a
+## wound so Sami can bleed for the blood puzzle.
 
 signal item_used(type: String)
 signal bandage_used
@@ -28,7 +11,6 @@ signal cut_used
 const ITEMS_DIR := "res://FD_Testing/GameSystems/Items"
 
 ## Remove one from the inventory after a successful use?
-## Their inventory may already do this — if items vanish twice, turn it OFF.
 @export var consume_on_use: bool = true
 
 ## Prints what happened, useful while wiring this up.
@@ -44,14 +26,11 @@ func _ready() -> void:
 
 func _load_items() -> void:
 	items.clear()
-	var dir := DirAccess.open(ITEMS_DIR)
-	if dir == null:
-		return
-	for file in dir.get_files():
-		if file.get_extension() == "tres" or file.get_extension() == "res":
-			var r := load(ITEMS_DIR + "/" + file)
-			if r is MedicalItem:
-				items.append(r)
+	# ResList: works in the editor and in an exported build.
+	for path in ResList.tres_files(ITEMS_DIR):
+		var r := load(path)
+		if r is MedicalItem:
+			items.append(r)
 
 
 ## Look up a definition by its `type` string.
@@ -62,19 +41,16 @@ func get_item(type: String) -> MedicalItem:
 	return null
 
 
-# ==========================================================================
-# the hook
-# ==========================================================================
+# ========================================================================== the hook
 
 ## Call this with an inventory item Dictionary.
-## Returns TRUE if it was a medical item and the effect was applied.
 func use(item) -> bool:
 	if item == null or not (item is Dictionary):
 		return false
 	var type: String = str(item.get("type", ""))
 	var def := get_item(type)
 	if def == null:
-		return false                     # not one of ours — let their code run
+		return false  # not one of ours - let their code run
 	var applied := _apply(def)
 	if applied:
 		if def.use_flag != "":
@@ -94,7 +70,7 @@ func _apply(def: MedicalItem) -> bool:
 			if not wounds.is_bleeding:
 				if debug_log:
 					print("MedicalItems: '%s' used but nothing is bleeding." % def.display_name)
-				return false             # don't waste it
+				return false  # don't waste it
 			wounds.bandage()
 			bandage_used.emit()
 			if debug_log:
@@ -135,12 +111,6 @@ func _wounds() -> Node:
 
 
 ## Takes one off the stack using the existing inventory's own function.
-##
-## IMPORTANT: this is DEFERRED on purpose. use_item() is called from the
-## slot's Use button, and removing an item rebuilds the whole grid — which
-## queue_free()s the very slot whose button handler is still running. Doing
-## it immediately crashes with "instance is null / freed". Deferring lets
-## their button handler finish first, then the grid rebuilds safely.
 func _consume(item: Dictionary) -> void:
 	var inv := get_node_or_null("/root/inventory")
 	if inv == null:

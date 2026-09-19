@@ -1,21 +1,6 @@
 extends Node
-## GameProgress — add as an Autoload named "GameProgress".
-## Remembers WHERE the player is in the game (one current state name) and
-## broadcasts changes. The actual per-level effects live in a
-## GameStateMachine node inside each level (see game_state_machine.gd).
-##
-## Change state from anywhere:
-##     GameProgress.goto_state("Act2")
-##
-## Read it:
-##     GameProgress.current()            -> "Act2"
-##     GameProgress.is_at("Act2")        -> true
-##
-## From DIALOG: a line with  action_name = "state", action_args = ["Act2"]
-## changes the game state mid-conversation.
-##
-## The current state is stored in Flags under "game_state", so it persists
-## with your save automatically (Flags.to_dict / from_dict).
+## GameProgress - add as an Autoload named "GameProgress". Remembers where the
+## player is in the game (one current state name) and broadcasts changes.
 
 signal state_changed(old_state: String, new_state: String)
 

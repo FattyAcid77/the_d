@@ -2,19 +2,6 @@
 class_name BloodGrid extends Node2D
 ## The floor puzzle: a grid of cells that each want a specific blood type.
 ## Bleed the right type onto the right cell and the puzzle solves.
-##
-## SETUP
-##   1. Drop this node where the top-left of the grid should be.
-##   2. Set `columns`, `rows` and `cell_size` — it draws itself in the editor
-##      so you can line it up with your tiles exactly.
-##   3. Fill `wanted` with one blood-type id per cell, reading left-to-right,
-##      top-to-bottom. Use "" for cells that don't care.
-##      Example for a 3x3 where only the middle row matters:
-##         ["", "", "", "A", "B", "A", "", "", ""]
-##   4. Set `solved_flag` — raised when the pattern is complete.
-##
-## Cells remember the LAST blood spilled on them, so a mistake can be
-## covered by bleeding the correct type on top (unless `lock_cells` is on).
 
 signal cell_stained(index: int, type_id: String)
 signal solved
@@ -34,7 +21,7 @@ signal solved
 		cell_size = v
 		queue_redraw()
 
-## One blood-type id per cell (row by row). "" = this cell is ignored.
+## One blood-type id per cell (row by row).
 @export var wanted: Array[String] = []:
 	set(v):
 		wanted = v
@@ -47,12 +34,10 @@ signal solved
 ## Flag raised when every wanted cell holds its type.
 @export var solved_flag: String = "blood_puzzle_solved"
 
-## Prints every hit to the Output panel: which cell, what landed, what it
-## wanted. Turn this ON while building a puzzle.
+## Prints every hit to the Output panel: which cell, what landed, what it wanted.
 @export var debug_log: bool = true
 
-## ON = blood only "sticks" on cells that actually want blood; anything
-## else fades away. OFF = any cell in the grid keeps its stain.
+## on = blood only "sticks" on cells that actually want blood; anything else fades away.
 @export var keep_only_on_wanted: bool = false
 
 @export_group("Editor look")
@@ -65,6 +50,7 @@ var _is_solved := false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	_resize_arrays()
 	if Engine.is_editor_hint():
 		return
@@ -103,7 +89,6 @@ func cell_at(world_pos: Vector2) -> int:
 
 
 ## Called by BloodWorld whenever blood lands anywhere.
-## Returns TRUE if the blood landed on this grid (so it should stay).
 func stain_at(world_pos: Vector2, type: BloodType) -> bool:
 	var idx := cell_at(world_pos)
 	if idx < 0:
@@ -113,7 +98,7 @@ func stain_at(world_pos: Vector2, type: BloodType) -> bool:
 	if _is_solved and lock_cells:
 		return true
 	if lock_cells and current[idx] != "" and current[idx] == wanted[idx]:
-		return true                 # already correct and locked
+		return true  # already correct and locked
 	current[idx] = type.id
 	cell_stained.emit(idx, type.id)
 	queue_redraw()
@@ -148,7 +133,7 @@ func _check() -> void:
 		return
 	for i in wanted.size():
 		if wanted[i] == "":
-			continue                # this cell doesn't matter
+			continue  # this cell doesn't matter
 		if current[i] != wanted[i]:
 			return
 	_is_solved = true

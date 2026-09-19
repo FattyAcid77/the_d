@@ -1,47 +1,30 @@
 class_name WindowBlocker extends Area2D
-## A thing INSIDE THE GAME that a popup window cannot be dragged over.
-##
-## Put one in your level around a rock, a door, a corpse — anything. When the
-## player drags a popup window across their desktop and it reaches this spot
-## in the game, the window STOPS dead, like it hit a wall, and its title and
-## text change to whatever you set here.
-##
-## The window is on the desktop. The rock is in the level. WindowSpace does
-## the maths that connects them, taking the camera into account — so if the
-## camera moves, the blocked area moves with the rock, exactly as it should.
-##
-## SCENE SHAPE
-##   WindowBlocker (Area2D, this script)
-##   └── CollisionShape2D        <- draw the blocked area over the thing
-##
-## The CollisionShape2D is only used to work out the rectangle. Its collision
-## layers don't matter and nothing physical ever touches it.
+## A thing inside the game that a popup window cannot be dragged over. Put one
+## in your level around a rock, a door, a corpse - anything.
 
 signal window_blocked(window: PopupWindow)
 signal window_released(window: PopupWindow)
 
 @export_group("What it does to the window")
-## Physically stop the window. OFF = the window passes over freely and only
-## the text changes.
+## Physically stop the window.
 @export var blocks: bool = true
-## New title bar text while the window is touching this. Empty = unchanged.
+## New title bar text while the window is touching this.
 @export var new_title: String = ""
-## New body text while the window is touching this. Empty = unchanged.
+## New body text while the window is touching this.
 @export_multiline var new_text: String = ""
 ## Put the old title and text back when the window is dragged away.
-## OFF = the change sticks for good.
 @export var restore_on_leave: bool = true
 
 @export_group("Which windows")
-## Only these window ids are affected. Empty = every window.
+## Only these window ids are affected.
 @export var only_window_ids: Array[String] = []
 ## These ids are never affected.
 @export var ignore_window_ids: Array[String] = []
 
 @export_group("Flags")
-## The blocker only exists once this flag is set. Empty = always there.
+## The blocker only exists once this flag is set.
 @export var require_flag: String = ""
-## Dead once this flag is set — windows pass over freely again.
+## Dead once this flag is set - windows pass over freely again.
 @export var hide_flag: String = ""
 ## Flag set the first time a window is stopped here.
 @export var set_flag: String = ""
@@ -50,7 +33,7 @@ signal window_released(window: PopupWindow)
 ## Play this the moment a window is stopped.
 @export var bump_sound: AudioStream
 @export var bump_volume_db: float = 0.0
-## Shake the window this many pixels when it's stopped. 0 = no shake.
+## Shake the window this many pixels when it's stopped.
 @export var bump_shake: float = 4.0
 ## Seconds before the same window can be bumped again (stops sound spam).
 @export var bump_cooldown: float = 0.4
@@ -59,14 +42,15 @@ signal window_released(window: PopupWindow)
 ## Draw the blocked area in-game while you're building the level.
 @export var show_in_game: bool = false
 
-var _touching: Dictionary = {}      ## window -> {title, text}
-var _cooldowns: Dictionary = {}     ## window -> seconds left
+var _touching: Dictionary = {}  # window -> {title, text}
+var _cooldowns: Dictionary = {}  # window -> seconds left
 var _fired := false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	add_to_group("window_blockers")
-	monitoring = false          # nothing physical ever touches this
+	monitoring = false  # nothing physical ever touches this
 	monitorable = false
 	if not show_in_game:
 		for c in get_children():
@@ -91,7 +75,7 @@ func is_active() -> bool:
 	return true
 
 
-## The area it covers, in WORLD coordinates, taken from the CollisionShape2D.
+## The area it covers, in world coordinates, taken from the CollisionShape2D.
 func world_rect() -> Rect2:
 	for c in get_children():
 		if c is CollisionShape2D and c.shape:
@@ -105,7 +89,7 @@ func world_rect() -> Rect2:
 				mn = mn.min(p)
 				mx = mx.max(p)
 			return Rect2(global_position + c.position + mn, mx - mn)
-	# no shape drawn — a small default so it still does something
+	# no shape drawn - a small default so it still does something
 	return Rect2(global_position - Vector2(16, 16), Vector2(32, 32))
 
 
@@ -123,7 +107,7 @@ func affects(w: PopupWindow) -> bool:
 ## Called by PopupWindow every frame while it overlaps this blocker.
 func on_window_touch(w: PopupWindow) -> void:
 	if _touching.has(w):
-		return                       # already handled, don't re-apply
+		return  # already handled, don't re-apply
 
 	_touching[w] = {"title": w.title, "text": w.get_body_text()}
 
@@ -165,6 +149,7 @@ func _bump(w: PopupWindow) -> void:
 		var p := AudioStreamPlayer.new()
 		p.stream = bump_sound
 		p.volume_db = bump_volume_db
+		BusRoute.use(p, "SFX")
 		get_tree().root.add_child(p)
 		p.play()
 		p.finished.connect(p.queue_free)

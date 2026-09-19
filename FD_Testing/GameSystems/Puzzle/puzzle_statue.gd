@@ -1,26 +1,15 @@
 class_name PuzzleStatue extends Node2D
 ## The statue's brain. Wire the four speakers and their target numbers in the
-## inspector. It reacts in three stages, exactly your design:
-##
-##   0 sides correct  ->  plays anim_sad
-##   1 side correct   ->  plays anim_half     (the statue "moves")
-##   2 sides correct  ->  plays anim_solved, sets `solved_flag`,
-##                        and the statue SPEAKS (starts `dialog`)
-##
-## Right side = speakers 1 & 4, left side = speakers 2 & 3 (like your sketch),
-## but really: whatever you plug into the right_/left_ slots.
-##
-## Persistence: if `solved_flag` is already set (loaded save), the statue
-## starts solved and the speakers lock.
+## inspector.
 
-signal side_solved(side: String)          ## "right" or "left", first time only
+signal side_solved(side: String)  # "right" or "left", first time only
 signal puzzle_solved
 
 @export_group("Speakers")
-@export var right_speaker_a: PuzzleSpeaker    ## e.g. speaker 1
-@export var right_speaker_b: PuzzleSpeaker    ## e.g. speaker 4
-@export var left_speaker_a: PuzzleSpeaker     ## e.g. speaker 2
-@export var left_speaker_b: PuzzleSpeaker     ## e.g. speaker 3
+@export var right_speaker_a: PuzzleSpeaker  # e.g. speaker 1
+@export var right_speaker_b: PuzzleSpeaker  # e.g. speaker 4
+@export var left_speaker_a: PuzzleSpeaker  # e.g. speaker 2
+@export var left_speaker_b: PuzzleSpeaker  # e.g. speaker 3
 
 @export_group("Answers")
 @export var right_target_a: int = 1
@@ -38,12 +27,12 @@ signal puzzle_solved
 @export var per_speaker_tell: bool = true
 
 @export_group("On Solve")
-## What the statue says when it wakes up. Plays automatically once.
+## What the statue says when it wakes up.
 @export var dialog: Dialog
 @export var statue_name: String = "Statue"
 @export var portrait: Texture2D
 @export var solved_flag: String = "statue_solved"
-## Optional cutscene played BEFORE the statue speaks (.ogv path). Empty = none.
+## Optional cutscene played before the statue speaks (.ogv path).
 @export_file("*.ogv") var solve_cutscene: String = ""
 
 var _right_was_solved := false
@@ -52,11 +41,12 @@ var _solved := false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	for s in _speakers():
 		if s:
 			s.value_changed.connect(_on_speaker_changed)
 	if Flags.is_set(solved_flag):
-		_apply_solved(false)   # already solved in a previous session: no speech
+		_apply_solved(false)  # already solved in a previous session: no speech
 	else:
 		_evaluate(false)
 

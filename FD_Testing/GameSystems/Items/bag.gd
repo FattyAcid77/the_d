@@ -1,46 +1,22 @@
 extends Node
-## Bag — the inventory. Add as an Autoload named "Bag".
-##
-## WHY IT'S CALLED "Bag" AND NOT "Inventory"
-## The other developer already has an autoload called `inventory`. Naming
-## this one `Inventory` would put two nearly identical names in the same
-## project and we'd be chasing that mix-up for months. `Bag` can never be
-## confused with theirs. Their system is left completely alone.
-##
-## WHAT IT HOLDS
-## A fixed grid of slots (5 x 5 by default = 25). Each slot holds one kind
-## of MedicalItem and a count. Items that can stack pile up in one slot;
-## items that can't take a slot each.
-##
-## WHEN IT'S FULL, PICKUPS FAIL. Walk over an item with a full bag and it
-## stays on the floor, exactly as you asked.
-##
-##     Bag.add(item)              -> how many actually went in
-##     Bag.has("bandage")         -> true / false
-##     Bag.count_of("bandage")    -> 3
-##     Bag.use_slot(4)
-##     Bag.drop_slot(4)
-##     Bag.unique_items()         -> one of each, for drawing the avatar
+## Bag - the inventory. Add as an Autoload named "Bag".
 
-signal changed                                   ## anything at all moved
+signal changed  # anything at all moved
 signal item_added(type: String, amount: int)
 signal item_removed(type: String, amount: int)
-signal bag_full(type: String)                    ## a pickup was refused
+signal bag_full(type: String)  # a pickup was refused
 signal item_used(type: String)
 
 @export_group("Size")
-## The SMALL slots at the top, matching the art: 4 across, 3 down.
+## The small slots at the top, matching the art: 4 across, 3 down.
 @export var columns: int = 4
 @export var rows: int = 3
 
-## The BIG slots underneath, for the main things he carries (the axe, the
-## radio). These are the LAST slots in the list, so with 4x3 above them
-## slot 12 is the left big one and slot 13 is the right big one.
+## The big slots underneath, for the main things he carries (the axe, the radio).
 @export var big_slots: int = 2
 
 @export_group("Dropping")
-## What a dropped item becomes in the world. Leave empty and one is built
-## in code (an Area2D with the ItemPickup script), which is usually fine.
+## What a dropped item becomes in the world.
 @export var pickup_scene: PackedScene
 ## How far in front of Sami a dropped item lands.
 @export var drop_distance: float = 24.0
@@ -71,8 +47,7 @@ func slot_count() -> int:
 	return columns * rows + big_slots
 
 
-## How many of the small slots there are. Anything at or past this index is
-## one of the big ones.
+## How many of the small slots there are.
 func small_count() -> int:
 	return columns * rows
 
@@ -111,9 +86,7 @@ func count_of(type: String) -> int:
 	return n
 
 
-## One of each KIND of item currently held, sorted by avatar_order.
-## This is what the avatar paperdoll draws — a stack of three bandages
-## still puts exactly one bandage on Sami.
+## One of each kind of item currently held, sorted by avatar_order.
 func unique_items() -> Array[MedicalItem]:
 	var out: Array[MedicalItem] = []
 	var seen := {}
@@ -129,7 +102,7 @@ func unique_items() -> Array[MedicalItem]:
 	return out
 
 
-## Every filled slot as {index, item, count}. For the grid.
+## Every filled slot as {index, item, count}.
 func filled() -> Array:
 	var out := []
 	for i in slots.size():
@@ -147,7 +120,7 @@ func is_full() -> bool:
 
 # --- adding ----------------------------------------------------------------
 
-## Could this many fit right now? Used by ItemPickup before it disappears.
+## Could this many fit right now?
 func can_add(item: MedicalItem, amount: int = 1) -> bool:
 	return _room_for(item) >= amount
 
@@ -172,17 +145,16 @@ func _slot_order(item: MedicalItem) -> Array:
 	var order: Array = []
 	if item and item.needs_big_slot:
 		for i in range(small, slot_count()):
-			order.append(i)            # big slots only
+			order.append(i)  # big slots only
 		return order
 	for i in small:
-		order.append(i)                # small first
+		order.append(i)  # small first
 	for i in range(small, slot_count()):
-		order.append(i)                # then big, only if it has to
+		order.append(i)  # then big, only if it has to
 	return order
 
 
-## Puts items in. Returns HOW MANY ACTUALLY WENT IN — 0 means the bag was
-## full and the item should stay on the floor.
+## Puts items in.
 func add(item: MedicalItem, amount: int = 1) -> int:
 	if item == null or amount <= 0:
 		return 0
@@ -202,10 +174,7 @@ func add(item: MedicalItem, amount: int = 1) -> int:
 					slots[i]["count"] = int(slots[i]["count"]) + put
 					left -= put
 
-	# then empty slots. An item marked `needs_big_slot` ONLY goes in a big
-	# one; everything else fills the small slots first and only spills into
-	# the big ones if the small ones are full, so the two big slots stay
-	# free for the things that matter.
+	# then empty slots.
 	for i in _slot_order(item):
 		if left <= 0:
 			break
@@ -245,10 +214,10 @@ func _raise_flags(item: MedicalItem) -> void:
 
 # --- removing --------------------------------------------------------------
 
-## Takes items out by type. Returns how many were actually removed.
+## Takes items out by type.
 func remove(type: String, amount: int = 1) -> int:
 	var left := amount
-	for i in range(slots.size() - 1, -1, -1):       # newest stacks first
+	for i in range(slots.size() - 1, -1, -1):  # newest stacks first
 		if left <= 0:
 			break
 		if slots[i] != null and slots[i]["item"] and slots[i]["item"].type == type:
@@ -286,7 +255,6 @@ func clear() -> void:
 # --- using and dropping ----------------------------------------------------
 
 ## Uses the item in that slot, through MedicalItems so the existing effects
-## (heal, cut, bandage) all still run. Consumes one on success.
 func use_slot(i: int) -> bool:
 	var it := item_at(i)
 	if it == null:
@@ -302,8 +270,7 @@ func use_slot(i: int) -> bool:
 		if flags and it.use_flag != "":
 			flags.set_flag(it.use_flag)
 		item_used.emit(it.type)
-		# Deferred: this is called from a button press, and freeing or
-		# rebuilding the grid mid-callback is how you crash Godot.
+		# Deferred: this is called from a button press
 		remove_at.call_deferred(i, 1)
 	return worked
 
@@ -332,7 +299,7 @@ func _spawn_pickup(item: MedicalItem, where: Vector2) -> void:
 		if "item" in node:
 			node.item = item
 	else:
-		# build one by hand — an Area2D with the ItemPickup script
+		# build one by hand - an Area2D with the ItemPickup script
 		var a := Area2D.new()
 		a.set_script(load("res://FD_Testing/GameSystems/Items/item_pickup.gd"))
 		a.item = item

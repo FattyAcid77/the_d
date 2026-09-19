@@ -1,21 +1,5 @@
 class_name WoundComponent extends Node
-## Sami's damage + bleeding. Add as a child of the player NAMED "Wounds".
-##
-## THIS IS THE "DAMAGE CODE" the breath system was waiting for:
-## when Sami gets cut, this opens a WOUND, and a wound is what makes him
-## bleed — which is what feeds blood into the breath stages and the floor
-## puzzle.
-##
-## HURT HIM from anywhere:
-##     $Wounds.take_damage(1)                       # a plain hit
-##     $Wounds.take_damage(1, "bleeding", true)     # a hit that CUTS
-##     $Wounds.cut("bleeding")                      # a cut with no damage
-## Patch him up:
-##     $Wounds.bandage()          # stops the bleeding
-##     $Wounds.heal(1)            # gives health back
-##
-## Bleeding can also drain health over time — set `bleed_damage` above 0
-## if you want wounds to be a clock the player has to answer.
+## Sami's damage + bleeding. Add as a child of the player named "Wounds".
 
 signal damaged(amount: float, cause_id: String)
 signal wound_opened(cause_id: String)
@@ -26,7 +10,7 @@ signal died(cause_id: String)
 @export_group("Health source")
 ## Property on the player holding the HealthData resource.
 @export var stats_property: String = "stats"
-## Leave EMPTY to auto-detect (current_health / health / hp / ...).
+## Leave empty to auto-detect (current_health / health / hp / ...).
 @export var health_property: String = ""
 @export var max_health_property: String = ""
 ## Used only if the resource has no max property.
@@ -37,25 +21,21 @@ signal died(cause_id: String)
 @export var invulnerable_seconds: float = 0.8
 ## Cause id used when damage kills him and no cause was given.
 @export var default_death_cause: String = "bleeding"
-## Kill him here when health hits 0. Turn OFF if HealthWatcher does it.
+## Kill him here when health hits 0.
 @export var handle_death: bool = true
 
 @export_group("Bleeding")
-## Where drips land, from Sami's origin — same idea as the Breath node's
-## feet_offset. Keep the two the same so all blood lands together.
+## Where drips land, from Sami's origin - same idea as the Breath node's feet_offset.
 @export var feet_offset := Vector2(0, 30)
-## Health lost per second while bleeding. 0 = bleeding costs no health
-## (it only produces blood for the breath/puzzle systems).
+## Health lost per second while bleeding.
 @export var bleed_damage: float = 0.0
-## He stops bleeding by himself after this long. 0 = bleeds until bandaged.
+## He stops bleeding by himself after this long.
 @export var bleed_seconds: float = 0.0
-## Drip blood onto the floor while bleeding. This is the "every second"
-## splatting — set drip_interval to whatever rhythm you want.
+## Drip blood onto the floor while bleeding.
 @export var drip_while_bleeding: bool = true
-## Seconds between splats. Change freely (1.0 = one splat per second).
+## Seconds between splats.
 @export var drip_interval: float = 1.0
-## Blood type for the drips. LEAVE EMPTY to use the blood of whichever
-## breath stage he's currently in — so the trail matches his strain.
+## Blood type for the drips.
 @export var drip_blood: BloodType
 
 var is_bleeding: bool = false
@@ -70,6 +50,7 @@ var _drip_timer: float = 0.0
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	_player = get_parent() as Node2D
 	await get_tree().process_frame
 	_bind_stats()
@@ -113,7 +94,7 @@ func _process(delta: float) -> void:
 
 # --- getting hurt ----------------------------------------------------------
 
-## The main entry point. `opens_wound` makes him start bleeding.
+## The main entry point.
 func take_damage(amount: float, cause_id: String = "", opens_wound: bool = false) -> void:
 	if Deaths.is_dead or invuln > 0.0:
 		return
@@ -129,7 +110,7 @@ func take_damage(amount: float, cause_id: String = "", opens_wound: bool = false
 ## Open a wound without dealing damage (a shallow cut that just bleeds).
 func cut(cause_id: String = "") -> void:
 	if is_bleeding:
-		_bleed_left = bleed_seconds       # a fresh cut restarts the clock
+		_bleed_left = bleed_seconds  # a fresh cut restarts the clock
 		return
 	is_bleeding = true
 	_bleed_left = bleed_seconds
@@ -170,7 +151,7 @@ func _drip_type() -> BloodType:
 		var arr: Array = b.stage_blood
 		var idx: int = int(b.stage)
 		if idx < 0:
-			idx = 0                      # not holding: use the first stage
+			idx = 0  # not holding: use the first stage
 		if idx < arr.size():
 			return arr[idx]
 	return null
@@ -191,8 +172,7 @@ func _change_health(delta_hp: float, cause_id: String) -> void:
 		Deaths.kill(cause_id if cause_id != "" else default_death_cause)
 
 
-## Keeps the breath component's bleeding flag in sync, so the 4 stages
-## know whether to spill blood.
+## Keeps the breath component's bleeding flag in sync
 func _set_breath_bleeding(value: bool) -> void:
 	var b := _player.get_node_or_null("Breath") if _player else null
 	if b and "is_bleeding" in b:

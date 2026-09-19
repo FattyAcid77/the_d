@@ -1,19 +1,10 @@
 class_name ProgressStateMachine extends Node
-## Put ONE of these in each level scene, with ProgressState children — your
-## "empty node per state" idea:
-##
-##   ProgressStateMachine
-##   ├── Start          (ProgressState)
-##   ├── Met_Java       (ProgressState)
-##   ├── Statue_Solved  (ProgressState)
-##   └── Act2           (ProgressState)
-##
-## The child NODE NAME is the state name. When the level loads, the machine
-## finds the state matching GameProgress.current() and enters it. When
-## GameProgress.goto_state() is called, it exits the old and enters the new.
-##
-## A level that doesn't have a node for the current state simply applies
-## nothing — so levels only need the states that matter to them.
+## Put one of these in each level scene, with ProgressState children - your
+## "empty node per state" idea: ProgressStateMachine ├── Start (ProgressState)
+## ├── Met_Java (ProgressState) ├── Statue_Solved (ProgressState) └── Act2
+## (ProgressState) The child node name is the state name. When the level
+## loads, the machine finds the state matching GameProgress.current() and
+## enters it.
 
 var _active: ProgressState = null
 

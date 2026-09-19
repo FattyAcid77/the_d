@@ -1,25 +1,15 @@
 class_name HealthWatcher extends Node
-## Connects HEALTH to DEATH. Add this as a child of Sami.
-##
-## It watches his `stats` resource (HealthData) and calls Deaths.kill()
-## the moment health reaches 0. Because I don't know your HealthData's exact
-## property names, it AUTO-DETECTS the common ones — check the Output panel
-## on first run: it prints which property it locked onto.
-##
-## If it can't find it, set `health_property` yourself in the inspector.
+## Connects health to death. Add this as a child of Sami.
 
-## Property on the player holding the health resource.
 @export var stats_property: String = "stats"
 
-## Name of the health value inside that resource. Leave EMPTY to auto-detect
-## (tries current_health, health, hp, current_hp, health_current...).
+## Name of the health value inside that resource.
 @export var health_property: String = ""
 
 ## Which DeathCause is used when health runs out.
 @export var death_cause: String = "bleeding"
 
 ## Ignore damage deaths while the player is holding their breath?
-## (The breath mechanic already blocks toxic death; this covers the rest.)
 @export var immune_while_holding_breath: bool = false
 
 const CANDIDATES := ["current_health", "health", "hp", "current_hp",
@@ -32,7 +22,7 @@ var _player: Node
 
 func _ready() -> void:
 	_player = get_parent()
-	await get_tree().process_frame          # let the player set itself up
+	await get_tree().process_frame  # let the player set itself up
 	_find_stats()
 
 

@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="10_iq4ux"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="11_idite"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="12_4k670"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="13_de0em"]
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="13_hfd0h"]
 [ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="14_qme8w"]
 [ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="15_iq4ux"]
@@ -23,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="21_oth73"]
 [ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
 [ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
-[ext_resource type="Resource" uid="uid://r0psm55ad7rr" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
 [ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
 [ext_resource type="Script" uid="uid://dtkr5os4od5m7" path="res://FD_Testing/GameSystems/Windows/window_blocker.gd" id="26_ldlnt"]
 
@@ -197,6 +198,8 @@ script = ExtResource("8_gmla1")
 text = "i am happy to be here"
 speaker_name = "Yazzed"
 show_if_flag = "sun"
+action_name = "toggle_flag  [flag]"
+action_args = [null]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_38kcd"]
@@ -433,7 +436,7 @@ script = ExtResource("16_iq4ux")
 comic = ExtResource("17_idite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=204304978]
-position = Vector2(-64, 15)
+position = Vector2(-72, 17)
 shape = SubResource("RectangleShape2D_idite")
 
 [node name="Azoz" parent="Area2D" unique_id=1804397539 groups=["Nothing"] instance=ExtResource("6_83ett")]
@@ -464,7 +467,7 @@ position = Vector2(320, 491)
 dialog = SubResource("Resource_xlqiq")
 
 [node name="Area2D2" type="Area2D" parent="." unique_id=2023173997]
-position = Vector2(642, 459)
+position = Vector2(648, 402)
 script = ExtResource("22_ug341")
 item = ExtResource("23_h0mp1")
 amount = 5
@@ -473,7 +476,7 @@ amount = 5
 shape = SubResource("RectangleShape2D_bkopv")
 
 [node name="Area2D3" type="Area2D" parent="." unique_id=1622657557]
-position = Vector2(645, 491)
+position = Vector2(648, 454)
 script = ExtResource("22_ug341")
 item = ExtResource("24_h0mp1")
 amount = 5

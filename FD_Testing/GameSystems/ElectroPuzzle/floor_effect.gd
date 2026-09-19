@@ -1,24 +1,14 @@
 class_name FloorEffect extends Area2D
-## Icy and watery floors for the generator run.
-##
-## HOW IT WORKS WITHOUT TOUCHING SAMI'S CODE
-## His states set `velocity` and he calls move_and_slide() himself. So this
-## area doesn't try to change his speed — it runs AFTER him (higher physics
-## priority) and pushes him a little extra with move_and_collide():
-##   ICE   — keeps a drift that builds up in the direction he's moving and
-##           only fades slowly, so he slides past corners.
-##   WATER — pushes back against his movement, so he wades.
-##   PUSH  — a constant shove (a draught, a current, a vent).
-##
-## Add a CollisionShape2D and lay it over the floor tiles.
+## Icy and watery floors for the generator run. how it works without touching
+## sami'S code His states set `velocity` and he calls move_and_slide()
+## himself.
 
 enum Kind { ICE, WATER, PUSH }
 
 @export var kind: Kind = Kind.ICE
 
 @export_group("Ice")
-## How fast the slide builds up toward his current movement (lower = more
-## slippery, because it takes longer to change direction).
+## How fast the slide builds up toward his current movement
 @export var ice_grip: float = 1.6
 ## How fast the slide dies away when he stops (lower = longer slide).
 @export var ice_friction: float = 0.9
@@ -34,12 +24,11 @@ enum Kind { ICE, WATER, PUSH }
 @export var push_strength: float = 90.0
 
 @export_group("Extra")
-## Damage per second while standing in it (0 = harmless). Uses the Wounds
-## component, so it can also CUT.
+## Damage per second while standing in it (0 = harmless).
 @export var damage_per_second: float = 0.0
 @export var damage_cause: String = "unknown"
 @export var damage_opens_wound: bool = false
-## Only active once this flag is set. Empty = always.
+## Only active once this flag is set.
 @export var active_flag: String = ""
 ## Harmless once this flag is set.
 @export var disabled_flag: String = ""

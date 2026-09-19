@@ -1,23 +1,9 @@
 class_name RadioStatue extends Node2D
-## The statue. It listens to the speakers and answers with a MOOD and a
-## NUMBER in a speech bubble.
-##
-##   HAPPY = wrong. The number is a decoy — ignore it.
-##   SAD   = right. That number is real, and goes on the board.
-##
-## FOUR STAGES, in order. Each stage unlocks when the one before it is
-## answered correctly:
-##   Stage 1: one speaker            (top left)
-##   Stage 2: the two on the left
-##   Stage 3: the two on the right
-##   Stage 4: all four at once
-##
-## Single-speaker stages answer the moment the speaker is tuned. Multi-
-## speaker stages need the PLAY button (it appears once every speaker in
-## that stage holds a frequency).
+## The statue. It listens to the speakers and answers with a mood and a number
+## in a speech bubble.
 
 signal answered(response: StatueResponse)
-signal answer_found(numbers: PackedStringArray)   ## a SAD (real) answer
+signal answer_found(numbers: PackedStringArray)  # a sad (real) answer
 signal stage_advanced(stage: int)
 signal all_stages_done
 
@@ -30,13 +16,12 @@ signal all_stages_done
 @export var board: Node
 
 @export_group("Stages")
-## Which speakers each stage needs, in order. Defaults to your layout:
-##   1) top-left only   2) both left   3) both right   4) all four
+## Which speakers each stage needs, in order.
 @export var stage_1_speakers: Array[int] = [0]
 @export var stage_2_speakers: Array[int] = [0, 2]
 @export var stage_3_speakers: Array[int] = [1, 3]
 @export var stage_4_speakers: Array[int] = [0, 1, 2, 3]
-## Start at stage 1. Raised as each stage is answered.
+## Start at stage 1.
 @export var current_stage: int = 1
 
 @export_group("Look")
@@ -45,7 +30,7 @@ signal all_stages_done
 @export var anim_happy: String = "happy"
 @export var anim_sad: String = "sad"
 @export var bubble_offset := Vector2(0, -110)
-## How long an answer stays up. 0 = until the tuning changes.
+## How long an answer stays up.
 @export var bubble_seconds: float = 0.0
 
 @export_group("Play button")
@@ -58,7 +43,7 @@ signal all_stages_done
 
 var current_response: StatueResponse = null
 
-var _tuning := {}                      ## speaker_index -> hz
+var _tuning := {}  # speaker_index -> hz
 var _bubble: Node2D
 var _bubble_label: Label
 var _play_btn: Button
@@ -66,6 +51,7 @@ var _bubble_timer: float = 0.0
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	for s in speakers:
 		if s:
 			s.tuned.connect(_on_speaker_tuned)
@@ -121,12 +107,12 @@ func stage_speakers(stage: int = -1) -> Array[int]:
 func _on_speaker_tuned(index: int, hz: int) -> void:
 	_tuning[index] = hz
 	_refresh_play_button()
-	# a one-speaker stage answers straight away; bigger stages wait for PLAY
+	# a one-speaker stage answers straight away; bigger stages wait for play
 	if stage_speakers().size() <= 1:
 		_evaluate()
 
 
-## The PLAY button: sound every speaker of this stage together.
+## The play button: sound every speaker of this stage together.
 func play_stage() -> void:
 	_evaluate()
 
@@ -142,7 +128,7 @@ func _evaluate() -> void:
 			break
 	if hit == null:
 		if needed.size() > 1:
-			_say("...", false)     # played them together, nothing recognised
+			_say("...", false)  # played them together, nothing recognised
 		return
 	_answer(hit)
 
@@ -155,7 +141,7 @@ func _answer(r: StatueResponse) -> void:
 		Flags.set_flag(r.heard_flag)
 	answered.emit(r)
 	if not r.is_answer():
-		return                      # happy = decoy, stage stays put
+		return  # happy = decoy, stage stays put
 
 	answer_found.emit(r.numbers())
 	if board and board.has_method("offer_numbers"):
@@ -210,7 +196,7 @@ func _say(text: String, is_answer: bool) -> void:
 	_bubble_timer = bubble_seconds
 
 
-## The button appears only when EVERY speaker of this stage holds a value.
+## The button appears only when every speaker of this stage holds a value.
 func _refresh_play_button() -> void:
 	if _play_btn == null:
 		return

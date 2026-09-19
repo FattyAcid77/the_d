@@ -1,34 +1,17 @@
 @tool
 extends EditorScript
-## TRANSLATION AUDIT — the safety net for the English-as-key approach.
-##
-## Because the English text IS the key, editing an English line breaks its
-## Arabic link until the CSV is updated. This finds those breaks.
-##
-## HOW TO RUN IT
-##   1. Open this file in Godot's script editor
-##   2. File > Run  (or Ctrl+Shift+X)
-##   3. Read the Output panel
-##
-## It reports:
-##   MISSING    — text in your .tres files that isn't in the CSV at all
-##                (usually a line you edited or a new one you wrote)
-##   UNTRANSLATED — in the CSV but with an empty Arabic column
-##   UNUSED     — in the CSV but no longer anywhere in the game
-##                (usually the OLD version of a line you edited)
-##
-## A MISSING and an UNUSED that look similar = the same line, edited.
-## Copy the Arabic from the unused row to the new one.
+## translation audit - the safety net for the English-as-key approach. Because
+## the English text is the key, editing an English line breaks its Arabic link
+## until the CSV is updated.
 
 const CSV_PATH := "res://FD_Testing/GameSystems/Localization/translations.csv"
 const SCAN_DIR := "res://FD_Testing/GameSystems"
 
-## Fields that hold player-visible text. `spoken` is NOT here — those are
-## the statue's puzzle numbers, and must never be translated.
+## Fields that hold player-visible text.
 const TEXT_FIELDS := ["text", "label", "note", "title", "display_name",
 		"effect", "result_title", "result_text", "board_title", "topic_label"]
 
-## Folders whose strings are DATA, not text.
+## Folders whose strings are data, not text.
 const SKIP := ["Prescription"]
 
 
@@ -78,7 +61,7 @@ func _read_csv() -> Dictionary:
 	var f := FileAccess.open(CSV_PATH, FileAccess.READ)
 	if f == null:
 		return out
-	var header := f.get_csv_line()      # keys, en, ar, ...
+	var header := f.get_csv_line()  # keys, en, ar, ...
 	var ar_col := 2
 	for i in header.size():
 		if header[i].strip_edges().to_lower() == "ar":
@@ -98,6 +81,7 @@ func _scan_resources() -> Dictionary:
 
 
 func _scan_dir(path: String, found: Dictionary) -> void:
+	# Plain DirAccess: this is a dev tool that reads .tres files as raw text to find translatable
 	var dir := DirAccess.open(path)
 	if dir == null:
 		return
@@ -126,7 +110,7 @@ func _scan_file(path: String, found: Dictionary) -> void:
 				var v: String = line.substr(prefix.length())
 				v = v.substr(0, v.rfind("\""))
 				v = v.strip_edges()
-				# skip pure numbers — puzzle data, not text
+				# skip pure numbers - puzzle data, not text
 				if v != "" and not v.is_valid_int() and not _is_number_list(v):
 					found[v] = true
 

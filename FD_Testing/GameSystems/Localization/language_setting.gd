@@ -1,11 +1,8 @@
 class_name LanguageSetting extends HBoxContainer
-## Drop this into your settings menu and it just works.
-## It builds a label + a dropdown listing every language in Loc.LANGUAGES,
-## shows the current one, and saves the choice when it changes.
-##
-## No setup needed — add the node, attach this script, done.
+## Drop this into your settings menu and it just works. It builds a label + a
+## dropdown listing every language in Loc.languages, shows the current one,
+## and saves the choice when it changes.
 
-## The word next to the dropdown ("Language"). It's translated too.
 @export var label_text: String = "Language"
 @export var label_min_width: float = 140.0
 

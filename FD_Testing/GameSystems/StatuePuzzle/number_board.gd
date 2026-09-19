@@ -1,33 +1,18 @@
 class_name NumberBoard extends Area2D
-## The board in the room. It holds the numbers the statue gave while SAD,
+## The board in the room. It holds the numbers the statue gave while sad,
 ## jumbled up, and the player drags the tiles into the right order.
-##
-## TWO PHASES
-##   1. COLLECTING — while the statue is sad and saying a real number, walk
-##      to the board and press interact to WRITE it down. The very first
-##      number is written automatically, to teach what the board is for.
-##   2. ORDERING — once the tiles are on the board, open it and drag them
-##      into the right order. Correct order = solved.
-##
-## Scene shape:
-##   NumberBoard (Area2D, this script)
-##   ├── CollisionShape2D
-##   ├── Sprite2D      (the board art)
-##   └── Prompt        (optional, shown when the player is near)
 
 signal number_written(text: String)
 signal solved
 
 @export_group("Puzzle")
-## The correct order, left to right. These must be numbers the statue says
-## in its SAD answers, e.g. ["20", "45", "17", "88"].
+## The correct order, left to right.
 @export var solution: PackedStringArray = []
 
 ## Numbers already printed on the board when the game starts (jumbled).
-## Leave empty to start blank and collect everything from the statue.
 @export var starting_numbers: PackedStringArray = []
 
-## Write the FIRST real number automatically (the tutorial nudge).
+## Write the first real number automatically (the tutorial nudge).
 @export var auto_write_first: bool = true
 
 @export var solved_flag: String = "number_board_solved"
@@ -37,8 +22,8 @@ signal solved
 @export var tile_size := Vector2(84, 84)
 @export var tile_gap: float = 12.0
 
-var written: PackedStringArray = []     ## what's on the board, in order
-var pending: PackedStringArray = []     ## offered by the statue, not written yet
+var written: PackedStringArray = []  # what's on the board, in order
+var pending: PackedStringArray = []  # offered by the statue, not written yet
 var is_open: bool = false
 var is_solved: bool = false
 
@@ -54,6 +39,7 @@ var _drag_from: int = -1
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	written = starting_numbers.duplicate()
 	body_entered.connect(_on_entered)
 	body_exited.connect(_on_exited)

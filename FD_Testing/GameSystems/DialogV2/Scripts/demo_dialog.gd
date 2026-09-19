@@ -1,12 +1,11 @@
 class_name DemoDialog
 
-
 static func build() -> Dialog:
 	var kw := DialogKeyword.new()
 	kw.word = "apple"
-	kw.unlock_flag = "apple_eaten"   # word lights up only after this flag is set
-	kw.topic_branch = "apple"        # clicking it plays the "apple" branch
-	kw.topic_label = "The apple"     # topic button label
+	kw.unlock_flag = "apple_eaten"  # word lights up only after this flag is set
+	kw.topic_branch = "apple"  # clicking it plays the "apple" branch
+	kw.topic_label = "The apple"  # topic button label
 
 
 	var entry_line := DialogLine.new()

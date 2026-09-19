@@ -10,11 +10,10 @@
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="8_iej28"]
 [ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="8_vqpyy"]
 [ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="9_fymg5"]
-[ext_resource type="Texture2D" uid="uid://r4swomx6el5n" path="res://characters scenes/NPC_Assets/Qassor idle.png" id="9_wdsf5"]
-[ext_resource type="Texture2D" uid="uid://cuxbdehgnydpf" path="res://characters scenes/NPC_Assets/natheef.png" id="10_iej28"]
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="10_w0syh"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="11_cmgme"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="12_w23mw"]
+[ext_resource type="Texture2D" uid="uid://u2mx55p85ycy" path="res://characters scenes/NPC_Assets/qassor_and_natheef_.png" id="14_iavfr"]
 
 [sub_resource type="Resource" id="Resource_8rqgk"]
 script = ExtResource("9_fymg5")
@@ -213,20 +212,7 @@ script = ExtResource("12_w23mw")
 branches = Array[ExtResource("8_vqpyy")]([SubResource("Resource_qusje")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pf347"]
-atlas = ExtResource("10_iej28")
-region = Rect2(0, 0, 31, 95)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_dlgea"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pf347")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Resource" id="Resource_iavfr"]
 script = ExtResource("8_iej28")
@@ -236,14 +222,35 @@ dialog = SubResource("Resource_ydqwy")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqpyy"]
-atlas = ExtResource("9_wdsf5")
-region = Rect2(0, 0, 33, 93)
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 0, 61, 135)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fymg5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fymg5"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 135, 61, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0syh"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 270, 61, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmgme"]
+atlas = ExtResource("14_iavfr")
+region = Rect2(0, 405, 61, 135)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w23mw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vqpyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fymg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0syh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmgme")
 }],
 "loop": true,
 "name": &"default",
@@ -291,9 +298,10 @@ target_door_name = "Maz_Sad_Hall_North"
 this_door_name = "Maz_Sad_Room"
 
 [node name="Maz_Sad_Introduction" parent="." unique_id=1293972803 instance=ExtResource("7_ayjjp")]
-position = Vector2(682, 514)
+position = Vector2(677, 535)
 npc_resource = SubResource("Resource_iavfr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=297244444]
-position = Vector2(747, 528)
-sprite_frames = SubResource("SpriteFrames_fymg5")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=888211834]
+position = Vector2(721, 498)
+sprite_frames = SubResource("SpriteFrames_w23mw")
+autoplay = "default"

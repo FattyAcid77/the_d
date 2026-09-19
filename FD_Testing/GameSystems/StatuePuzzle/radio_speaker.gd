@@ -1,29 +1,17 @@
 class_name RadioSpeaker extends Area2D
-## One of the statue's speakers. It's dead on its own — the RADIO drives it.
-##
-## While the player stands inside this area, the speaker follows
-## RadioGlobal.radio LIVE, so tuning the radio retunes the speaker in real
-## time. Walk away and it KEEPS the last frequency it was given.
-##
-## Scene shape:
-##   RadioSpeaker (Area2D, this script)
-##   ├── CollisionShape2D
-##   ├── Sprite2D          (optional art)
-##   ├── HzLabel (Label)   (optional — shows the tuned frequency)
-##   └── Ring (Node2D)     (optional — shown while the player is inside)
+## One of the statue's speakers. It's dead on its own - the radio drives it.
 
 signal tuned(speaker_index: int, hz: int)
 signal player_entered(speaker_index: int)
 signal player_exited(speaker_index: int)
 
-## 0..3 — which speaker this is. The statue's responses refer to this.
+## 0..3 - which speaker this is.
 @export var speaker_index: int = 0
 
-## What it reads before the player has ever tuned it. -1 = silent/unset.
+## What it reads before the player has ever tuned it.
 @export var starting_hz: int = -1
 
-## Show the frequency on the speaker itself? (Turn off for a harder puzzle
-## where the player has to remember what they set.)
+## Show the frequency on the speaker itself?
 @export var show_hz: bool = true
 
 ## Only follow the radio while its UI is actually open on screen.
@@ -39,6 +27,7 @@ var player_inside: bool = false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	current_hz = starting_hz
 	body_entered.connect(_on_entered)
 	body_exited.connect(_on_exited)
@@ -63,9 +52,7 @@ func _radio_hz() -> int:
 	return RadioLink.frequency()
 
 
-## The other dev's tuning keys only work while the radio UI is open (that
-## script is the node reading them), so by default the speaker only listens
-## then. Turn `needs_radio_open` off to let it follow the value regardless.
+## The other dev's tuning keys only work while the radio UI is open
 func _radio_listening() -> bool:
 	return (not needs_radio_open) or RadioLink.is_open()
 

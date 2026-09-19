@@ -1,21 +1,10 @@
 class_name LanguagePrompt extends CanvasLayer
-## The "choose your language" screen shown the FIRST time the game runs.
-##
-## Put it in your main menu scene (or your very first scene). It checks
-## Loc.needs_first_prompt() and hides itself instantly if the player has
-## already chosen — so it costs nothing on every later launch.
-##
-## To test it again: call Loc.forget_choice() and restart.
-##
-## TURNING IT OFF: untick `enabled` in the Inspector, or set
-## `first_launch_prompt = false` in loc.gd to kill it everywhere at once.
-## Either way the node deletes itself in _ready and never touches the screen
-## or the pause state, so a half-finished main menu still runs normally.
+## The "choose your language" screen shown the first time the game runs. Put
+## it in your main menu scene (or your very first scene).
 
 signal chosen(code: String)
 
-## Shown above the buttons. Deliberately written in BOTH languages, since
-## the player hasn't picked one yet and might not read English.
+## Shown above the buttons.
 @export var heading: String = "Language  /  اللغة"
 @export var button_min_size := Vector2(260, 56)
 @export var font_size: int = 26
@@ -23,34 +12,33 @@ signal chosen(code: String)
 ## Pause the game while the prompt is up.
 @export var pause_game: bool = true
 
-## MASTER OFF SWITCH. Untick this while the main menu is still being built —
-## the prompt then deletes itself immediately and changes nothing.
+## master off switch.
 @export var enabled: bool = true
 
 var _root: Control
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	layer = 100
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	if not enabled:
-		queue_free()          # switched off in the Inspector
+		queue_free()  # switched off in the Inspector
 		return
 
-	# The global switch in loc.gd. Read defensively so this node still works
-	# if Loc isn't registered as an autoload yet.
+	# The global switch in loc.gd.
 	var loc := get_node_or_null("/root/Loc")
 	if loc == null:
 		push_warning("LanguagePrompt: no Loc autoload — prompt skipped.")
 		queue_free()
 		return
 	if loc.get("first_launch_prompt") == false:
-		queue_free()          # switched off globally in loc.gd
+		queue_free()  # switched off globally in loc.gd
 		return
 
 	if not loc.needs_first_prompt():
-		queue_free()          # already chosen — never seen again
+		queue_free()  # already chosen - never seen again
 		return
 
 	_build()

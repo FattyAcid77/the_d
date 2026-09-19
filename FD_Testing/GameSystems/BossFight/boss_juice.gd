@@ -1,7 +1,6 @@
 class_name BossJuice extends Node
-## The feel: screen shake, hit-stop, flashes, zoom punch.
-## Drop this in the boss room and hand it to BossFight's `juice` slot.
-## It joins the group "boss_juice" so the TV can shake the screen too.
+## The feel: screen shake, hit-stop, flashes, zoom punch. Drop this in the
+## boss room and hand it to BossFight's `juice` slot.
 
 @export_group("Shake")
 @export var shake_decay: float = 6.0
@@ -63,12 +62,12 @@ func _process(delta: float) -> void:
 		_cam.rotation = 0.0
 
 
-## Shake the screen. `strength` is roughly pixels.
+## Shake the screen.
 func shake(strength: float = 10.0) -> void:
 	_shake = minf(shake_max_offset, maxf(_shake, strength))
 
 
-## Freeze the world for an instant — the punch behind every good hit.
+## Freeze the world for an instant - the punch behind every good hit.
 func hit_stop(seconds: float = -1.0) -> void:
 	if _stopping:
 		return

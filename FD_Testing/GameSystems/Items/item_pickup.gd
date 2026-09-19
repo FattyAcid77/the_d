@@ -1,45 +1,31 @@
 class_name ItemPickup extends Area2D
-## A medical item lying in the world. Walk over it (or press interact) and
-## it goes into the existing inventory.
-##
-## Scene shape:
-##   ItemPickup (Area2D, this script)
-##   ├── CollisionShape2D
-##   └── Sprite2D          (optional — auto-filled from the item's texture)
-##
-## NOTE: this calls the other dev's inventory to add the item. Their add
-## function's name is guessed from the usual suspects; if the item doesn't
-## appear, check the Output panel — it prints the method names it tried.
+## A medical item lying in the world. Walk over it (or press interact) and it
+## goes into the existing inventory.
 
 signal picked_up(type: String)
 
-## Which item this is. Drag a MedicalItem .tres here.
+## Which item this is.
 @export var item: MedicalItem
 @export var amount: int = 1
 
-## ON = picked up by walking into it. OFF = needs the interact key.
+## on = picked up by walking into it.
 @export var auto_pickup: bool = true
 
 @export_group("Look")
-## Take the sprite's texture AND its size from the MedicalItem .tres.
-## This is what makes scaling work from the resource. Turn it OFF only if
-## you want to hand-place a special one-off sprite in this scene.
+## Take the sprite's texture and its size from the MedicalItem .tres.
 @export var use_item_look: bool = true
-## Extra per-pickup multiplier ON TOP of the item's size, for the odd
-## "this one giant scalpel" moment. Leave at 1 normally.
+## Extra per-pickup multiplier on top of the item's size
 @export var extra_scale: Vector2 = Vector2.ONE
 ## If there is no Sprite2D child, make one automatically.
 @export var create_sprite_if_missing: bool = true
 
 @export_group("Flags")
-## Always raise a flag named "item:<type>" on pickup, e.g. "item:bandage".
-## Costs nothing and means dialog can check for any item without you having
-## to name a flag first.
+## Always raise a flag named "item:<type>" on pickup, e.g.
 @export var auto_type_flag: bool = true
 
-## Only exists once this flag is set. Empty = always there.
+## Only exists once this flag is set.
 @export var require_flag: String = ""
-## Gone once this flag is set (e.g. already taken in a past life).
+## Gone once this flag is set (e.g.
 @export var hide_flag: String = ""
 ## Flag set when taken.
 @export var taken_flag: String = ""
@@ -50,6 +36,7 @@ var sprite: Sprite2D = null
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	sprite = get_node_or_null("Sprite2D")
 	_apply_look()
 	body_entered.connect(_on_entered)
@@ -67,12 +54,6 @@ func _process(_delta: float) -> void:
 
 
 ## Pulls texture, scale, offset, filtering and tint off the MedicalItem.
-##
-## THE OLD BUG: the texture was copied from the item but the SCALE was left
-## to whatever the Sprite2D node happened to be set to in that scene. So the
-## same item looked different in every level, and any item whose source image
-## wasn't the same pixel size as the placeholder came out wrong. Everything
-## visual now comes from the .tres.
 func _apply_look() -> void:
 	if not use_item_look or item == null:
 		return
@@ -95,7 +76,7 @@ func _apply_look() -> void:
 			else CanvasItem.TEXTURE_FILTER_LINEAR
 
 
-## Re-reads the item's look at runtime. Call it after swapping `item`.
+## Re-reads the item's look at runtime.
 func refresh_look() -> void:
 	_apply_look()
 
@@ -116,20 +97,18 @@ func _take() -> void:
 	if item == null:
 		push_warning("ItemPickup: no MedicalItem assigned.")
 		return
-	# THE BAG IS THE INVENTORY NOW. A full bag refuses the item and it stays
-	# on the floor — nothing disappears into nowhere.
+	# the bag is the inventory now.
 	var bag := get_node_or_null("/root/Bag")
 	if bag:
 		if bag.add(item, amount) <= 0:
-			return                      # full: leave it where it is
+			return  # full: leave it where it is
 	elif not _add_to_inventory(item.to_dict(amount)):
 		return
 	# 1. this particular pickup node's own flag (per-level)
 	if taken_flag != "":
 		Flags.set_flag(taken_flag)
 
-	# 2. the item's own flags. Bag raises these itself when it accepts an
-	#    item, so this only runs when there's no Bag autoload.
+	# 2.
 	if bag == null:
 		if item.pickup_flag != "":
 			Flags.set_flag(item.pickup_flag)

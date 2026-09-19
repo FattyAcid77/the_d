@@ -1,37 +1,18 @@
 class_name InputAccess
-## Small helper so every system asks for input the same safe way.
-##
-## THE PROBLEM IT SOLVES
-## Godot's Input.is_action_just_pressed("interact") throws a hard error
-##     The InputMap action "interact" doesn't exist.
-## EVERY FRAME if that action isn't in your Input Map. Eleven scripts in this
-## package poll "interact" inside _process, so a single missing action buries
-## the Errors panel under thousands of identical lines and hides the real
-## problems underneath.
-##
-## This checks the action exists first, falls back to a sensible alternative,
-## and warns ONCE instead of erroring forever.
-##
-## SETUP (do this once)
-## Project > Project Settings > Input Map, add an action named "interact"
-## and bind it to E (and/or Space, controller A). Until you do, the package
-## quietly falls back to "ui_accept" (Enter/Space), which Godot always has,
-## so everything still works while you get set up.
+## Small helper so every system asks for input the same safe way. the problem
+## it solves Godot's Input.is_action_just_pressed("interact") throws a hard
+## error The InputMap action "interact" doesn't exist.
 
-## The action every system uses for "talk / pick up / press the thing".
 const INTERACT := "interact"
 
 ## Used automatically when the action above isn't in the Input Map yet.
-## "ui_accept" is built into Godot, so this always resolves to something.
 const FALLBACK := "ui_accept"
 
-## Remembers which names we've already complained about, so the warning
-## appears once per run rather than once per frame.
+# Remembers which names we've already complained about
 static var _warned := {}
 
 
-## The action name to actually use — the real one if it exists, else the
-## fallback. Warns once if it had to substitute.
+## The action name to actually use - the real one if it exists, else the fallback.
 static func resolve(action: String = INTERACT) -> String:
 	if InputMap.has_action(action):
 		return action
@@ -63,8 +44,7 @@ static func just_released(action: String = INTERACT) -> bool:
 	return a != "" and Input.is_action_just_released(a)
 
 
-## Safe replacement for event.is_action_pressed(). Returns false rather than
-## erroring when the action is missing.
+## Safe replacement for event.is_action_pressed().
 static func event_pressed(event: InputEvent, action: String) -> bool:
 	if event == null or not InputMap.has_action(action):
 		return false

@@ -1,10 +1,6 @@
 class_name BossTV extends StaticBody2D
-## The TV Yazzed slams into. It's the bookend of the fight: hit 1 ends
-## stage 1, hit 2 (in stage 3) kills him.
-##
-## It DROPS from the ceiling when a stage needs it, and lifts away when it
-## doesn't. Put it in the group "boss_tv" (done in _ready) so Yazzed's
-## stage-3 aiming knows never to bounce toward it.
+## The TV Yazzed slams into. It's the bookend of the fight: hit 1 ends stage
+## 1, hit 2 (in stage 3) kills him.
 
 signal dropped
 signal hit
@@ -17,7 +13,7 @@ signal destroyed
 ## A little bounce when it lands.
 @export var land_bounce_pixels: float = 18.0
 @export var lift_seconds: float = 0.7
-## Shake the screen when it lands? (needs a BossJuice node in the scene)
+## Shake the screen when it lands?
 @export var shake_on_land: float = 8.0
 
 @export_group("Hits")
@@ -33,7 +29,7 @@ signal destroyed
 @export var hit_particles: PackedScene
 
 var hits_taken: int = 0
-var is_down: bool = false          ## in position and hittable
+var is_down: bool = false  # in position and hittable
 
 var _rest_position := Vector2.ZERO
 var _busy := false
@@ -41,6 +37,7 @@ var _busy := false
 
 
 func _ready() -> void:
+	SoundLink.attach(self)  # every signal here becomes a SoundMap moment
 	add_to_group("boss_tv")
 	_rest_position = position
 	# start hidden above the room
@@ -50,7 +47,7 @@ func _ready() -> void:
 	_play(anim_idle)
 
 
-## Bring it down. Await this if you want to wait for the landing.
+## Bring it down.
 func drop() -> void:
 	if is_down or _busy:
 		return
