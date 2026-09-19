@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://ium53gf18a1a"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_ycl6m"]
+[ext_resource type="PackedScene" uid="uid://clxud3eb7snhy" path="res://Demo_Scenes/GameStateMachine.tscn" id="2_af2e1"]
+[ext_resource type="PackedScene" uid="uid://f1tgqseg6a43" path="res://BGRD_Lights/node_8d.tscn" id="3_6jbkf"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="4_4f13b"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="4_af2e1"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="5_stggq"]
+[ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="6_xp1oa"]
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="7_3t1ue"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="8_r38vp"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="9_8jt4k"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="10_uwywi"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="11_q1s6g"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="12_526xe"]
+[ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="13_ev2mk"]
+[ext_resource type="Texture2D" uid="uid://r4swomx6el5n" path="res://characters scenes/NPC_Assets/Qassor idle.png" id="14_cejip"]
+
+[sub_resource type="Resource" id="Resource_auwn4"]
+script = ExtResource("8_r38vp")
+text = "اريد اللوح يا قسور"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_hlqg6"]
+script = ExtResource("8_r38vp")
+text = "بالطبع خذه، لكن اريد خدمه منك"
+speaker_name = "قسور"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_bm7l8"]
+script = ExtResource("8_r38vp")
+text = "ما هي؟"
+speaker_name = "سامي"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_oomwi"]
+script = ExtResource("8_r38vp")
+text = "اطفئ النور وسأخبرك، المفتاح عند الباب."
+speaker_name = "قسور"
+set_flags = Array[String](["Qaswar_Light_Action"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_6gkp4"]
+script = ExtResource("7_3t1ue")
+id = "Sad_Elevator_init"
+lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_auwn4"), SubResource("Resource_hlqg6"), SubResource("Resource_bm7l8"), SubResource("Resource_oomwi")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_tgt42"]
+script = ExtResource("8_r38vp")
+text = " اسفل قدميك، لكن لا تقوم بتشغيل النور"
+speaker_name = "قسور"
+set_flags = Array[String](["Panel_Choices"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_2ji0h"]
+script = ExtResource("7_3t1ue")
+id = "Qaswar_After_Light_Action"
+require_flags = Array[String](["Qaswar_Light_Action"])
+lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_tgt42")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_w64cl"]
+script = ExtResource("7_3t1ue")
+id = "Lights_On"
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_uhsip"]
+script = ExtResource("12_526xe")
+branches = Array[ExtResource("7_3t1ue")]([SubResource("Resource_6gkp4"), SubResource("Resource_2ji0h"), SubResource("Resource_w64cl")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu4hi"]
+atlas = ExtResource("14_cejip")
+region = Rect2(0, 0, 33, 93)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yq8qf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu4hi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_e6sj1"]
+script = ExtResource("13_ev2mk")
+npc_name = "Qaswar_elevatorpt3"
+sprite_frames = SubResource("SpriteFrames_yq8qf")
+dialog = SubResource("Resource_uhsip")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[node name="SadRoomMigration" type="Node2D" unique_id=1189622833 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_ycl6m")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg")]
+
+[node name="GameStateMachine" parent="." unique_id=922868313 instance=ExtResource("2_af2e1")]
+
+[node name="Node2D" parent="." unique_id=8911383 instance=ExtResource("3_6jbkf")]
+script = ExtResource("4_af2e1")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("4_4f13b")]
+position = Vector2(107, 281)
+camera_adj = NodePath("../Node2D")
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("5_stggq")]
+position = Vector2(36, 292)
+entery_direction = 1
+push_distance = 60
+new_scene_path = "res://Demo_Scenes/Maz_Sad_Hall_Migration.tscn"
+target_door_name = "Maz_Sad_Hall_East"
+this_door_name = "Sad_Room_Door"
+
+[node name="Qaswar" parent="." unique_id=1071129527 instance=ExtResource("6_xp1oa")]
+position = Vector2(370, 265)
+npc_resource = SubResource("Resource_e6sj1")

@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://bqui4ye420n8p"]
+
+[ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_8wg7h"]
+[ext_resource type="PackedScene" uid="uid://clxud3eb7snhy" path="res://Demo_Scenes/GameStateMachine.tscn" id="2_pwp6l"]
+[ext_resource type="PackedScene" uid="uid://cdqdw6wgo6r4s" path="res://BGRD_Lights/node_5d.tscn" id="2_xppd8"]
+[ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="3_xppd8"]
+[ext_resource type="PackedScene" uid="uid://b34ba4i1pfeqq" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="5_50d32"]
+[ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="6_guk6j"]
+[ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="7_4sgow"]
+[ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="8_pbryg"]
+[ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="9_t3w16"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="10_c07al"]
+[ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="11_4v8rc"]
+[ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="12_rrfx8"]
+[ext_resource type="Texture2D" uid="uid://cuxbdehgnydpf" path="res://characters scenes/NPC_Assets/natheef.png" id="13_lh8kv"]
+[ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="14_g2l14"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="15_8e2bl"]
+
+[sub_resource type="Resource" id="Resource_5d8f4"]
+script = ExtResource("9_t3w16")
+word = "قسور"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_yybm1"]
+script = ExtResource("9_t3w16")
+word = "اللوح"
+metadata/_custom_type_script = "uid://dndbtnfe6ys4a"
+
+[sub_resource type="Resource" id="Resource_d0fbj"]
+script = ExtResource("7_4sgow")
+text = "اذهب الى قسور فهو من معه اللوح"
+speaker_name = "نذيف"
+set_flags = Array[String](["Maz_Elevator_Quest_init"])
+keywords = Array[ExtResource("9_t3w16")]([SubResource("Resource_5d8f4"), SubResource("Resource_yybm1")])
+action_name = "checkpoint"
+action_args = [9]
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_yaw4y"]
+script = ExtResource("6_guk6j")
+id = "Natheef_Elevator_Quest"
+blocked_by_flags = Array[String](["Maz_Elevator_Quest_init"])
+lines = Array[ExtResource("7_4sgow")]([SubResource("Resource_d0fbj")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_3ohd2"]
+script = ExtResource("7_4sgow")
+text = "اذهب الى قسور فهو من معه اللوح"
+speaker_name = "قسور"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_hwvn3"]
+script = ExtResource("6_guk6j")
+id = "entry"
+require_flags = Array[String](["Maz_Elevator_Quest_init"])
+lines = Array[ExtResource("7_4sgow")]([SubResource("Resource_3ohd2")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_8yyky"]
+script = ExtResource("11_4v8rc")
+branches = Array[ExtResource("6_guk6j")]([SubResource("Resource_yaw4y"), SubResource("Resource_hwvn3")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fflf"]
+atlas = ExtResource("13_lh8kv")
+region = Rect2(0, 0, 31, 95)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_grk20"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fflf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_fa8lg"]
+script = ExtResource("12_rrfx8")
+sprite_frames = SubResource("SpriteFrames_grk20")
+dialog = SubResource("Resource_8yyky")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[node name="MazSadHallMigration" type="Node2D" unique_id=1086060319 node_paths=PackedStringArray("player", "doors")]
+script = ExtResource("1_8wg7h")
+player = NodePath("Sami_Doctor_test")
+doors = [NodePath("Door_reg"), NodePath("Door_reg2"), NodePath("Door_reg3")]
+
+[node name="GameStateMachine" parent="." unique_id=922868313 instance=ExtResource("2_pwp6l")]
+
+[node name="Node2D" parent="." unique_id=2104625497 instance=ExtResource("2_xppd8")]
+script = ExtResource("3_xppd8")
+
+[node name="NPC" parent="." unique_id=135909684 groups=["Maz_Elevator_Hallway"] instance=ExtResource("5_50d32")]
+position = Vector2(190, 433)
+npc_resource = SubResource("Resource_fa8lg")
+
+[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("14_g2l14")]
+position = Vector2(236, 675)
+entery_direction = 0
+push_distance = 30
+new_scene_path = "res://Demo_Scenes/lvl_1_lobby_migration.tscn"
+target_door_name = "lvl1_lobby_north"
+this_door_name = "Maz_Sad_Hall_South"
+
+[node name="Door_reg2" parent="." unique_id=527544546 groups=["Maz_Sad_Room_Door"] instance=ExtResource("14_g2l14")]
+position = Vector2(242, 256)
+entery_direction = 2
+push_distance = 40
+new_scene_path = "res://Demo_Scenes/Maz_Sad_Room_Migration.tscn"
+target_door_name = "Maz_Sad_Room"
+this_door_name = "Maz_Sad_Hall_North"
+
+[node name="Door_reg3" parent="." unique_id=1465019033 groups=["Sad_Room_Door"] instance=ExtResource("14_g2l14")]
+position = Vector2(349, 413)
+entery_direction = 3
+push_distance = 60
+new_scene_path = "res://Demo_Scenes/Sad_Room_Migration.tscn"
+target_door_name = "Sad_Room_Door"
+this_door_name = "Maz_Sad_Hall_East"
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("15_8e2bl")]
+position = Vector2(237, 548)
+camera_adj = NodePath("../Node2D")

@@ -33,7 +33,7 @@ polygon = PackedVector2Array(1.3511505, 8.756561, 1.3511505, 8.756561, 1.3511505
 [node name="Node2D" type="Node2D" unique_id=2104625497]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=693844363]
-position = Vector2(-102.02713, 399.60526)
+position = Vector2(23.999992, 475.60526)
 scale = Vector2(1.3207546, 1.1014975)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=528294054]
@@ -71,31 +71,31 @@ position = Vector2(102.991974, 170.12723)
 scale = Vector2(0.99999994, 0.99999994)
 polygon = PackedVector2Array(-8.328571, 9.078552, -8.328571, -8.170715, -12.8714285, -8.170715, -12.8714285, -204.26733, -26.5, -204.26733, -26.5, -254.19937, -9.842858, -254.19943, -9.842858, -365.8656, -0.757143, -365.86554, -0.757143, -384.93048, 119.62857, -384.93048, 119.62857, -368.58908, 132.5, -368.58908, 132.75002, -249.57285, 145.37143, -249.6601, 145.37143, -202.45163, 132.84912, -202.39761, 133.25714, -8.170715, 127.2, -8.170715, 127.2, 10.894287, -6.0571423, 9.986389, -6.0571423, 36.31421, 162.7857, 36.31421, 159, -556.5151, -37.857143, -555.6072, -37.1, 35.406372, -8.328571, 36.31421)
 
-[node name="F1Abovepath" type="Sprite2D" parent="." unique_id=1439075258]
-position = Vector2(113, 303)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1439075258]
+position = Vector2(239.02713, 379)
 texture = ExtResource("1_0krhl")
 
 [node name="CollectiblesSami" type="Sprite2D" parent="." unique_id=1415984768]
-position = Vector2(197, 211)
+position = Vector2(323.02713, 287)
 scale = Vector2(0.37500006, 0.3750001)
 texture = ExtResource("2_ow7tp")
 
 [node name="F1AbovepathWall" type="Sprite2D" parent="." unique_id=1858841542]
-position = Vector2(113, 303)
+position = Vector2(239.02713, 379)
 texture = ExtResource("3_w84mm")
 
 [node name="F1AbovepathFur" type="Sprite2D" parent="." unique_id=1361516984]
-position = Vector2(113, 303)
+position = Vector2(239.02713, 379)
 texture = ExtResource("4_3spbu")
 
 [node name="F1AbovepathFilter" type="Sprite2D" parent="." unique_id=144451616]
 material = SubResource("CanvasItemMaterial_mcvd7")
-position = Vector2(112, 298)
+position = Vector2(238.02713, 374)
 scale = Vector2(1.3207546, 1.1014975)
 texture = ExtResource("5_mj01t")
 
 [node name="light" type="Node2D" parent="." unique_id=833883463]
-position = Vector2(-94.34714, 469.82205)
+position = Vector2(31.679993, 545.822)
 
 [node name="PointLight2D" type="PointLight2D" parent="light" unique_id=1698337282]
 visible = false
@@ -141,7 +141,7 @@ scale = Vector2(1.1858981, 0.91166127)
 occluder = SubResource("OccluderPolygon2D_emq3y")
 sdf_collision = false
 
-[node name="mazo5e" type="PointLight2D" parent="light/LightOccluder2D" unique_id=1559454692]
+[node name="mazo5e" type="PointLight2D" parent="light/LightOccluder2D" unique_id=1559454692 groups=["Sad_Room_Door"]]
 material = SubResource("CanvasItemMaterial_erjal")
 position = Vector2(481.49167, 234.73633)
 scale = Vector2(0.08217844, 0.39021847)
@@ -184,10 +184,10 @@ shadow_enabled = true
 texture = ExtResource("10_0phbv")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2038641495]
-position = Vector2(86.64885, 170.24344)
+position = Vector2(212.67598, 246.24344)
 occluder = SubResource("OccluderPolygon2D_se2gb")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2072595959]
-position = Vector2(106.04129, 194.80585)
+position = Vector2(232.06842, 270.80585)
 scale = Vector2(1.3207546, 1.1014975)
 color = Color(3.272891e-06, 0.83674026, 0.8407033, 1)

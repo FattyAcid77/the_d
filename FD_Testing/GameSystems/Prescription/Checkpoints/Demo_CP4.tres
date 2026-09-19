@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://bnjm70l8snlun"]
 
-[ext_resource type="PackedScene" uid="uid://bwa3j8b2suknh" path="res://Demo_Scenes/Maz_Sad_hall.tscn" id="1_x733d"]
+[ext_resource type="PackedScene" uid="uid://bqui4ye420n8p" path="res://Demo_Scenes/Maz_Sad_Hall_Migration.tscn" id="1_x733d"]
 [ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="2_hj05h"]
 
 [resource]
