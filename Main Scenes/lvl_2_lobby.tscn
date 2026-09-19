@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://2gg6loxs6m6v" path="res://Main Scenes/Level_trans_script.gd" id="1_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://ctbx86vm8lsvv" path="res://background_scenes/lvl_2_lobby_bgrdv2.tscn" id="2_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="3_rx0ui"]
-[ext_resource type="PackedScene" uid="uid://kx7ryt12er25" path="res://3MK-File/Scene/quest_signal.tscn" id="5_6eri3"]
 [ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="5_rx0ui"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="6_6eri3"]
+[ext_resource type="PackedScene" path="res://3MK-File/RadioMaker/radio_signal.tscn" id="6_wtcen"]
+[ext_resource type="Script" uid="uid://du8lpsfhmecx5" path="res://3MK-File/RadioMaker/radio_signal.gd" id="7_6u2yr"]
 
 [node name="Lvl2Lobby" type="Node2D" unique_id=651412082 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_rx0ui")
@@ -28,11 +29,6 @@ new_scene_path = "res://Main Scenes/OCD_Hall.tscn"
 target_door_name = "OCD_Hall_South"
 this_door_name = "lvl_2_lobby_North"
 
-[node name="QuestSignal" parent="door_reg_type2" unique_id=2085552719 instance=ExtResource("5_6eri3")]
-window_id = "PULL_ARM"
-puzzle_id = "PULL_ARM"
-signal_radius = 20.0
-
 [node name="Door_reg2" parent="." unique_id=199103109 instance=ExtResource("3_rx0ui")]
 position = Vector2(146, 423)
 entery_direction = 1
@@ -51,3 +47,10 @@ this_door_name = "Lvl2_lobby_south"
 z_index = 1
 position = Vector2(530, 398)
 camera_adj = NodePath("../lvl2_Lobby_bgrd")
+
+[node name="Pop" type="Node2D" parent="." unique_id=1054332673 instance=ExtResource("6_wtcen")]
+position = Vector2(531, 240)
+script = ExtResource("7_6u2yr")
+signal_id = "Pop"
+quest_type = 1
+signal_radius = 120.0

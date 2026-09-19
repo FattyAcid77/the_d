@@ -75,7 +75,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cine_timeline/plugin.cfg")
+enabled=PackedStringArray("res://addons/cine_timeline/plugin.cfg", "res://addons/radio_maker/plugin.cfg")
 
 [file_customization]
 

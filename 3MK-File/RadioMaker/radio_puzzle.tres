@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="RadioMaker_v1Puzzle" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="RadioMaker_v1Puzzle" format=3 uid="uid://hfgy8m77ix18"]
 
-[ext_resource type="Script" path="res://3MK-File/RadioMaker/radio_puzzle.gd" id="1_pz"]
+[ext_resource type="Script" uid="uid://0d2088ia6gga" path="res://3MK-File/RadioMaker/radio_puzzle.gd" id="1_pz"]
 
 [resource]
 script = ExtResource("1_pz")
-entries = [{
+entries = Array[Dictionary]([{
 "frequency": 630,
-"id": "beam_puzzle",
+"id": "Pop",
 "order": 0,
 "puzzle_id": "",
-"radius": 400.0,
+"radius": 120.0,
 "reward": 3,
-"reward_value": "radio_beam_found",
+"reward_value": "PULL_ARM",
 "type": 1
-}]
+}])
