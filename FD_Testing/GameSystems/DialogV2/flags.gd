@@ -1,5 +1,6 @@
 extends Node
-## Flags - the game's memory. Add as an Autoload named "Flags".
+## Flags. A dictionary of named booleans that every system reads and writes.
+## Dialog branches, zones, map discovery and checkpoints all run on it.
 
 signal flag_changed(flag_name: String, value: Variant)
 

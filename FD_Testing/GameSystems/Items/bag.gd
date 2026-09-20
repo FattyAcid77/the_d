@@ -1,5 +1,5 @@
 extends Node
-## Bag - the inventory. Add as an Autoload named "Bag".
+## Bag. Our inventory: 4x3 small slots, 2 big ones, stacking, drag to reorder.
 
 signal changed  # anything at all moved
 signal item_added(type: String, amount: int)

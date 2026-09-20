@@ -1,6 +1,6 @@
 extends Node
-## Deaths - add as an Autoload named "Deaths". the sequence when the player
-## dies: 1.
+## Deaths. What happens when Sami dies: the cause, the death board, retry from
+## the last checkpoint.
 
 const CAUSES_DIR := "res://FD_Testing/GameSystems/Death/Causes"
 const FRAMES_RES := "res://FD_Testing/GameSystems/Death/board_frames.tres"
@@ -272,9 +272,7 @@ func _on_retry() -> void:
 	if n >= 0 and Prescription.get_checkpoint(n) != null:
 		Prescription.apply(n)  # back to the last checkpoint
 	else:
-		# awaited so the fallback below runs against the reloaded scene, not the
-		# old one that is still alive behind the transition
-		await SceneManager.reload_current_scene()
+		get_tree().reload_current_scene()
 		if _has_fallback:
 			await get_tree().process_frame
 			var p := get_tree().get_first_node_in_group("Player") as Node2D
@@ -290,7 +288,7 @@ func _on_quit() -> void:
 	get_tree().paused = false
 	is_dead = false
 	if main_menu_scene != "":
-		SceneManager.load_new_scene(main_menu_scene)
+		get_tree().change_scene_to_file.call_deferred(main_menu_scene)
 	else:
 		push_warning("Deaths: main_menu_scene is empty — set it on the autoload.")
 
@@ -318,6 +316,8 @@ func _build_ui() -> void:
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_root.layout_direction = Control.LAYOUT_DIRECTION_LTR   # art-locked, never mirrored
+	_root.add_to_group("no_mirror")
 	_layer.add_child(_root)
 
 	_frame = TextureRect.new()

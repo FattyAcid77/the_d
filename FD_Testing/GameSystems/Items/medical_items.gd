@@ -1,7 +1,6 @@
 extends Node
-## MedicalItems - add as an Autoload named "MedicalItems". Turns inventory
-## items into medical effects: bandages stop the bleeding, a scalpel opens a
-## wound so Sami can bleed for the blood puzzle.
+## MedicalItems. Item definitions and what using them does: bandage, cut,
+## heal.
 
 signal item_used(type: String)
 signal bandage_used
@@ -33,12 +32,28 @@ func _load_items() -> void:
 			items.append(r)
 
 
-## Look up a definition by its `type` string.
+## Look up a definition by its `type` string. Exact match first, then
+## case-insensitive, then the display name, so "Radio" still finds "radio".
 func get_item(type: String) -> MedicalItem:
 	for i in items:
 		if i.type == type:
 			return i
+	var want := type.strip_edges().to_lower()
+	for i in items:
+		if i.type.to_lower() == want:
+			return i
+	for i in items:
+		if i.display_name.to_lower() == want:
+			return i
 	return null
+
+
+## Every loaded type, for warnings and debug prints.
+func type_names() -> Array[String]:
+	var out: Array[String] = []
+	for i in items:
+		out.append(i.type)
+	return out
 
 
 # ========================================================================== the hook

@@ -1,12 +1,14 @@
 # GameSystems
 
-The FD systems package. One folder, drop it at `res://FD_Testing/GameSystems/`.
-Everything in here is data-driven: you make `.tres` files and place nodes; the
-scripts read them. Nothing here edits the other developer's code (player,
-inventory, radio) - our systems find those by group name or by
-`get_node_or_null` and step aside if they're missing.
+Everything we built for FD, in one folder. It lives at
+`res://FD_Testing/GameSystems/`.
 
-Engine: Godot 4.6.3.
+The whole thing is data first: you make `.tres` files and place nodes, the
+scripts read them. We don't touch the other developer's code (the player, the
+inventory, the radio). Our stuff finds theirs by group name or `get_node_or_null`
+and quietly does nothing if it isn't there.
+
+Godot 4.6.3.
 
 ---
 
@@ -14,15 +16,14 @@ Engine: Godot 4.6.3.
 
 ### Autoloads
 
-Project > Project Settings > Globals (Autoload). Add these, in this order.
-`Loc` has to be first. Names must match exactly.
+Project > Project Settings > Globals (Autoload). Add these in this order.
+Loc has to be first. Spell the names exactly.
 
 | Name | Path |
 |---|---|
 | Loc | res://FD_Testing/GameSystems/Localization/loc.gd |
 | Flags | res://FD_Testing/GameSystems/DialogV2/flags.gd |
 | DialogManager | res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_manager.gd |
-| Cutscene | res://FD_Testing/GameSystems/Cutscene/cutscene_player.gd |
 | GameProgress | res://FD_Testing/GameSystems/Progress/game_progress.gd |
 | LogBook | res://FD_Testing/GameSystems/LogBook/log_book.gd |
 | Prescription | res://FD_Testing/GameSystems/Prescription/prescription.gd |
@@ -36,43 +37,42 @@ Project > Project Settings > Globals (Autoload). Add these, in this order.
 | MapRooms | res://FD_Testing/GameSystems/Map/map_rooms.gd |
 | Board | res://FD_Testing/GameSystems/Board/board.gd |
 
-These are script autoloads, so their `@export` fields don't show in an
-inspector. To change a default, edit the value in the script.
+They're script autoloads, so their `@export` values don't show up in any
+inspector. To change a default, change it in the script.
 
 ### Input Map
 
-| Action | Used by | Suggested key |
+| Action | Used by | Key we use |
 |---|---|---|
 | interact | dialog, pickups, puzzles | E |
 | hold_breath | BreathComponent | Shift |
-| log | LogBook (when not using the Board) | L |
+| log | LogBook on its own (outside the Board) | L |
 
-The Board opens on TAB directly. Missing actions don't crash: `InputAccess`
-falls back to `ui_accept` and warns once.
+TAB opens the Board and isn't an action. A missing action won't crash
+anything; `InputAccess` falls back to ui_accept and warns once.
 
 ### Project settings
 
-- Display > Window > Subwindows > Embed Subwindows: **off** (popup windows
-  must be real OS windows).
-- Display > Window > Per-pixel transparency: **on**.
+- Display > Window > Subwindows > Embed Subwindows: off. The popup windows
+  need to be real OS windows.
+- Display > Window > Per-pixel transparency: on.
 - Localization > Translations: add `translations.en.translation` and
-  `translations.ar.translation` (import `Localization/translations.csv` as
-  Translation first).
-- A theme with an Arabic-capable font as the project default, or Arabic
-  renders as boxes.
+  `translations.ar.translation`. Import `Localization/translations.csv` as
+  Translation first.
+- A default theme with a font that has Arabic glyphs, or Arabic is boxes.
 - Internationalization > Rendering > Root Node Layout Direction: Locale.
 
-### Player
+### The player
 
-Sami's scene must be in the group `Player`. Our components read his `stats`
-by property name; if a property isn't there they warn and go inert.
+Sami's scene needs to be in the group `Player`. Our components read his
+`stats` by property name and back off with a warning if something's missing.
 
 ### Exported builds
 
-Every loader that scans a folder for `.tres` goes through `res_list.gd`
-(`ResList`), which works in the editor and in an exported `.pck`. Plain
-`DirAccess` scans see `.tres.remap` names in a build and find nothing. Use
-`ResList.tres_files(dir)` for any new loader.
+Anything that loads content by scanning a folder goes through `res_list.gd`.
+Plain `DirAccess` works in the editor and finds nothing in an exported build,
+because the pck lists files as `.tres.remap`. If you write a new loader, use
+`ResList.tres_files(dir)`.
 
 ---
 
@@ -93,7 +93,6 @@ Every loader that scans a folder for `.tres` goes through `res_list.gd`
 | Health | WoundComponent, DamageArea, HealthWatcher |
 | Breath | BreathComponent, ToxicArea, BloodWorld, BloodGrid, blood types |
 | Progress | GameProgress state machine |
-| Cutscene | Video and comic cutscenes |
 | StatuePuzzle | Radio-driven statue puzzle, RadioLink |
 | ElectroPuzzle | Generator sequence and timed run |
 | BossFight | Yazzed |
@@ -187,14 +186,18 @@ radio_tune [hz]   radio_open
 play_sound [cue]  play_music [id, fade]   stop_music [fade]
 play_set [set, "drums,bass"]  stop_set [category]
 music_layer / ambience_layer [layer, on|off|auto]
-progress_stage [state]    play_cutscene [path]
-wait [seconds]    end_dialog
+progress_stage [state]
+wait [seconds]    delay [seconds]    end_dialog
 ```
+
+`wait` holds the line on screen. `delay` takes the box off screen, waits,
+and the next spoken line brings it back. `give_item`/`take_item` go through
+the Bag (the `type` field of the MedicalItem, case doesn't matter).
 
 `action_name` is a dropdown; each entry shows the args it wants
 (`give_item  [type; amount]`). Pick `custom` and type a name in
 `custom_action` to emit your own `action_requested(name, args)`. Other
-systems answer these through that signal: `cutscene`, `checkpoint`,
+systems answer these through that signal: `checkpoint`,
 `prescription_show`, `prescription_entry`, `state`. `wait_for_action` pauses
 the line until `DialogManager.finish_action()` is called.
 
@@ -223,6 +226,9 @@ Instance `NPC/npc.tscn`, give it an `NPCResource`:
 
 Movement: add one child of `NPCBehaviorWander` (radius, walk/wait times) or
 `NPCBehaviorPatrol` (Marker2D children as the route). No child = stands still.
+`npc.is_blocked` is true on any frame the NPC pushed against something; Wander
+stops and waits when it bumps into Sami, Patrol gives up on that point after
+`give_up_after`.
 
 Dialog lines can override the NPC's animation for the line
 (`npc_animation`); the direction state machine is suspended while it plays.
@@ -351,24 +357,7 @@ Fullscreen and controls rows are placeholders.
 
 ---
 
-## 15. Cutscenes
-
-Videos must be `.ogv`:
-`ffmpeg -i in.mp4 -c:v libtheora -q:v 8 -c:a libvorbis -q:a 5 out.ogv`
-
-```gdscript
-await Cutscene.play("res://.../scene.ogv")
-await Cutscene.play_comic(load("res://.../comic.tres"))
-```
-
-`CutsceneTrigger` (Area2D): `video_path`, `play_once`, `set_flag_after`.
-From dialog: action `cutscene [path]` with `wait_for_action` on.
-A `Comic` is a list of `ComicPanel`: video or image, sound, `set_flags`,
-wait for interact or auto-advance.
-
----
-
-## 16. Popup windows
+## 15. Popup windows
 
 Real OS windows on the player's desktop. Each is a `PopupWindowDef` .tres in
 Windows/Defs/ with an `id`.
@@ -411,7 +400,7 @@ SubViewport each.
 
 ---
 
-## 17. Puzzles
+## 16. Puzzles
 
 ### Radio statue (StatuePuzzle/)
 
@@ -435,7 +424,7 @@ radio). `on_fail`: RESET_ONLY / KILL_PLAYER / RELOAD_CHECKPOINT. Test scene:
 
 Three stages: TV drops and he charges into it; TV lifts and you chip his hp
 to `stage3_hp`; fast bouncy stage with `wall_feint_chance`, second TV hit
-ends it and `victory_comic` plays. Every timing and speed is an export on
+ends it and `won_flag` is raised. Every timing and speed is an export on
 `yazzed_boss.gd` / `boss_tv.gd`. `BossFight.reset_fight()` on death.
 
 ### Puzzle/ (older)
@@ -444,7 +433,7 @@ The speaker-number statue puzzle before the radio version. Keep or delete.
 
 ---
 
-## 18. Sound
+## 17. Sound
 
 ### Categories and buses
 
@@ -541,7 +530,7 @@ bus layout is untouched. `Sound.set_muffle(0..1)` from anywhere.
 
 ---
 
-## 19. Known traps
+## 18. Known traps
 
 - Paths are `res://FD_Testing/GameSystems/...`, not `res://GameSystems/`.
 - Name collisions in the shared project: `State` -> `BossState`, `Action` ->
@@ -555,3 +544,87 @@ bus layout is untouched. `Sound.set_muffle(0..1)` from anywhere.
 - Warnings, not crashes: most systems warn and go inert when something is
   missing. An empty Output panel is the green light; a wall of warnings is
   the bug list.
+
+---
+
+## 19. Player identity (the Discord trick)
+
+`PlayerIdentity` finds the player's own profile picture before you need it, so
+any UI can show it back to them later. Discord first, the Windows account
+picture second, nothing third. The result is cached in
+`user://identity/avatar.png`, so the second session works offline.
+
+### One-time setup (FD)
+
+1. discord.com/developers/applications → New Application (any name; the player
+   never sees it).
+2. Copy the **Application ID** into `client_id` at the top of
+   `Identity/player_identity.gd`. `@export` on an autoload does nothing, so it
+   must be the default in the script.
+3. That is all. There is no RPC Origins box to fill any more - that program is
+   closed. Leave `rpc_origin` empty: Discord lets a connection through when it
+   carries no Origin header at all, which is how it tells a local game from a
+   random web page. Sending one gets you rejected with 4001.
+
+No addon, no .dll, no GDExtension. If `client_id` is left empty the whole
+Discord half is skipped and only the Windows picture is tried.
+
+### How it finds the picture
+
+| Order | Where | Works on |
+|---|---|---|
+| 1 | `\\.\pipe\discord-ipc-N`, the documented IPC transport | Windows |
+| 2 | `ws://127.0.0.1:6463-6472`, the RPC websocket | any OS |
+| 3 | `%APPDATA%/Microsoft/Windows/AccountPictures` | Windows |
+
+Discord answers a connection with a `READY` event that carries the logged-in
+user (`id`, `username`, `global_name`, `avatar` hash). We read it and hang up:
+no login screen, no permission dialog, nothing appears in Discord, and the
+player has no idea. The picture itself is one GET to
+`cdn.discordapp.com/avatars/<id>/<hash>.png`. Nothing is uploaded anywhere.
+
+If Discord is closed, or the app is not registered, or the build hides the user
+from an unauthorised app, every step fails quietly and the game carries on with
+the fallback picture. Never let the scare depend on the picture being there.
+
+### Using it
+
+Drop an `AvatarView` (TextureRect + `Identity/avatar_view.gd`) into the scene.
+Exports: `fallback_texture`, `hide_until_ready`, `reveal_delay`. It binds
+itself and fires `revealed` when the face appears.
+
+From code:
+
+```gdscript
+if PlayerIdentity.has_avatar():
+    $Photo.texture = PlayerIdentity.get_avatar()
+PlayerIdentity.get_display_name()   # "FD", or the Windows user name
+PlayerIdentity.avatar_ready         # signal(texture) if it arrives later
+PlayerIdentity.fetch()              # run the chain again
+PlayerIdentity.forget()             # wipe the cached picture
+```
+
+`PlayerIdentity.info` holds `source` (`discord`, `os`, `none`), `id`,
+`username`, `global_name`, `avatar_hash`. Set `verbose = true` to print every
+step and Discord's raw reply.
+
+### Why the pipe path looks odd
+
+`\\?\pipe\discord-ipc-N`, not the usual `\\.\pipe\...`. Godot pushes every
+path through `simplify_path()` before opening it, which strips the "." segment
+and leaves `\\pipe\discord-ipc-0` - a network share to a machine called
+"pipe". That is the `err 7` (file not found) you get on every pipe even with
+Discord running. The `\\?\` form is the same device namespace and survives.
+
+### When nothing shows up
+
+Attach `Identity/identity_debug.gd` to a Node in an empty scene and press F6.
+It prints the autoload, the client id, every Discord pipe, Discord's raw reply
+and the final result, whatever `verbose` is set to. It also says outright when
+the picture arrived and the fault is in the UI node.
+
+### Before shipping
+
+Put one line in the store page or EULA saying the game may read the profile
+picture from a running Discord client, and keep it local-only. That keeps it a
+horror trick instead of a privacy complaint.

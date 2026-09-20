@@ -107,6 +107,14 @@ func hide_ui() -> void:
 		box.visible = false
 
 
+## Take the box off screen mid-conversation (the `delay` action). The next
+## spoken line brings it back.
+func blank() -> void:
+	if text_label:
+		text_label.text = ""
+	hide_ui()
+
+
 func start(dialog: Dialog, speaker_name: String, portrait: Texture2D) -> void:
 	if not _validate():
 		finished.emit()
@@ -144,11 +152,11 @@ func _request_close() -> void:
 # --- main loop -------------------------------------------------------------
 
 func _run() -> void:
-	var start_branch := _pick_branch()
-	if start_branch == "":
+	var start := _pick_branch()
+	if start == "":
 		push_warning("DialogUI: no playable branch in this dialog.")
 		return
-	await _play_branch(start_branch)
+	await _play_branch(start)
 	if _end_all:
 		return
 	while true:
@@ -211,17 +219,19 @@ func _play_branch(branch_id: String) -> void:
 			else:
 				await _move_camera(line.camera_target, line.camera_time)
 
+		# each action runs in order; wait/delay and wait_for_action hold the line here
 		for a in line.actions():
 			DialogManager.emit_action(a["verb"], a["args"], a["wait"])
-			if a["wait"]:
-				while DialogManager.is_waiting_action() and not _end_all:
-					await get_tree().process_frame
+			while DialogManager.is_waiting_action() and not _end_all:
+				await get_tree().process_frame
 			if _end_all:
 				break
 		if _end_all:
 			return
 		if not has_text:
 			continue
+		if box:
+			box.visible = true  # a delay may have hidden it
 
 		_apply_line_direction(line.text)
 		name_label.text = tr(line.speaker_name) if line.speaker_name != "" else tr(_speaker_default)
@@ -290,11 +300,11 @@ func _move_camera(target: Vector2, time: float) -> void:
 	if time <= 0.0:
 		cam.global_position = target
 		return
-	var start_pos := cam.global_position
+	var start := cam.global_position
 	var elapsed := 0.0
 	while elapsed < time and not _end_all:
 		elapsed += get_process_delta_time()
-		cam.global_position = start_pos.lerp(target, clampf(elapsed / time, 0.0, 1.0))
+		cam.global_position = start.lerp(target, clampf(elapsed / time, 0.0, 1.0))
 		await get_tree().process_frame
 	cam.global_position = target
 

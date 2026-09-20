@@ -24,10 +24,10 @@ func setup(owner_npc: NPC) -> void:
 
 func tick(delta: float) -> void:
 	_timer -= delta
-	# bumped into the player or another NPC?
+	# bumped into the player or another NPC: stop, wait, then pick a new way
 	if _walking and npc.is_blocked:
-		_walk_dir = _pick_direction()
-		_timer = minf(_timer, 0.35)
+		_walking = false
+		_timer = randf_range(wait_time_min, wait_time_max)
 	if _timer <= 0.0:
 		_walking = not _walking
 		if _walking:

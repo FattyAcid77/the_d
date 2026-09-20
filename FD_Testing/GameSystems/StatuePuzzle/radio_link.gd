@@ -1,6 +1,6 @@
 extends Node
-## RadioLink - add as an Autoload named "RadioLink". The one place our systems
-## talk to the other dev's radio.
+## RadioLink. The only place we read the other developer's radio. If it isn't
+## in the project this returns the minimum frequency and warns once.
 
 signal frequency_changed(hz: int)
 signal radio_opened
@@ -80,15 +80,15 @@ func is_tuned_to(hz: int, tolerance: int = 0) -> bool:
 	return absi(frequency() - hz) <= tolerance
 
 
-# --- writing (for cutscenes, tests and story beats) ------------------------
+# --- writing (for tests and story beats) -----------------------------------
 
 ## Force the radio to a frequency.
 func set_frequency(hz: int) -> void:
 	var rg := get_node_or_null("/root/RadioGlobal")
 	if rg == null:
 		return
-	var snapped_hz: int = int(round(float(hz) / 10.0)) * 10
-	rg.radio = clampi(snapped_hz, min_hz(), max_hz())
+	var snapped: int = int(round(float(hz) / 10.0)) * 10
+	rg.radio = clampi(snapped, min_hz(), max_hz())
 
 
 ## Is this a frequency the player can actually reach?

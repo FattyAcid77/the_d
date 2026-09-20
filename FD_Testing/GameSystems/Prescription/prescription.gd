@@ -1,6 +1,6 @@
 extends Node
-## Prescription - add as an Autoload named "Prescription". The old-school
-## password save system, themed as medicine prescriptions.
+## Prescription. Password saves dressed up as medicine. A code encodes a
+## checkpoint number; entering it restores that checkpoint's flags.
 
 signal checkpoint_reached(number: int)
 signal checkpoint_applied(number: int)
@@ -136,7 +136,7 @@ func apply(number: int) -> void:
 	checkpoint_applied.emit(number)
 	if c.scene:
 		get_tree().paused = false
-		SceneManager.load_new_packed(c.scene)
+		get_tree().change_scene_to_packed.call_deferred(c.scene)
 
 
 # ========================================================================== UI
@@ -149,6 +149,7 @@ func _build_ui() -> void:
 
 	# --- the small popup (new prescription / messages) ---
 	_popup = PanelContainer.new()
+	_popup.layout_direction = Control.LAYOUT_DIRECTION_LTR   # a centred box; text inside still reads RTL
 	_popup.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	_popup.position = Vector2(-180, 40)
 	_popup.custom_minimum_size = Vector2(360, 0)
@@ -167,6 +168,7 @@ func _build_ui() -> void:
 
 	# --- the pharmacy entry window (four dials) ---
 	_entry = PanelContainer.new()
+	_entry.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_entry.set_anchors_preset(Control.PRESET_CENTER)
 	_entry.position = Vector2(-260, -140)
 	_entry.custom_minimum_size = Vector2(520, 0)

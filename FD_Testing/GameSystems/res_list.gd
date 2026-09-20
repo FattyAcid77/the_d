@@ -1,12 +1,18 @@
 class_name ResList
-## Lists .tres files in a folder so it works in the editor and in an exported
-## build (where DirAccess only sees .remap names).
+## Folder scanning that survives export.
+##
+## In the editor, DirAccess lists "thing.tres". In an exported game the same
+## folder lists "thing.tres.remap" and every extension check comes back
+## empty, so a system that loads its content by scanning a folder finds
+## nothing and the game looks broken for no reason. Use these instead.
 
+
+## Full paths of the .tres/.res files directly in a folder, sorted.
 static func tres_files(dir_path: String) -> Array[String]:
 	return files_with_extensions(dir_path, ["tres", "res"])
 
 
-## Same, but for any set of extensions (lowercase, no dot).
+## Same idea for any extensions (lowercase, no dot).
 static func files_with_extensions(dir_path: String, exts: Array) -> Array[String]:
 	var out: Array[String] = []
 	for file in _list(dir_path):
@@ -16,20 +22,20 @@ static func files_with_extensions(dir_path: String, exts: Array) -> Array[String
 	return out
 
 
-## The raw file names in the folder, with any export ".remap" suffix already stripped
+# File names in the folder with any ".remap" already stripped off.
 static func _list(dir_path: String) -> Array[String]:
 	var seen := {}
 	var names: Array[String] = []
 
-	# 1) the export-aware way - sees the original file names inside a .pck
+	# ResourceLoader knows the real names inside a pck
 	for f in ResourceLoader.list_directory(dir_path):
 		if f.ends_with("/"):
-			continue  # subfolder - we don't recurse
+			continue
 		if not seen.has(f):
 			seen[f] = true
 			names.append(f)
 
-	# 2) plain DirAccess - covers the editor and anything the above missed.
+	# DirAccess covers the editor, and anything the loader didn't list
 	var dir := DirAccess.open(dir_path)
 	if dir:
 		dir.list_dir_begin()
@@ -40,7 +46,7 @@ static func _list(dir_path: String) -> Array[String]:
 				if clean.ends_with(".remap"):
 					clean = clean.trim_suffix(".remap")
 				if clean.ends_with(".import"):
-					clean = ""  # import sidecars are not resources
+					clean = ""
 				if clean != "" and not seen.has(clean):
 					seen[clean] = true
 					names.append(clean)
@@ -50,7 +56,7 @@ static func _list(dir_path: String) -> Array[String]:
 	return names
 
 
-## Same as tres_files, but walks every subfolder too
+## tres_files, but into every subfolder too.
 static func tres_files_recursive(dir_path: String) -> Array[String]:
 	var out: Array[String] = []
 	_walk(dir_path, out)
@@ -83,7 +89,7 @@ static func _subdirs(dir_path: String) -> Array[String]:
 	return names
 
 
-## Does the folder exist at all (editor or exported)?
+## True if the folder exists, in the editor or in a build.
 static func dir_exists(dir_path: String) -> bool:
 	if DirAccess.open(dir_path) != null:
 		return true

@@ -1,5 +1,6 @@
 extends Node
-## MapRooms - the map's memory. Add as an Autoload named "MapRooms".
+## MapRooms. Which rooms Sami has found, saved as map:<id> flags, and where he
+## is right now.
 
 signal room_discovered(id: String)
 signal room_changed(id: String)
