@@ -1,5 +1,7 @@
 extends CanvasLayer
-## Board - the pause menu. Add as an Autoload named "Board".
+## Board. The pause menu on TAB: a clipboard with Inventory, LogBook, Map and
+## Settings tabs. Everything is placed on the 640x360 art canvas, then scaled
+## to the screen.
 
 signal opened(tab: int)
 signal closed
@@ -29,8 +31,10 @@ var tab_settings: Texture2D
 @export_group("Tab feel")
 ## The selected tab is drawn again on top at this brightness, so it lifts off the others.
 @export var selected_brightness: float = 1.35
-## And nudged sideways by this much, like a real tab being pulled out.
-@export var selected_nudge: float = 2.0
+## Sideways nudge for the selected tab. 0 keeps it flush with the art.
+@export var selected_nudge: float = 0.0
+## Brightness of the tabs that aren't selected or hovered.
+@export var idle_brightness: float = 0.92
 ## Hover brightness, for the tab the mouse is over.
 @export var hover_brightness: float = 1.15
 @export var tab_click_sound: AudioStream
@@ -47,6 +51,8 @@ var tab_settings: Texture2D
 ## Come back to the tab he was last on, instead of the default every time.
 @export var remember_tab: bool = true
 ## Dim the game behind the board.
+## Darken the game behind the clipboard. Off = the world shows as it is.
+@export var dim_background: bool = false
 @export var dim_color: Color = Color(0, 0, 0, 0.55)
 ## Seconds for the board to glide up from the bottom.
 @export var slide_seconds: float = 0.42
@@ -112,20 +118,31 @@ func _build() -> void:
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	# ignore, not stop.
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# art-locked layout: never mirrored for Arabic (Loc skips this group)
+	_root.layout_direction = Control.LAYOUT_DIRECTION_LTR
+	_root.add_to_group("no_mirror")
 	add_child(_root)
 
 	_dim = ColorRect.new()
-	_dim.color = dim_color
+	_dim.layout_direction = Control.LAYOUT_DIRECTION_LTR
+	_dim.color = dim_color if dim_background else Color(0, 0, 0, 0)
 	_dim.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(_dim)
 
+	# Every control here is explicitly LTR BEFORE it gets a position. A
+	# control that isn't in the tree yet takes the window's direction, and
+	# in Arabic that mirrors position 0 to -640 (off the clipboard). Built
+	# in English and switched later it never mirrors, which is why the bug
+	# only showed on an Arabic cold start.
 	_canvas = Control.new()
+	_canvas.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_canvas.size = CANVAS
 	_canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_root.add_child(_canvas)
 
 	_board = TextureRect.new()
+	_board.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_board.texture = board_art
 	_board.position = Vector2.ZERO
 	_board.size = CANVAS
@@ -136,12 +153,14 @@ func _build() -> void:
 
 	# The pages go on top of the clipboard art.
 	_pages = Control.new()
+	_pages.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_pages.position = Vector2.ZERO
 	_pages.size = CANVAS
 	_pages.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_canvas.add_child(_pages)
 
 	_tab_layer = Control.new()
+	_tab_layer.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_tab_layer.position = Vector2.ZERO
 	_tab_layer.size = CANVAS
 	_tab_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -196,6 +215,7 @@ func _read_hit_areas() -> void:
 func _build_pages() -> void:
 	for t in [Tab.INVENTORY, Tab.LOGBOOK, Tab.MAP, Tab.SETTINGS]:
 		var page := Control.new()
+		page.layout_direction = Control.LAYOUT_DIRECTION_LTR
 		page.position = Vector2.ZERO
 		page.size = CANVAS
 		page.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -241,6 +261,10 @@ func open(which: int = -1) -> void:
 	_layout()
 	_show_page(true)
 	_slide_in()
+	# nothing keeps keyboard focus while the board is up
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused:
+		focused.release_focus()
 
 	if debug_log:
 		print("Board: opened on tab %d" % tab)
@@ -335,6 +359,11 @@ func _show_page(animate: bool = false) -> void:
 
 ## Tabs are handled in _input, not _unhandled_input
 func _input(event: InputEvent) -> void:
+	# the open/close key, ahead of GUI focus handling (see _unhandled_input)
+	if event is InputEventKey and event.pressed and not event.echo and _is_open_key(event):
+		toggle()
+		get_viewport().set_input_as_handled()
+		return
 	if not is_open:
 		return
 	if event is InputEventMouseMotion:
@@ -355,6 +384,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		var handled := false
 		if _is_open_key(event):
+			# TAB is also ui_focus_next. If a slider or dropdown has focus it
+			# eats the key before we see it here, so _input handles it too.
 			toggle()
 			handled = true
 		elif use_letter_shortcuts and (event.shift_pressed or not letters_need_shift):
@@ -408,18 +439,15 @@ func _draw_tabs() -> void:
 		Tab.MAP: tab_map,
 		Tab.SETTINGS: tab_settings,
 	}
-	# On the logbook tab our clipboard is hidden so the real LogBook shows through
-	var must_draw_all: bool = _board != null and not _board.visible
-
+	# All four tab PNGs are drawn every time, covering the copies baked into
+	# the clipboard art, so every tab looks the same (sticker included).
 	for t in arts:
 		var tex: Texture2D = arts[t]
 		if tex == null:
 			continue
 		var selected: bool = (t == tab)
 		var hovered: bool = (t == _hover)
-		if not selected and not hovered and not must_draw_all:
-			continue  # the board art already shows it
-		var b: float = 1.0
+		var b: float = idle_brightness
 		if selected:
 			b = selected_brightness
 		elif hovered:

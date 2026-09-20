@@ -46,10 +46,12 @@ an NPC picks, which windows open, which items exist — reads flags.
 
 The name is the MedicalItem's **`type`** field, not its display name.
 
-`give_item` goes through the same inventory route ItemPickup uses, and raises
-the item's `pickup_flag` and `item:<type>` just like walking over it would.
-`take_item` needs a remove function on your inventory — if it warns in the
-Output panel, tell me the real function name and I'll wire it exactly.
+Both go through the **Bag**, the same route ItemPickup uses, so `give_item`
+raises the item's `pickup_flag` and `item:<type>` just like walking over it
+would, and a full bag refuses it (`Bag.bag_full`). The item must be a
+MedicalItem `.tres` inside `Items/` — if the type isn't found the Output
+panel lists every type it does know. Case doesn't matter, and the display
+name works too.
 
 ## Windows
 
@@ -99,17 +101,37 @@ their code's job, so `radio_open` just raises a flag their side can watch.
 | action_name | args | what it does |
 |---|---|---|
 | `progress_stage` | `["hospital_night"]` | Moves the game to that state (a GameProgress state NAME, not a number). |
-| `play_cutscene` | `["res://vids/apple.ogv"]` | Plays a video by path. Pass a Comic resource instead to play a comic. |
 
 ## Flow control
 
 | action_name | args | what it does |
 |---|---|---|
-| `wait` | `[1.5]` | Holds the dialog for 1.5 seconds. |
+| `wait` | `[1.5]` | Holds the dialog for 1.5 seconds. The box stays on screen. |
+| `delay` | `[2]` | Hides the box, waits 2 seconds, then the next spoken line brings it back. |
 | `end_dialog` | *(none)* | Ends the dialog right here, skipping the rest. |
 
-`wait` is the good one for timing. An empty line with `wait` = a silent beat
-before the next thing is said.
+`wait` is a pause inside the conversation. `delay` is a pause *between* two
+things said — the box disappears, the world sits there for a beat, and the
+box comes back with the next line. Put either on an empty line between two
+spoken lines, or on the spoken line itself (it runs before the text types).
+Both count real seconds, so they work while the game is paused for dialog.
+Neither needs `wait_for_action`.
+
+---
+
+## More than one action on a line
+
+The Action group has `more_actions`. Click **Add Element**, pick
+**New DialogActionStep**, and it gets the same dropdown + args + wait as the
+line's own action. They run in order after the first one, on the same line.
+
+```
+Line: "Here, take this."
+  action_name = give_item     action_args = ["radio"]
+  more_actions:
+    [0] action = set_flag     args = ["java_gave_radio"]
+    [1] action = play_sound   args = ["pickup_metal"]
+```
 
 ---
 

@@ -1,8 +1,7 @@
 extends Node
-## Sound autoload. Buses, the sound library (SoundDef by id), music, zones,
-## ducking, the breath muffle, and the SoundMap events. Register as "Sound".
-## Buses are reused by name if the project already has them; only missing ones
-## get created.
+## Sound. Volume buses, the sound library, music, zones, the SoundMap events,
+## ducking and the breath muffle. Reuses buses the project already has and
+## only creates the missing ones.
 
 signal volume_changed(category: String, value: float)
 signal music_changed(stream: AudioStream)
@@ -25,7 +24,7 @@ const SETTINGS_PATH := "user://sound.cfg"
 ## Autoloads whose signals become SoundMap moments, by autoload name.
 const EVENT_AUTOLOADS := ["Bag", "MedicalItems", "Deaths", "Board", "MapRooms",
 	"Prescription", "GameProgress", "DialogManager", "PopupWindows", "Loc",
-	"Cutscene", "RadioLink", "BloodWorld", "LogBook"]
+	"RadioLink", "BloodWorld", "LogBook"]
 
 ## Signals that fire every frame (or are pure plumbing) - never sound moments
 const SKIP_SIGNALS := ["ToxicArea.warning", "ElectroPuzzle.run_tick",

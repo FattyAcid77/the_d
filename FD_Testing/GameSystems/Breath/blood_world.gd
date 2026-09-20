@@ -1,6 +1,5 @@
 extends Node
-## BloodWorld - add as an Autoload named "BloodWorld". Puts blood on the floor
-## and tells any BloodGrid underneath about it.
+## BloodWorld. Puts blood on the floor and tells any BloodGrid under it.
 
 signal spilled(type: BloodType, world_pos: Vector2)
 

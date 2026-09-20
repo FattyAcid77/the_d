@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://7p6jc21ru8hq"]
 
-[ext_resource type="Texture2D" uid="uid://bmyopqsltfohj" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom.png" id="1_hqns4"]
-[ext_resource type="Texture2D" uid="uid://c6l5qjwfkj4dl" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-wall.png" id="1_x0ka3"]
-[ext_resource type="Texture2D" uid="uid://rp4u44k2ogav" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-fur.png" id="4_x0ka3"]
-[ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="5_hqns4"]
+[ext_resource type="Texture2D" uid="uid://bmyopqsltfohj" path="res://Yazzed/Bipolarroom/f1-laundaryroom.png" id="1_hqns4"]
+[ext_resource type="Texture2D" uid="uid://c6l5qjwfkj4dl" path="res://Yazzed/Bipolarroom/f1-laundaryroom-wall.png" id="1_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://rp4u44k2ogav" path="res://Yazzed/Bipolarroom/f1-laundaryroom-fur.png" id="4_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://Lights/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="5_hqns4"]
 [ext_resource type="Texture2D" uid="uid://64a6xfd1isbe" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-sami.png" id="5_x0ka3"]
-[ext_resource type="Texture2D" uid="uid://l077rmvaiw2p" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (80).png" id="6_hqns4"]
-[ext_resource type="Texture2D" uid="uid://bncaxoyudfkem" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/288x288/288x288 textures (59).png" id="7_hqns4"]
+[ext_resource type="Texture2D" uid="uid://l077rmvaiw2p" path="res://Lights/FREE Textures Of Light/160x160/160x160 textures (80).png" id="6_hqns4"]
+[ext_resource type="Texture2D" uid="uid://bncaxoyudfkem" path="res://Lights/FREE Textures Of Light/288x288/288x288 textures (59).png" id="7_hqns4"]
 [ext_resource type="Shader" uid="uid://ddkbwk6hykf34" path="res://BGRD_Lights/node_2d.gdshader" id="7_rj586"]
-[ext_resource type="Texture2D" uid="uid://b1vkbupx37u0s" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/288x288/288x288 textures (61).png" id="8_x0ka3"]
-[ext_resource type="Texture2D" uid="uid://5a0qgqjlj16w" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (15).png" id="10_x0ka3"]
-[ext_resource type="Texture2D" uid="uid://elhmecbtu0sv" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/f1-laundaryroom-furlight.png" id="12_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://b1vkbupx37u0s" path="res://Lights/FREE Textures Of Light/288x288/288x288 textures (61).png" id="8_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://5a0qgqjlj16w" path="res://Lights/FREE Textures Of Light/512x512/512x512 textures (15).png" id="10_x0ka3"]
+[ext_resource type="Texture2D" uid="uid://elhmecbtu0sv" path="res://Yazzed/Bipolarroom/f1-laundaryroom-furlight.png" id="12_x0ka3"]
+[ext_resource type="PackedScene" uid="uid://dcq5g8tmkn3y5" path="res://Main_Stuff/sami_doctor.tscn" id="12_x6qon"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rj586"]
 blend_mode = 3
@@ -87,6 +88,9 @@ polygon = PackedVector2Array(17.99997, 365, 17.99997, 306, 25.99997, 306, 33.999
 [node name="F1Laundaryroom" type="Sprite2D" parent="." unique_id=146011165]
 position = Vector2(251, 193)
 texture = ExtResource("1_hqns4")
+
+[node name="Sami_Doctor" parent="." unique_id=2001215541 instance=ExtResource("12_x6qon")]
+position = Vector2(399, 256)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1248092240]
 material = SubResource("CanvasItemMaterial_rj586")

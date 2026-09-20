@@ -47,8 +47,6 @@ To change any of these: click the node, edit in the **Inspector** on the right.
 **Ending**
 | Setting | What it does |
 |---|---|
-| `victory_comic` | Nada's comic, played when he dies |
-| `victory_video` | or a single .ogv instead |
 | `won_flag` | flag raised on victory (dialogs/doors react to it) |
 
 **UI**

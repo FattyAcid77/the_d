@@ -12,19 +12,19 @@ var panel_art: Texture2D
 
 @export_group("The small slots (4 across, 3 down)")
 ## Top-left corner of the first small slot, in canvas pixels.
-@export var grid_origin: Vector2 = Vector2(326, 139)
+@export var grid_origin: Vector2 = Vector2(326, 130)
 @export var slot_size: Vector2 = Vector2(17, 16)
-@export var slot_gap: Vector2 = Vector2(3, 3)
+@export var slot_gap: Vector2 = Vector2(1, 3)
 ## How big an item's icon is drawn inside a small slot.
 @export var icon_size: float = 13.0
 
 @export_group("The two big slots")
 ## Top-left of the first big slot.
-@export var big_origin: Vector2 = Vector2(326, 197)
-@export var big_size: Vector2 = Vector2(37, 37)
-@export var big_gap: float = 3.0
-## Icons in the big slots are drawn larger.
-@export var big_icon_size: float = 28.0
+@export var big_origin: Vector2 = Vector2(329, 194)
+@export var big_size: Vector2 = Vector2(30, 30)
+@export var big_gap: float = 5.8
+## Icons in the big slots are drawn larger.	
+@export var big_icon_size: float = 32.0
 
 @export_group("The stack number")
 ## The little count in the bottom-right of a slot, e.g.
@@ -82,6 +82,7 @@ var _dragging := false
 
 func _ready() -> void:
 	# Sized to the 640x360 art canvas, not the viewport.
+	layout_direction = Control.LAYOUT_DIRECTION_LTR   # art-locked
 	position = Vector2.ZERO
 	size = Vector2(640, 360)
 	mouse_filter = Control.MOUSE_FILTER_STOP

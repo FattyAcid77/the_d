@@ -1,7 +1,7 @@
 extends Node
-## LogBook - add as an Autoload named "LogBook". The knowledge board, drawn as
-## a clipboard: notes pinned on the paper, the world blurred behind it,
-## sliding up from the bottom when opened.
+## LogBook. The clipboard of clues: entries, deductions and comments, cards
+## you can drag, slides up from the bottom. Also lives inside the Board as a
+## tab.
 
 const ENTRIES_DIR := "res://FD_Testing/GameSystems/LogBook/Entries"
 const OPEN_ACTION := "log"  # <-- your input action name
@@ -53,6 +53,13 @@ var is_open: bool = false
 
 var _layer: CanvasLayer
 var _blur: ColorRect
+
+@export_group("Background")
+## Blur the world behind the clipboard (a shader).
+@export var blur_background: bool = false
+## Darken it instead. Both off = the world shows as it is.
+@export var dim_background: bool = false
+@export var dim_color: Color = Color(0.05, 0.05, 0.07, 0.55)
 var _root: Control  # slides up/down
 var _frame: TextureRect
 var _svc: SubViewportContainer  # clips the paper area
@@ -75,6 +82,7 @@ var _drag_card := {}
 var _drag_moved := false
 var _panning := false
 var _was_paused := false
+var _owned_by_board := false   ## opened as the Board's tab: the Board owns pause and closing
 var _content_rect := Rect2()
 
 
@@ -127,12 +135,15 @@ func toggle() -> void:
 
 ## `animate` off makes it appear instantly with no slide.
 func open(animate: bool = true) -> void:
-	if is_open or DialogManager.is_active or Cutscene.is_playing:
+	if is_open or DialogManager.is_active:
 		return
 	is_open = true
 	opened.emit()
-	_was_paused = get_tree().paused
-	get_tree().paused = true
+	var board := get_node_or_null("/root/Board")
+	_owned_by_board = board != null and bool(board.get("is_open"))
+	if not _owned_by_board:
+		_was_paused = get_tree().paused
+		get_tree().paused = true
 	_layout()
 	_refresh()
 	_layer.visible = true
@@ -162,9 +173,12 @@ func close(animate: bool = true) -> void:
 	if _tween and _tween.is_running():
 		_tween.kill()
 
+	var owned := _owned_by_board
+	_owned_by_board = false
 	if not animate:
 		_layer.visible = false
-		get_tree().paused = _was_paused
+		if not owned:
+			get_tree().paused = _was_paused
 		return
 
 	var h := get_viewport().get_visible_rect().size.y
@@ -172,7 +186,8 @@ func close(animate: bool = true) -> void:
 	_tween.tween_property(_root, "position:y", h, slide_seconds * 0.8)
 	_tween.tween_callback(func() -> void:
 		_layer.visible = false
-		get_tree().paused = _was_paused)
+		if not owned:
+			get_tree().paused = _was_paused)
 
 
 # --- layout ----------------------------------------------------------------
@@ -193,6 +208,18 @@ func _layout() -> void:
 # --- input -----------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
+	# inside the Board, closing is the Board's job - otherwise the logbook
+	# vanishes and the Board is left up with just its tabs showing
+	if _owned_by_board and is_open:
+		var board := get_node_or_null("/root/Board")
+		if board and (InputAccess.event_pressed(event, "ui_cancel")
+				or (InputMap.has_action(OPEN_ACTION) and event.is_action_pressed(OPEN_ACTION))):
+			if _fact_panel.visible:
+				_fact_panel.visible = false
+			elif board.has_method("close"):
+				board.close()
+			get_viewport().set_input_as_handled()
+		return
 	var pressed_log := false
 	if InputMap.has_action(OPEN_ACTION):
 		pressed_log = event.is_action_pressed(OPEN_ACTION)
@@ -382,17 +409,19 @@ func _build_ui() -> void:
 	_blur = ColorRect.new()
 	_blur.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_blur.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if ResourceLoader.exists(BLUR_SHADER):
+	if blur_background and ResourceLoader.exists(BLUR_SHADER):
 		var mat := ShaderMaterial.new()
 		mat.shader = load(BLUR_SHADER)
 		_blur.material = mat
 		_blur.color = Color.WHITE
 	else:
-		_blur.color = Color(0.05, 0.05, 0.07, 0.85)  # fallback: plain dim
+		_blur.color = dim_color if dim_background else Color(0, 0, 0, 0)
 	_layer.add_child(_blur)
 
 	_root = Control.new()
 	_root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_root.layout_direction = Control.LAYOUT_DIRECTION_LTR   # art-locked, never mirrored
+	_root.add_to_group("no_mirror")
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_layer.add_child(_root)
 
@@ -423,12 +452,14 @@ func _build_ui() -> void:
 
 	_toast = Label.new()
 	_toast.add_theme_font_size_override("font_size", 22)
+	_toast.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_toast.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	_toast.position = Vector2(-50, 16)
 	_toast.visible = false
 	_root.add_child(_toast)
 
 	_fact_panel = PanelContainer.new()
+	_fact_panel.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	_fact_panel.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
 	_fact_panel.custom_minimum_size = Vector2(300, 0)
 	_fact_panel.offset_left = -320

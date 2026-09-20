@@ -64,6 +64,7 @@ var _last_mouse := Vector2.ZERO
 
 func _ready() -> void:
 	# Sized to the clipboard paper, not the whole canvas, with clipping on.
+	layout_direction = Control.LAYOUT_DIRECTION_LTR   # art-locked
 	position = paper_rect.position
 	size = paper_rect.size
 	clip_contents = true

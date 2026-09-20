@@ -29,6 +29,7 @@ var direction_animations_override: int = 0
 
 var direction: Vector2 = Vector2.ZERO  # set by the behavior each frame
 var cardinal_direction: Vector2 = Vector2.DOWN
+var is_blocked: bool = false  # the last move pushed against something (a wall, Sami, another NPC)
 var _behavior: NPCBehavior = null
 
 
@@ -85,8 +86,20 @@ func _physics_process(delta: float) -> void:
 	var speed: float = npc_resource.move_speed if npc_resource else 60.0
 	velocity = direction * speed
 	move_and_slide()
+	is_blocked = _hit_something()
 	_set_cardinal()
 	_update_animation()
+
+
+## True when something stood in the way of the direction we tried to walk.
+func _hit_something() -> bool:
+	if direction == Vector2.ZERO:
+		return false
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		if c and c.get_normal().dot(direction) < -0.3:
+			return true
+	return false
 
 
 ## Face a world position

@@ -1,6 +1,6 @@
 extends Node
-## PopupWindows - add as an Autoload named "PopupWindows". Spawns real OS
-## windows that talk to the player, emit sound, or look into another world.
+## PopupWindows. Real OS windows that appear on the player's desktop. Defs in
+## Windows/Defs.
 
 signal window_opened(id: String)
 signal window_closed(id: String)
