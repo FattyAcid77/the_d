@@ -1,6 +1,6 @@
 class_name LogFact extends Resource
 ## One piece of knowledge. It appears in the log the moment its flag is set -
-## and your dialog lines / cutscene triggers / puzzle already set flags, so
+## and your dialog lines / zones / puzzles already set flags, so
 ## learning happens with zero extra wiring.
 
 @export var flag: String = ""

@@ -16,15 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://bn2wphwq88drc" path="res://3MK-File/myshit/sami push down (1).png" id="13_hfd0h"]
 [ext_resource type="Script" uid="uid://dpwja1ey4xaot" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="14_qme8w"]
 [ext_resource type="Script" uid="uid://ykyg8w1qwik6" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="15_iq4ux"]
-[ext_resource type="Script" uid="uid://eqkod3vr65xj" path="res://FD_Testing/GameSystems/Cutscene/cutscene_trigger.gd" id="16_iq4ux"]
-[ext_resource type="Resource" uid="uid://c7drqucrjd6da" path="res://FD_Testing/GameSystems/Cutscene/example_comic.tres" id="17_idite"]
 [ext_resource type="PackedScene" uid="uid://dlw7l4o25npqk" path="res://control scene/door_reg.tscn" id="18_4k670"]
-[ext_resource type="Texture2D" uid="uid://crc5kol3rdv7y" path="res://3MK-File/myshit/icon.svg" id="18_v8wcs"]
 [ext_resource type="Texture2D" uid="uid://cjlgcx68s0dyt" path="res://3MK-File/TEST-ANIM/Player-down.tres" id="20_rtr1t"]
 [ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="21_oth73"]
 [ext_resource type="Script" uid="uid://dv28db6kmiprf" path="res://FD_Testing/GameSystems/Items/item_pickup.gd" id="22_ug341"]
 [ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
-[ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
+[ext_resource type="Resource" uid="uid://r0psm55ad7rr" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
 [ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
 [ext_resource type="Script" uid="uid://dtkr5os4od5m7" path="res://FD_Testing/GameSystems/Windows/window_blocker.gd" id="26_ldlnt"]
 
@@ -135,71 +132,12 @@ sprite_frames = SubResource("SpriteFrames_qme8w")
 dialog = SubResource("Resource_oth73")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_idite"]
-size = Vector2(94, 88)
-
-[sub_resource type="Resource" id="Resource_i5dnf"]
-script = ExtResource("8_gmla1")
-text = "YES...YES IT WAS ME"
-speaker_name = "AZOZ"
-action_name = "checkpoint"
-action_args = [3]
-wait_for_action = true
-metadata/_custom_type_script = "uid://c8gnwlh24codr"
-
-[sub_resource type="Resource" id="Resource_0owj3"]
-script = ExtResource("7_hfd0h")
-id = "azoz ate apple"
-require_flags = Array[String](["azoz_ate_apple"])
-lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_i5dnf")])
-metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
-
-[sub_resource type="Resource" id="Resource_cfm55"]
-script = ExtResource("8_gmla1")
-text = "..."
-speaker_name = "Azoz"
-metadata/_custom_type_script = "uid://c8gnwlh24codr"
-
-[sub_resource type="Resource" id="Resource_5ygl5"]
-script = ExtResource("7_hfd0h")
-id = "entry"
-lines = Array[ExtResource("8_gmla1")]([SubResource("Resource_cfm55")])
-metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
-
-[sub_resource type="Resource" id="Resource_m2n10"]
-script = ExtResource("11_idite")
-branches = Array[ExtResource("7_hfd0h")]([SubResource("Resource_0owj3"), SubResource("Resource_5ygl5")])
-metadata/_custom_type_script = "uid://vlj7pu3occ4q"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i5dnf"]
-atlas = ExtResource("18_v8wcs")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0owj3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i5dnf")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="Resource" id="Resource_h8623"]
-script = ExtResource("12_4k670")
-npc_name = "Azoz"
-sprite_frames = SubResource("SpriteFrames_0owj3")
-dialog = SubResource("Resource_m2n10")
-metadata/_custom_type_script = "uid://touqh4l3kjuq"
-
 [sub_resource type="Resource" id="Resource_racjh"]
 script = ExtResource("8_gmla1")
 text = "i am happy to be here"
 speaker_name = "Yazzed"
-show_if_flag = "sun"
-action_name = "toggle_flag  [flag]"
-action_args = [null]
+action_name = "wait  [seconds]"
+action_args = ["bandage", 5]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_38kcd"]
@@ -429,19 +367,6 @@ npc_resource = SubResource("Resource_qlnu4")
 [node name="NPC2" parent="." unique_id=697453048 groups=["Nothing"] instance=ExtResource("6_83ett")]
 position = Vector2(484, 331)
 npc_resource = SubResource("Resource_idite")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1404938324]
-position = Vector2(296, 404)
-script = ExtResource("16_iq4ux")
-comic = ExtResource("17_idite")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=204304978]
-position = Vector2(-72, 17)
-shape = SubResource("RectangleShape2D_idite")
-
-[node name="Azoz" parent="Area2D" unique_id=1804397539 groups=["Nothing"] instance=ExtResource("6_83ett")]
-position = Vector2(204, 144)
-npc_resource = SubResource("Resource_h8623")
 
 [node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("18_4k670")]
 position = Vector2(536, 260)

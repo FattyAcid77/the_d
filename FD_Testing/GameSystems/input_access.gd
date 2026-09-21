@@ -1,18 +1,17 @@
 class_name InputAccess
-## Small helper so every system asks for input the same safe way. the problem
-## it solves Godot's Input.is_action_just_pressed("interact") throws a hard
-## error The InputMap action "interact" doesn't exist.
+## Input lookups that don't explode when an action is missing.
+##
+## Input.is_action_just_pressed("interact") errors every frame if "interact"
+## isn't in the Input Map, which buries the debugger. These check first,
+## fall back to ui_accept, and complain once.
 
 const INTERACT := "interact"
-
-## Used automatically when the action above isn't in the Input Map yet.
 const FALLBACK := "ui_accept"
 
-# Remembers which names we've already complained about
 static var _warned := {}
 
 
-## The action name to actually use - the real one if it exists, else the fallback.
+## The action to use: the real one if it's mapped, else the fallback.
 static func resolve(action: String = INTERACT) -> String:
 	if InputMap.has_action(action):
 		return action
@@ -26,25 +25,22 @@ static func resolve(action: String = INTERACT) -> String:
 	return ""
 
 
-## Safe replacement for Input.is_action_just_pressed().
 static func just_pressed(action: String = INTERACT) -> bool:
 	var a := resolve(action)
 	return a != "" and Input.is_action_just_pressed(a)
 
 
-## Safe replacement for Input.is_action_pressed().
 static func pressed(action: String = INTERACT) -> bool:
 	var a := resolve(action)
 	return a != "" and Input.is_action_pressed(a)
 
 
-## Safe replacement for Input.is_action_just_released().
 static func just_released(action: String = INTERACT) -> bool:
 	var a := resolve(action)
 	return a != "" and Input.is_action_just_released(a)
 
 
-## Safe replacement for event.is_action_pressed().
+## event.is_action_pressed without the missing-action error.
 static func event_pressed(event: InputEvent, action: String) -> bool:
 	if event == null or not InputMap.has_action(action):
 		return false

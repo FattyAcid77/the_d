@@ -1,6 +1,6 @@
 extends Node
-## Loc - add as an Autoload named "Loc". Put it above every other autoload,
-## because the language must be set before anything draws text.
+## Loc. Language switching, Arabic/English. Autoload, and it goes first: text
+## draws with whatever language is set when the other autoloads come up.
 
 signal language_changed(code: String)
 
@@ -98,7 +98,11 @@ func _apply_mirror(rtl: bool) -> void:
 		root.call("set_layout_direction", dir)
 
 	# Every top-level Control gets told directly; their children inherit.
+	# Art-locked screens (Board, LogBook, death board) sit in "no_mirror"
+	# and lay themselves out for Arabic.
 	for c in _top_controls(root):
+		if c.is_in_group("no_mirror"):
+			continue
 		c.layout_direction = dir
 
 

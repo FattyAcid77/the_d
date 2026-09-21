@@ -1,6 +1,6 @@
 extends Node
-## DialogManager - add as an Autoload named "DialogManager". Owns one DialogUI
-## for the whole game.
+## DialogManager. Starts and stops conversations and owns the one DialogUI.
+## Runs line actions through DialogActions.
 
 const UI_SCENE_PATH := "res://FD_Testing/GameSystems/DialogV2/dialog_ui.tscn"
 
@@ -51,9 +51,13 @@ func emit_action(action_name: String, args: Array, wait: bool) -> void:
 	action_name = DialogActionStep.verb_of(action_name, "")
 	_waiting_action = wait
 
-	if action_name == "wait":
+	# wait = hold on the current text. delay = hide the box, hold, show it again
+	# for the next line. Both count in real time, so they work while paused.
+	if action_name == "wait" or action_name == "delay":
 		var secs := float(args[0]) if args.size() > 0 else 1.0
 		_waiting_action = true
+		if action_name == "delay" and _ui:
+			_ui.blank()
 		await get_tree().create_timer(secs).timeout
 		_waiting_action = false
 		return

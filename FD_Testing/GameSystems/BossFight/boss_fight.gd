@@ -35,10 +35,6 @@ signal fight_reset
 @export var tv_lift_delay: float = 1.0
 
 @export_group("Ending")
-## The comic that plays when he dies (Nada's panels).
-@export var victory_comic: Comic
-## Or a single video, if you'd rather.
-@export var victory_video: VideoStream
 @export var won_flag: String = "yazzed_defeated"
 
 @export_group("UI")
@@ -172,11 +168,6 @@ func _win() -> void:
 	Flags.set_flag(won_flag)
 	fight_won.emit()
 	print("BOSS FIGHT WON — flag '%s' raised." % won_flag)
-	await get_tree().create_timer(1.0, true, false, false).timeout
-	if victory_comic:
-		await Cutscene.play_comic(victory_comic)
-	elif victory_video:
-		await Cutscene.play_stream(victory_video)
 
 
 ## Sami died - put everything back and start over.

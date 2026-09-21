@@ -32,8 +32,6 @@ signal puzzle_solved
 @export var statue_name: String = "Statue"
 @export var portrait: Texture2D
 @export var solved_flag: String = "statue_solved"
-## Optional cutscene played before the statue speaks (.ogv path).
-@export_file("*.ogv") var solve_cutscene: String = ""
 
 var _right_was_solved := false
 var _left_was_solved := false
@@ -110,8 +108,6 @@ func _apply_solved(speak: bool) -> void:
 
 
 func _speak() -> void:
-	if solve_cutscene != "":
-		await Cutscene.play(solve_cutscene)
 	if dialog:
 		DialogManager.start_dialog(dialog, statue_name, portrait)
 

@@ -14,8 +14,7 @@ const VERBS := [
 	"play_sound", "play_music", "stop_music",
 	"play_set", "stop_set", "music_layer", "ambience_layer",
 	"progress_stage",
-	"play_cutscene",
-	"wait",
+	"wait", "delay",
 	"end_dialog",
 ]
 
@@ -153,18 +152,10 @@ static func run(tree: SceneTree, verb: String, args: Array) -> bool:
 			var gp := _node(root, "GameProgress")
 			if gp and args.size() > 0 and gp.has_method("goto_state"):
 				gp.goto_state(str(args[0]))
-		"play_cutscene":
-			var cs := _node(root, "Cutscene")
-			if cs and args.size() > 0:
-				var a = args[0]
-				if a is Comic and cs.has_method("play_comic"):
-					cs.play_comic(a)
-				elif cs.has_method("play"):
-					cs.play(str(a))  # a res:// path to a video
 
 		# --- flow ----------------------------------------------------------
-		"wait":
-			# handled by the caller, which knows how to pause the box
+		"wait", "delay":
+			# handled by DialogManager, which owns the box and the clock
 			return true
 		"end_dialog":
 			var dm := _node(root, "DialogManager")
@@ -202,21 +193,28 @@ static func _find_type(node: Node, type_name: String) -> Node:
 	return null
 
 
-## Adds an item to the existing inventory, by the same route ItemPickup uses
+## Puts the item in the Bag (the same route ItemPickup uses). Falls back to
+## an "inventory" autoload if there is no Bag in the project.
 static func _give_item(root: Node, args: Array) -> void:
 	if args.is_empty():
 		return
 	var mi := root.get_node_or_null("MedicalItems")
 	if mi == null or not mi.has_method("get_item"):
+		push_warning("DialogActions: give_item needs the MedicalItems autoload.")
 		return
 	var item = mi.get_item(str(args[0]))
 	if item == null:
-		push_warning("DialogActions: no MedicalItem with type '%s'." % str(args[0]))
+		push_warning("DialogActions: no MedicalItem with type '%s'. Known types: %s"
+				% [str(args[0]), mi.type_names() if mi.has_method("type_names") else "?"])
 		return
 	var amount := int(args[1]) if args.size() > 1 else 1
+	var bag := root.get_node_or_null("Bag")
+	if bag and bag.has_method("add"):
+		bag.add(item, amount)  # Bag raises pickup_flag and item:<type> itself
+		return
 	var inv := root.get_node_or_null("inventory")
 	if inv == null:
-		push_warning("DialogActions: give_item needs the 'inventory' autoload.")
+		push_warning("DialogActions: give_item found neither the Bag nor an 'inventory' autoload.")
 		return
 	for m in ["Add_item", "add_item", "AddItem", "add", "pick_up", "collect"]:
 		if inv.has_method(m):
@@ -233,13 +231,23 @@ static func _give_item(root: Node, args: Array) -> void:
 static func _take_item(root: Node, args: Array) -> void:
 	if args.is_empty():
 		return
+	var amount := int(args[1]) if args.size() > 1 else 1
+	var bag := root.get_node_or_null("Bag")
+	if bag and bag.has_method("remove"):
+		var type := str(args[0])
+		var mi := root.get_node_or_null("MedicalItems")
+		if mi and mi.has_method("get_item"):
+			var item = mi.get_item(type)
+			if item:
+				type = item.type  # so "Radio" and "radio" both hit the same stack
+		if bag.remove(type, amount) <= 0:
+			push_warning("DialogActions: take_item - Sami has no '%s'." % type)
+		return
 	var inv := root.get_node_or_null("inventory")
 	if inv == null:
 		return
-	var amount := int(args[1]) if args.size() > 1 else 1
 	for m in ["Remove_item", "remove_item", "RemoveItem", "remove", "take", "drop"]:
 		if inv.has_method(m):
 			inv.call(m, str(args[0]), amount)
 			return
-	push_warning("DialogActions: couldn't find a remove function on the inventory. "
-			+ "Tell me its real name and I'll wire it exactly.")
+	push_warning("DialogActions: couldn't find a remove function on the inventory.")

@@ -71,13 +71,12 @@ class_name DialogLine extends Resource
 	"music_layer  [layer; on|off|auto]",
 	"ambience_layer  [layer; on|off|auto]",
 	"progress_stage  [state]",
-	"play_cutscene  [path]",
-	"cutscene  [path]",
 	"checkpoint  [number]",
 	"prescription_show",
 	"prescription_entry",
 	"state  [state]",
 	"wait  [seconds]",
+	"delay  [seconds]",
 	"end_dialog",
 	"custom  (type the name below)"
 ) var action_name: String = ""

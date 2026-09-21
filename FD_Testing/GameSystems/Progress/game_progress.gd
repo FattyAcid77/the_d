@@ -1,6 +1,6 @@
 extends Node
-## GameProgress - add as an Autoload named "GameProgress". Remembers where the
-## player is in the game (one current state name) and broadcasts changes.
+## GameProgress. The current story state as one name, kept in the game_state
+## flag so checkpoints restore it.
 
 signal state_changed(old_state: String, new_state: String)
 

@@ -55,6 +55,7 @@ func _rows() -> Array:
 
 func _ready() -> void:
 	# Sized to the 640x360 art canvas, not the viewport.
+	layout_direction = Control.LAYOUT_DIRECTION_LTR
 	position = Vector2.ZERO
 	size = Vector2(640, 360)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -110,6 +111,9 @@ func _build() -> void:
 			y += row_height + row_gap
 			continue
 
+		# LTR before the position is set: a control not yet in the tree
+		# takes the window's direction, and Arabic would mirror it off-canvas
+		c.layout_direction = Control.LAYOUT_DIRECTION_LTR
 		c.position = Vector2(x, y)
 		c.size = Vector2(w, row_height)
 		c.mouse_filter = Control.MOUSE_FILTER_STOP if live \
@@ -190,6 +194,11 @@ func refresh() -> void:
 	queue_redraw()
 
 
+func _is_rtl() -> bool:
+	var loc := get_node_or_null("/root/Loc")
+	return loc != null and loc.has_method("is_rtl") and loc.is_rtl(loc.current())
+
+
 ## Where a real setting would report in.
 func _on_row_changed(key: String, value) -> void:
 	match key:
@@ -208,13 +217,16 @@ func _draw() -> void:
 			Vector2(content_rect.position.x + content_rect.size.x, rule_y),
 			rule_color, 1.0)
 
+	var rtl := _is_rtl()
 	for entry in _controls:
 		var row: Dictionary = entry["row"]
 		var y: float = entry["y"]
 		var col: Color = label_color if row["live"] else dead_color
+		# Arabic reads toward the slider, so its label sits against it
 		draw_string(f, Vector2(content_rect.position.x, y + row_height * 0.72),
-				tr(row["label"]), HORIZONTAL_ALIGNMENT_LEFT, label_width - 4.0,
-				label_size, col)
+				tr(row["label"]),
+				HORIZONTAL_ALIGNMENT_RIGHT if rtl else HORIZONTAL_ALIGNMENT_LEFT,
+				label_width - 4.0, label_size, col)
 
 	var last: float = content_rect.position.y
 	if not _controls.is_empty():
