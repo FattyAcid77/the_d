@@ -15,7 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://d2bjirlrulvj6" path="res://characters scenes/NPC_Assets/7mto_cleaning_1.png" id="13_waonf"]
 [ext_resource type="Texture2D" uid="uid://day1d5o1hywm8" path="res://characters scenes/NPC_Assets/om_alsaleel_in_the_office.png" id="14_cdgtx"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="15_pb284"]
-[ext_resource type="PackedScene" path="res://Cutscenes/cine_player.tscn" id="16_cfl07"]
+[ext_resource type="PackedScene" uid="uid://ws5n8eh8o56g" path="res://Cutscenes/cine_player.tscn" id="16_cfl07"]
+[ext_resource type="Script" uid="uid://241k33imt8d1" path="res://Cutscenes/cine_step.gd" id="17_rtxce"]
 
 [sub_resource type="Resource" id="Resource_ysp6m"]
 script = ExtResource("7_rtxce")
@@ -194,6 +195,8 @@ metadata/_custom_type_script = "uid://c8gnwlh24codr"
 script = ExtResource("7_rtxce")
 text = "خذ…. هذا اللوح للطبيب و  جهاز راديو  للاستمتاع به اثناء الانتظار"
 speaker_name = "؟؟؟"
+action_name = "give_item  [type; amount]"
+action_args = ["Radio,1"]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_h25gc"]
@@ -572,6 +575,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Resource" id="Resource_xxgnw"]
+script = ExtResource("17_rtxce")
+kind = 1
+to_position = Vector2(409, 121)
+duration = 2.5
+
+[sub_resource type="Resource" id="Resource_2g00e"]
+script = ExtResource("17_rtxce")
+at_time = 2.7
+kind = 1
+to_position = Vector2(436.03, 234)
+metadata/_custom_type_script = "uid://241k33imt8d1"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0yi8"]
+radius = 53.037724
+
 [node name="Lvl1LobbyMigration" type="Node2D" unique_id=129310507 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_30g0c")
 player = NodePath("Sami_Doctor_test")
@@ -582,7 +601,7 @@ doors = [NodePath("door_reg_type2")]
 [node name="Lvl_1_Hall_BGRD" parent="." unique_id=1479894374 instance=ExtResource("2_kvmyh")]
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_2d5s0")]
-position = Vector2(649, 373)
+position = Vector2(436, 234)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
 [node name="Hamato" parent="." unique_id=639073822 groups=["HamatoIntroduction", "NPC"] instance=ExtResource("5_imgkc")]
@@ -617,6 +636,18 @@ this_door_name = "lvl1_lobby_north"
 [node name="CollisionShape2D" parent="door_reg_type2" index="0" unique_id=1184659297]
 position = Vector2(2.5, 0)
 
-[node name="CinePlayer" parent="." unique_id=2006906300 instance=ExtResource("16_cfl07")]
+[node name="CinePlayer" parent="." unique_id=2006906300 node_paths=PackedStringArray("trigger_area") instance=ExtResource("16_cfl07")]
+steps = Array[ExtResource("17_rtxce")]([SubResource("Resource_xxgnw"), SubResource("Resource_2g00e")])
+trigger_area = NodePath("../Area2D")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1248821648]
+position = Vector2(409, 121)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1693753350 groups=["EV_CS_1"]]
+position = Vector2(452, 253)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1787677589 groups=["EV_CS_1"]]
+position = Vector2(37, -9)
+shape = SubResource("CircleShape2D_v0yi8")
 
 [editable path="door_reg_type2"]

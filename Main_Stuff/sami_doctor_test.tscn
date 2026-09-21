@@ -775,6 +775,7 @@ position = Vector2(2, 30)
 shape = SubResource("CircleShape2D_6vt2j")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=537697524]
+visible = false
 position = Vector2(1.5687103, -14.697159)
 occluder = SubResource("OccluderPolygon2D_ef2nf")
 

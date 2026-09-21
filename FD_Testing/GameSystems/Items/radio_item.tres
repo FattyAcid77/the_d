@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MedicalItem" format=3 uid="uid://cdmrk1tam5gu2"]
+
+[ext_resource type="Script" uid="uid://dlv2mr6up1u1i" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1_dkl2f"]
+[ext_resource type="Texture2D" uid="uid://dfdxvanu3t3c5" path="res://3MK-File/radio.png" id="2_a42un"]
+
+[resource]
+script = ExtResource("1_dkl2f")
+type = "Radio"
+display_name = "راديو قديم"
+effect = ""
+texture = ExtResource("2_a42un")
+description = "جهاز راديو قديم أعكتني إياه موظفة الإستقبال"
+metadata/_custom_type_script = "uid://dlv2mr6up1u1i"
