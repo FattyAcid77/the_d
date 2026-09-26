@@ -1,0 +1,5 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://dlgv2trigger01" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="1"]
+
+[node name="DialogTrigger" instance=ExtResource("1")]

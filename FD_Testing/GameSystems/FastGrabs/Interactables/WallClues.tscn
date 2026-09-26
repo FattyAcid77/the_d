@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Interactables/wall_clues.gd" id="1_v3g3h"]
+
+[node name="WallClues" type="Node2D" unique_id=2083085490]
+script = ExtResource("1_v3g3h")
+
+[node name="Slot1" type="Marker2D" parent="." unique_id=857481908]
+
+[node name="Slot2" type="Marker2D" parent="." unique_id=1834370406]
+position = Vector2(80, 0)
+
+[node name="Slot3" type="Marker2D" parent="." unique_id=1561338850]
+position = Vector2(160, 0)

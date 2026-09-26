@@ -23,6 +23,8 @@
 [ext_resource type="Script" uid="uid://goxssdheyerb" path="res://FD_Testing/GameSystems/Breath/blood_grid.gd" id="23_bkopv"]
 [ext_resource type="Resource" uid="uid://r0psm55ad7rr" path="res://FD_Testing/GameSystems/Items/item_bandage.tres" id="23_h0mp1"]
 [ext_resource type="Resource" path="res://FD_Testing/GameSystems/Items/item_scalpel.tres" id="24_h0mp1"]
+[ext_resource type="Script" uid="uid://dw8hwje1dwn64" path="res://FD_Testing/GameSystems/PC/pc_terminal.gd" id="25_h0mp1"]
+[ext_resource type="Script" uid="uid://bfld8qjo7wlru" path="res://FD_Testing/GameSystems/Identity/identity_debug.gd" id="26_de0em"]
 [ext_resource type="Script" uid="uid://dtkr5os4od5m7" path="res://FD_Testing/GameSystems/Windows/window_blocker.gd" id="26_ldlnt"]
 
 [sub_resource type="Resource" id="Resource_h0mp1"]
@@ -329,6 +331,9 @@ func open_windwos() -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h0mp1"]
 size = Vector2(237, 143.5)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldlnt"]
+radius = 41.01219
+
 [node name="Lvl3Lobby" type="Node2D" unique_id=1338498092 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_sailq")
 player = NodePath("Sami_Doctor")
@@ -353,7 +358,7 @@ next_state = "Nothing_Matter"
 script = ExtResource("3_k5edk")
 
 [node name="Sami_Doctor" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("6_k5edk")]
-position = Vector2(356, 426)
+position = Vector2(340, 420)
 camera_adj = NodePath("../Lvl3LobbyBgrd")
 
 [node name="StatuePuzzle" parent="." unique_id=1258403952 groups=["statue_area"] instance=ExtResource("5_sailq")]
@@ -376,7 +381,7 @@ target_door_name = "Bipolar_Hall_South"
 this_door_name = "lvl_3_lobby_FD"
 
 [node name="Yazed" parent="." unique_id=569669017 groups=["Nothing"] instance=ExtResource("6_83ett")]
-position = Vector2(392, 434)
+position = Vector2(713, 448)
 npc_resource = SubResource("Resource_bac7x")
 
 [node name="NPC3" parent="." unique_id=1293972803 groups=["Nothing"] instance=ExtResource("6_83ett")]
@@ -429,5 +434,16 @@ script = ExtResource("26_ldlnt")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Window_Blocker" unique_id=1076438204]
 position = Vector2(-58.5, -34.25)
 shape = SubResource("RectangleShape2D_h0mp1")
+
+[node name="PcTerminal" type="Area2D" parent="." unique_id=1165240957]
+position = Vector2(412, 434)
+script = ExtResource("25_h0mp1")
+metadata/_custom_type_script = "uid://dw8hwje1dwn64"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PcTerminal" unique_id=2005320439]
+shape = SubResource("CircleShape2D_ldlnt")
+
+[node name="PC_Test" type="Node2D" parent="." unique_id=501309140]
+script = ExtResource("26_de0em")
 
 [connection signal="area_entered" from="Window_Area" to="Window_Area" method="_on_area_entered"]

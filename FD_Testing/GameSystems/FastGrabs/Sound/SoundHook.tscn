@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Sound/sound_hook.gd" id="1_n7wx5"]
+
+[node name="SoundHook" type="Node" unique_id=1952218180]
+script = ExtResource("1_n7wx5")

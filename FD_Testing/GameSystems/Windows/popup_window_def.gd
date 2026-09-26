@@ -151,6 +151,9 @@ enum TextMotion {
 
 ## Separate-world portals only.
 @export var portal_make_camera: bool = true
+## The scene inside takes the mouse and keyboard, for a mini-game. Off = a
+## peephole that only shows the scene.
+@export var portal_interactive: bool = false
 
 @export_group("IMAGE windows")
 @export var image: Texture2D

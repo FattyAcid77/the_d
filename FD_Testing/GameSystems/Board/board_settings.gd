@@ -1,6 +1,7 @@
 class_name BoardSettings extends Control
-## Settings tab: language dropdown and the six volume sliders, drawn on the
-## 640x360 art canvas. Fullscreen/controls rows are placeholders.
+## Settings page: language dropdown, the six volume sliders and fullscreen,
+## drawn on the 640x360 art canvas. The Board's tab and the main menu both use
+## it. The controls row is a placeholder.
 
 @export_group("Where it sits on the 640x360 canvas")
 ## The usable area inside the clipboard.
@@ -11,11 +12,15 @@ class_name BoardSettings extends Control
 
 @export_group("Words")
 @export var heading: String = "SETTINGS"
-@export var footer_note: String = "Fullscreen and controls are not wired up yet."
+@export var footer_note: String = "Controls are not wired up yet."
 @export var heading_size: int = 10
 @export var label_size: int = 7
 @export var note_size: int = 6
 @export var font: Font
+
+@export_group("Rows")
+## Show only these rows, by key (language, Master, Music, Ambience, SFX, UI, Dialog, fullscreen, controls). Empty shows all.
+@export var only_rows: PackedStringArray = []
 
 @export_group("Sound")
 ## Preview blip when a volume slider is released
@@ -48,7 +53,7 @@ func _rows() -> Array:
 		{"key": "SFX",      "label": "Effects",    "live": true,  "kind": "volume"},
 		{"key": "UI",       "label": "Interface",  "live": true,  "kind": "volume"},
 		{"key": "Dialog",   "label": "Dialog",     "live": true,  "kind": "volume"},
-		{"key": "fullscr",  "label": "Fullscreen", "live": false, "kind": "check"},
+		{"key": "fullscreen", "label": "Fullscreen", "live": true, "kind": "check"},
 		{"key": "controls", "label": "Controls",   "live": false, "kind": "button"},
 	]
 
@@ -65,12 +70,18 @@ func _ready() -> void:
 	var snd := get_node_or_null("/root/Sound")
 	if snd and snd.has_signal("volume_changed"):
 		snd.volume_changed.connect(_on_external_volume)
+	var prof := get_node_or_null("/root/Profile")
+	if prof:
+		prof.display_changed.connect(_on_display_changed)
 
 
 func _build() -> void:
 	var snd := get_node_or_null("/root/Sound")
+	var prof := get_node_or_null("/root/Profile")
 	var y := content_rect.position.y + float(heading_size) + 8.0
 	for row in _rows():
+		if not only_rows.is_empty() and not only_rows.has(row["key"]):
+			continue
 		var x := content_rect.position.x + label_width
 		var w := content_rect.size.x - label_width
 		var c: Control = null
@@ -100,6 +111,12 @@ func _build() -> void:
 			"check":
 				var cb := CheckBox.new()
 				cb.text = ""
+				if prof:
+					cb.button_pressed = prof.call(row["key"])
+					cb.toggled.connect(_on_check_toggled.bind(row["key"]))
+				else:
+					live = false
+				_style_check(cb)
 				c = cb
 			"button":
 				var b := Button.new()
@@ -111,9 +128,11 @@ func _build() -> void:
 			y += row_height + row_gap
 			continue
 
-		# LTR before the position is set: a control not yet in the tree
-		# takes the window's direction, and Arabic would mirror it off-canvas
+		# into the tree first, then placed: a button made off-tree has already
+		# cached the window's direction, and in Arabic its position gets mirrored
+		# off-canvas even with LTR set on it
 		c.layout_direction = Control.LAYOUT_DIRECTION_LTR
+		add_child(c)
 		c.position = Vector2(x, y)
 		c.size = Vector2(w, row_height)
 		c.mouse_filter = Control.MOUSE_FILTER_STOP if live \
@@ -122,7 +141,6 @@ func _build() -> void:
 		c.modulate = Color(1, 1, 1, 1) if live else Color(1, 1, 1, 0.4)
 		if not live:
 			c.set_process_input(false)
-		add_child(c)
 		# LanguageSetting builds its own OptionButton at the default font size
 		if row["kind"] == "dropdown":
 			_shrink_text(c)
@@ -152,6 +170,41 @@ func _style_slider(sl: HSlider) -> void:
 	sl.add_theme_icon_override("grabber", grab)
 	sl.add_theme_icon_override("grabber_highlight", grab)
 	sl.add_theme_icon_override("grabber_disabled", grab)
+
+
+## Same ink as the sliders: an empty box, filled when on
+func _style_check(cb: CheckBox) -> void:
+	var side := int(row_height) - 5
+	var off := Image.create(side, side, false, Image.FORMAT_RGBA8)
+	var on := Image.create(side, side, false, Image.FORMAT_RGBA8)
+	for py in side:
+		for px in side:
+			var edge := px == 0 or py == 0 or px == side - 1 or py == side - 1
+			var inner := px > 1 and py > 1 and px < side - 2 and py < side - 2
+			off.set_pixel(px, py, slider_ink if edge else Color(0, 0, 0, 0))
+			on.set_pixel(px, py, slider_ink if edge or inner else Color(0, 0, 0, 0))
+	var off_tex := ImageTexture.create_from_image(off)
+	var on_tex := ImageTexture.create_from_image(on)
+	for icon in ["unchecked", "unchecked_disabled"]:
+		cb.add_theme_icon_override(icon, off_tex)
+	for icon in ["checked", "checked_disabled"]:
+		cb.add_theme_icon_override(icon, on_tex)
+	var empty := StyleBoxEmpty.new()
+	for box in ["normal", "hover", "pressed", "focus", "hover_pressed"]:
+		cb.add_theme_stylebox_override(box, empty)
+
+
+func _on_check_toggled(on: bool, key: String) -> void:
+	var prof := get_node_or_null("/root/Profile")
+	if prof:
+		prof.call("set_" + key, on)
+
+
+func _on_display_changed() -> void:
+	var prof := get_node_or_null("/root/Profile")
+	for entry in _controls:
+		if entry["row"]["kind"] == "check" and prof:
+			(entry["node"] as CheckBox).set_pressed_no_signal(prof.call(entry["row"]["key"]))
 
 
 func _on_volume_changed(value: float, category: String) -> void:

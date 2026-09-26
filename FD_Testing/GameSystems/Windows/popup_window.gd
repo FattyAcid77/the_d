@@ -9,6 +9,8 @@ signal portal_ready(scene_root: Node)
 var def: PopupWindowDef
 ## For PORTAL windows showing a separate scene: that scene's root node.
 var portal_root: Node = null
+var _portal_container: SubViewportContainer = null
+var _portal_viewport: SubViewport = null
 ## The camera looking into a PORTAL window.
 var portal_camera: Camera2D = null
 var _portal_anchor := Vector2i.ZERO  # window pos when the portal opened
@@ -506,13 +508,17 @@ func _build_portal() -> void:
 	var svc := SubViewportContainer.new()
 	svc.stretch = true
 	svc.set_anchors_preset(Control.PRESET_FULL_RECT)
-	svc.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# interactive: the container passes mouse and keys into the scene
+	svc.mouse_filter = Control.MOUSE_FILTER_STOP if def.portal_interactive \
+			else Control.MOUSE_FILTER_IGNORE
 	_content_parent().add_child(svc)
+	_portal_container = svc
 
 	var sv := SubViewport.new()
 	sv.size = def.size
 	sv.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	svc.add_child(sv)
+	_portal_viewport = sv
 
 	if def.portal_same_world and def.portal_scene == null:
 		push_warning("PopupWindow '%s': portal_same_world isn't supported "
@@ -529,7 +535,8 @@ func _build_portal() -> void:
 	if def.portal_scene:
 		sv.own_world_3d = false
 		sv.world_2d = World2D.new()
-		sv.handle_input_locally = false
+		# interactive: input stays inside the scene instead of falling to the game
+		sv.handle_input_locally = def.portal_interactive
 		sv.disable_3d = true
 		var inst := def.portal_scene.instantiate()
 		sv.add_child(inst)
@@ -809,3 +816,18 @@ func _on_drag_input(event: InputEvent) -> void:
 	elif event is InputEventMouseMotion and _dragging:
 		position += Vector2i(event.position) - _drag_from
 		_base_position = position
+
+
+## Bring this window to the front and give the scene inside the keyboard
+## and mouse. RadioCheck calls it when the mini-game opens.
+func focus_portal() -> void:
+	if unfocusable:
+		unfocusable = false
+		set_flag(Window.FLAG_NO_FOCUS, false)
+	grab_focus()
+	if _portal_container:
+		_portal_container.mouse_filter = Control.MOUSE_FILTER_STOP
+		_portal_container.grab_focus()
+	if _portal_viewport:
+		_portal_viewport.handle_input_locally = true
+		_portal_viewport.gui_disable_input = false

@@ -21,7 +21,7 @@ Haji: MOVE! The whole floor is going!,Haji: MOVE! The whole floor is going!,
 "Haji: don't stop, don't stop —","Haji: don't stop, don't stop —",
 Heals and stops bleeding,Heals and stops bleeding,
 I will not leave until it's done,I will not leave until it's done,
-Leave,Leave,
+Leave,Leave,مغادرة
 Lost too much blood.,Lost too much blood.,
 Med Kit,Med Kit,
 NEW PRESCRIPTION:,NEW PRESCRIPTION:,
@@ -63,5 +63,17 @@ you are not supposed to be here,you are not supposed to be here,
 "Fullscreen","Fullscreen","ملء الشاشة"
 "Controls","Controls","التحكم"
 "Not yet","Not yet","ليس بعد"
-"Fullscreen and controls are not wired up yet.","Fullscreen and controls are not wired up yet.","ملء الشاشة والتحكم غير مفعّلة بعد."
+"Controls are not wired up yet.","Controls are not wired up yet.","التحكم غير مفعّل بعد."
 "Sound autoload missing","Sound autoload missing","نظام الصوت غير مسجّل"
+"New game","New game","لعبة جديدة"
+"Load game","Load game","تحميل الحفظ"
+"Radio","Radio","الراديو"
+"Previous station","Previous station","المحطة السابقة"
+"Next station","Next station","المحطة التالية"
+"Settings","Settings","الإعدادات"
+"Leave? Press again","Leave? Press again","مغادرة؟ اضغط مرة أخرى"
+"VOLUME","VOLUME","الصوت"
+"DISPLAY","DISPLAY","العرض"
+"Back","Back","رجوع"
+"Next","Next","التالي"
+"Done","Done","تم"
