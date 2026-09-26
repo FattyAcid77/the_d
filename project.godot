@@ -102,10 +102,13 @@ Doors=""
 MazSad_Door=""
 Elevator_Quest=""
 Elevator_pt1=""
-Maz_Elevator_Hallway=""
 Sad_Room_Door=""
 Maz_Sad_Room_Door=""
 EV_CS_1="For the area that activates the first cutscene in elevator sequence"
+Maz_Elevator_Quest_Hallway=""
+light_switch=""
+Lights_Off=""
+Maz_Elevator_Hallway=""
 
 [input]
 

@@ -38,37 +38,32 @@ metadata/_custom_type_script = "uid://c8gnwlh24codr"
 script = ExtResource("8_r38vp")
 text = "اطفئ النور وسأخبرك، المفتاح عند الباب."
 speaker_name = "قسور"
-set_flags = Array[String](["Qaswar_Light_Action"])
+set_flags = Array[String](["Qaswar_Light_Action1"])
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_6gkp4"]
 script = ExtResource("7_3t1ue")
 id = "Sad_Elevator_init"
+blocked_by_flags = Array[String](["Qaswar_Light_Action1"])
 lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_auwn4"), SubResource("Resource_hlqg6"), SubResource("Resource_bm7l8"), SubResource("Resource_oomwi")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
-[sub_resource type="Resource" id="Resource_tgt42"]
+[sub_resource type="Resource" id="Resource_af2e1"]
 script = ExtResource("8_r38vp")
-text = " اسفل قدميك، لكن لا تقوم بتشغيل النور"
+text = "اطفئ النور وسأخبرك، المفتاح عند الباب."
 speaker_name = "قسور"
-set_flags = Array[String](["Panel_Choices"])
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
-[sub_resource type="Resource" id="Resource_2ji0h"]
+[sub_resource type="Resource" id="Resource_6jbkf"]
 script = ExtResource("7_3t1ue")
-id = "Qaswar_After_Light_Action"
-require_flags = Array[String](["Qaswar_Light_Action"])
-lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_tgt42")])
-metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
-
-[sub_resource type="Resource" id="Resource_w64cl"]
-script = ExtResource("7_3t1ue")
-id = "Lights_On"
+id = "Qaswar_Light_Action1"
+require_flags = Array[String](["Qaswar_Light_Action1"])
+lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_af2e1")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_uhsip"]
 script = ExtResource("12_526xe")
-branches = Array[ExtResource("7_3t1ue")]([SubResource("Resource_6gkp4"), SubResource("Resource_2ji0h"), SubResource("Resource_w64cl")])
+branches = Array[ExtResource("7_3t1ue")]([SubResource("Resource_6gkp4"), SubResource("Resource_6jbkf")])
 metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uu4hi"]
@@ -93,6 +88,30 @@ sprite_frames = SubResource("SpriteFrames_yq8qf")
 dialog = SubResource("Resource_uhsip")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
+[sub_resource type="Resource" id="Resource_stggq"]
+script = ExtResource("8_r38vp")
+text = "تحريك المفتاح"
+speaker_name = "   "
+set_flags = Array[String](["Light_Switch_off"])
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_xp1oa"]
+script = ExtResource("7_3t1ue")
+id = "light_switch_init"
+lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_stggq")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_3t1ue"]
+script = ExtResource("12_526xe")
+branches = Array[ExtResource("7_3t1ue")]([SubResource("Resource_xp1oa")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="Resource" id="Resource_4f13b"]
+script = ExtResource("13_ev2mk")
+npc_name = "    "
+dialog = SubResource("Resource_3t1ue")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
 [node name="SadRoomMigration" type="Node2D" unique_id=1189622833 node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_ycl6m")
 player = NodePath("Sami_Doctor_test")
@@ -107,7 +126,7 @@ script = ExtResource("4_af2e1")
 position = Vector2(107, 281)
 camera_adj = NodePath("../Node2D")
 
-[node name="Door_reg" parent="." unique_id=1549867704 instance=ExtResource("5_stggq")]
+[node name="Door_reg" parent="." unique_id=1549867704 groups=["Sad_Room_Door"] instance=ExtResource("5_stggq")]
 position = Vector2(36, 292)
 entery_direction = 1
 push_distance = 60
@@ -118,3 +137,15 @@ this_door_name = "Sad_Room_Door"
 [node name="Qaswar" parent="." unique_id=1071129527 instance=ExtResource("6_xp1oa")]
 position = Vector2(370, 265)
 npc_resource = SubResource("Resource_e6sj1")
+
+[node name="light_switch" parent="." unique_id=870688830 groups=["light_switch"] instance=ExtResource("6_xp1oa")]
+position = Vector2(47, 348)
+npc_resource = SubResource("Resource_4f13b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1645565668 groups=["Lights_Off"]]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2137051554 groups=["Lights_Off"]]
+offset_right = 646.0
+offset_bottom = 439.0
+color = Color(0, 0, 0, 1)

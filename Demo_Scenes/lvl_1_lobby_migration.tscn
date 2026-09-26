@@ -195,8 +195,14 @@ metadata/_custom_type_script = "uid://c8gnwlh24codr"
 script = ExtResource("7_rtxce")
 text = "خذ…. هذا اللوح للطبيب و  جهاز راديو  للاستمتاع به اثناء الانتظار"
 speaker_name = "؟؟؟"
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_rtxce"]
+script = ExtResource("7_rtxce")
+text = "( قمت بأخذ اللوح والراديو)"
+speaker_name = "   "
 action_name = "give_item  [type; amount]"
-action_args = ["Radio,1"]
+action_args = ["Radio", 1]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_h25gc"]
@@ -291,7 +297,7 @@ script = ExtResource("6_cfl07")
 id = "S3alel_Welcome"
 require_flags = Array[String](["Hamato_Introduction_Finished"])
 blocked_by_flags = Array[String](["S3alel_introduction_finished"])
-lines = Array[ExtResource("7_rtxce")]([SubResource("Resource_fx16m"), SubResource("Resource_w6aar"), SubResource("Resource_hgaiw"), SubResource("Resource_h25gc"), SubResource("Resource_t170u"), SubResource("Resource_bo3rv"), SubResource("Resource_mitlc"), SubResource("Resource_l2np2"), SubResource("Resource_h4xkc"), SubResource("Resource_vvib2"), SubResource("Resource_kxdwo"), SubResource("Resource_2b71s"), SubResource("Resource_gsa1i"), SubResource("Resource_2cfxy"), SubResource("Resource_mfi34"), SubResource("Resource_wnqka"), SubResource("Resource_modo6")])
+lines = Array[ExtResource("7_rtxce")]([SubResource("Resource_fx16m"), SubResource("Resource_w6aar"), SubResource("Resource_hgaiw"), SubResource("Resource_rtxce"), SubResource("Resource_h25gc"), SubResource("Resource_t170u"), SubResource("Resource_bo3rv"), SubResource("Resource_mitlc"), SubResource("Resource_l2np2"), SubResource("Resource_h4xkc"), SubResource("Resource_vvib2"), SubResource("Resource_kxdwo"), SubResource("Resource_2b71s"), SubResource("Resource_gsa1i"), SubResource("Resource_2cfxy"), SubResource("Resource_mfi34"), SubResource("Resource_wnqka"), SubResource("Resource_modo6")])
 metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
 
 [sub_resource type="Resource" id="Resource_y5lbl"]

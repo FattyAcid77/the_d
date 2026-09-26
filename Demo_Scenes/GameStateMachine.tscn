@@ -43,8 +43,8 @@ next_state = "Elevator_pt2"
 
 [node name="Elevator_pt2" type="Node" parent="." unique_id=1830836194]
 script = ExtResource("2_eofw3")
-show_groups = Array[String](["Maz_Elevator_Hallway", "EV_CS_1"])
-hide_groups = Array[String](["S3alel", "Sad_Room_Door", "Maz_Sad_Room_Door"])
+show_groups = Array[String](["Maz_Elevator_Quest_Hallway", "EV_CS_1"])
+hide_groups = Array[String](["S3alel", "Sad_Room_Door", "Maz_Sad_Room_Door", "Lights_Off"])
 set_flags = Array[String](["Hamato_Elevator_d1_Finished", "Maz_Sad_door_open"])
 auto_advance_when_flag = "Maz_Elevator_Quest_init"
 next_state = "Elevator_pt3"
@@ -52,6 +52,20 @@ next_state = "Elevator_pt3"
 [node name="Elevator_pt3" type="Node" parent="." unique_id=286964987]
 script = ExtResource("2_eofw3")
 show_groups = Array[String](["Sad_Room_Door"])
+hide_groups = Array[String](["light_switch", "Lights_Off"])
+auto_advance_when_flag = "Qaswar_Light_Action1"
+next_state = "Qaswar_light_Req"
+
+[node name="Qaswar_light_Req" type="Node" parent="." unique_id=1345777789]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["light_switch"])
+hide_groups = Array[String](["Lights_Off"])
+auto_advance_when_flag = "Light_Switch_off"
+next_state = "Qaswar_Light_Off"
+
+[node name="Qaswar_Light_Off" type="Node" parent="." unique_id=219941174]
+script = ExtResource("2_eofw3")
+show_groups = Array[String](["Lights_Off"])
 
 [node name="Qaswar_Choice" type="Node" parent="." unique_id=1702953036]
 script = ExtResource("2_eofw3")

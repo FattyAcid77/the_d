@@ -2,6 +2,8 @@ class_name Door_reg extends Area2D
 
 signal  player_entered_door(door: Door_reg)
 
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
 @export_enum("north", "east", "south", "west") var entery_direction
 @export var push_distance:int = 100
 @export var new_scene_path:String
@@ -55,3 +57,4 @@ func get_move_dir() -> Vector2:
 func _on_body_exited(_body: Node2D) -> void:
 	player_inside = false
 	SceneManager.player_in_area = false
+	
