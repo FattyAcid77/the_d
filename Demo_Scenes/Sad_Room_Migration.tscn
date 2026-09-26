@@ -143,6 +143,8 @@ position = Vector2(47, 348)
 npc_resource = SubResource("Resource_4f13b")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1645565668 groups=["Lights_Off"]]
+layer = 2
+visible = false
 follow_viewport_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=2137051554 groups=["Lights_Off"]]
