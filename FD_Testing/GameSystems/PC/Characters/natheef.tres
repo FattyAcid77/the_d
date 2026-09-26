@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PcCharacter" format=3]
+
+[ext_resource type="Texture2D" path="res://FD_Testing/GameSystems/PC/Art/Characters/COMPUTER_UI_natheef_icon.png" id="1_caywk"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/PC/pc_character.gd" id="2_f7j2y"]
+
+[resource]
+script = ExtResource("2_f7j2y")
+icon = ExtResource("1_caywk")

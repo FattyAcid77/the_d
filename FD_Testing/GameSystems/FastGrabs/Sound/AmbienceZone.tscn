@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Sound/ambience_zone.gd" id="1_yymc7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42ja6"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="AmbienceZone" type="Area2D" unique_id=347499836]
+script = ExtResource("1_yymc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954395852]
+shape = SubResource("RectangleShape2D_42ja6")

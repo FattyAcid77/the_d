@@ -21,13 +21,8 @@ const RTL_LANGUAGES := ["ar", "he", "fa", "ur"]
 ## Flip the whole UI for RTL languages (portraits, bars, buttons swap sides).
 @export var mirror_ui: bool = true
 
-## global off switch for the first-launch language chooser.
-@export var first_launch_prompt: bool = true
-
 ## Prints what it's doing while you set this up.
 @export var debug_log: bool = true
-
-var _chosen: bool = false
 
 
 func _ready() -> void:
@@ -49,11 +44,6 @@ func is_rtl(code: String = "") -> bool:
 	return RTL_LANGUAGES.has(c)
 
 
-## True the very first time the game runs, so you can show the chooser.
-func needs_first_prompt() -> bool:
-	return not _chosen
-
-
 func language_name(code: String) -> String:
 	return LANGUAGES.get(code, code)
 
@@ -70,7 +60,6 @@ func set_language(code: String, remember: bool = true) -> void:
 		return
 	_apply(code, true)
 	if remember:
-		_chosen = true
 		_save_settings()
 
 
@@ -122,9 +111,7 @@ func _load_settings() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(SETTINGS_PATH) != OK:
 		TranslationServer.set_locale(default_language)
-		_chosen = false
 		return
-	_chosen = bool(cfg.get_value("language", "chosen", false))
 	var code := str(cfg.get_value("language", "code", default_language))
 	TranslationServer.set_locale(code if LANGUAGES.has(code) else default_language)
 
@@ -132,13 +119,4 @@ func _load_settings() -> void:
 func _save_settings() -> void:
 	var cfg := ConfigFile.new()
 	cfg.set_value("language", "code", current())
-	cfg.set_value("language", "chosen", _chosen)
 	cfg.save(SETTINGS_PATH)
-
-
-## Wipes the saved choice, so the first-launch prompt shows again (testing).
-func forget_choice() -> void:
-	_chosen = false
-	_save_settings()
-	if debug_log:
-		print("Loc: choice forgotten — the prompt will show next launch.")

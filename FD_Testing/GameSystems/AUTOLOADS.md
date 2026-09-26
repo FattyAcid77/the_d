@@ -25,8 +25,9 @@ does nothing.
 | 14 | `MapRooms` | `res://FD_Testing/GameSystems/Map/map_rooms.gd` |
 | 15 | `Board` | `res://FD_Testing/GameSystems/Board/board.gd` |
 | 16 | `PlayerIdentity` | `res://FD_Testing/GameSystems/Identity/player_identity.gd` |
+| 17 | `Profile` | `res://FD_Testing/GameSystems/MainMenu/profile.gd` |
 
-`Bag`, `MapRooms`, `Board` and `PlayerIdentity` are the newest rows. If the
+`Profile` is the newest row (the main menu needs it). If the
 board does nothing when you press TAB, `Board` is missing.
 
 There is no `Cutscene` autoload any more. If it is still in your Globals list
@@ -42,8 +43,14 @@ them as autoloads will cause errors:
 `InputAccess`, `HealthAccess`, `WindowSpace`, `DialogActions`, `MapRoom`,
 `MapRoomDef`, `WindowSkin`, `WindowBlocker`, `RadioReactor`, `RadioBand`,
 `DialogZone`, `BoardInventory`, `BoardMap`, `BoardSettings`,
-`LanguageSetting`, `LanguagePrompt`, `AvatarView`, `DiscordWSProbe`,
-`DiscordPipeProbe`, `identity_debug.gd`, and every `*_component.gd`.
+`LanguageSetting`, `MainMenu`, `MenuHotspot`, `MenuSettings`, `MenuRadio`,
+`RadioTrack`, `AvatarView`, `DiscordWSProbe`,
+`DiscordPipeProbe`, `IdentityLabel`, `identity_debug.gd`, `PcScreen`,
+`PcTerminal`, `PcCharacter`, `PcClock`, `WindowsUserPicture` (C#), `WindowsDesktop` (C#), `GifDecoder`,
+`WallpaperEngineLink`, `FlagArea`,
+`Readable`, `ItemSocket`, `WallClues`, `RadioCheck`, `SoundSpy` (Sound adds it),
+`DebugPanel` (Flags adds it, debug builds only),
+and every `*_component.gd`.
 
 ---
 

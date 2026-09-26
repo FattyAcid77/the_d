@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Progress/progress_state_machine.gd" id="1_6dfno"]
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Progress/progress_state.gd" id="2_nudvk"]
+
+[node name="ProgressStateMachine" type="Node" unique_id=296110453]
+script = ExtResource("1_6dfno")
+
+[node name="Start" type="Node" parent="." unique_id=1982253787]
+script = ExtResource("2_nudvk")

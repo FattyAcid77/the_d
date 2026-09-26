@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Health/damage_area.gd" id="1_nmhtt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lqhc"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="DamageArea" type="Area2D" unique_id=1757418605]
+script = ExtResource("1_nmhtt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1982633751]
+shape = SubResource("RectangleShape2D_1lqhc")

@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_zone.gd" id="1_uo32b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0cqf"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="DialogZone" type="Area2D" unique_id=1600461234]
+script = ExtResource("1_uo32b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1451415470]
+shape = SubResource("RectangleShape2D_k0cqf")

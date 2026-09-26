@@ -182,10 +182,12 @@ func _build_ui() -> void:
 
 	_play_btn = Button.new()
 	_play_btn.text = play_button_text
-	_play_btn.position = play_button_offset
 	_play_btn.pressed.connect(play_stage)
 	_play_btn.visible = false
+	# LTR and placed after it's in the tree, or an Arabic start mirrors it away
+	_play_btn.layout_direction = Control.LAYOUT_DIRECTION_LTR
 	add_child(_play_btn)
+	_play_btn.position = play_button_offset
 
 
 func _say(text: String, is_answer: bool) -> void:

@@ -5,6 +5,10 @@ extends Node
 
 signal volume_changed(category: String, value: float)
 signal music_changed(stream: AudioStream)
+## Every moment as it fires, with what it played ("" = nothing mapped).
+signal moment_fired(moment: String, cue: String)
+## Every library sound as it starts; found is false for an id that isn't there.
+signal sound_started(id: String, found: bool)
 
 ## where sounds live.
 const LIBRARY_DIRS := [
@@ -107,6 +111,8 @@ func _ready() -> void:
 	beds.name = "Beds"
 	add_child(beds)
 	_install_muffle_filter()
+	if OS.is_debug_build():
+		add_child(SoundSpy.new())
 
 	# The other autoloads may sit after us in the autoload order
 	_connect_dialog.call_deferred()
@@ -294,6 +300,7 @@ func start_loop(key: String, id: String, fade: float = 0.4) -> void:
 	var d := _resolve(id)
 	if d == null:
 		return
+	sound_started.emit(id, true)
 	var p := AudioStreamPlayer.new()
 	p.stream = d.stream
 	p.bus = _bus(d.category)
@@ -361,10 +368,12 @@ func _fire(ev: String, source: Node, args: Array) -> void:
 	# 1) the specific wins: a resource riding on the signal with its own sound_id
 	var id := _resource_sound(ev, args)
 	if id != "":
+		moment_fired.emit(ev, id)
 		_fire_one(id, source, args)
 		return
 	# 2) otherwise the production team's map.
 	var value := map.sound_for(ev) if map else ""
+	moment_fired.emit(ev, value)
 	if value == "":
 		return  # unmapped = silent
 	cue(value, source, args)
@@ -616,6 +625,7 @@ func has_sound(id: String) -> bool:
 func _resolve(id: String) -> SoundDef:
 	var d := get_def(id)
 	if d == null or d.stream == null:
+		sound_started.emit(id, false)
 		if not _warned_ids.has(id):
 			_warned_ids[id] = true
 			push_warning("Sound: no playable sound with id '%s' — staying silent. (Looked in %s, subfolders included. Loaded ids: %s)"
@@ -631,6 +641,7 @@ func play(id: String) -> void:
 	var d := _resolve(id)
 	if d == null:
 		return
+	sound_started.emit(id, true)
 	_one_shot(d.stream, _bus(d.category), d.volume_db, d.random_pitch())
 
 
@@ -638,24 +649,28 @@ func play(id: String) -> void:
 func sfx(id: String) -> void:
 	var d := _resolve(id)
 	if d:
+		sound_started.emit(id, true)
 		_one_shot(d.stream, _bus("SFX"), d.volume_db, d.random_pitch())
 
 
 func ui(id: String) -> void:
 	var d := _resolve(id)
 	if d:
+		sound_started.emit(id, true)
 		_one_shot(d.stream, _bus("UI"), d.volume_db, d.random_pitch())
 
 
 func ambience(id: String) -> void:
 	var d := _resolve(id)
 	if d:
+		sound_started.emit(id, true)
 		_one_shot(d.stream, _bus("Ambience"), d.volume_db, d.random_pitch())
 
 
 func dialog(id: String) -> void:
 	var d := _resolve(id)
 	if d:
+		sound_started.emit(id, true)
 		_one_shot(d.stream, _bus("Dialog"), d.volume_db, d.random_pitch())
 
 
@@ -687,6 +702,7 @@ func sfx_at(id: String, world_pos: Vector2) -> void:
 	var scene := get_tree().current_scene
 	if scene == null:
 		return
+	sound_started.emit(id, true)
 	var p := AudioStreamPlayer2D.new()
 	p.stream = d.stream
 	p.bus = _bus(d.category if d.category != "Master" else "SFX")

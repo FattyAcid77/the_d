@@ -7,6 +7,13 @@ signal flag_changed(flag_name: String, value: Variant)
 var _flags: Dictionary = {}
 
 
+func _ready() -> void:
+	# The F11 debug panel, debug builds only. Last child of the root, so it
+	# hears F11 / Esc / TAB before the Board does.
+	if OS.is_debug_build():
+		get_tree().root.add_child.call_deferred(DebugPanel.new())
+
+
 ## Set a flag to any value (bool / int / String).
 func set_flag(flag_name: String, value: Variant = true) -> void:
 	_flags[flag_name] = value

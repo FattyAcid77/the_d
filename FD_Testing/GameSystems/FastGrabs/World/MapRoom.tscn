@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Map/map_room.gd" id="1_s0goe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdk3j"]
+resource_local_to_scene = true
+size = Vector2(320, 180)
+
+[node name="MapRoom" type="Node2D" unique_id=872886989]
+script = ExtResource("1_s0goe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2045512048]
+shape = SubResource("RectangleShape2D_wdk3j")

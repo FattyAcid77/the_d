@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Sound/floor_surface.gd" id="1_glufy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q08pw"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="FloorSurface" type="Area2D" unique_id=2042543540]
+script = ExtResource("1_glufy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=523344343]
+shape = SubResource("RectangleShape2D_q08pw")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_trigger.gd" id="1_trg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_trg"]
+resource_local_to_scene = true
 radius = 34.0
 
 [node name="DialogTrigger" type="Area2D"]

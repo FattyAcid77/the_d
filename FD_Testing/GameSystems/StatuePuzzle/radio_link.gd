@@ -36,6 +36,14 @@ func available() -> bool:
 	return get_node_or_null("/root/RadioGlobal") != null
 
 
+## The current frequency with decimals, for a radio that tunes to 23.12.
+func frequency_exact() -> float:
+	var rg := get_node_or_null("/root/RadioGlobal")
+	if rg == null:
+		return float(min_hz())
+	return float(rg.radio)
+
+
 ## The current frequency in Hz.
 func frequency() -> int:
 	var rg := get_node_or_null("/root/RadioGlobal")

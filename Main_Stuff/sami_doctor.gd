@@ -37,6 +37,12 @@ func _ready():
 	var inv := get_node_or_null("/root/inventory")
 	if inv != null:
 		inv.player_ref(self)
+	
+	
+	var f = FileAccess.open("user://buildcheck.txt", FileAccess.WRITE)
+	f.store_string("debug=" + str(OS.is_debug_build()))
+	f.close()
+	
 
 
 # Every frame we ONLY read the input into 'direction'.

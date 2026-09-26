@@ -170,6 +170,7 @@ func close(animate: bool = true) -> void:
 	closed.emit()
 	_active_deduction = ""
 	_fact_panel.visible = false
+	_panning = false
 	if _tween and _tween.is_running():
 		_tween.kill()
 
@@ -208,9 +209,9 @@ func _layout() -> void:
 # --- input -----------------------------------------------------------------
 
 func _unhandled_input(event: InputEvent) -> void:
-	# inside the Board, closing is the Board's job - otherwise the logbook
-	# vanishes and the Board is left up with just its tabs showing
 	if _owned_by_board and is_open:
+		# inside the Board, closing is the Board's job - otherwise the logbook
+		# vanishes and the Board is left up with just its tabs showing
 		var board := get_node_or_null("/root/Board")
 		if board and (InputAccess.event_pressed(event, "ui_cancel")
 				or (InputMap.has_action(OPEN_ACTION) and event.is_action_pressed(OPEN_ACTION))):
@@ -219,25 +220,28 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif board.has_method("close"):
 				board.close()
 			get_viewport().set_input_as_handled()
-		return
-	var pressed_log := false
-	if InputMap.has_action(OPEN_ACTION):
-		pressed_log = event.is_action_pressed(OPEN_ACTION)
-	elif event is InputEventKey and event.pressed and not event.echo:
-		pressed_log = event.physical_keycode == KEY_M
-	if pressed_log:
-		toggle()
-		get_viewport().set_input_as_handled()
-		return
+			return
+	else:
+		var pressed_log := false
+		if InputMap.has_action(OPEN_ACTION):
+			pressed_log = event.is_action_pressed(OPEN_ACTION)
+		elif event is InputEventKey and event.pressed and not event.echo:
+			pressed_log = event.physical_keycode == KEY_M
+		if pressed_log:
+			toggle()
+			get_viewport().set_input_as_handled()
+			return
+		if is_open and InputAccess.event_pressed(event, "ui_cancel"):
+			if _fact_panel.visible:
+				_fact_panel.visible = false
+			else:
+				close()
+			get_viewport().set_input_as_handled()
+			return
 	if not is_open:
 		return
-	if InputAccess.event_pressed(event, "ui_cancel"):
-		if _fact_panel.visible:
-			_fact_panel.visible = false
-		else:
-			close()
-		get_viewport().set_input_as_handled()
-	elif event is InputEventKey and event.pressed and not event.echo \
+	# the view controls, same in both modes
+	if event is InputEventKey and event.pressed and not event.echo \
 			and event.physical_keycode in [KEY_HOME, KEY_SPACE]:
 		# lost in the empty parts of an infinite board? snap back to the notes
 		_center_board()
