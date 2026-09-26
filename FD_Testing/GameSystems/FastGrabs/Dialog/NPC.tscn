@@ -1,0 +1,5 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://npcv2base0001" path="res://FD_Testing/GameSystems/NPC/npc.tscn" id="1"]
+
+[node name="NPC" instance=ExtResource("1")]

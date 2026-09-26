@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://bkhq1gx712om4"]
+
+[ext_resource type="Script" uid="uid://d2hasnebqyu7u" path="res://FD_Testing/GameSystems/MainMenu/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" uid="uid://cw2v0nyiswcir" path="res://FD_Testing/GameSystems/MainMenu/menu_hotspot.gd" id="2_hot"]
+[ext_resource type="VideoStream" uid="uid://dg76aiipr4hd6" path="res://FD_Testing/GameSystems/MainMenu/Art/Reehsa_Intro.ogv" id="2_qjaiy"]
+[ext_resource type="Script" uid="uid://nmg7lkak0lfa" path="res://FD_Testing/GameSystems/MainMenu/menu_settings.gd" id="3_set"]
+[ext_resource type="Script" uid="uid://buakyfx5crlsn" path="res://FD_Testing/GameSystems/MainMenu/menu_radio.gd" id="4_radio"]
+[ext_resource type="Texture2D" uid="uid://b6sfus75epn7c" path="res://FD_Testing/GameSystems/MainMenu/Art/menu_preview.png" id="5_preview"]
+[ext_resource type="Script" uid="uid://cnexd7w63uygd" path="res://FD_Testing/GameSystems/MainMenu/radio_track.gd" id="7_edf1o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_2va7a"]
+script = ExtResource("7_edf1o")
+sound_id = "loop paper"
+metadata/_custom_type_script = "uid://cnexd7w63uygd"
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1130814152]
+layer = 10
+script = ExtResource("1_menu")
+intro_video = ExtResource("2_qjaiy")
+intro_every_launch = true
+new_game_scene = "uid://d2wwqrdyyx2h7"
+
+[node name="Root" type="Control" parent="." unique_id=1222733348 groups=["no_mirror"]]
+unique_name_in_owner = true
+texture_filter = 1
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Blackout" type="ColorRect" parent="Root" unique_id=28304076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Stage" type="Control" parent="Root" unique_id=584473205]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Root/Stage" unique_id=1722992221]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("5_preview")
+
+[node name="RadioArt" type="TextureRect" parent="Root/Stage" unique_id=1417371191]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="RadioGlow" type="ColorRect" parent="Root/Stage" unique_id=531575973]
+unique_name_in_owner = true
+visible = false
+material = SubResource("CanvasItemMaterial_add")
+layout_mode = 0
+offset_left = 84.0
+offset_top = 249.0
+offset_right = 188.0
+offset_bottom = 280.0
+mouse_filter = 2
+color = Color(1, 0.72, 0.38, 0.28)
+
+[node name="Hotspots" type="Node2D" parent="Root/Stage" unique_id=1128117007]
+unique_name_in_owner = true
+
+[node name="Radio" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=2090811599]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(63, 238, 80, 228, 205, 228, 213, 240, 213, 322, 203, 331, 72, 331, 62, 320)
+script = ExtResource("2_hot")
+action = "radio"
+label = "Radio"
+label_at = Vector2(137, 219)
+
+[node name="KnobBack" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=1841231418]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(86, 298, 89, 290, 97, 287, 105, 290, 108, 298, 105, 306, 97, 309, 89, 306)
+script = ExtResource("2_hot")
+action = "knob_back"
+label = "Previous station"
+label_at = Vector2(137, 219)
+
+[node name="KnobNext" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=2121917272]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(164, 298, 167, 290, 175, 287, 183, 290, 186, 298, 183, 306, 175, 309, 167, 306)
+script = ExtResource("2_hot")
+action = "knob_next"
+label = "Next station"
+label_at = Vector2(137, 219)
+
+[node name="Dominoes" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=599636747]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(208, 300, 236, 291, 270, 299, 271, 347, 208, 349)
+script = ExtResource("2_hot")
+action = "dominoes"
+label = "Settings"
+label_at = Vector2(240, 283)
+
+[node name="Door" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=1990969988]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(296, 46, 349, 46, 349, 98, 362, 100, 362, 297, 283, 297, 283, 100, 296, 98)
+script = ExtResource("2_hot")
+label = "New game"
+label_at = Vector2(322, 306)
+
+[node name="Counter" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=936537948]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(438, 38, 560, 34, 560, 82, 572, 80, 572, 226, 422, 226, 422, 82, 438, 84)
+script = ExtResource("2_hot")
+action = "counter"
+enabled = false
+label = "Load game"
+label_at = Vector2(497, 234)
+
+[node name="Chair" type="Polygon2D" parent="Root/Stage/Hotspots" unique_id=962057029]
+color = Color(1, 0.8, 0.3, 0.3)
+polygon = PackedVector2Array(560, 228, 640, 216, 640, 360, 486, 360, 490, 300, 524, 262)
+script = ExtResource("2_hot")
+action = "chair"
+label = "Leave"
+label_at = Vector2(566, 210)
+
+[node name="HoverLabel" type="Label" parent="Root/Stage" unique_id=1080407560]
+unique_name_in_owner = true
+auto_translate_mode = 2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 12.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dim" type="ColorRect" parent="Root/Stage" unique_id=1227093097]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Settings" type="Control" parent="Root/Stage" unique_id=710164334]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+script = ExtResource("3_set")
+
+[node name="Intro" type="Control" parent="Root" unique_id=1034839406]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="IntroBlack" type="ColorRect" parent="Root/Intro" unique_id=304527664]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="IntroVideo" type="VideoStreamPlayer" parent="Root/Intro" unique_id=7118394]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+expand = true
+
+[node name="Fade" type="ColorRect" parent="Root" unique_id=904536409]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Radio" type="Node" parent="." unique_id=2117115888]
+unique_name_in_owner = true
+script = ExtResource("4_radio")
+tracks = Array[ExtResource("7_edf1o")]([SubResource("Resource_2va7a")])

@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Interactables/radio_check.gd" id="1_ewbca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dn4b8"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="RadioCheck" type="Area2D" unique_id=262726549]
+script = ExtResource("1_ewbca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397051124]
+shape = SubResource("RectangleShape2D_dn4b8")
+
+[node name="Prompt" type="Node2D" parent="." unique_id=1078444705]
+position = Vector2(0, -44)
+
+[node name="Mark" type="Label" parent="Prompt" unique_id=830356662]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 20
+text = "E"
+horizontal_alignment = 1

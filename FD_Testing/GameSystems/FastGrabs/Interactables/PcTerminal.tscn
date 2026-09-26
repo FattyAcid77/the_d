@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/PC/pc_terminal.gd" id="1_q6trj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3thl"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="PcTerminal" type="Area2D" unique_id=1864129650]
+script = ExtResource("1_q6trj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1012374044]
+shape = SubResource("RectangleShape2D_m3thl")
+
+[node name="Prompt" type="Node2D" parent="." unique_id=1288708972]
+position = Vector2(0, -44)
+
+[node name="Mark" type="Label" parent="Prompt" unique_id=1799960]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 20
+text = "E"
+horizontal_alignment = 1

@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Windows/window_blocker.gd" id="1_s267t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_voyvv"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="WindowBlocker" type="Area2D" unique_id=1250468925]
+script = ExtResource("1_s267t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077802920]
+shape = SubResource("RectangleShape2D_voyvv")

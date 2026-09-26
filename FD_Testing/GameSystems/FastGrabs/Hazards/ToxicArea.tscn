@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Breath/toxic_area.gd" id="1_wau1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5gfm"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="ToxicArea" type="Area2D" unique_id=2133505895]
+script = ExtResource("1_wau1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2138902172]
+shape = SubResource("RectangleShape2D_t5gfm")

@@ -1,0 +1,454 @@
+[gd_scene format=3 uid="uid://b2qjb3dw013mk"]
+
+[ext_resource type="Script" uid="uid://dfj2rxskw08d3" path="res://FD_Testing/GameSystems/PC/pc_screen.gd" id="1_nt8p6"]
+[ext_resource type="Script" uid="uid://bg6mv8rurelv8" path="res://FD_Testing/GameSystems/PC/pc_character.gd" id="2_isk0t"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/sami_classified.tres" id="3_xvudu"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/haji.tres" id="4_hjgci"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/hamato.tres" id="5_ttj66"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/maryam.tres" id="6_qpc7x"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/natheef.tres" id="7_gvylg"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/om_alsaleel.tres" id="8_10olp"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/qassuar.tres" id="9_7tfyy"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/yamas.tres" id="10_7ernh"]
+[ext_resource type="Resource" path="res://FD_Testing/GameSystems/PC/Characters/yazeed.tres" id="11_6woe4"]
+[ext_resource type="Texture2D" uid="uid://hmvuw218b3jn" path="res://FD_Testing/GameSystems/PC/Art/1-COMPUTER_UI.png" id="12_bc5vs"]
+[ext_resource type="Texture2D" uid="uid://clxxg74pkj27y" path="res://FD_Testing/GameSystems/PC/Art/2-COMPUTER_UI.png" id="13_ougld"]
+[ext_resource type="Texture2D" uid="uid://boalnrnbonwky" path="res://FD_Testing/GameSystems/PC/Art/3-COMPUTER_UI-Sheet.png" id="14_eufd8"]
+[ext_resource type="Texture2D" uid="uid://bboof67urwpis" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_arabic.png" id="15_r7dv1"]
+[ext_resource type="Texture2D" uid="uid://lrbe01fhb6kq" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_page.png" id="16_hhl2d"]
+[ext_resource type="Texture2D" uid="uid://oimdwhnf5n6p" path="res://FD_Testing/GameSystems/PC/Art/MOUSE_CORSAIR.png" id="17_m5pfm"]
+[ext_resource type="Theme" uid="uid://bbg0ndek8sfsl" path="res://FD_Testing/GameSystems/PC/pc_theme.tres" id="18_puhju"]
+[ext_resource type="Texture2D" uid="uid://c615ghvjwp07u" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI.png" id="19_b3h2h"]
+[ext_resource type="Texture2D" uid="uid://bpcgl23pak7tt" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_screen_glare.png" id="20_wd1ts"]
+[ext_resource type="Script" uid="uid://djgl3d7mt0eyv" path="res://FD_Testing/GameSystems/PC/pc_clock.gd" id="21_0ou7b"]
+[ext_resource type="Texture2D" uid="uid://bmabcw1kx5kaq" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_clock_digits.png" id="22_ldjls"]
+[ext_resource type="Texture2D" uid="uid://blk76jvs2rgvu" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_icons_tab.png" id="23_haqug"]
+[ext_resource type="Texture2D" uid="uid://f547l30s7yse" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_characters_tab.png" id="24_q3yud"]
+[ext_resource type="Texture2D" uid="uid://bas2twdwxrnqn" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_characters_tab_arrows.png" id="25_11o5r"]
+[ext_resource type="Texture2D" uid="uid://y3vcpvodxaep" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_page_pointer.png" id="26_crj0y"]
+[ext_resource type="Texture2D" uid="uid://b38kh3p76ahg3" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_tutorial_tab.png" id="27_8emvq"]
+[ext_resource type="Texture2D" uid="uid://0oodafnoyb5n" path="res://FD_Testing/GameSystems/PC/Art/COMPUTER_UI_media_tab.png" id="28_5wthf"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5wk0y"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddwmb"]
+atlas = ExtResource("25_11o5r")
+region = Rect2(195, 107, 6, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueshx"]
+atlas = ExtResource("25_11o5r")
+region = Rect2(480, 107, 6, 11)
+
+[node name="PcScreen" type="CanvasLayer" unique_id=348663659]
+layer = 95
+script = ExtResource("1_nt8p6")
+characters = Array[ExtResource("2_isk0t")]([ExtResource("4_hjgci"), ExtResource("5_ttj66"), ExtResource("6_qpc7x"), ExtResource("7_gvylg"), ExtResource("8_10olp"), ExtResource("9_7tfyy"), ExtResource("10_7ernh"), ExtResource("11_6woe4"), ExtResource("3_xvudu")])
+instagram_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+x_url = "https://www.youtube.com/watch?v=fC7oUOUEEi4"
+use_24_hour = true
+boot_off = ExtResource("12_bc5vs")
+boot_on = ExtResource("13_ougld")
+login_sheet = ExtResource("14_eufd8")
+desktop_arabic = ExtResource("15_r7dv1")
+default_page = ExtResource("16_hhl2d")
+cursor = ExtResource("17_m5pfm")
+
+[node name="Root" type="Control" parent="." unique_id=1295827543 groups=["no_mirror"]]
+unique_name_in_owner = true
+texture_filter = 1
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("18_puhju")
+
+[node name="Blackout" type="ColorRect" parent="Root" unique_id=475831742]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Stage" type="Control" parent="Root" unique_id=847350942]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Boot" type="TextureRect" parent="Root/Stage" unique_id=1373652952]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("12_bc5vs")
+
+[node name="Avatar" type="TextureRect" parent="Root/Stage/Boot" unique_id=143572136]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 248.0
+offset_top = 111.0
+offset_right = 363.0
+offset_bottom = 200.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="UserName" type="Label" parent="Root/Stage/Boot" unique_id=1734567284]
+unique_name_in_owner = true
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 247.0
+offset_top = 222.0
+offset_right = 365.0
+offset_bottom = 234.0
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Desktop" type="TextureRect" parent="Root/Stage" unique_id=289664366]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("19_b3h2h")
+
+[node name="Wallpaper" type="TextureRect" parent="Root/Stage/Desktop" unique_id=750540955]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 104.0
+offset_top = 69.0
+offset_right = 504.0
+offset_bottom = 271.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Glare" type="TextureRect" parent="Root/Stage/Desktop" unique_id=1386302735]
+unique_name_in_owner = true
+visible = false
+material = SubResource("CanvasItemMaterial_5wk0y")
+layout_mode = 0
+offset_left = 104.0
+offset_top = 69.0
+offset_right = 504.0
+offset_bottom = 271.0
+mouse_filter = 2
+texture = ExtResource("20_wd1ts")
+
+[node name="Clock" type="Control" parent="Root/Stage/Desktop" unique_id=1184379169]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 472.0
+offset_top = 277.0
+offset_right = 508.0
+offset_bottom = 285.0
+mouse_filter = 2
+script = ExtResource("21_0ou7b")
+digits = ExtResource("22_ldjls")
+
+[node name="PowerButton" type="Button" parent="Root/Stage/Desktop" unique_id=2015362902]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 97.0
+offset_top = 274.0
+offset_right = 119.0
+offset_bottom = 288.0
+focus_mode = 0
+flat = true
+
+[node name="DataButton" type="Button" parent="Root/Stage/Desktop" unique_id=1826752138]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 127.0
+offset_top = 274.0
+offset_right = 180.0
+offset_bottom = 288.0
+focus_mode = 0
+flat = true
+
+[node name="DataBar" type="TextureRect" parent="Root/Stage/Desktop" unique_id=509238821]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("23_haqug")
+
+[node name="CharactersIcon" type="Button" parent="Root/Stage/Desktop/DataBar" unique_id=1792549752]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 96.0
+offset_right = 172.0
+offset_bottom = 131.0
+focus_mode = 0
+flat = true
+
+[node name="TutorialIcon" type="Button" parent="Root/Stage/Desktop/DataBar" unique_id=2133015304]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 138.0
+offset_right = 172.0
+offset_bottom = 173.0
+focus_mode = 0
+flat = true
+
+[node name="MediaIcon" type="Button" parent="Root/Stage/Desktop/DataBar" unique_id=578149617]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 136.0
+offset_top = 180.0
+offset_right = 172.0
+offset_bottom = 215.0
+focus_mode = 0
+flat = true
+
+[node name="CloseData" type="Button" parent="Root/Stage/Desktop/DataBar" unique_id=849281566]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 179.0
+offset_top = 80.0
+offset_right = 188.0
+offset_bottom = 89.0
+focus_mode = 0
+flat = true
+
+[node name="CharactersApp" type="Control" parent="Root/Stage/Desktop" unique_id=851431301]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Window" type="TextureRect" parent="Root/Stage/Desktop/CharactersApp" unique_id=1639990587]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("24_q3yud")
+
+[node name="Slots" type="Control" parent="Root/Stage/Desktop/CharactersApp" unique_id=568549645]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 202.0
+offset_top = 96.0
+offset_right = 478.0
+offset_bottom = 136.0
+mouse_filter = 2
+
+[node name="Slot0" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=676418067]
+layout_mode = 0
+offset_right = 33.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot1" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=444684013]
+layout_mode = 0
+offset_left = 41.0
+offset_right = 74.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot2" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=1136470144]
+layout_mode = 0
+offset_left = 81.0
+offset_right = 114.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot3" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=1835734011]
+layout_mode = 0
+offset_left = 122.0
+offset_right = 155.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot4" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=2065792481]
+layout_mode = 0
+offset_left = 162.0
+offset_right = 195.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot5" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=190723072]
+layout_mode = 0
+offset_left = 202.0
+offset_right = 235.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="Slot6" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp/Slots" unique_id=2088779456]
+layout_mode = 0
+offset_left = 243.0
+offset_right = 276.0
+offset_bottom = 40.0
+focus_mode = 0
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="ArrowLeft" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp" unique_id=2029170804]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 193.0
+offset_top = 103.0
+offset_right = 203.0
+offset_bottom = 122.0
+focus_mode = 0
+texture_normal = SubResource("AtlasTexture_ddwmb")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="ArrowRight" type="TextureButton" parent="Root/Stage/Desktop/CharactersApp" unique_id=230704099]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 478.0
+offset_top = 103.0
+offset_right = 488.0
+offset_bottom = 122.0
+focus_mode = 0
+texture_normal = SubResource("AtlasTexture_ueshx")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="CloseCharacters" type="Button" parent="Root/Stage/Desktop/CharactersApp" unique_id=744270677]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 481.0
+offset_top = 87.0
+offset_right = 490.0
+offset_bottom = 96.0
+focus_mode = 0
+flat = true
+
+[node name="Pointer" type="TextureRect" parent="Root/Stage/Desktop/CharactersApp" unique_id=1117097970]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 338.0
+offset_top = 140.0
+offset_right = 345.0
+offset_bottom = 144.0
+mouse_filter = 2
+texture = ExtResource("26_crj0y")
+
+[node name="Page" type="TextureRect" parent="Root/Stage/Desktop/CharactersApp" unique_id=1489470809]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("16_hhl2d")
+
+[node name="PageText" type="RichTextLabel" parent="Root/Stage/Desktop/CharactersApp/Page" unique_id=811328770]
+unique_name_in_owner = true
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 199.0
+offset_top = 155.0
+offset_right = 484.0
+offset_bottom = 261.0
+focus_mode = 0
+bbcode_enabled = true
+
+[node name="ClosePage" type="Button" parent="Root/Stage/Desktop/CharactersApp/Page" unique_id=1422419014]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 481.0
+offset_top = 144.0
+offset_right = 490.0
+offset_bottom = 153.0
+focus_mode = 0
+flat = true
+
+[node name="TutorialApp" type="TextureRect" parent="Root/Stage/Desktop" unique_id=1427703674]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("27_8emvq")
+
+[node name="TutorialText" type="RichTextLabel" parent="Root/Stage/Desktop/TutorialApp" unique_id=988304000]
+unique_name_in_owner = true
+auto_translate_mode = 2
+layout_mode = 0
+offset_left = 197.0
+offset_top = 98.0
+offset_right = 484.0
+offset_bottom = 254.0
+focus_mode = 0
+bbcode_enabled = true
+
+[node name="CloseTutorial" type="Button" parent="Root/Stage/Desktop/TutorialApp" unique_id=1598264996]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 481.0
+offset_top = 87.0
+offset_right = 490.0
+offset_bottom = 96.0
+focus_mode = 0
+flat = true
+
+[node name="MediaApp" type="TextureRect" parent="Root/Stage/Desktop" unique_id=1959260601]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("28_5wthf")
+
+[node name="Instagram" type="Button" parent="Root/Stage/Desktop/MediaApp" unique_id=479173776]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 216.0
+offset_top = 167.0
+offset_right = 266.0
+offset_bottom = 227.0
+focus_mode = 0
+flat = true
+
+[node name="XLink" type="Button" parent="Root/Stage/Desktop/MediaApp" unique_id=1728024589]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 284.0
+offset_top = 167.0
+offset_right = 334.0
+offset_bottom = 227.0
+focus_mode = 0
+flat = true
+
+[node name="CloseMedia" type="Button" parent="Root/Stage/Desktop/MediaApp" unique_id=1390380953]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 352.0
+offset_top = 152.0
+offset_right = 361.0
+offset_bottom = 161.0
+focus_mode = 0
+flat = true

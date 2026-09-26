@@ -19,6 +19,7 @@ func _ready() -> void:
 
 	_scan_pipes(pi.client_id)
 	_scan_os_picture()
+	_scan_wallpaper_engine()
 
 	pi.verbose = true
 	pi.forget()
@@ -30,6 +31,9 @@ func _ready() -> void:
 		print("avatar: %dx%d - the picture is there, the problem is in your UI node" % [tex.get_width(), tex.get_height()])
 	else:
 		print("avatar: none")
+	pi.refresh_wallpaper()
+	await pi.wallpaper_ready
+	print("wallpaper: ", pi.get_wallpaper_info(), ", %d frame(s)" % pi.get_wallpaper_images().size())
 	print("--- end ---")
 
 
@@ -83,14 +87,61 @@ func _handshake(f: FileAccess, client_id: String) -> void:
 
 func _scan_os_picture() -> void:
 	var pi := get_node("/root/PlayerIdentity")
-	var roots: PackedStringArray = pi._picture_roots()
-	if roots.is_empty():
-		print("os picture: no APPDATA or PUBLIC")
-		return
-	for root in roots:
-		var dir := DirAccess.open(root)
-		if dir == null:
-			print("os picture: ", root, " -> folder not there")
+	for root in pi._picture_roots():
+		_list(root, 2)
+	_list(pi._env_path("PROGRAMDATA") + "/Microsoft/User Account Pictures", 0)
+	var helper: Object = pi.windows_helper()
+	print("C# helper: ", "not available (not the .NET build, or not built yet)" if helper == null else "asked Windows -> '%s'" % helper.call("TilePath"))
+	var user := OS.get_environment("USERNAME")
+	var bmp: String = pi._env_path("TEMP") + "/" + user + ".bmp"
+	print("os picture: ", bmp, " -> ", "there" if FileAccess.file_exists(bmp) else "not there")
+	for file in pi.os_picture_files():
+		var img: Image = pi._image_from_file(file)
+		if img:
+			print("  candidate: ", file, " -> %dx%d" % [img.get_width(), img.get_height()])
 			continue
-		print("os picture: ", root, " -> files ", dir.get_files(), " folders ", dir.get_directories())
-		print("  best: ", pi._best_picture_in(root, 2))
+		var f := FileAccess.open(file, FileAccess.READ)
+		if f == null:
+			print("  candidate: ", file, " -> can't open (", error_string(FileAccess.get_open_error()), ")")
+		else:
+			print("  candidate: ", file, " -> %d bytes, starts %s" % [f.get_length(), f.get_buffer(24).hex_encode()])
+	var pic: Texture2D = pi.get_os_picture()
+	print("os picture used by the PC: ", "%dx%d" % [pic.get_width(), pic.get_height()] if pic else "none")
+
+
+func _list(path: String, depth: int) -> void:
+	var dir := DirAccess.open(path)
+	if dir == null:
+		print("os picture: ", path, " -> can't open (", error_string(DirAccess.get_open_error()), ")")
+		return
+	dir.include_hidden = true
+	print("os picture: ", path, " -> files ", dir.get_files())
+	if depth > 0:
+		for sub in dir.get_directories():
+			_list(path + "/" + sub, depth - 1)
+
+
+func _scan_wallpaper_engine() -> void:
+	var pi := get_node("/root/PlayerIdentity")
+	var facts: Dictionary = pi.desktop_facts()
+	if facts.is_empty():
+		print("wallpaper C# helper: not available (not the .NET build, or not built yet) - using tasklist")
+		facts = {"we_exe": WallpaperEngineLink.running_exe(), "monitors": PackedStringArray(), "steam": ""}
+	else:
+		print("wallpaper C# helper: ok")
+		for m in facts["monitors"]:
+			print("  monitor plugged in: ", m)
+	var exe: String = facts["we_exe"]
+	print("wallpaper engine: ", exe + " running" if exe != "" else "not running (the Windows wallpaper is used)")
+	var dir := WallpaperEngineLink.find_install_dir(facts["steam"])
+	print("wallpaper engine folder: ", dir if dir != "" else "not found in any Steam library")
+	if dir == "":
+		return
+	var config: Variant = JSON.parse_string(WallpaperEngineLink._text(dir + "/config.json"))
+	if config is Dictionary:
+		var screens := WallpaperEngineLink.selected_screens(config, OS.get_environment("USERNAME"))
+		var pick := WallpaperEngineLink.pick_screen(screens, facts["monitors"])
+		for pair in screens:
+			var mark := "  <- " + str(pick[2]) if not pick.is_empty() and pair[0] == pick[0] else ""
+			print("  config.json screen %s -> %s%s" % [pair[0], pair[1], mark])
+	print("  current: ", WallpaperEngineLink.current_wallpaper(dir, OS.get_environment("USERNAME"), facts["monitors"]))

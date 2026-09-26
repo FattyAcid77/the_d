@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Interactables/readable.gd" id="1_ikvqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dchq3"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[node name="Readable" type="Area2D" unique_id=564883370]
+script = ExtResource("1_ikvqk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1996161548]
+shape = SubResource("RectangleShape2D_dchq3")
+
+[node name="Prompt" type="Node2D" parent="." unique_id=1557856452]
+position = Vector2(0, -44)
+
+[node name="Mark" type="Label" parent="Prompt" unique_id=812343499]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 20
+text = "E"
+horizontal_alignment = 1

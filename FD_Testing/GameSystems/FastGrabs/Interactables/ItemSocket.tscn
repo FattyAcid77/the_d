@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://FD_Testing/GameSystems/Interactables/item_socket.gd" id="1_kr32o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gur6q"]
+resource_local_to_scene = true
+size = Vector2(64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t77yk"]
+resource_local_to_scene = true
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}]
+
+[node name="ItemSocket" type="Area2D" unique_id=368502226]
+script = ExtResource("1_kr32o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=834744795]
+shape = SubResource("RectangleShape2D_gur6q")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=124356336]
+sprite_frames = SubResource("SpriteFrames_t77yk")
+animation = &"empty"
+
+[node name="Prompt" type="Node2D" parent="." unique_id=1453991396]
+position = Vector2(0, -44)
+
+[node name="Mark" type="Label" parent="Prompt" unique_id=1287909813]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_font_sizes/font_size = 20
+text = "E"
+horizontal_alignment = 1
