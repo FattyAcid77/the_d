@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="7_m2ccb"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="8_l2np2"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="9_h4xkc"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="10_m2ccb"]
 [ext_resource type="Texture2D" uid="uid://d2bjirlrulvj6" path="res://characters scenes/NPC_Assets/7mto_cleaning_1.png" id="13_m2ccb"]
 [ext_resource type="PackedScene" uid="uid://dqy2cj62goht4" path="res://control scene/door_reg_type2.tscn" id="15_qwha2"]
 [ext_resource type="Texture2D" uid="uid://njhep3nlfe4" path="res://background_scenes/assets/Lights/light.png" id="16_m2ccb"]
@@ -584,6 +585,7 @@ position = Vector2(701, 324)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
 [node name="Hamato" parent="." unique_id=1293972803 groups=["HamatoIntroduction", "NPC"] instance=ExtResource("3_vrf2x")]
+visible = false
 position = Vector2(591, 263)
 npc_resource = SubResource("Resource_akhaw")
 

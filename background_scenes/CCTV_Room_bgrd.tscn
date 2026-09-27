@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://0r8cqxulob7t" path="res://background_scenes/bgrd_script.gd" id="1_drg7g"]
 [ext_resource type="Texture2D" uid="uid://dm6gwjfjpti7h" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/cctvroom.png" id="2_5b3vk"]
-[ext_resource type="Texture2D" uid="uid://dw2t1l0qhi1qp" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (79).png" id="3_bm65t"]
-[ext_resource type="Texture2D" uid="uid://cna5ne8b0bh4a" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-halfsami.png" id="3_hxo8k"]
+[ext_resource type="Texture2D" uid="uid://cna5ne8b0bh4a" path="res://yazed/rooms/S/Collectibles-halfsami.png" id="3_hxo8k"]
 [ext_resource type="Texture2D" uid="uid://ox4mnnb2of54" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/cctvroom-fur1.png" id="3_l7l5a"]
-[ext_resource type="Texture2D" uid="uid://c0nnw68xpw1ow" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (25).png" id="3_wmfx1"]
-[ext_resource type="Texture2D" uid="uid://c24kydgcif5bg" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (39).png" id="4_bm65t"]
-[ext_resource type="Texture2D" uid="uid://clpq7m8v8aloh" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (30).PNG" id="5_na1nu"]
-[ext_resource type="Texture2D" uid="uid://d33n1nv8i2hxk" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (4).png" id="6_sxreo"]
 [ext_resource type="Texture2D" uid="uid://qmtjfrs0f2a6" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/cctvroom-walls.png" id="8_qgft7"]
 [ext_resource type="Texture2D" uid="uid://cjjmt1ek5u6o8" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/cctvroom-furm.png" id="9_5b3vk"]
 [ext_resource type="Texture2D" uid="uid://cjtgd7daedgkt" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/cctvroom-wall.png" id="13_tshjc"]
-[ext_resource type="Texture2D" uid="uid://5a0qgqjlj16w" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (15).png" id="14_tshjc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_na1nu"]
 polygon = PackedVector2Array(-93.31406, -118.87811, -55.40265, -118.87811, -55.40265, -108.37213, -30.760223, -108.37213, -30.760223, -118.87811, 37.480347, -118.87811, 37.480347, -101.368225, 39.375916, -101.368225, 39.375916, -94.36426, 48.85376, -94.36426, 48.85376, -94.36426, 65.91388, -94.36426, 65.91388, -52.340576, 62.12274, -52.340576, 60.227173, -55.84253, 48.85376, -55.84253, 46.95819, -52.340576, 46.95819, -48.838562, 50.74933, -45.33661, 52.644897, -52.340576, 62.12274, -52.340576, 62.12274, -48.838562, 48.85376, -27.826721, 50.74933, -20.822754, 65.91388, -45.33661, 71.600586, -45.33661, 84.86963, -20.822754, 88.66077, -24.324768, 86.7652, -31.328674, 75.39172, -48.838562, 75.39172, -52.340576, 84.86963, -52.340576, 86.7652, -45.33661, 90.556335, -48.838562, 88.66077, -55.84253, 77.28729, -55.84253, 73.496155, -52.340576, 71.600586, -52.340576, 71.600586, -94.36426, 88.66077, -94.36426, 88.66077, -94.36426, 98.13861, -94.36426, 98.13861, -101.368225, 100.03418, -101.368225, 100.03418, -115.3761, 94.34747, -115.3761, 94.34747, -118.87811, 223.24628, -118.87811, 350.2495, 10.695007, 403.3255, -216.93341, 291.48682, -199.42352, 225.14185, -230.94128, 211.87286, -262.4591, 136.04999, -262.4591, -53.50708, -262.4591, -51.61151, -202.92548, -174.82361, -199.42352, -208.94388, -48.838562, -182.40588, 3.69104)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wmfx1"]
+load_path = "res://.godot/imported/512x512 textures (25).png-d8aec7bae72031e8fa2479c2150a5ede.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wvp5d"]
+load_path = "res://.godot/imported/512x512 textures (39).png-01926e93c1344f0275f259e398243545.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_drg7g"]
 load_path = "res://.godot/imported/light.png-a38a265daafeceb55db80624c451cd62.ctex"
@@ -23,14 +23,23 @@ load_path = "res://.godot/imported/light.png-a38a265daafeceb55db80624c451cd62.ct
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sxreo"]
 blend_mode = 1
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qgft7"]
+load_path = "res://.godot/imported/160x160 textures (30).PNG-d1c2624234bfbb421a057863e0e89700.ctex"
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bm65t"]
 polygon = PackedVector2Array(368, 90, 325, 69, 258, 69, 166, 118, 142, 178, 218, 90, 258, 69, 325, 69, 368, 90, 430, 174, 430, 174)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wmfx1"]
 polygon = PackedVector2Array(-1.4617004, 7.6862755, 3.5382996, 4.6862755, 111.5383, 4.6862755, 115.5383, 8.6862755, 195.5383, 21.686275, 195.5383, -33.313725, -53.4617, -33.313725, -73.4617, 17.686275)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rgbc4"]
+load_path = "res://.godot/imported/512x512 textures (79).png-018b0c6652cb8b6d2eec62e8d087ca66.ctex"
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_frh66"]
 polygon = PackedVector2Array(-1655.4629, -1719.0181, -1655.4629, -1108.5903, -1207.4624, -1108.5903, -1207.4624, -1108.5903, 2056.543, -1139.1113, 2056.543, -1719.0181)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5b3vk"]
+load_path = "res://.godot/imported/512x512 textures (4).png-d0b13b540fb3390ac7f59567b4f168ac.ctex"
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hxo8k"]
 polygon = PackedVector2Array(196.41699, 221.32666, -1051.5854, 2876.6885, 1924.419, 2876.6885, 900.41797, 221.32666, 228.41699, 221.32666)
@@ -41,6 +50,9 @@ polygon = PackedVector2Array(484, 132.99998, 484, 132.99998, 484.00003, 211.9999
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0q8o6"]
 blend_mode = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bja6t"]
+load_path = "res://.godot/imported/512x512 textures (15).png-55ec9020720ca417ff89c7a801e2a67f.ctex"
 
 [node name="CctvRoomBgrd" type="Node2D" unique_id=1456596676]
 script = ExtResource("1_drg7g")
@@ -83,7 +95,7 @@ position = Vector2(293, 120)
 scale = Vector2(0.7263233, 0.5343717)
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("3_wmfx1")
+texture = SubResource("CompressedTexture2D_wmfx1")
 texture_scale = 0.95
 height = 80.0
 
@@ -95,7 +107,7 @@ scale = Vector2(0.7011719, 0.5253906)
 color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("4_bm65t")
+texture = SubResource("CompressedTexture2D_wvp5d")
 texture_scale = 0.75
 height = 822.0
 
@@ -119,7 +131,7 @@ scale = Vector2(0.037516855, 0.593888)
 color = Color(1, 0.79607844, 1, 0.56078434)
 energy = 1.43
 shadow_enabled = true
-texture = ExtResource("5_na1nu")
+texture = SubResource("CompressedTexture2D_qgft7")
 texture_scale = 1.9
 height = 74.0
 
@@ -140,7 +152,7 @@ scale = Vector2(0.7263233, 0.5343717)
 energy = 0.43
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("3_bm65t")
+texture = SubResource("CompressedTexture2D_rgbc4")
 texture_scale = 0.95
 height = 80.0
 
@@ -157,7 +169,7 @@ scale = Vector2(0.35913575, 0.26503974)
 energy = 0.98
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("3_bm65t")
+texture = SubResource("CompressedTexture2D_rgbc4")
 texture_scale = 0.95
 height = 80.0
 
@@ -169,7 +181,7 @@ scale = Vector2(0.5275456, 0.2855531)
 energy = 0.72
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("3_bm65t")
+texture = SubResource("CompressedTexture2D_rgbc4")
 texture_scale = 0.95
 height = 80.0
 
@@ -178,7 +190,7 @@ position = Vector2(469, 66)
 scale = Vector2(0.031249948, 0.0327639)
 color = Color(1, 0.29000002, 0.29000002, 1)
 energy = 0.72
-texture = ExtResource("6_sxreo")
+texture = SubResource("CompressedTexture2D_5b3vk")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D/PointLight2D6" unique_id=160494237]
 position = Vector2(-6116.427, 4814.704)
@@ -211,6 +223,6 @@ scale = Vector2(0.11286338, 0.34745067)
 color = Color(0.6039, 0.8741699, 0.99, 0.69411767)
 energy = 0.77
 shadow_enabled = true
-texture = ExtResource("14_tshjc")
+texture = SubResource("CompressedTexture2D_bja6t")
 texture_scale = 1.9
 height = 74.0

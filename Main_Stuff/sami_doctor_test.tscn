@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://ldxs6xhdy3jl" path="res://3MK-File/Sami_statemachine/drag_state.gd" id="18_drag0"]
 [ext_resource type="Script" uid="uid://cw17o138hgm6h" path="res://3MK-File/Sami_statemachine/rotate_state.gd" id="19_rot0"]
 [ext_resource type="PackedScene" uid="uid://c1p54hwrqfphl" path="res://3MK-File/Scene/inventory_ui.tscn" id="20_invui"]
+[ext_resource type="Shader" uid="uid://ddkbwk6hykf34" path="res://BGRD_Lights/node_2d.gdshader" id="21_6vrky"]
 [ext_resource type="FontFile" uid="uid://b26qlchnc3w4o" path="res://FD_Testing/Fonts/PixelAE-Regular.ttf" id="21_pixaefont"]
 [ext_resource type="PackedScene" uid="uid://lh4fl0yvp3j1" path="res://control scene/area_indicator.tscn" id="22_areaind"]
 [ext_resource type="Script" uid="uid://cikn8qmh4dwel" path="res://Indic_config.gd" id="23_indicconfig"]
@@ -741,11 +742,21 @@ normal_texture = SubResource("CompressedTexture2D_ef2nf")
 specular_color = Color(0.16253604, 0.16253604, 0.16253604, 1)
 specular_shininess = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_im4cj"]
+shader = ExtResource("21_6vrky")
+shader_parameter/strength = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6vrky"]
+load_path = "res://.godot/imported/128x128 textures (1).png-9b247b76aaeb35891054acd889eae028.ctex"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vrky"]
+blend_mode = 3
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18gna"]
+load_path = "res://.godot/imported/160x160 textures (80).png-e5e4620c8a5da00c648190bab3b15d0c.ctex"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6vt2j"]
 radius = 24.020824
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ef2nf"]
-polygon = PackedVector2Array(7.4312897, 60.69716, -9.56871, 60.69716, -9.56871, 57.69716, 7.4312897, 57.69716)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oevct"]
 
@@ -762,21 +773,34 @@ configurations = Array[ExtResource("23_indicconfig")]([SubResource("Resource_are
 position = Vector2(-2, -87)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=2020204498]
+z_index = 1
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_rwi67")
 animation = &"Walk_down"
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=513518743]
+visible = false
 texture = SubResource("CanvasTexture_18gna")
 
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1131813056]
+material = SubResource("ShaderMaterial_im4cj")
+position = Vector2(1.4999976, 41)
+scale = Vector2(0.9140625, 0.3984375)
+color = Color(0.9607843, 1, 1, 1)
+energy = 1.25
+texture = SubResource("CompressedTexture2D_6vrky")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1970999991]
+material = SubResource("CanvasItemMaterial_6vrky")
+position = Vector2(-1.7881393e-07, 2)
+scale = Vector2(0.2125, 0.67499995)
+energy = 0.8
+shadow_enabled = true
+texture = SubResource("CompressedTexture2D_18gna")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041668416]
-visible = false
 position = Vector2(2, 30)
 shape = SubResource("CircleShape2D_6vt2j")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=537697524]
-position = Vector2(1.5687103, -14.697159)
-occluder = SubResource("OccluderPolygon2D_ef2nf")
 
 [node name="Statemachine" type="Node" parent="." unique_id=1492896408]
 script = ExtResource("15_7dkr7")
@@ -795,7 +819,7 @@ script = ExtResource("18_drag0")
 script = ExtResource("19_rot0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=270767651]
-zoom = Vector2(1.275, 1.275)
+zoom = Vector2(1.25, 1.25)
 limit_smoothed = true
 
 [node name="UI" type="Node" parent="." unique_id=766651730]

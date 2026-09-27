@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dkjo6cnq0jmfh" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_branch.gd" id="6_fujne"]
 [ext_resource type="Script" uid="uid://c8gnwlh24codr" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_line.gd" id="7_fdm0s"]
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="8_3de23"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="9_3de23"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="9_yp0i2"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="10_to3ly"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="11_8pbyl"]
@@ -161,7 +162,7 @@ position = Vector2(663, 370)
 npc_resource = SubResource("Resource_hon07")
 
 [node name="Sami_Doctor_test" parent="." unique_id=2001215541 node_paths=PackedStringArray("camera_adj") instance=ExtResource("3_cqvki")]
-position = Vector2(431, 375)
+position = Vector2(393, 333)
 camera_adj = NodePath("../Lvl_1_Hall_BGRD")
 
 [node name="GameStateMachine" type="Node" parent="." unique_id=430378142]
