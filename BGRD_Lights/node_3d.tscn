@@ -2,12 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://d1qa4tqdfmv42" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom.png" id="1_noarx"]
 [ext_resource type="Texture2D" uid="uid://cafkd7bdxl8qq" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-fur.png" id="3_a0tk4"]
-[ext_resource type="Texture2D" uid="uid://c8y2l3qspkoxh" path="res://yazed/rooms/S/Collectibles-maryam.png" id="4_6iypd"]
-[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://yazed/LightTexture/160x160 textures (80).png" id="6_lghmy"]
+[ext_resource type="Texture2D" uid="uid://c8y2l3qspkoxh" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Collectibles-maryam.png" id="4_6iypd"]
+[ext_resource type="Texture2D" uid="uid://ceqphve7getlw" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (14).png" id="4_r3fl7"]
+[ext_resource type="Texture2D" uid="uid://cybtq8apuf0ow" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (31).PNG" id="5_wc5p8"]
 [ext_resource type="Shader" uid="uid://glrf31iooaeu" path="res://BGRD_Lights/node_3d.gdshader" id="6_wc5p8"]
-[ext_resource type="Texture2D" uid="uid://nlkejvbpvjoa" path="res://yazed/LightTexture/512x512 textures (5).png" id="7_4s7kb"]
 [ext_resource type="Texture2D" uid="uid://v3u660s60i7u" path="res://FD_Testing/GameSystems/Cutscene/Bipolarroom/Bipolaroom-light.png" id="7_jsk3o"]
-[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://yazed/LightTexture/side_door.png" id="8_jnf7u"]
+[ext_resource type="Texture2D" uid="uid://cfebpiwa323jo" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (5).png" id="8_4arys"]
+[ext_resource type="Texture2D" uid="uid://clpq7m8v8aloh" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (30).PNG" id="8_6iypd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i5arm"]
 blend_mode = 3
@@ -87,7 +88,7 @@ scale = Vector2(1.071592, 1.1109595)
 color = Color(0.5058824, 0.58431375, 0.8117647, 0.47058824)
 energy = 0.54
 shadow_enabled = true
-texture = ExtResource("6_lghmy")
+texture = ExtResource("5_wc5p8")
 texture_scale = 1.9
 height = 74.0
 
@@ -98,7 +99,7 @@ scale = Vector2(0.24384427, 0.22214223)
 color = Color(1, 0.79607844, 1, 0.56078434)
 energy = 1.43
 shadow_enabled = true
-texture = ExtResource("7_4s7kb")
+texture = ExtResource("8_4arys")
 texture_scale = 1.9
 height = 74.0
 
@@ -109,7 +110,7 @@ scale = Vector2(0.074235305, 0.38815793)
 color = Color(1, 0.79607844, 1, 0.56078434)
 energy = 1.43
 shadow_enabled = true
-texture = ExtResource("6_lghmy")
+texture = ExtResource("8_6iypd")
 texture_scale = 1.9
 height = 74.0
 
@@ -120,7 +121,7 @@ scale = Vector2(0.13484153, 0.11147661)
 color = Color(1, 0.58431375, 0.20784314, 1)
 energy = 1.43
 shadow_enabled = true
-texture = ExtResource("8_jnf7u")
+texture = ExtResource("4_r3fl7")
 texture_scale = 1.9
 height = 74.0
 
@@ -146,4 +147,4 @@ sdf_collision = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2098281644]
 position = Vector2(282.50696, 248.31302)
-color = Color(0.5428046, 0.4894351, 0.66288584, 1)
+color = Color(0.90910685, 0.8210707, 1.1027867, 1)

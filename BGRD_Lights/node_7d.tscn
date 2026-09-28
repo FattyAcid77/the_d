@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://c7dhum0dhh6ua"]
 
-[ext_resource type="Texture2D" uid="uid://doejydb5ilkbq" path="res://yazed/rooms/S/f1-saderoom.png" id="1_cd2ls"]
-[ext_resource type="Texture2D" uid="uid://bhgknggw4dt37" path="res://yazed/rooms/S/f1-saderoom-fur.png" id="2_d7gu3"]
-[ext_resource type="Texture2D" uid="uid://bbnlfwyc84nkb" path="res://yazed/rooms/S/f1-saderoom-wall.png" id="3_igjsm"]
-[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://yazed/LightTexture/above_lights.png" id="5_4i7bn"]
-[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://yazed/LightTexture/160x160 textures (80).png" id="6_4i7bn"]
-[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://yazed/LightTexture/side_door.png" id="8_1723n"]
+[ext_resource type="Texture2D" uid="uid://doejydb5ilkbq" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/S/f1-saderoom.png" id="1_cd2ls"]
+[ext_resource type="Texture2D" uid="uid://bhgknggw4dt37" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/S/f1-saderoom-fur.png" id="2_d7gu3"]
+[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_ggje7"]
+[ext_resource type="Texture2D" uid="uid://bbnlfwyc84nkb" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/S/f1-saderoom-wall.png" id="3_igjsm"]
+[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (22).png" id="5_4i7bn"]
+[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="6_4i7bn"]
+[ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="7_1723n"]
+[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="8_1723n"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uo0i2"]
 polygon = PackedVector2Array(-29.900063, -13.780457, -71.900055, 80.21954, -71.900055, 80.21954, 76.09994, 80.21954, 76.09994, 94.21954, -81.90006, 94.21954, -80.900055, -32.780457, 44.099945, -32.780457, 44.099937, 59.219543, -0.90006256, -13.780457, -6.9000626, -12.780457, -9.900063, -11.780457, -20.900063, -11.780457, -23.900063, -12.780457)
@@ -40,6 +42,9 @@ polygon = PackedVector2Array(-20.776932, 14.489685, -20.776932, 5.795868, -3.462
 [node name="F1Saderoom" type="Sprite2D" parent="." unique_id=1366780373]
 position = Vector2(217, 199)
 texture = ExtResource("1_cd2ls")
+
+[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_ggje7")]
+position = Vector2(394, 237)
 
 [node name="F1SaderoomFur" type="Sprite2D" parent="." unique_id=1442449563]
 position = Vector2(217, 199)
@@ -97,7 +102,7 @@ height = 74.0
 position = Vector2(-277.4244, -818.38477)
 scale = Vector2(0.058865216, 0.0024134035)
 energy = 0.61
-texture = ExtResource("6_4i7bn")
+texture = ExtResource("7_1723n")
 texture_scale = 11.78
 height = 74.0
 
