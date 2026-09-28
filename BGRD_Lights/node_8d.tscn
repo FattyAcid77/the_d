@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d4k1y2h5l7jbg" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/M/f1-mazo5eroom-fur.png" id="3_yfjvd"]
 [ext_resource type="Texture2D" uid="uid://beyyap7iajhuq" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/M/f1-mazo5eroom-wall.png" id="4_5jml6"]
 [ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="5_sqec4"]
-[ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="6_0p7yt"]
+[ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://Lights/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="6_0p7yt"]
 [ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (22).png" id="7_uhuqp"]
 [ext_resource type="Texture2D" uid="uid://cfqbrr3725mvi" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/128x128 textures (9).png" id="8_2d5ml"]
 [ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="9_yfjvd"]
@@ -49,7 +49,7 @@ texture = ExtResource("4_5jml6")
 [node name="light" type="Node2D" parent="." unique_id=1166156890]
 position = Vector2(414.65286, 876.322)
 
-[node name="PointLight2D7" type="PointLight2D" parent="light" unique_id=2110850731]
+[node name="PointLight2D7" type="PointLight2D" parent="light" unique_id=2110850731 groups=["Qaswar_backlight_off"]]
 material = SubResource("CanvasItemMaterial_8vo1v")
 position = Vector2(-137.65286, -813.82196)
 rotation = -3.1358526
@@ -61,7 +61,7 @@ texture = ExtResource("5_sqec4")
 texture_scale = 1.9
 height = 74.0
 
-[node name="PointLight2D5" type="PointLight2D" parent="light" unique_id=144474219]
+[node name="PointLight2D5" type="PointLight2D" parent="light" unique_id=144474219 groups=["Qaswar_backlight_off"]]
 position = Vector2(-138.4244, -814.38477)
 scale = Vector2(0.058865216, 0.0024134035)
 energy = 0.61
@@ -69,7 +69,7 @@ texture = ExtResource("6_0p7yt")
 texture_scale = 11.78
 height = 74.0
 
-[node name="PointLight2D4" type="PointLight2D" parent="light" unique_id=81577826]
+[node name="PointLight2D4" type="PointLight2D" parent="light" unique_id=81577826 groups=["Qaswar_backlight_off"]]
 position = Vector2(36.72058, -697.9066)
 rotation = -3.136917
 scale = Vector2(0.1162788, 0.15550345)
@@ -78,7 +78,7 @@ energy = 2.1
 shadow_enabled = true
 texture = ExtResource("7_uhuqp")
 
-[node name="PointLight2D" type="PointLight2D" parent="light" unique_id=1055220121]
+[node name="PointLight2D" type="PointLight2D" parent="light" unique_id=1055220121 groups=["Qaswar_backlight_off"]]
 position = Vector2(-231.65286, -520.822)
 scale = Vector2(0.16702594, 0.14069895)
 color = Color(0.912505, 0.61477363, 0.25236198, 1)
@@ -86,7 +86,7 @@ energy = 0.85
 texture = ExtResource("8_2d5ml")
 offset = Vector2(4.445, 0)
 
-[node name="PointLight2D2" type="PointLight2D" parent="light" unique_id=9298337]
+[node name="PointLight2D2" type="PointLight2D" parent="light" unique_id=9298337 groups=["Qaswar_backlight_off"]]
 position = Vector2(-241.65286, -518.822)
 scale = Vector2(0.14069895, 0.14069895)
 color = Color(0.912505, 0.61477363, 0.25236198, 1)
@@ -102,12 +102,12 @@ energy = 1.65
 texture = ExtResource("5_sqec4")
 offset = Vector2(4.445, 0)
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="light" unique_id=908437806]
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="light" unique_id=908437806 groups=["Qaswar_backlight_off"]]
 position = Vector2(-0.89590454, -690.86084)
 rotation = -3.136917
 occluder = SubResource("OccluderPolygon2D_kskeq")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="light/LightOccluder2D3" unique_id=535715894]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="light/LightOccluder2D3" unique_id=535715894 groups=["Qaswar_backlight_off"]]
 position = Vector2(258.22144, 129.68135)
 occluder = SubResource("OccluderPolygon2D_2d5ml")
 
@@ -118,7 +118,7 @@ scale = Vector2(1.1858981, 0.91166127)
 occluder = SubResource("OccluderPolygon2D_yfjvd")
 sdf_collision = false
 
-[node name="mazo5e" type="PointLight2D" parent="light/LightOccluder2D2" unique_id=2126962666]
+[node name="mazo5e" type="PointLight2D" parent="light/LightOccluder2D2" unique_id=2126962666 groups=["Qaswar_backlight_off"]]
 material = SubResource("CanvasItemMaterial_5jml6")
 position = Vector2(482.72507, 142.27324)
 scale = Vector2(0.06900651, 0.34745067)
@@ -129,6 +129,6 @@ texture = ExtResource("9_yfjvd")
 texture_scale = 1.9
 height = 74.0
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1365434552]
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1365434552 groups=["Qaswar_backlight_off"]]
 position = Vector2(509, 406.5)
-color = Color(0.35388428, 0.1514329, 0.16123012, 1)
+color = Color(0.21023881, 0.07945537, 0.084690236, 1)

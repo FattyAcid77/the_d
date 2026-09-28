@@ -113,6 +113,9 @@ Maz_Elevator_Quest_Hallway=""
 light_switch=""
 Lights_Off=""
 Maz_Elevator_Hallway=""
+Qaswar_backlight_off=""
+Panel_Item=""
+No_Button_Door_for_Panel=""
 
 [input]
 
