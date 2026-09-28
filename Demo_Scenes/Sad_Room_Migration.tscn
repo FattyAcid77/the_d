@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="12_526xe"]
 [ext_resource type="Script" uid="uid://touqh4l3kjuq" path="res://FD_Testing/GameSystems/NPC/Scripts/npc_resource.gd" id="13_ev2mk"]
 [ext_resource type="Texture2D" uid="uid://r4swomx6el5n" path="res://characters scenes/NPC_Assets/Qassor idle.png" id="14_cejip"]
+[ext_resource type="Texture2D" uid="uid://c7wigudjns5rq" path="res://Yazzed/boardscrewdriver_item.png" id="16_4f13b"]
+[ext_resource type="Script" uid="uid://d4mnrwb2lebrk" path="res://Demo_Scenes/door_reg_nobutton.gd" id="17_stggq"]
 
 [sub_resource type="Resource" id="Resource_auwn4"]
 script = ExtResource("8_r38vp")
@@ -90,10 +92,9 @@ metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [sub_resource type="Resource" id="Resource_stggq"]
 script = ExtResource("8_r38vp")
+text = "تحريك المفتاح"
 speaker_name = "   "
 set_flags = Array[String](["Light_Switch_off"])
-action_name = "delay  [seconds]"
-action_args = [2.0]
 metadata/_custom_type_script = "uid://c8gnwlh24codr"
 
 [sub_resource type="Resource" id="Resource_r38vp"]
@@ -117,6 +118,46 @@ metadata/_custom_type_script = "uid://vlj7pu3occ4q"
 script = ExtResource("13_ev2mk")
 npc_name = "    "
 dialog = SubResource("Resource_3t1ue")
+metadata/_custom_type_script = "uid://touqh4l3kjuq"
+
+[sub_resource type="Resource" id="Resource_8jt4k"]
+script = ExtResource("8_r38vp")
+text = "قمت بأخذ لوحة المصعد"
+speaker_name = "   "
+set_flags = Array[String](["Panel_Taken"])
+action_name = "give_item  [type; amount]"
+action_args = [""]
+metadata/_custom_type_script = "uid://c8gnwlh24codr"
+
+[sub_resource type="Resource" id="Resource_uwywi"]
+script = ExtResource("7_3t1ue")
+lines = Array[ExtResource("8_r38vp")]([SubResource("Resource_8jt4k")])
+metadata/_custom_type_script = "uid://dkjo6cnq0jmfh"
+
+[sub_resource type="Resource" id="Resource_q1s6g"]
+script = ExtResource("12_526xe")
+branches = Array[ExtResource("7_3t1ue")]([SubResource("Resource_uwywi")])
+metadata/_custom_type_script = "uid://vlj7pu3occ4q"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_526xe"]
+atlas = ExtResource("16_4f13b")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ev2mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_526xe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_cejip"]
+script = ExtResource("13_ev2mk")
+sprite_frames = SubResource("SpriteFrames_ev2mk")
+dialog = SubResource("Resource_q1s6g")
 metadata/_custom_type_script = "uid://touqh4l3kjuq"
 
 [node name="SadRoomMigration" type="Node2D" unique_id=1189622833 node_paths=PackedStringArray("player", "doors")]
@@ -152,7 +193,19 @@ npc_resource = SubResource("Resource_4f13b")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1904845994 groups=["Lights_Off"]]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=267126486 groups=["Lights_Off"]]
-polygon = PackedVector2Array(65, 319, 133, 319, 133, 372, 59, 372, 58, 318, 61, 318, 60, 307, 53, 310, 53, 380, 201, 379, 200, 310, 66, 311)
+polygon = PackedVector2Array(65, 317, 134, 317, 134, 374, 58, 374, 58, 318, 61, 318, 60, 307, 53, 310, 53, 380, 201, 379, 200, 310, 66, 311)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=187417079 groups=["Lights_Off"]]
 color = Color(0.00011382792, 0.000113828064, 0.000113827984, 1)
+
+[node name="Panel" parent="." unique_id=503210627 groups=["Panel_Item"] instance=ExtResource("6_xp1oa")]
+position = Vector2(237, 341)
+npc_resource = SubResource("Resource_cejip")
+
+[node name="Door_reg2" parent="." unique_id=678408775 groups=["No_Button_Door_for_Panel"] instance=ExtResource("5_stggq")]
+visible = false
+position = Vector2(156, 345)
+script = ExtResource("17_stggq")
+entery_direction = 0
+new_scene_path = "res://Demo_Scenes/Maz_Sad_Hall_Migration.tscn"
+target_door_name = "Maz_Sad_Hall_East"
