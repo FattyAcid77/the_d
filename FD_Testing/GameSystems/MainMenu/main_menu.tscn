@@ -11,9 +11,9 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
 blend_mode = 1
 
-[sub_resource type="Resource" id="Resource_2va7a"]
+[sub_resource type="Resource" id="Resource_edf1o"]
 script = ExtResource("7_edf1o")
-sound_id = "loop paper"
+sound_id = "paper"
 metadata/_custom_type_script = "uid://cnexd7w63uygd"
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1130814152]
@@ -209,4 +209,4 @@ color = Color(0, 0, 0, 0)
 [node name="Radio" type="Node" parent="." unique_id=2117115888]
 unique_name_in_owner = true
 script = ExtResource("4_radio")
-tracks = Array[ExtResource("7_edf1o")]([SubResource("Resource_2va7a")])
+tracks = Array[ExtResource("7_edf1o")]([SubResource("Resource_edf1o")])
