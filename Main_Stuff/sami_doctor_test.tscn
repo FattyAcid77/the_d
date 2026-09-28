@@ -31,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="27_mqpgr"]
 [ext_resource type="PackedScene" uid="uid://be3qnkolom80x" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
 [ext_resource type="Resource" path="res://3MK-File/Resources/PlayerHealth_Test.tres" id="29_healthstats"]
-[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="31_6vrky"]
 
 [sub_resource type="Resource" id="Resource_areaindcfg"]
 script = ExtResource("23_indicconfig")
@@ -783,7 +782,7 @@ animation = &"Walk_down"
 visible = false
 texture = SubResource("CanvasTexture_18gna")
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1131813056]
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D" unique_id=1131813056 groups=["Lights_Off"]]
 material = SubResource("ShaderMaterial_im4cj")
 position = Vector2(1.4999976, 41)
 scale = Vector2(0.9140625, 0.3984375)
@@ -791,10 +790,10 @@ color = Color(0.9607843, 1, 1, 1)
 energy = 1.25
 texture = SubResource("CompressedTexture2D_6vrky")
 
-[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1970999991]
+[node name="PointLight2D2" type="PointLight2D" parent="Sprite2D" unique_id=1970999991 groups=["Lights_Off"]]
 material = SubResource("CanvasItemMaterial_6vrky")
-position = Vector2(-1.7881393e-07, 2)
-scale = Vector2(0.2125, 0.67499995)
+position = Vector2(-0.50000226, -3.5000043)
+scale = Vector2(0.28125, 0.74375004)
 energy = 0.8
 shadow_enabled = true
 texture = SubResource("CompressedTexture2D_18gna")
@@ -873,10 +872,5 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=542696879 instance=ExtResource("28_healthui")]
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=419528385 groups=["Lights_Off"]]
-position = Vector2(-0.4999981, -13.999996)
-scale = Vector2(0.31875002, 0.9125)
-texture = ExtResource("31_6vrky")
 
 [editable path="AreaIndicator"]

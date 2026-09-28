@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwm20yx0t56bw"
-path="res://.godot/imported/f1-downpath.png-e97346c5d348075c4ea5324ccfdb9dd6.ctex"
+path="res://.godot/imported/3.png-8b91a002c813b249d08dc8f7cfb1f7cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yazed/rooms/S/f1-downpath.png"
-dest_files=["res://.godot/imported/f1-downpath.png-e97346c5d348075c4ea5324ccfdb9dd6.ctex"]
+source_file="res://FREE Textures Of Light/128x128/animation/3.png"
+dest_files=["res://.godot/imported/3.png-8b91a002c813b249d08dc8f7cfb1f7cf.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkbalb46truxg"
-path="res://.godot/imported/f2-abovepath-fur.png-8742fc80925c401f691055245adf9b4e.ctex"
+path="res://.godot/imported/32x32 textures (7).png-889ea6f93633965acbed4f283f1f9a0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yazed/rooms/abovepath/f2-abovepath-fur.png"
-dest_files=["res://.godot/imported/f2-abovepath-fur.png-8742fc80925c401f691055245adf9b4e.ctex"]
+source_file="res://Lights/FREE Textures Of Light/32x32/32x32 textures (7).png"
+dest_files=["res://.godot/imported/32x32 textures (7).png-889ea6f93633965acbed4f283f1f9a0c.ctex"]
 
 [params]
 

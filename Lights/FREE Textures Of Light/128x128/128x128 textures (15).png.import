@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bf4urun1cuodh"
-path="res://.godot/imported/f1-restroom-light.png-614b15a5ec6530895128ddccfcaa5fd3.ctex"
+path="res://.godot/imported/128x128 textures (15).png-1d4b97b1d9174a12a37da1dd0d48be58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yazed/rooms/Restroom/f1-restroom-light.png"
-dest_files=["res://.godot/imported/f1-restroom-light.png-614b15a5ec6530895128ddccfcaa5fd3.ctex"]
+source_file="res://Lights/FREE Textures Of Light/128x128/128x128 textures (15).png"
+dest_files=["res://.godot/imported/128x128 textures (15).png-1d4b97b1d9174a12a37da1dd0d48be58.ctex"]
 
 [params]
 

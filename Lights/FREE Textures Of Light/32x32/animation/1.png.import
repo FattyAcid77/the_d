@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8y2l3qspkoxh"
-path="res://.godot/imported/Collectibles-maryam.png-977b752fd2a84f350770c0490b77cfc9.ctex"
+path="res://.godot/imported/1.png-f4bfaa092a5a5940fb22be419ab21892.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yazed/rooms/S/Collectibles-maryam.png"
-dest_files=["res://.godot/imported/Collectibles-maryam.png-977b752fd2a84f350770c0490b77cfc9.ctex"]
+source_file="res://Lights/FREE Textures Of Light/32x32/animation/1.png"
+dest_files=["res://.godot/imported/1.png-f4bfaa092a5a5940fb22be419ab21892.ctex"]
 
 [params]
 

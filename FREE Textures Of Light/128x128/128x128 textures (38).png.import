@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1isnopetue6i"
-path="res://.godot/imported/f2-Reciption-fur.png-adfffdc3d20894b7077d91cffc530e28.ctex"
+path="res://.godot/imported/128x128 textures (38).png-b802c879c669d3094acb06cd037c4cca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yazed/rooms/2ndRecioetion/f2-Reciption-fur.png"
-dest_files=["res://.godot/imported/f2-Reciption-fur.png-adfffdc3d20894b7077d91cffc530e28.ctex"]
+source_file="res://FREE Textures Of Light/128x128/128x128 textures (38).png"
+dest_files=["res://.godot/imported/128x128 textures (38).png-b802c879c669d3094acb06cd037c4cca.ctex"]
 
 [params]
 
