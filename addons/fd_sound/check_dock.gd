@@ -1,6 +1,6 @@
 @tool
 extends VBoxContainer
-## The Check panel (bottom, next to Output): Run reads the whole project and lists what will break, what's
+## The Check tab: Run reads the whole project and lists what will break, what's
 ## probably a mistake and what's missing from the translations. Double-click a
 ## line to open that scene with the node selected, or that resource.
 
@@ -33,7 +33,6 @@ func _init(p_tools) -> void:
 	bar.add_child(summary)
 	tree = Tree.new()
 	tree.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	tree.custom_minimum_size = Vector2(0, 220)  # the bottom panel opens this tall
 	tree.hide_root = true
 	tree.columns = 2
 	tree.set_column_expand(0, true)

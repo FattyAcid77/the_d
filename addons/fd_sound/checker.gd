@@ -123,30 +123,24 @@ func _check_object(obj: Object, path: String, node: String, visited: Dictionary)
 		var value: Variant = obj.get(prop)
 		if value == null:
 			continue
-		# only what someone typed in: a default isn't in the file, so the flag
-		# index can't see the other side of it either (a false red)
-		if _is_default(obj, prop, value):
-			continue
 		# sounds
 		if value is String and (prop == "sound_id" or prop.ends_with("_sound_id") or prop == "music_id"):
-			_check_cue(value, "%s%s " % [here, prop], path, node)
+			_check_cue(value, "%s%s" % [here, prop], path, node)
 		# flags
 		var role := Names.flag_role(prop)
 		if role == Names.USE or role == Names.CLEAR:
 			for f in _as_strings(value):
 				if f != "" and not names.is_set_somewhere(f):
-					var near := _near(f, _set_flags())
-					var hint := "; did you mean '%s'?" % near if near != "" else ""
 					if role == Names.USE:
-						_add(RED, "%s%s '%s': nothing ever sets this flag, so it waits forever%s" % [here, prop, f, hint], path, node)
+						_add(RED, "%s%s '%s': nothing ever sets this flag, so it waits forever" % [here, prop, f], path, node)
 					else:
-						_add(YELLOW, "%s%s '%s': clears a flag nothing ever sets%s" % [here, prop, f, hint], path, node)
+						_add(YELLOW, "%s%s '%s': clears a flag nothing ever sets (a typo?)" % [here, prop, f], path, node)
 		# ids
 		var kind := Names.id_kind(prop)
 		if kind != "" and value is String and value != "" and not names.ids[kind].has(value):
-			_missing_id(kind, "%s%s" % [here, prop], value, path, node)
+			_add(RED, "%s%s '%s': there's no %s with this id" % [here, prop, value, names._kind_name(kind)], path, node)
 		# player-visible text, for the translation check
-		if value is String and prop in TEXT_FIELDS and not path.contains("/Prescription/"):
+		if value is String and prop in TEXT_FIELDS and path.ends_with(".tres") and not path.contains("/Prescription/"):
 			var t: String = value.strip_edges()
 			if t != "" and not t.is_valid_int() and not _texts.has(t):
 				_texts[t] = [path, node]
@@ -171,18 +165,6 @@ func _check_object(obj: Object, path: String, node: String, visited: Dictionary)
 			_check_cue(m.get_string(1), "%s[sfx:] in the text: " % here, path, node)
 	if Library.is_a(obj, "DialogActionStep"):
 		_check_action(str(obj.get("action")), obj.get("args"), here, path, node)
-
-
-func _is_default(obj: Object, prop: String, value: Variant) -> bool:
-	var s: Script = obj.get_script()
-	var def: Variant = null
-	if s:
-		def = s.get_property_default_value(prop)
-	if def == null:
-		def = ClassDB.class_get_property_default_value(obj.get_class(), prop)
-	if def == null:
-		return value is String and value == ""
-	return typeof(def) == typeof(value) and def == value
 
 
 func _dive(r: Resource, path: String, node: String, visited: Dictionary) -> void:
@@ -241,7 +223,7 @@ func _check_action(verb_text: String, args: Variant, here: String, path: String,
 		_:
 			var kind: String = ARG_KINDS.get(verb, "")
 			if kind != "" and not names.ids[kind].has(first):
-				_missing_id(kind, "%s%s" % [here, verb], first, path, node)
+				_add(RED, "%s%s '%s': there's no %s with this id" % [here, verb, first, names._kind_name(kind)], path, node)
 
 
 func _check_hook(hook: Object, path: String, node: String) -> void:
@@ -294,22 +276,9 @@ func _check_library() -> void:
 			seen[l.name] = true
 
 
-## A missing progress state is only yellow: a checkpoint can name a state that
-## no level reacts to, and that's allowed. Every other missing id breaks.
-func _missing_id(kind: String, what: String, value: String, path: String, node: String) -> void:
-	var near := _near(value, names.ids[kind].keys())
-	var hint := "; did you mean '%s'?" % near if near != "" else ""
-	if kind == "state":
-		_add(YELLOW, "%s '%s': no ProgressState node has this name in any level (fine if nothing needs to react)%s" % [what, value, hint], path, node)
-	else:
-		_add(RED, "%s '%s': there's no %s with this id%s" % [what, value, names._kind_name(kind), hint], path, node)
-
-
-## A flag that's set but never read, when a flag that IS read is spelled almost
-## the same: that's a typo on one side. Unread flags on their own are normal
-## (used_medkit, checkpoint story flags...), so they aren't listed.
+## A flag something sets that nothing ever reads. Flags the game makes by itself
+## (item:, died_of:...) are left out: most of them are there in case.
 func _check_unread_flags() -> void:
-	var read: Array = names.flags.keys().filter(func(f): return names.is_read_somewhere(f))
 	for f in names.flags:
 		var sets: Array = names.flags[f][Names.SET]
 		if sets.is_empty() or names.is_read_somewhere(f):
@@ -317,41 +286,8 @@ func _check_unread_flags() -> void:
 		var first := str(sets[0])
 		if first.begins_with("the game"):
 			continue
-		var near := _near(f, read)
-		if near == "":
-			continue
 		var at := _where_to_path(first)
-		_add(YELLOW, "Flag '%s' is set but nothing reads it; '%s' is read. A typo on one side?" % [f, near], at[0], at[1])
-
-
-func _set_flags() -> Array:
-	return names.flags.keys().filter(func(f): return names.is_set_somewhere(f))
-
-
-## The closest name within two letters (or only different in case), "" if none.
-func _near(word: String, candidates: Array) -> String:
-	var best := ""
-	var best_d := 3
-	var lw := word.to_lower()
-	for c in candidates:
-		var cs := str(c)
-		if cs == word or absi(cs.length() - word.length()) > 2:
-			continue
-		var d := 0 if cs.to_lower() == lw else _distance(lw, cs.to_lower())
-		if d < best_d:
-			best_d = d
-			best = cs
-	return best if word.length() >= 4 else ""
-
-
-func _distance(a: String, b: String) -> int:
-	var prev := range(b.length() + 1)
-	for i in a.length():
-		var cur := [i + 1]
-		for j in b.length():
-			cur.append(mini(mini(cur[j] + 1, prev[j + 1] + 1), prev[j] + (0 if a[i] == b[j] else 1)))
-		prev = cur
-	return prev[b.length()]
+		_add(YELLOW, "Flag '%s' is set but nothing reads it (a typo on the other side?)" % f, at[0], at[1])
 
 
 ## "level.tscn > Door/Hook" or "door.gd:12" -> [res path, node path]

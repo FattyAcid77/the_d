@@ -2,7 +2,7 @@
 extends EditorPlugin
 ## Pickers for the inspector: sounds and music sets, flags, and ids (death
 ## causes, items, windows, rooms, states). Rescans whenever something is saved.
-## Plus the Check panel, which lists what will break before a playtest does.
+## Plus the Check dock, which lists what will break before a playtest does.
 
 const Library := preload("library.gd")
 const Tools := preload("tools.gd")
@@ -34,9 +34,8 @@ func _enter_tree() -> void:
 	scene_saved.connect(func(_p): names.scan())
 	library.scan()
 	names.scan()
-	# bottom panel, next to Output: a list of problems wants the width
 	check_dock = CheckDock.new(tools)
-	add_control_to_bottom_panel(check_dock, "Check")
+	add_control_to_dock(DOCK_SLOT_RIGHT_BL, check_dock)
 
 
 func _exit_tree() -> void:
@@ -46,7 +45,7 @@ func _exit_tree() -> void:
 	if fs.filesystem_changed.is_connected(names.scan):
 		fs.filesystem_changed.disconnect(names.scan)
 	remove_inspector_plugin(inspector)
-	remove_control_from_bottom_panel(check_dock)
+	remove_control_from_docks(check_dock)
 	check_dock.queue_free()
 	tools.queue_free()
 
