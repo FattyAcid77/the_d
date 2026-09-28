@@ -16,7 +16,4 @@ Install: this folder goes in `res://addons/`, then Project Settings -> Plugins
 - SoundHook: a table. Each hook picks a signal or animation of the node it
   listens to, and the sound it plays.
 
-Full notes: GameSystems README, sections 23 and 26.
-- Check (bottom bar, next to Output): Run lists what will break, what's
-  probably a mistake, and text missing from the translations. Double-click a
-  line to go there.
+Full notes: GameSystems README, section 23.
