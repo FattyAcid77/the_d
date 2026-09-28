@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://dfjv5rfj7q1q4"]
 
-[ext_resource type="Texture2D" uid="uid://bo35eh3wu11go" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Restroom/f2-restroom.png" id="1_sx17h"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_yw1j7"]
-[ext_resource type="Texture2D" uid="uid://driu1lpo8svc5" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Restroom/f2-restroom-wall.png" id="3_ss5g2"]
-[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (22).png" id="4_jynbe"]
-[ext_resource type="Texture2D" uid="uid://cn7yg2u5kbkie" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/256x256 textures (64).png" id="5_f72e0"]
-[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="6_n1s17"]
-[ext_resource type="Texture2D" uid="uid://c24kydgcif5bg" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (39).png" id="7_6ljpk"]
-[ext_resource type="Texture2D" uid="uid://clpq7m8v8aloh" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (30).PNG" id="8_ocqsm"]
-[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="9_c4v1a"]
+[ext_resource type="Texture2D" uid="uid://bo35eh3wu11go" path="res://yazed/rooms/Restroom/f2-restroom.png" id="1_sx17h"]
+[ext_resource type="Texture2D" uid="uid://driu1lpo8svc5" path="res://yazed/rooms/Restroom/f2-restroom-wall.png" id="3_ss5g2"]
+[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://yazed/LightTexture/above_lights.png" id="4_jynbe"]
+[ext_resource type="Texture2D" uid="uid://cn7yg2u5kbkie" path="res://yazed/LightTexture/256x256 textures (64).png" id="5_f72e0"]
+[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://yazed/LightTexture/160x160 textures (80).png" id="6_n1s17"]
+[ext_resource type="Texture2D" uid="uid://vkl2png3wktj" path="res://yazed/LightTexture/512x512 textures (38).png" id="8_ulxtn"]
+[ext_resource type="Texture2D" uid="uid://cfqbrr3725mvi" path="res://yazed/LightTexture/128x128 textures (9).png" id="9_6xdga"]
+[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://yazed/LightTexture/side_door.png" id="9_c4v1a"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qw0ho"]
 polygon = PackedVector2Array(-3, 144, 12.317932, -33.08612, 105, -33, 119, 130, 118, 130, 104, -32, 13.317932, -32.08612, -2, 144)
@@ -26,6 +25,11 @@ polygon = PackedVector2Array(455.34082, 124.01357, 483.4105, 123.61502, 484.5060
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4bg3k"]
 blend_mode = 1
 
+[sub_resource type="Curve" id="Curve_ulxtn"]
+_data = [Vector2(0.1, 0.4), 0.0, 0.0, 0, 0, Vector2(0.3, 0.90000004), 0.0, 0.0, 0, 0, Vector2(0.8, 0.90000004), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
 [node name="Node2D" type="Node2D" unique_id=20678267]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=146697453]
@@ -38,9 +42,6 @@ polygon = PackedVector2Array(-70.880936, 173.93036, -70.880936, 184.93036, 532.1
 [node name="F2Restroom" type="Sprite2D" parent="." unique_id=826187077]
 position = Vector2(313, 137)
 texture = ExtResource("1_sx17h")
-
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_yw1j7")]
-position = Vector2(578, 200)
 
 [node name="F2RestroomWall" type="Sprite2D" parent="." unique_id=26439445]
 position = Vector2(313, 137)
@@ -94,19 +95,18 @@ color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
 energy = 0.55
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("7_6ljpk")
 texture_scale = 0.75
 height = 822.0
 
 [node name="PointLight2D4" type="PointLight2D" parent="light/PointLight2D6" unique_id=705980673]
 material = SubResource("CanvasItemMaterial_2o0l2")
-position = Vector2(-10.088432, 3.7376018)
+position = Vector2(1.4261913, 3.8065784)
 rotation = -1.5730057
 scale = Vector2(0.037516855, 0.593888)
 color = Color(1, 0.79607844, 1, 0.56078434)
 energy = 1.83
 shadow_enabled = true
-texture = ExtResource("8_ocqsm")
+texture = ExtResource("9_6xdga")
 texture_scale = 1.9
 height = 74.0
 
@@ -142,19 +142,19 @@ color = Color(0.9983788, 0.9999991, 0.72211146, 0.8784314)
 energy = 0.55
 shadow_enabled = true
 shadow_item_cull_mask = 5
-texture = ExtResource("7_6ljpk")
+texture = ExtResource("8_ulxtn")
 texture_scale = 0.75
 height = 822.0
 
 [node name="PointLight2D4" type="PointLight2D" parent="light/PointLight2D7" unique_id=1016587250]
 material = SubResource("CanvasItemMaterial_2o0l2")
-position = Vector2(-10.088432, 3.7376018)
+position = Vector2(7.6293945e-06, -0.000113248825)
 rotation = -1.5730057
 scale = Vector2(0.037516855, 0.593888)
 color = Color(1, 0.79607844, 1, 0.56078434)
 energy = 1.83
 shadow_enabled = true
-texture = ExtResource("8_ocqsm")
+texture = ExtResource("9_6xdga")
 texture_scale = 1.9
 height = 74.0
 
@@ -166,3 +166,23 @@ occluder = SubResource("OccluderPolygon2D_bjvg5")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024640842]
 position = Vector2(468, 392)
 color = Color(0.8466757, 0.87451994, 0.9331581, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=860327671]
+position = Vector2(79, 138)
+rotation = 1.489031
+amount = 10
+lifetime = 2.9899999999999998
+speed_scale = 0.3
+explosiveness = 0.1
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 58.95
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 9.015)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_amount_min = 0.8
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_ulxtn")
+color = Color(18.892157, 18.892157, 18.892157, 0.65882355)

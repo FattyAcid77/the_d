@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bgn8vxy33b4ld" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_choice.gd" id="3_sg126"]
 [ext_resource type="Script" uid="uid://dndbtnfe6ys4a" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_keyword.gd" id="4_mwv53"]
 [ext_resource type="Script" uid="uid://vlj7pu3occ4q" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog.gd" id="5_8o75h"]
+[ext_resource type="Script" uid="uid://cu70slxxwoesq" path="res://FD_Testing/GameSystems/DialogV2/Scripts/dialog_action_step.gd" id="5_osa8j"]
 
 [sub_resource type="Resource" id="Resource_6ub74"]
 script = ExtResource("4_mwv53")

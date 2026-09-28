@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://ce2mh140inwin"]
 
-[ext_resource type="Texture2D" uid="uid://36dcsp30mst4" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath.png" id="1_2ohvw"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_wc6c6"]
-[ext_resource type="Texture2D" uid="uid://fwsp0ytsncha" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-wall.png" id="3_4soya"]
-[ext_resource type="Texture2D" uid="uid://dkbalb46truxg" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-fur.png" id="4_gvynq"]
-[ext_resource type="Texture2D" uid="uid://dobngwxlr62m4" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/abovepath/f2-abovepath-walls.png" id="4_wc6c6"]
-[ext_resource type="Texture2D" uid="uid://2h4uwmbdovmt" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (22).png" id="6_7o88h"]
-[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/512x512 textures (15).png" id="7_n1163"]
-[ext_resource type="Texture2D" uid="uid://ceqphve7getlw" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/512x512/512x512 textures (14).png" id="8_2v46g"]
+[ext_resource type="Texture2D" uid="uid://36dcsp30mst4" path="res://yazed/rooms/abovepath/f2-abovepath.png" id="1_2ohvw"]
+[ext_resource type="Texture2D" uid="uid://fwsp0ytsncha" path="res://yazed/rooms/abovepath/f2-abovepath-wall.png" id="3_4soya"]
+[ext_resource type="Texture2D" uid="uid://dkbalb46truxg" path="res://yazed/rooms/abovepath/f2-abovepath-fur.png" id="4_gvynq"]
+[ext_resource type="Texture2D" uid="uid://dobngwxlr62m4" path="res://yazed/rooms/abovepath/f2-abovepath-walls.png" id="4_wc6c6"]
+[ext_resource type="Texture2D" uid="uid://dp7bd3ail740k" path="res://yazed/LightTexture/above_lights.png" id="6_quyt4"]
+[ext_resource type="Texture2D" uid="uid://bj6ieoj2584xd" path="res://yazed/LightTexture/side_door.png" id="7_n1163"]
+[ext_resource type="Texture2D" uid="uid://bwfyxk2kyvomp" path="res://yazed/LightTexture/door_lights.png" id="8_g18x6"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4shok"]
 cull_mode = 2
@@ -34,9 +33,6 @@ polygon = PackedVector2Array(-201, 628, -24, 629, -24, 608, -16, 608, -16, 514, 
 position = Vector2(105, 358)
 texture = ExtResource("1_2ohvw")
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_wc6c6")]
-position = Vector2(103, 645)
-
 [node name="F2AbovepathWall" type="Sprite2D" parent="." unique_id=1830607563]
 position = Vector2(105, 358)
 texture = ExtResource("3_4soya")
@@ -57,14 +53,14 @@ position = Vector2(-268.83035, -291.77295)
 scale = Vector2(0.45703122, 0.38085943)
 color = Color(0.58456355, 0.58456355, 0.58456355, 1)
 energy = 0.32
-texture = ExtResource("6_7o88h")
+texture = ExtResource("6_quyt4")
 
 [node name="PointLight2D4" type="PointLight2D" parent="light" unique_id=385624030]
 position = Vector2(-268.83035, -546.822)
 scale = Vector2(0.45703122, 0.47265625)
 color = Color(0.58456355, 0.58456355, 0.58456355, 1)
 energy = 0.32
-texture = ExtResource("6_7o88h")
+texture = ExtResource("6_quyt4")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="light" unique_id=103449857]
 position = Vector2(-730.65295, -503.82202)
@@ -116,7 +112,7 @@ scale = Vector2(0.07840033, 0.2678916)
 color = Color(0.25173613, 0.4276592, 0.5346394, 0.8)
 energy = 1.97
 shadow_enabled = true
-texture = ExtResource("8_2v46g")
+texture = ExtResource("8_g18x6")
 texture_scale = 1.9
 height = 74.0
 
