@@ -1,4 +1,4 @@
-class_name Door_reg extends Area2D
+extends Area2D
 
 signal  player_entered_door(door: Door_reg)
 
@@ -24,7 +24,7 @@ func _on_body_entered(body: Node2D) -> void:
 		#queue_free()
 #هذي الفنكشن في البروسيس بمعنى إنها تشتغل مع كل فريم
 func _process(_delta: float) -> void:
-	if player_inside and Input.is_action_just_pressed("action"):
+	if player_inside:
 		player_entered_door.emit(self)
 		SceneManager.load_new_scene(new_scene_path)
 		#queue_free()

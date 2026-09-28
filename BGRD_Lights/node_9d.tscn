@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b5cypqgi65wxk"]
 
 [ext_resource type="Texture2D" uid="uid://bnlffwp8crox4" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Middleroom/f1-middleroom.png" id="1_xg8pl"]
-[ext_resource type="PackedScene" uid="uid://b5d8lnfj61akt" path="res://Main_Stuff/sami_doctor_test.tscn" id="2_cu1qu"]
 [ext_resource type="Texture2D" uid="uid://bxdqa286x34t8" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/Downpath/Collectibles/Middleroom/f1-middleroom-wall.png" id="3_k7oxg"]
 [ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="4_dt2q8"]
 [ext_resource type="Texture2D" uid="uid://bb65oa8xu5oj2" path="res://FD_Testing/GameSystems/Death/FREE Textures Of Light/160x160/160x160 textures (53).PNG" id="5_tipyi"]
@@ -31,7 +30,7 @@ polygon = PackedVector2Array(441.94324, -361.87418, 413.53503, -198.9011, 468.25
 [node name="Node2D" type="Node2D" unique_id=5179257]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=270870665]
-position = Vector2(217.29913, 84.131256)
+position = Vector2(278.66763, 113.131256)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1676286897]
 position = Vector2(-32.299133, 47.868748)
@@ -46,19 +45,17 @@ position = Vector2(41.331635, 191.72952)
 scale = Vector2(1, 3.28125)
 polygon = PackedVector2Array(-48.630768, 27.85196, 83.36923, 27.775764, 79.36923, 11.928139, -48.630768, 11.851959)
 
-[node name="F1Middleroom" type="Sprite2D" parent="." unique_id=1730107733]
-position = Vector2(215, 241)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1730107733]
+z_index = -2
+position = Vector2(276.3685, 270)
 texture = ExtResource("1_xg8pl")
 
-[node name="Sami_Doctor_test" parent="." unique_id=2001215541 instance=ExtResource("2_cu1qu")]
-position = Vector2(93, 409)
-
 [node name="F1MiddleroomWall" type="Sprite2D" parent="." unique_id=636502023]
-position = Vector2(215, 241)
+position = Vector2(276.3685, 270)
 texture = ExtResource("3_k7oxg")
 
 [node name="light" type="Node2D" parent="." unique_id=800165930]
-position = Vector2(373.65286, 861.822)
+position = Vector2(435.02136, 890.822)
 
 [node name="PointLight2D7" type="PointLight2D" parent="light" unique_id=511286335]
 material = SubResource("CanvasItemMaterial_yq4wt")
@@ -116,16 +113,17 @@ position = Vector2(63.917847, 208.90349)
 occluder = SubResource("OccluderPolygon2D_xg8pl")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=149618728]
-position = Vector2(468, 392)
+position = Vector2(529.36847, 421)
 color = Color(0.44350344, 0.28726584, 0.38220626, 1)
 
 [node name="F1MiddleroomFur" type="Sprite2D" parent="." unique_id=1210407123]
-position = Vector2(214.99998, 241)
+z_index = 10
+position = Vector2(276.36847, 270)
 texture = ExtResource("8_d3gb6")
 
 [node name="mrym" type="PointLight2D" parent="." unique_id=1070657506]
 material = SubResource("CanvasItemMaterial_xg8pl")
-position = Vector2(90.00001, 471)
+position = Vector2(151.3685, 500)
 rotation = 1.5752369
 scale = Vector2(0.031172298, 0.26789156)
 color = Color(0.32687104, 0.6525322, 1, 0.3019608)
@@ -136,7 +134,7 @@ texture_scale = 1.9
 height = 74.0
 
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=527826293]
-position = Vector2(76.88359, 277.21707)
+position = Vector2(138.25208, 306.21707)
 rotation = 1.5682279
 scale = Vector2(0.40251154, 0.26984477)
 skew = 0.0034570694

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MedicalItem" format=3 uid="uid://d35afvln3olpg"]
+
+[ext_resource type="Script" uid="uid://dlv2mr6up1u1i" path="res://FD_Testing/GameSystems/Items/medical_item.gd" id="1_ii24l"]
+[ext_resource type="Texture2D" uid="uid://c7wigudjns5rq" path="res://Yazzed/boardscrewdriver_item.png" id="2_n7qfe"]
+
+[resource]
+script = ExtResource("1_ii24l")
+type = "Quest_Item"
+display_name = "لوحة المصعد الكهربائية"
+effect = "لإصلاح المصعد المعطل"
+texture = ExtResource("2_n7qfe")
+description = "لوحة المصعد الكهربائية لإصلاح المصعد"
+metadata/_custom_type_script = "uid://dlv2mr6up1u1i"

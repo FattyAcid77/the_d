@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://bxcexbse8ov6a" path="res://background_scenes/background_black.tscn" id="27_mqpgr"]
 [ext_resource type="PackedScene" uid="uid://be3qnkolom80x" path="res://characters scenes/health_point_ui.tscn" id="28_healthui"]
 [ext_resource type="Resource" path="res://3MK-File/Resources/PlayerHealth_Test.tres" id="29_healthstats"]
+[ext_resource type="Texture2D" uid="uid://bdkaumdwoaj78" path="res://FD_Testing/GameSystems/BossFight/f1-abovepath/LightTexture/160x160 textures (80).png" id="31_6vrky"]
 
 [sub_resource type="Resource" id="Resource_areaindcfg"]
 script = ExtResource("23_indicconfig")
@@ -775,6 +776,7 @@ position = Vector2(2, 30)
 shape = SubResource("CircleShape2D_6vt2j")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=537697524]
+visible = false
 position = Vector2(1.5687103, -14.697159)
 occluder = SubResource("OccluderPolygon2D_ef2nf")
 
@@ -848,5 +850,10 @@ layout_mode = 1
 [node name="BlackgroundBlack" parent="UI" unique_id=511762952 instance=ExtResource("27_mqpgr")]
 
 [node name="Health_point" parent="UI" unique_id=542696879 instance=ExtResource("28_healthui")]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=419528385 groups=["Lights_Off"]]
+position = Vector2(-0.4999981, -13.999996)
+scale = Vector2(0.31875002, 0.9125)
+texture = ExtResource("31_6vrky")
 
 [editable path="AreaIndicator"]

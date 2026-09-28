@@ -1,18 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://npcv2base0001"]
+[gd_scene format=3 uid="uid://b34ba4i1pfeqq"]
 
-[ext_resource type="Script" path="res://FD_Testing/GameSystems/NPC/Scripts/npc.gd" id="1_npc"]
-[ext_resource type="PackedScene" uid="uid://dlgv2trigger01" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
+[ext_resource type="Script" uid="uid://bp4il55ijplfm" path="res://FD_Testing/GameSystems/NPC/Scripts/npc.gd" id="1_npc"]
+[ext_resource type="PackedScene" uid="uid://bd2tp4t42je1u" path="res://FD_Testing/GameSystems/DialogV2/dialog_trigger.tscn" id="2_trg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npc"]
-radius = 10.0
-height = 30.0
 
-[node name="NPC" type="CharacterBody2D"]
+[node name="NPC" type="CharacterBody2D" unique_id=870688830]
 script = ExtResource("1_npc")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1752345057]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1731338821]
 shape = SubResource("CapsuleShape2D_npc")
 
-[node name="DialogTrigger" parent="." instance=ExtResource("2_trg")]
+[node name="DialogTrigger" parent="." unique_id=45557039 groups=["NPC"] instance=ExtResource("2_trg")]

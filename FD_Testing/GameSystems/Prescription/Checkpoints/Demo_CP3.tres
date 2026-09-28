@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PrescriptionCheckpoint" format=3 uid="uid://ktjj3voouune"]
 
 [ext_resource type="Script" uid="uid://cwxis2l0po8r2" path="res://FD_Testing/GameSystems/Prescription/prescription_checkpoint.gd" id="1_km8an"]
-[ext_resource type="PackedScene" uid="uid://crccd18yuh4d4" path="res://Demo_Scenes/Maz_Sad_Room.tscn" id="1_yjqdi"]
+[ext_resource type="PackedScene" uid="uid://ipdd1qs3jskt" path="res://Demo_Scenes/Maz_Sad_Room_Migration.tscn" id="1_yjqdi"]
 
 [resource]
 script = ExtResource("1_km8an")
