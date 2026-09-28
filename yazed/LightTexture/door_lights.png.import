@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:Lights/FREE Textures Of Light/128x128/animation/1.png.import
-uid="uid://ch3nk4nrt2jns"
-path="res://.godot/imported/1.png-61104df2d5e5bf4dfebc33f5ab65a4ce.ctex"
-========
 uid="uid://bwfyxk2kyvomp"
 path="res://.godot/imported/door_lights.png-5db65ac696bd4f2e8aeba356565fef20.ctex"
->>>>>>>> yazed:yazed/LightTexture/door_lights.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Lights/FREE Textures Of Light/128x128/animation/1.png.import
-source_file="res://Lights/FREE Textures Of Light/128x128/animation/1.png"
-dest_files=["res://.godot/imported/1.png-61104df2d5e5bf4dfebc33f5ab65a4ce.ctex"]
-========
 source_file="res://yazed/LightTexture/door_lights.png"
 dest_files=["res://.godot/imported/door_lights.png-5db65ac696bd4f2e8aeba356565fef20.ctex"]
->>>>>>>> yazed:yazed/LightTexture/door_lights.png.import
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1tt3jbang8wp"
-path="res://.godot/imported/sami_walk_down1-Sheet_n.png-1d07d8820330a25cdefbd48c756c8443.ctex"
+uid="uid://db0x3hr24wgc0"
+path="res://.godot/imported/f1-middleroom-fur.png-7955c854f0767387005b08433090f1b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Test/sami_walk_down1-Sheet_n.png"
-dest_files=["res://.godot/imported/sami_walk_down1-Sheet_n.png-1d07d8820330a25cdefbd48c756c8443.ctex"]
+source_file="res://yazed/rooms/Middleroom/f1-middleroom-fur.png"
+dest_files=["res://.godot/imported/f1-middleroom-fur.png-7955c854f0767387005b08433090f1b0.ctex"]
 
 [params]
 

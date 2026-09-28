@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diamfl6gsoiui"
-path="res://.godot/imported/256x256 textures (1).png-ef5d9aad2b65287a4b57c0eb9a5b6502.ctex"
+uid="uid://bl7r1ogkjfvdk"
+path="res://.godot/imported/Reciption-filter.png-d74327321d9241b7169d8d9c7a69533d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FREE Textures Of Light/256x256/256x256 textures (1).png"
-dest_files=["res://.godot/imported/256x256 textures (1).png-ef5d9aad2b65287a4b57c0eb9a5b6502.ctex"]
+source_file="res://yazed/rooms/Reception/Reciption-filter.png"
+dest_files=["res://.godot/imported/Reciption-filter.png-d74327321d9241b7169d8d9c7a69533d.ctex"]
 
 [params]
 

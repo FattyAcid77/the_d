@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8y8lovomiatl"
-path="res://.godot/imported/5.png-69bb9693b25d41fce85afad5c2653dd8.ctex"
+uid="uid://ch53u3cqwgvwj"
+path="res://.godot/imported/512x512 textures (6).png-bd1557e2f39d1c57b564c843025e4fb7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lights/FREE Textures Of Light/32x32/animation/5.png"
-dest_files=["res://.godot/imported/5.png-69bb9693b25d41fce85afad5c2653dd8.ctex"]
+source_file="res://testing_scripts/512x512 textures (6).png"
+dest_files=["res://.godot/imported/512x512 textures (6).png-bd1557e2f39d1c57b564c843025e4fb7.ctex"]
 
 [params]
 

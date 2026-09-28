@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:FD_Testing/GameSystems/MainMenu/Art/menu_english.png.import
-uid="uid://c6085cj6sawgj"
-path="res://.godot/imported/menu_english.png-24e63c30c5387931ee65ba52b0bab775.ctex"
-========
 uid="uid://b5khuvjwil5u0"
 path="res://.godot/imported/Elevator (Broken).png-b6eea77c623e6e32ec397ca6d231c80c.ctex"
->>>>>>>> yazed:yazed/rooms/Elevator/Elevator (Broken).png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:FD_Testing/GameSystems/MainMenu/Art/menu_english.png.import
-source_file="res://FD_Testing/GameSystems/MainMenu/Art/menu_english.png"
-dest_files=["res://.godot/imported/menu_english.png-24e63c30c5387931ee65ba52b0bab775.ctex"]
-========
 source_file="res://yazed/rooms/Elevator/Elevator (Broken).png"
 dest_files=["res://.godot/imported/Elevator (Broken).png-b6eea77c623e6e32ec397ca6d231c80c.ctex"]
->>>>>>>> yazed:yazed/rooms/Elevator/Elevator (Broken).png.import
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd6no2gr8j0qo"
-path="res://.godot/imported/2.png-2bdf6a88750122fd28670e4be6079034.ctex"
+uid="uid://bi5p2xxqfk1nq"
+path="res://.godot/imported/f1-mazo5eroom.png-4e3013b46b1adff1a832be2ec646ae81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lights/FREE Textures Of Light/512x512/animation/2.png"
-dest_files=["res://.godot/imported/2.png-2bdf6a88750122fd28670e4be6079034.ctex"]
+source_file="res://yazed/rooms/M/f1-mazo5eroom.png"
+dest_files=["res://.godot/imported/f1-mazo5eroom.png-4e3013b46b1adff1a832be2ec646ae81.ctex"]
 
 [params]
 

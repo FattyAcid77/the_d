@@ -2,26 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:FREE Textures Of Light/128x128/animation/1.png.import
-uid="uid://c4ic1fcj05ssk"
-path="res://.godot/imported/1.png-6ebaadecbe93382053265b37d4dcdb5b.ctex"
-========
 uid="uid://blm7nhlo1cwwr"
 path="res://.godot/imported/Elevator.png-c6302cdbe86ba6897e74b99f769608fe.ctex"
->>>>>>>> yazed:yazed/rooms/Elevator/Elevator.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:FREE Textures Of Light/128x128/animation/1.png.import
-source_file="res://FREE Textures Of Light/128x128/animation/1.png"
-dest_files=["res://.godot/imported/1.png-6ebaadecbe93382053265b37d4dcdb5b.ctex"]
-========
 source_file="res://yazed/rooms/Elevator/Elevator.png"
 dest_files=["res://.godot/imported/Elevator.png-c6302cdbe86ba6897e74b99f769608fe.ctex"]
->>>>>>>> yazed:yazed/rooms/Elevator/Elevator.png.import
 
 [params]
 
